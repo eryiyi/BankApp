@@ -152,22 +152,26 @@ public class MyPushMessageReceiver extends PushMessageReceiver {
                case 1:
                {
                    //备忘录
-                   Intent intent = new Intent();
-                   intent.setClass(context.getApplicationContext(), MemoListActivity.class);
+                   Intent intent = new Intent(context, MemoListActivity.class);
+                   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                   context.startActivity(intent);
                }
                    break;
                case 2:
                {
                    //通知
-                   Intent intent = new Intent();
-                   intent.setClass(context.getApplicationContext(), NoticesActivity.class);
+                   Intent i = new Intent(context, NoticesActivity.class);
+                   i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                   context.startActivity(i);
+
                }
                    break;
                case 3:
                {
                    //任务
-                   Intent intent = new Intent();
-                   intent.setClass(context.getApplicationContext(), RenwuListActivity.class);
+                   Intent intent = new Intent(context, RenwuListActivity.class);
+                   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                   context.startActivity(intent);
                }
                    break;
            }
