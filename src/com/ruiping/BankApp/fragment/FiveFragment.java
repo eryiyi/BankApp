@@ -218,9 +218,18 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
                     }
                         break;
                     case 7:
+                    {
                         //年报
                         Intent intent = new Intent(getActivity(), YearActivity.class);
                         startActivity(intent);
+                    }
+                        break;
+                    case 8:
+                        //办公会
+                    {
+                        Intent intent = new Intent(getActivity(), BangonghuiActivity.class);
+                        startActivity(intent);
+                    }
                         break;
                 }
             }
@@ -259,7 +268,7 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
             case R.id.relate_mobile:
             {
                 //修改手机号
-                Intent intent  = new Intent(getActivity(), UpdateMobileActivity.class);
+                Intent intent  = new Intent(getActivity(), BangonghuiActivity.class);
                 startActivity(intent);
             }
                 break;
@@ -425,6 +434,7 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
         lists.add(new IndexObj("季报", R.drawable.md_h_brown, indexCountObj.getKey4()));
         lists.add(new IndexObj("年中", R.drawable.md_h_blue_dark, indexCountObj.getKey5()));
         lists.add(new IndexObj("年报", R.drawable.md_h_red, indexCountObj.getKey6()));
+        lists.add(new IndexObj("办公会", R.drawable.md_h_red, indexCountObj.getKey6()));
         adapter.notifyDataSetChanged();
     }
 

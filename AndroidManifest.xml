@@ -145,6 +145,7 @@
         <activity android:name=".ui.RenwuShareActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.TaskSharePersonSelectActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.TaskShareGroupsSelectActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.BangonghuiActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
 
         <!--百度推送-->
         <!-- push富媒体，不使用富媒体推送不需要 -->
