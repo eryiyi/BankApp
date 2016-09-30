@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:padding="12dp"
+              android:background="@drawable/btn_white_shape"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <ImageView android:layout_width="35dp"
+               android:id="@+id/item_head"
+               android:src="@drawable/ic_launcher"
+               android:layout_height="35dp"/>
+    <TextView android:layout_width="wrap_content"
+              android:text="杭三"
+              android:textSize="14sp"
+              android:layout_marginLeft="8dp"
+              android:layout_toRightOf="@+id/item_head"
+              android:textColor="@color/text_color"
+              android:id="@+id/item_nickname"
+              android:layout_height="wrap_content"/>
+    <TextView android:layout_width="wrap_content"
+              android:text="2019-01-01 06:00"
+              android:textSize="13sp"
+              android:layout_alignParentRight="true"
+              android:layout_marginTop="3dp"
+              android:layout_marginLeft="8dp"
+              android:textColor="@color/text_color_two"
+              android:id="@+id/item_dateline"
+              android:layout_height="wrap_content"/>
+
+    <TextView android:layout_width="wrap_content"
+              android:text="这里是评论内容"
+              android:textSize="14sp"
+              android:layout_marginTop="6dp"
+              android:layout_below="@+id/item_nickname"
+              android:layout_marginLeft="8dp"
+              android:layout_toRightOf="@+id/item_head"
+              android:textColor="@color/blue_btn_normal"
+              android:id="@+id/item_cont"
+              android:layout_height="wrap_content"/>
+</RelativeLayout>

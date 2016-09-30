@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/main_bg"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            layout="@layout/top_liner"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:layout_weight="1"
+                  android:layout_height="wrap_content">
+        <RelativeLayout android:layout_width="match_parent"
+                        android:id="@+id/relate_one"
+                        android:layout_height="match_parent">
+            <TextView android:layout_width="wrap_content"
+                      android:id="@+id/no_data"
+                      android:text="暂无数据"
+                      android:visibility="gone"
+                      android:textSize="16sp"
+                      android:layout_centerInParent="true"
+                      android:layout_height="wrap_content"/>
+            <com.ruiping.BankApp.widget.ContentListView
+                    android:id="@+id/lstv"
+                    android:cacheColorHint="#00000000"
+                    android:divider="@color/gray"
+                    android:dividerHeight="0.1dp"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+        </RelativeLayout>
+        <RelativeLayout android:layout_width="match_parent"
+                        android:id="@+id/relate_two"
+                        android:layout_height="match_parent">
+            <TextView android:layout_width="wrap_content"
+                      android:id="@+id/no_data2"
+                      android:text="暂无数据"
+                      android:visibility="gone"
+                      android:textSize="16sp"
+                      android:layout_centerInParent="true"
+                      android:layout_height="wrap_content"/>
+            <com.ruiping.BankApp.widget.ContentListView
+                    android:id="@+id/lstv2"
+                    android:cacheColorHint="#00000000"
+                    android:divider="@color/gray"
+                    android:dividerHeight="0.1dp"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View android:layout_width="match_parent"
+          android:background="@color/gray"
+          android:layout_height="0.1dp"></View>
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:id="@+id/liner_bottom"
+                  android:visibility="gone"
+                  android:background="@color/white"
+                  android:layout_height="50dp">
+        <TextView android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:gravity="center"
+                  android:id="@+id/btn_edit"
+                  android:text="编辑"
+                  android:drawableRight="@drawable/blue_line_two"
+                  android:textColor="@color/blue"
+                  android:textSize="16sp"
+                  android:layout_height="match_parent"/>
+
+        <TextView android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:id="@+id/btn_delete"
+                  android:gravity="center"
+                  android:text="删除"
+                  android:textColor="@color/blue"
+                  android:textSize="16sp"
+                  android:layout_height="match_parent"/>
+    </LinearLayout>
+</LinearLayout>

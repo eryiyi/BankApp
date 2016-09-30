@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/main_bg"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            layout="@layout/top_liner"/>
+
+    <View android:layout_width="match_parent"
+          android:layout_marginTop="15dp"
+          android:background="@color/gray"
+          android:layout_height="0.1dp"></View>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:background="@drawable/btn_white_shape"
+                    android:padding="12dp"
+                    android:id="@+id/liner_one"
+                    android:layout_height="wrap_content">
+        <TextView android:layout_width="wrap_content"
+                  android:text="我的日报"
+                  android:layout_centerVertical="true"
+                  android:textSize="16sp"
+                  android:textColor="@color/text_color"
+                  android:layout_height="wrap_content"/>
+        <TextView android:layout_width="wrap_content"
+                  android:text="5"
+                  android:gravity="center"
+                  android:layout_centerVertical="true"
+                  android:background="@drawable/sm_task_bubble"
+                  android:textSize="14sp"
+                  android:id="@+id/daily_count"
+                  android:layout_alignParentRight="true"
+                  android:textColor="@color/white"
+                  android:layout_height="wrap_content"/>
+    </RelativeLayout>
+    <View android:layout_width="match_parent"
+          android:background="@color/gray"
+          android:layout_height="0.1dp"></View>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:background="@drawable/btn_white_shape"
+                    android:padding="12dp"
+                    android:id="@+id/liner_two"
+                    android:layout_height="wrap_content">
+        <TextView android:layout_width="wrap_content"
+                  android:text="下属日报"
+                  android:layout_centerVertical="true"
+                  android:textSize="16sp"
+                  android:textColor="@color/text_color"
+                  android:layout_height="wrap_content"/>
+        <TextView android:layout_width="wrap_content"
+                  android:text="3"
+                  android:id="@+id/xiashuCount"
+                  android:gravity="center"
+                  android:layout_centerVertical="true"
+                  android:background="@drawable/sm_task_bubble"
+                  android:textSize="14sp"
+                  android:layout_alignParentRight="true"
+                  android:textColor="@color/white"
+                  android:layout_height="wrap_content"/>
+    </RelativeLayout>
+    <View android:layout_width="match_parent"
+          android:background="@color/gray"
+          android:layout_height="0.1dp"></View>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:background="@drawable/btn_white_shape"
+                    android:padding="12dp"
+                    android:id="@+id/liner_three"
+                    android:layout_height="wrap_content">
+        <TextView android:layout_width="wrap_content"
+                  android:text="评论我的"
+                  android:textSize="16sp"
+                  android:layout_centerVertical="true"
+                  android:textColor="@color/text_color"
+                  android:layout_height="wrap_content"/>
+        <TextView android:layout_width="wrap_content"
+                  android:text="10"
+                  android:id="@+id/comment_count"
+                  android:layout_centerVertical="true"
+                  android:gravity="center"
+                  android:background="@drawable/sm_task_bubble"
+                  android:textSize="14sp"
+                  android:layout_alignParentRight="true"
+                  android:textColor="@color/white"
+                  android:layout_height="wrap_content"/>
+    </RelativeLayout>
+    <View android:layout_width="match_parent"
+          android:background="@color/gray"
+          android:layout_height="0.1dp"></View>
+
+</LinearLayout>

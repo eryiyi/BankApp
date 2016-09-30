@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.ruiping.BankApp"
+          android:versionCode="1"
+          android:versionName="1.0">
+    <uses-sdk android:minSdkVersion="18"/>
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <permission
+            android:name="com.ruiping.BankApp.permission.C2D_MESSAGE"
+            android:protectionLevel="signature"
+            />
+    <uses-permission android:name="com.ruiping.BankApp.permission.C2D_MESSAGE" />
+    <permission
+            android:name="com.ruiping.BankApp.permission.MIPUSH_RECEIVE"
+            android:protectionLevel="signature" />
+    <uses-permission android:name="com.ruiping.BankApp.permission.MIPUSH_RECEIVE" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.SET_DEBUG_APP"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+
+    <application android:label="@string/app_name"
+                 android:theme="@android:style/Theme.NoTitleBar"
+                 android:name=".BankAppApplication"
+                 android:icon="@drawable/ic_launcher">
+        <activity android:name=".ui.WelcomeActivity"
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".MainActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.MineProfileActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.UpdatePwrActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.RenwuListActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.DailyListActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.DailyDetailActivtiy" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AddDailyActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AddDailyCommentActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.WeeklyActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.WeeklyListActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.RenwuDetailActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.MemoActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.MemoListActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.MemoDetailActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.QuarterActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.QuarterListActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.QuarterDetailActivtiy" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.YearActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.YearDetailActivtiy" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AlbumActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AlbumChanceActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.FileChooserActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AttachMentActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.MineSetActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AboutOaActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.ErweimaActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.LoginActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AboutActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.UpdateMobileActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.UpdateEmailActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.WriteContentActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AttachMentUpWeekActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AddMineWeeklyActivtiy" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.WeeklyDetailActivtiy" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.WeeklyCommentActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.WeeklyXiashuActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.MonthActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AddMineMonthActivtiy" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.MoonthDetailActivtiy" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.MoonthlyListActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.MoonthXiashuActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.MoonthCommentActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AddQuarterMonthActivtiy" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.QuarterXiashuActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.QuarterCommentActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.YearMiddleActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AddYearMiddleActivtiy" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.YearMiddleDetailActivtiy" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.YearMiddleXiashuActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.YearMiddleCommentActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AddYearActivtiy" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.YearXiashuActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.YearCommentActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AddMemoActivity"
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.MemoListDoneActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AddTaskTitleActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.ChildTaskActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.TaskPersonActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AttachMentTaskActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.TaskPersonSelectActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.TaskPersonFuzerenSelectActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.TaskWriteContentActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.RenwuChildListActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AddTaskTitleChildActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.RenwuChildDetailActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AddTaskCommentActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.NoticesActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.NoticeDetailActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.ProfileActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AttachMentNoticeActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.RenwuShareActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.TaskSharePersonSelectActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.TaskShareGroupsSelectActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+
+        <!--百度推送-->
+        <!-- push富媒体，不使用富媒体推送不需要 -->
+        <activity
+                android:name="com.baidu.android.pushservice.richmedia.MediaViewActivity"
+                android:configChanges="orientation|keyboardHidden"
+                android:label="MediaViewActivity">
+        </activity>
+        <activity
+                android:name="com.baidu.android.pushservice.richmedia.MediaListActivity"
+                android:configChanges="orientation|keyboardHidden"
+                android:label="MediaListActivity"
+                android:launchMode="singleTask">
+        </activity>
+        <!-- push富媒体结束 -->
+
+        <!-- push应用定义消息receiver声明 -->
+        <receiver android:name="com.ruiping.BankApp.receiver.MyPushMessageReceiver">
+            <intent-filter>
+                <!-- 接收push消息 -->
+                <action android:name="com.baidu.android.pushservice.action.MESSAGE"/>
+                <!-- 接收bind,unbind,fetch,delete等反馈消息 -->
+                <action android:name="com.baidu.android.pushservice.action.RECEIVE"/>
+                <action android:name="com.baidu.android.pushservice.action.notification.CLICK"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- push必须的receviver和service声明 -->
+        <receiver android:name="com.baidu.android.pushservice.PushServiceReceiver"
+                  android:process=":bdservice_v1">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="com.baidu.android.pushservice.action.notification.SHOW"/>
+                <action android:name="com.baidu.android.pushservice.action.media.CLICK"/>
+                <!-- 以下四项为可选的action声明，可大大提高service存活率和消息到达速度 -->
+                <action android:name="android.intent.action.MEDIA_MOUNTED"/>
+                <action android:name="android.intent.action.USER_PRESENT"/>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.baidu.android.pushservice.RegistrationReceiver"
+                  android:process=":bdservice_v1">
+            <intent-filter>
+                <action android:name="com.baidu.android.pushservice.action.METHOD"/>
+                <action android:name="com.baidu.android.pushservice.action.BIND_SYNC"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+        </receiver>
+        <service
+                android:name="com.baidu.android.pushservice.PushService"
+                android:exported="true"
+                android:process=":bdservice_v1">
+            <intent-filter>
+                <action android:name="com.baidu.android.pushservice.action.PUSH_SERVICE"/>
+            </intent-filter>
+        </service>
+        <service android:name="com.baidu.android.pushservice.CommandService"
+                 android:exported="true"/>
+        <!-- 4.6.2版本增加一个可选的Activity声明 -->
+        <activity
+                android:launchMode="singleInstance"
+                android:name="com.baidu.android.pushservice.PushKeepAlive"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
+        <!-- push结束 -->
+
+        <!-- 在百度开发者中心查询应用的API Key -->
+        <meta-data android:name="api_key" android:value="HUs4DmXHRXyzF1BackTcT1U4"/>
+
+
+
+        <!-- 注册 -->
+        <activity
+                android:name=".huanxin.ui.RegisterActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="adjustResize|stateVisible">
+        </activity>
+        <!-- 聊天页面 -->
+        <activity
+                android:name=".huanxin.ui.ChatActivity"
+                android:launchMode="singleTask"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <!-- 添加好友 -->
+        <activity
+                android:name=".huanxin.ui.AddContactActivity"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="stateVisible"
+                android:theme="@style/horizontal_slide" >
+        </activity>
+        <!-- 群组详情 -->
+        <activity
+                android:name=".huanxin.ui.GroupDetailsActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide" >
+        </activity>
+        <!-- 群组列表 -->
+        <activity
+                android:name=".huanxin.ui.GroupsActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="adjustPan" >
+        </activity>
+
+        <!-- 聊天室详情 -->
+        <activity
+                android:name=".huanxin.ui.ChatRoomDetailsActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide" >
+        </activity>
+
+        <!-- 新建群组 -->
+        <activity
+                android:name=".huanxin.ui.NewGroupActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 退出群组提示框 -->
+        <activity
+                android:name=".huanxin.ui.ExitGroupDialog"
+                android:screenOrientation="portrait"
+                android:theme="@style/MyDialogStyleBottom" >
+        </activity>
+        <!-- 群组选人 -->
+        <activity
+                android:name=".huanxin.ui.GroupPickContactsActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="adjustPan" >
+        </activity>
+
+        <activity android:name=".huanxin.ui.PickAtUserActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/horizontal_slide"
+                ></activity>
+
+
+        <!-- 新的朋友邀请消息页面 -->
+        <activity
+                android:name=".huanxin.ui.NewFriendsMsgActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide" >
+        </activity>
+        <!-- 转发消息用户列表页面 -->
+        <activity
+                android:name=".huanxin.ui.ForwardMessageActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <!-- 自定义的contextmenu -->
+        <activity
+                android:name=".huanxin.ui.ContextMenuActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/MyDialogStyle" >
+        </activity>
+        <!-- 显示下载大图页面 -->
+        <activity
+                android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide" >
+        </activity>
+        <!-- 下载文件 -->
+        <activity
+                android:name="com.hyphenate.easeui.ui.EaseShowNormalFileActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide" >
+        </activity>
+        <!-- 黑名单 -->
+        <activity
+                android:name=".huanxin.ui.BlacklistActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide" >
+        </activity>
+
+        <!-- 公开的群聊列表 -->
+        <activity
+                android:name=".huanxin.ui.PublicGroupsActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="adjustPan" >
+        </activity>
+
+        <activity
+                android:name=".huanxin.ui.PublicChatRoomsActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="adjustPan" >
+        </activity>
+
+
+        <!-- 群聊简单信息 -->
+        <activity
+                android:name=".huanxin.ui.GroupSimpleDetailActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide" >
+        </activity>
+        <!-- 群组黑名单用户列表 -->
+        <activity
+                android:name=".huanxin.ui.GroupBlacklistActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide" >
+        </activity>
+        <activity
+                android:name=".huanxin.ui.GroupSearchMessageActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="stateVisible"
+                ></activity>
+
+        <activity
+                android:name=".huanxin.ui.PublicGroupsSeachActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide" >
+        </activity>
+
+        <activity
+                android:name="com.hyphenate.easeui.ui.EaseShowVideoActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <!-- choose video -->
+        <activity
+                android:name=".huanxin.ui.ImageGridActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <activity
+                android:name=".huanxin.ui.RecorderVideoActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <!-- upload error log -->
+        <activity
+                android:name=".huanxin.ui.DiagnoseActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+
+        <!-- iOS offline push nick -->
+        <activity
+                android:name=".huanxin.ui.OfflinePushNickActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <!-- robots list -->
+        <activity
+                android:name=".huanxin.ui.RobotsActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="stateAlwaysHidden"
+                ></activity>
+        <!-- user profile -->
+        <activity
+                android:name=".huanxin.ui.UserProfileActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                ></activity>
+
+
+        <!-- 开机自启动服务 -->
+        <receiver android:name=".huanxin.receiver.StartServiceReceiver" >
+            <intent-filter android:priority="1000" >
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 设置环信应用的appkey -->
+        <meta-data
+                android:name="EASEMOB_APPKEY"
+                android:value="sdhmrpkj#nsbankoa" />
+        <!-- 声明sdk所需的service -->
+        <service android:name="com.hyphenate.chat.EMChatService"
+                 android:exported="true"
+                />
+        <!-- 声明sdk所需的receiver -->
+        <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+            <!-- 可选filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+</manifest>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/main_bg"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:padding="12dp"
+                    android:layout_height="wrap_content">
+        <ImageView android:layout_width="45dp"
+                   android:id="@+id/head"
+                   android:src="@drawable/ic_launcher"
+                   android:layout_height="45dp"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_toRightOf="@+id/head"
+                  android:id="@+id/nickname"
+                  android:textSize="16sp"
+                  android:layout_marginLeft="8dp"
+                  android:layout_marginTop="6dp"
+                  android:textColor="@color/text_color"
+                  android:text="张三的第23周工作报告"
+                  android:layout_height="wrap_content"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_toRightOf="@+id/head"
+                  android:id="@+id/dateline"
+                  android:textSize="15sp"
+                  android:layout_below="@+id/nickname"
+                  android:layout_marginLeft="8dp"
+                  android:layout_marginTop="6dp"
+                  android:textColor="@color/text_color_two"
+                  android:text="16-07-02 16:00"
+                  android:layout_height="wrap_content"/>
+        <TextView android:layout_width="wrap_content"
+                  android:text="06.13-06.19"
+                  android:textColor="@color/blue_btn_normal"
+                  android:id="@+id/week"
+                  android:textSize="16sp"
+                  android:layout_alignParentRight="true"
+                  android:layout_marginTop="6dp"
+                  android:layout_below="@+id/nickname"
+                  android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <TextView android:layout_width="wrap_content"
+              android:text="工作成效"
+              android:padding="8dp"
+              android:layout_marginTop="8dp"
+              android:layout_marginLeft="8dp"
+              android:textColor="@color/text_color"
+              android:layout_height="wrap_content"/>
+    <TextView
+            android:id="@+id/content_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/et_bule_bg"
+            android:textSize="16sp"
+            android:gravity="top"
+            android:hint=" 此处填写工作成效"
+            android:padding="10dp"
+            android:textColor="#ff000000"/>
+    <TextView android:layout_width="wrap_content"
+              android:text="工作总结"
+              android:padding="8dp"
+              android:layout_marginTop="8dp"
+              android:layout_marginLeft="8dp"
+              android:textColor="@color/text_color"
+              android:layout_height="wrap_content"/>
+    <TextView
+            android:id="@+id/content_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/et_bule_bg"
+            android:textSize="16sp"
+            android:gravity="top"
+            android:hint=" 此处填写工作总结心得"
+            android:padding="10dp"
+            android:textColor="#ff000000"/>
+    <TextView android:layout_width="wrap_content"
+              android:text="下周计划"
+              android:padding="8dp"
+              android:layout_marginTop="8dp"
+              android:layout_marginLeft="8dp"
+              android:textColor="@color/text_color"
+              android:layout_height="wrap_content"/>
+    <TextView
+            android:id="@+id/content_three"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/et_bule_bg"
+            android:textSize="16sp"
+            android:gravity="top"
+            android:hint=" 此处填写工作计划"
+            android:padding="10dp"
+            android:textColor="#ff000000"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:text="点此查看附件"
+                  android:layout_marginLeft="8dp"
+                  android:layout_marginTop="8dp"
+                  android:background="@color/white"
+                  android:drawableLeft="@drawable/file_attachment"
+                  android:id="@+id/btn_attachment"
+                  android:padding="8dp"
+                  android:textColor="@color/blue"
+                  android:layout_height="wrap_content"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_marginTop="8dp"
+                  android:orientation="horizontal"
+                  android:background="@color/white"
+                  android:layout_height="45dp">
+        <TextView android:layout_width="0dp"
+                  android:padding="8dp"
+                  android:gravity="center"
+                  android:id="@+id/btn_comment"
+                  android:layout_weight="1"
+                  android:text="评论"
+                  android:textSize="16sp"
+                  android:textColor="@color/text_color"
+                  android:layout_height="45dp"/>
+        <View android:layout_width="0.1dp"
+              android:background="@color/gray"
+              android:layout_height="45dp"></View>
+        <TextView android:layout_width="0dp"
+                  android:gravity="center"
+                  android:layout_weight="1"
+                  android:padding="8dp"
+                  android:text="查阅情况"
+                  android:id="@+id/btn_brower"
+                  android:textSize="16sp"
+                  android:textColor="@color/text_color"
+                  android:layout_height="45dp"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:layout_height="wrap_content">
+        <View android:layout_width="0dp"
+              android:layout_weight="1"
+              android:id="@+id/view_one"
+              android:background="@color/blue_btn_normal"
+              android:layout_height="1dp">
+        </View>
+        <View android:layout_width="0dp"
+              android:layout_weight="1"
+              android:id="@+id/view_two"
+              android:background="@color/white"
+              android:layout_height="1dp">
+        </View>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_marginTop="15dp"
+                  android:layout_marginBottom="15dp"
+                  android:gravity="center_horizontal"
+                  android:layout_height="wrap_content">
+        <Button android:layout_width="wrap_content"
+                android:text="添加评论"
+                android:id="@+id/add_comment"
+                android:padding="8dp"
+                android:background="@drawable/btn_blue_shape"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

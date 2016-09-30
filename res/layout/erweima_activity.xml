@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/main_bg"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            layout="@layout/top_liner"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:gravity="center"
+                  android:layout_height="match_parent">
+        <ImageView android:layout_width="150dp"
+                   android:layout_gravity="center"
+                   android:src="@drawable/md_qr_download"
+                   android:layout_height="150dp"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:textColor="@color/text_color"
+                  android:textSize="18sp"
+                  android:gravity="center"
+                  android:padding="12dp"
+                  android:text="扫一扫，下载农商银行办公手机app"
+                  android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>

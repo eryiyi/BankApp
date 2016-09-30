@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:id="@+id/main"
+              android:background="@color/main_bg"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            layout="@layout/top_liner"/>
+
+    <!--<com.ruiping.BankApp.widget.ReboundScrollView android:layout_width="match_parent"-->
+                                                  <!--android:layout_height="match_parent">-->
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:layout_height="match_parent">
+            <EditText
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="200dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/et_bule_bg"
+                    android:textSize="16sp"
+                    android:gravity="top"
+                    android:hint="填写日报内容"
+                    android:padding="10dp"
+                    android:textColor="#ff000000"/>
+            <TextView android:layout_width="wrap_content"
+                      android:text="附件"
+                      android:drawableLeft="@drawable/file_attachment"
+                      android:id="@+id/addFile"
+                      android:textColor="@color/blue"
+                      android:padding="8dp"
+                      android:layout_height="wrap_content"/>
+            <ListView android:layout_width="match_parent"
+                      android:id="@+id/lstv"
+                      android:divider="@color/gray"
+                      android:dividerHeight="0.1dp"
+                      android:layout_height="match_parent">
+            </ListView>
+        </LinearLayout>
+    <!--</com.ruiping.BankApp.widget.ReboundScrollView>-->
+
+</LinearLayout>

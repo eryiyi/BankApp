@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:id="@+id/main"
+              android:background="@color/main_bg"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            layout="@layout/top_liner"/>
+    <com.ruiping.BankApp.widget.ReboundScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:layout_height="match_parent">
+            <RelativeLayout android:layout_width="match_parent"
+                            android:background="@drawable/profile_bg"
+                            android:layout_height="130dp">
+               <com.ruiping.BankApp.widget.CircleImageView
+                       android:layout_width="60dp"
+                       android:id="@+id/head"
+                       android:layout_marginTop="25dp"
+                       android:layout_centerHorizontal="true"
+                       android:src="@drawable/ic_launcher"
+                       android:layout_height="60dp"/>
+                <TextView android:layout_width="wrap_content"
+                          android:text="宋江"
+                          android:id="@+id/nickname"
+                          android:textSize="16sp"
+                          android:layout_marginTop="15dp"
+                          android:layout_below="@+id/head"
+                          android:layout_centerHorizontal="true"
+                          android:textColor="@color/white"
+                          android:layout_height="wrap_content"/>
+            </RelativeLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/gray"
+                  android:layout_marginTop="15dp"
+                  android:layout_height="0.1dp"></View>
+            <RelativeLayout android:layout_width="match_parent"
+                            android:background="@color/white"
+                            android:padding="12dp"
+                            android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content"
+                          android:text="状态"
+                          android:textSize="16sp"
+                          android:textColor="@color/text_color"
+                          android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:id="@+id/status"
+                          android:textSize="16sp"
+                          android:layout_alignParentRight="true"
+                          android:textColor="@color/text_color_two"
+                          android:layout_height="wrap_content"/>
+            </RelativeLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/gray"
+                  android:layout_height="0.1dp"></View>
+            <RelativeLayout android:layout_width="match_parent"
+                          android:background="@color/white"
+                          android:padding="12dp"
+                          android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content"
+                          android:text="部门"
+                          android:textSize="16sp"
+                          android:textColor="@color/text_color"
+                          android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:text=""
+                          android:textSize="16sp"
+                          android:id="@+id/groupName"
+                          android:layout_alignParentRight="true"
+                          android:textColor="@color/text_color_two"
+                          android:layout_height="wrap_content"/>
+            </RelativeLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/gray"
+                  android:layout_height="0.1dp"></View>
+            <RelativeLayout android:layout_width="match_parent"
+                            android:background="@color/white"
+                            android:padding="12dp"
+                            android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content"
+                          android:text="上级"
+                          android:textSize="16sp"
+                          android:textColor="@color/text_color"
+                          android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:text="暂无"
+                          android:id="@+id/upEmpName"
+                          android:textSize="16sp"
+                          android:layout_alignParentRight="true"
+                          android:textColor="@color/text_color_two"
+                          android:layout_height="wrap_content"/>
+            </RelativeLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/gray"
+                  android:layout_height="0.1dp"></View>
+            <RelativeLayout android:layout_width="match_parent"
+                            android:background="@drawable/btn_white_shape"
+                            android:padding="12dp"
+                            android:id="@+id/relate_emial"
+                            android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content"
+                          android:text="邮箱"
+                          android:textSize="16sp"
+                          android:textColor="@color/text_color"
+                          android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:text="暂无"
+                          android:textSize="16sp"
+                          android:drawableRight="@drawable/sm_more"
+                          android:id="@+id/email"
+                          android:layout_alignParentRight="true"
+                          android:textColor="@color/text_color_two"
+                          android:layout_height="wrap_content"/>
+            </RelativeLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/gray"
+                  android:layout_height="0.1dp"></View>
+            <RelativeLayout android:layout_width="match_parent"
+                            android:background="@drawable/btn_white_shape"
+                            android:padding="12dp"
+                            android:id="@+id/relate_mobile"
+                            android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content"
+                          android:text="手机"
+                          android:textSize="16sp"
+                          android:textColor="@color/text_color"
+                          android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:id="@+id/mobile"
+                          android:textSize="16sp"
+                          android:drawableRight="@drawable/sm_more"
+                          android:layout_alignParentRight="true"
+                          android:textColor="@color/text_color_two"
+                          android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+            <View android:layout_width="match_parent"
+                  android:background="@color/gray"
+                  android:layout_height="0.1dp"></View>
+            <RelativeLayout android:layout_width="match_parent"
+                            android:background="@drawable/btn_white_shape"
+                            android:padding="12dp"
+                            android:id="@+id/relate_set"
+                            android:layout_height="wrap_content">
+                <TextView android:layout_width="match_parent"
+                          android:text="设置"
+                          android:drawableRight="@drawable/sm_more"
+                          android:textSize="16sp"
+                          android:textColor="@color/text_color"
+                          android:layout_height="wrap_content"/>
+            </RelativeLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/gray"
+                  android:layout_height="0.1dp"></View>
+            <com.ruiping.BankApp.widget.PictureGridview
+                    android:id="@+id/gridView"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:horizontalSpacing="2dip"
+                    android:numColumns="4"
+                    android:layout_below="@+id/content"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="2dip"
+                    android:padding="1dip"/>
+
+        </LinearLayout>
+    </com.ruiping.BankApp.widget.ReboundScrollView>
+</LinearLayout>

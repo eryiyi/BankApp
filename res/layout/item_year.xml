@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:padding="12dp"
+              android:gravity="center_vertical"
+              android:background="@drawable/btn_white_shape"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <TextView android:layout_width="wrap_content"
+              android:text="2016年度"
+              android:id="@+id/item_title"
+              android:textColor="@color/text_color"
+              android:textSize="16sp"
+              android:layout_height="wrap_content"/>
+    <TextView android:layout_width="wrap_content"
+              android:text="完成农村商业银行OA系统安卓版本开发工作"
+              android:textColor="@color/text_color_two"
+              android:layout_marginTop="6dp"
+              android:lineSpacingMultiplier="1.2"
+              android:layout_below="@+id/item_title"
+              android:id="@+id/item_cont"
+              android:layout_height="wrap_content"/>
+    <TextView android:layout_width="wrap_content"
+              android:text="2016.01-2017.01"
+              android:id="@+id/item_dateline"
+              android:textColor="@color/blue_btn_normal"
+              android:textSize="14sp"
+              android:layout_alignParentRight="true"
+              android:layout_height="wrap_content"/>
+</RelativeLayout>

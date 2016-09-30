@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="280dp"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+              android:gravity="center"
+              android:orientation="vertical">
+
+
+    <LinearLayout android:layout_width="280dp"
+                  android:layout_height="37dp"
+                  android:background="@color/blue"
+            >
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:text="任务紧急程度"
+                  android:textColor="@color/white"
+                  android:textSize="16sp"
+                  android:textStyle="bold"
+                  android:gravity="center"
+                />
+    </LinearLayout>
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:layout_marginTop="7dp"
+                  android:layout_marginBottom="5dp"
+                  android:gravity="center"
+            >
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:layout_marginTop="8dp"
+                      android:layout_marginBottom="3dp">
+            <Button
+                    android:id="@+id/btn_one"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="0.2"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:textSize="16dp"
+                    android:text="正常"
+                    android:background="@color/blue"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/white"/>
+
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:layout_marginTop="8dp"
+                      android:layout_marginBottom="3dp">
+            <Button
+                    android:id="@+id/btn_two"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="0.2"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:textSize="16dp"
+                    android:text="紧急"
+                    android:background="@color/blue"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/white"/>
+
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:layout_marginTop="8dp"
+                      android:layout_marginBottom="3dp">
+            <Button
+                    android:id="@+id/btn_three"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="0.2"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:textSize="16dp"
+                    android:text="非常紧急"
+                    android:background="@color/blue"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/white"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

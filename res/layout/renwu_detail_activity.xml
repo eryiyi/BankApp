@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/main_bg"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <RelativeLayout android:layout_width="match_parent"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:background="@color/white"
+                    android:layout_height="@dimen/top_title_height">
+
+        <TextView android:layout_width="wrap_content"
+                  android:drawablePadding="5dp"
+                  android:textSize="16sp"
+                  android:gravity="center_vertical"
+                  android:padding="6dp"
+                  android:id="@+id/back"
+                  android:drawableLeft="@drawable/sm_back"
+                  android:text="@string/back"
+                  android:textColor="@color/blue_btn_normal"
+                  android:layout_centerVertical="true"
+                  android:layout_height="40dp"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:text="标题"
+                  android:layout_marginLeft="80dp"
+                  android:layout_marginRight="60dp"
+                  android:singleLine="true"
+                  android:id="@+id/title"
+                  android:textSize="18sp"
+                  android:layout_centerHorizontal="true"
+                  android:layout_centerVertical="true"
+                  android:textColor="@color/text_color"
+                  android:layout_height="wrap_content"/>
+
+        <ImageView android:layout_width="wrap_content"
+                  android:id="@+id/right_btn"
+                  android:padding="8dp"
+                  android:onClick="onTopMenuPopupButtonClick"
+                  android:src="@drawable/right_menu"
+                  android:layout_centerVertical="true"
+                  android:layout_alignParentRight="true"
+                  android:textColor="@color/blue_btn_normal"
+                  android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+        <RelativeLayout android:layout_width="match_parent"
+                        android:id="@+id/relate_one"
+                        android:layout_height="match_parent">
+            <TextView android:layout_width="wrap_content"
+                      android:id="@+id/no_data"
+                      android:text="暂无数据"
+                      android:visibility="gone"
+                      android:textSize="16sp"
+                      android:layout_centerInParent="true"
+                      android:layout_height="wrap_content"/>
+            <com.ruiping.BankApp.widget.ContentListView
+                    android:id="@+id/lstv"
+                    android:cacheColorHint="#00000000"
+                    android:divider="@color/gray"
+                    android:dividerHeight="0.1dp"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+</LinearLayout>
