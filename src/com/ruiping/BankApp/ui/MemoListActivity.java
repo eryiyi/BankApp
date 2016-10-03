@@ -104,7 +104,7 @@ public class MemoListActivity extends BaseActivity implements View.OnClickListen
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MemoListActivity.this, MemoDetailActivity.class);
                 BankNoteBean bankNoteBean = lists.get(position-1);
-                intent.putExtra("bankNoteBean", bankNoteBean);
+                intent.putExtra("bankNoteBeanId", bankNoteBean.getNoteId());
                 startActivity(intent);
             }
         });

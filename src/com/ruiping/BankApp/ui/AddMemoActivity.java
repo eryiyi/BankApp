@@ -121,9 +121,14 @@ public class AddMemoActivity extends BaseActivity implements View.OnClickListene
                                     BankNoteBeanSingleData data = getGson().fromJson(s, BankNoteBeanSingleData.class);
                                     BankNoteBean bankNoteBean = data.getData();
                                     if(bankNoteBean != null){
+                                        //发送广播  增加一个备忘录
+                                        Intent intent1 = new Intent("add_memo_success");
+                                        sendBroadcast(intent1);
+
                                         Intent intent = new Intent(AddMemoActivity.this, MemoDetailActivity.class);
-                                        intent.putExtra("bankNoteBean", bankNoteBean);
+                                        intent.putExtra("bankNoteBeanId", bankNoteBean.getNoteId());
                                         startActivity(intent);
+                                        finish();
                                     }
                                 } else {
                                     Toast.makeText(AddMemoActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();

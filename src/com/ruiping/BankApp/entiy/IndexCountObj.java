@@ -12,6 +12,15 @@ public class IndexCountObj {
     private String key6;
     private String key7;
     private String key8;
+    private String key9;
+
+    public String getKey9() {
+        return key9;
+    }
+
+    public void setKey9(String key9) {
+        this.key9 = key9;
+    }
 
     public String getKey8() {
         return key8;

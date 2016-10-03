@@ -101,7 +101,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                 onBackPressed();
             }
         });
-        ((EaseEmojiconMenu)inputMenu.getEmojiconMenu()).addEmojiconGroup(EmojiconExampleGroupData.getData());
+//        ((EaseEmojiconMenu)inputMenu.getEmojiconMenu()).addEmojiconGroup(EmojiconExampleGroupData.getData());
         if(chatType == EaseConstant.CHATTYPE_GROUP){
             inputMenu.getPrimaryMenu().getEditText().addTextChangedListener(new TextWatcher() {
                 

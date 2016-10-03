@@ -92,7 +92,6 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                     chatV.putExtra("userName", emp.getEmpName());
                     startActivity(chatV);
                 }
-
             }
                 break;
         }

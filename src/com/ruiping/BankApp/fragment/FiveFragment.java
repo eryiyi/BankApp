@@ -434,7 +434,7 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
         lists.add(new IndexObj("季报", R.drawable.md_h_brown, indexCountObj.getKey4()));
         lists.add(new IndexObj("年中", R.drawable.md_h_blue_dark, indexCountObj.getKey5()));
         lists.add(new IndexObj("年报", R.drawable.md_h_red, indexCountObj.getKey6()));
-        lists.add(new IndexObj("办公会", R.drawable.md_h_red, indexCountObj.getKey6()));
+        lists.add(new IndexObj("办公会", R.drawable.md_h_red, indexCountObj.getKey9()));
         adapter.notifyDataSetChanged();
     }
 
@@ -555,6 +555,9 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
                     mobile.setText(getGson().fromJson(getSp().getString(Contance.EMP_MOBILE, ""), String.class));
                 }
             }
+            if(action.equals("add_memo_success")){
+                //todo
+            }
         }
     };
 
@@ -563,6 +566,7 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
         IntentFilter myIntentFilter = new IntentFilter();
         myIntentFilter.addAction("update_email_success");
         myIntentFilter.addAction("update_mobile_success");
+        myIntentFilter.addAction("add_memo_success");
         //注册广播
         getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
     }

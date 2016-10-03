@@ -233,24 +233,24 @@ public class DemoHelper {
             }
         });
         //set emoji icon provider
-        easeUI.setEmojiconInfoProvider(new EaseUI.EaseEmojiconInfoProvider() {
-            
-            @Override
-            public EaseEmojicon getEmojiconInfo(String emojiconIdentityCode) {
-                EaseEmojiconGroupEntity data = EmojiconExampleGroupData.getData();
-                for(EaseEmojicon emojicon : data.getEmojiconList()){
-                    if(emojicon.getIdentityCode().equals(emojiconIdentityCode)){
-                        return emojicon;
-                    }
-                }
-                return null;
-            }
-
-            @Override
-            public Map<String, Object> getTextEmojiconMapping() {
-                return null;
-            }
-        });
+//        easeUI.setEmojiconInfoProvider(new EaseUI.EaseEmojiconInfoProvider() {
+//
+//            @Override
+//            public EaseEmojicon getEmojiconInfo(String emojiconIdentityCode) {
+//                EaseEmojiconGroupEntity data = EmojiconExampleGroupData.getData();
+//                for(EaseEmojicon emojicon : data.getEmojiconList()){
+//                    if(emojicon.getIdentityCode().equals(emojiconIdentityCode)){
+//                        return emojicon;
+//                    }
+//                }
+//                return null;
+//            }
+//
+//            @Override
+//            public Map<String, Object> getTextEmojiconMapping() {
+//                return null;
+//            }
+//        });
         
         //set notification options, will use default if you don't set it
         easeUI.getNotifier().setNotificationInfoProvider(new EaseNotifier.EaseNotificationInfoProvider() {

@@ -115,7 +115,7 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
 
     @Override
     protected void setUpView() {
-        titleBar.setRightImageResource(R.drawable.ease_blue_add);
+        titleBar.setRightImageResource(R.drawable.group_chat);
         titleBar.setRightLayoutClickListener(new OnClickListener() {
 
             @Override

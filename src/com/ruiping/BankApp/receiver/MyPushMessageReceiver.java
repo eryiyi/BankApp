@@ -14,6 +14,7 @@ import com.android.volley.toolbox.Volley;
 import com.baidu.android.pushservice.PushMessageReceiver;
 import com.google.gson.Gson;
 import com.ruiping.BankApp.base.InternetURL;
+import com.ruiping.BankApp.ui.MemoDetailActivity;
 import com.ruiping.BankApp.ui.MemoListActivity;
 import com.ruiping.BankApp.ui.NoticesActivity;
 import com.ruiping.BankApp.ui.RenwuListActivity;
@@ -152,7 +153,8 @@ public class MyPushMessageReceiver extends PushMessageReceiver {
                case 1:
                {
                    //备忘录
-                   Intent intent = new Intent(context, MemoListActivity.class);
+                   Intent intent = new Intent(context, MemoDetailActivity.class);
+                   intent.putExtra("bankNoteBeanId", msgId);
                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                    context.startActivity(intent);
                }

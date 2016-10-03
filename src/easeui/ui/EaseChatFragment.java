@@ -26,6 +26,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.hyphenate.EMChatRoomChangeListener;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.EMValueCallBack;
@@ -42,11 +47,18 @@ import com.hyphenate.util.EMLog;
 import com.hyphenate.util.PathUtil;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.ruiping.BankApp.R;
+import com.ruiping.BankApp.base.InternetURL;
+import com.ruiping.BankApp.data.BankNoteBeanSingleData;
+import com.ruiping.BankApp.entiy.BankNoteBean;
 import com.ruiping.BankApp.huanxin.ui.ChatActivity;
+import com.ruiping.BankApp.ui.MemoDetailActivity;
 import com.ruiping.BankApp.util.Contance;
+import com.ruiping.BankApp.util.StringUtil;
 import easeui.EaseConstant;
 import easeui.controller.EaseUI;
 import easeui.domain.EaseEmojicon;
@@ -56,6 +68,7 @@ import easeui.utils.EaseCommonUtils;
 import easeui.utils.EaseUserUtils;
 import easeui.widget.*;
 import easeui.widget.chatrow.EaseCustomChatRowProvider;
+import org.json.JSONObject;
 
 /**
  * you can new an EaseChatFragment to use or you can inherit it to expand.
@@ -799,6 +812,64 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         if(isMessageListInited) {
             messageList.refreshSelectLast();
         }
+
+        if (chatType == EaseConstant.CHATTYPE_SINGLE){
+            //保存到服务器 单聊信息
+            addData(message);
+        }
+    }
+
+    private void addData(final EMMessage message) {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.SAVE_MSG_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                String code1 = jo.getString("code");
+                                if (Integer.parseInt(code1) == 200) {
+
+                                } else {
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("fromUserName", message.getFrom());
+                params.put("msg", message.getBody().toString());
+                params.put("toUserName",message.getTo() );
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
     }
 
 

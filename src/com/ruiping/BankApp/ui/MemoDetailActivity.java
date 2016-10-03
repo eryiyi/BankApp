@@ -15,6 +15,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.BaseActivity;
 import com.ruiping.BankApp.base.InternetURL;
+import com.ruiping.BankApp.data.BankNoteBeanData;
+import com.ruiping.BankApp.data.BankNoteBeanSingleData;
 import com.ruiping.BankApp.entiy.BankNoteBean;
 import com.ruiping.BankApp.util.Contance;
 import com.ruiping.BankApp.util.StringUtil;
@@ -37,18 +39,77 @@ public class MemoDetailActivity extends BaseActivity implements View.OnClickList
 
     boolean flag = false;//true是自己 false是他人的
 
+    private String bankNoteBeanId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.memo_detail_activity);
-        bankNoteBean = (BankNoteBean) getIntent().getExtras().get("bankNoteBean");
-        if(bankNoteBean != null){
-            if(bankNoteBean.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))){
-                flag = true;
-            }
-        }
+        bankNoteBeanId = getIntent().getExtras().getString("bankNoteBeanId");
+
         initView();
-        initData();
+        getData();
+
+    }
+
+    private void getData() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.MOME_NOTE_DETAIL_BY_ID_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                String code1 = jo.getString("code");
+                                if (Integer.parseInt(code1) == 200) {
+                                    BankNoteBeanSingleData data = getGson().fromJson(s, BankNoteBeanSingleData.class);
+                                    if(data != null){
+                                        bankNoteBean = data.getData();
+                                        if(bankNoteBean != null){
+                                            initData();
+                                        }
+                                    }
+                                } else {
+                                    Toast.makeText(MemoDetailActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            Toast.makeText(MemoDetailActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(MemoDetailActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("noteId", bankNoteBeanId);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
     }
 
     private void initView() {
