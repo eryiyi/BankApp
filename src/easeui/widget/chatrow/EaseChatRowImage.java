@@ -1,13 +1,5 @@
 package easeui.widget.chatrow;
 
-import java.io.File;
-
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMFileMessageBody;
-import com.hyphenate.chat.EMImageMessageBody;
-import com.hyphenate.chat.EMMessage;
-import com.hyphenate.chat.EMMessage.ChatType;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,11 +9,18 @@ import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMFileMessageBody;
+import com.hyphenate.chat.EMImageMessageBody;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chat.EMMessage.ChatType;
 import com.ruiping.BankApp.R;
 import easeui.model.EaseImageCache;
 import easeui.ui.EaseShowBigImageActivity;
 import easeui.utils.EaseCommonUtils;
 import easeui.utils.EaseImageUtils;
+
+import java.io.File;
 
 public class EaseChatRowImage extends EaseChatRowFile {
 

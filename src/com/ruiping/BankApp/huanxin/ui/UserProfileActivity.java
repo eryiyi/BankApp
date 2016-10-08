@@ -17,11 +17,11 @@ import android.widget.*;
 import com.bumptech.glide.Glide;
 import com.hyphenate.EMValueCallBack;
 import com.hyphenate.chat.EMClient;
- import easeui.domain.EaseUser;
- import easeui.utils.EaseUserUtils;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.BaseActivity;
 import com.ruiping.BankApp.huanxin.DemoHelper;
+import easeui.domain.EaseUser;
+import easeui.utils.EaseUserUtils;
 
 import java.io.ByteArrayOutputStream;
 

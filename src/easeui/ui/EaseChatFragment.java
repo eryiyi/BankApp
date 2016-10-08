@@ -14,18 +14,12 @@ import android.provider.MediaStore;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.text.TextUtils;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
+import android.view.*;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -34,29 +28,13 @@ import com.android.volley.toolbox.StringRequest;
 import com.hyphenate.EMChatRoomChangeListener;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.EMValueCallBack;
-import com.hyphenate.chat.EMChatRoom;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMConversation;
-import com.hyphenate.chat.EMGroup;
-import com.hyphenate.chat.EMImageMessageBody;
-import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chat.*;
 import com.hyphenate.chat.EMMessage.ChatType;
-import com.hyphenate.chat.EMTextMessageBody;
-
 import com.hyphenate.util.EMLog;
 import com.hyphenate.util.PathUtil;
-
-import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.InternetURL;
-import com.ruiping.BankApp.data.BankNoteBeanSingleData;
-import com.ruiping.BankApp.entiy.BankNoteBean;
 import com.ruiping.BankApp.huanxin.ui.ChatActivity;
-import com.ruiping.BankApp.ui.MemoDetailActivity;
 import com.ruiping.BankApp.util.Contance;
 import com.ruiping.BankApp.util.StringUtil;
 import easeui.EaseConstant;
@@ -69,6 +47,11 @@ import easeui.utils.EaseUserUtils;
 import easeui.widget.*;
 import easeui.widget.chatrow.EaseCustomChatRowProvider;
 import org.json.JSONObject;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * you can new an EaseChatFragment to use or you can inherit it to expand.

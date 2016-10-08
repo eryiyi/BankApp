@@ -15,11 +15,10 @@ package com.ruiping.BankApp.huanxin.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-
- import easeui.widget.EaseAlertDialog;
- import easeui.widget.EaseAlertDialog.AlertDialogUser;
 import com.ruiping.BankApp.R;
 import easeui.domain.EaseUser;
+import easeui.widget.EaseAlertDialog;
+import easeui.widget.EaseAlertDialog.AlertDialogUser;
 
 public class ForwardMessageActivity extends PickContactNoCheckboxActivity {
 	private EaseUser selectUser;

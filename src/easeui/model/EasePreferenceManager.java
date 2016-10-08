@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import easeui.controller.EaseUI;
 
-
 import java.util.Set;
 
 public class EasePreferenceManager {

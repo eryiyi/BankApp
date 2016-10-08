@@ -1,10 +1,9 @@
 package easeui.model;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
+import android.text.TextUtils;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chat.EMMessage.ChatType;
 import com.ruiping.BankApp.R;
 import easeui.EaseConstant;
 import easeui.controller.EaseUI;
@@ -12,11 +11,10 @@ import easeui.domain.EaseUser;
 import easeui.utils.EaseUserUtils;
 import org.json.JSONArray;
 
-import android.text.TextUtils;
-
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMMessage;
-import com.hyphenate.chat.EMMessage.ChatType;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class EaseAtMessageHelper {
     private List<String> toAtUserList = new ArrayList<String>();

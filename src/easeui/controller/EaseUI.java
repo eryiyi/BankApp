@@ -1,24 +1,23 @@
 package easeui.controller;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import com.hyphenate.EMMessageListener;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMMessage;
-import com.hyphenate.chat.EMOptions;
-
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.util.Log;
+import com.hyphenate.EMMessageListener;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chat.EMOptions;
 import easeui.domain.EaseEmojicon;
 import easeui.domain.EaseUser;
 import easeui.model.EaseAtMessageHelper;
 import easeui.model.EaseNotifier;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public final class EaseUI {
     private static final String TAG = EaseUI.class.getSimpleName();

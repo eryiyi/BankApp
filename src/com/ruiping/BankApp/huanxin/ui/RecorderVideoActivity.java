@@ -39,12 +39,12 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.*;
- import easeui.utils.EaseCommonUtils;
 import com.hyphenate.util.EMLog;
 import com.hyphenate.util.PathUtil;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.BaseActivity;
 import com.ruiping.BankApp.huanxin.util.Utils;
+import easeui.utils.EaseCommonUtils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

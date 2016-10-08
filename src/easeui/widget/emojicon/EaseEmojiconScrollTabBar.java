@@ -9,7 +9,6 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-
 import com.hyphenate.util.DensityUtil;
 import com.ruiping.BankApp.R;
 

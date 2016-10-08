@@ -18,10 +18,10 @@ import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMConversation.EMSearchDirection;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMTextMessageBody;
- import easeui.utils.EaseUserUtils;
 import com.hyphenate.util.DateUtils;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.BaseActivity;
+import easeui.utils.EaseUserUtils;
 
 import java.util.Date;
 import java.util.List;

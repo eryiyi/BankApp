@@ -24,7 +24,6 @@ import com.ruiping.BankApp.MainActivity;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.huanxin.Constant;
 import com.ruiping.BankApp.huanxin.DemoHelper;
-import com.ruiping.BankApp.huanxin.domain.EmojiconExampleGroupData;
 import com.ruiping.BankApp.huanxin.domain.RobotUser;
 import com.ruiping.BankApp.huanxin.widget.ChatRowVoiceCall;
 import com.ruiping.BankApp.ui.ProfileActivity;
@@ -33,7 +32,6 @@ import easeui.ui.EaseChatFragment;
 import easeui.ui.EaseChatFragmentHelper;
 import easeui.widget.chatrow.EaseChatRow;
 import easeui.widget.chatrow.EaseCustomChatRowProvider;
-import easeui.widget.emojicon.EaseEmojiconMenu;
 
 import java.io.File;
 import java.io.FileOutputStream;

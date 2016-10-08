@@ -19,11 +19,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
- import easeui.adapter.EaseContactAdapter;
- import easeui.widget.EaseSidebar;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.BaseActivity;
 import com.ruiping.BankApp.entiy.BankEmpBean;
+import easeui.adapter.EaseContactAdapter;
+import easeui.widget.EaseSidebar;
 
 import java.util.ArrayList;
 import java.util.List;

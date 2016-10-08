@@ -24,13 +24,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
-
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
- import easeui.controller.EaseUI;
- import easeui.controller.EaseUI.EaseSettingsProvider;
 import com.hyphenate.util.EMLog;
 import com.hyphenate.util.EasyUtils;
+import easeui.controller.EaseUI;
+import easeui.controller.EaseUI.EaseSettingsProvider;
 
 import java.util.HashSet;
 import java.util.List;

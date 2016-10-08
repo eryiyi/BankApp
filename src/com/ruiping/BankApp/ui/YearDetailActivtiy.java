@@ -115,7 +115,7 @@ public class YearDetailActivtiy extends BaseActivity implements View.OnClickList
     void initHeader(){
         if(bankJobReport != null && bankJobReport.getBankEmp() != null){
             if(!StringUtil.isNullOrEmpty(bankJobReport.getBankEmp().getEmpCover())){
-                imageLoader.displayImage(InternetURL.INTERNAL+bankJobReport.getBankEmp().getEmpCover(), head, animateFirstListener);
+                imageLoader.displayImage(InternetURL.INTERNAL + bankJobReport.getBankEmp().getEmpCover(), head, animateFirstListener);
             }
             if(!StringUtil.isNullOrEmpty(bankJobReport.getBankEmp().getEmpName())){
                 nickname.setText(bankJobReport.getBankEmp().getEmpName());

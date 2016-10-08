@@ -4,7 +4,6 @@ import android.content.Context;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.hyphenate.chat.EMMessage;
 import com.ruiping.BankApp.R;

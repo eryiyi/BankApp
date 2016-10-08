@@ -1,17 +1,16 @@
 package easeui.widget.chatrow;
 
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMMessage;
-import com.hyphenate.chat.EMMessage.ChatType;
-import com.hyphenate.chat.EMTextMessageBody;
-import com.hyphenate.exceptions.HyphenateException;
-
 import android.content.Context;
 import android.text.Spannable;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chat.EMMessage.ChatType;
+import com.hyphenate.chat.EMTextMessageBody;
+import com.hyphenate.exceptions.HyphenateException;
 import com.ruiping.BankApp.R;
 import easeui.utils.EaseSmileUtils;
 

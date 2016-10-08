@@ -11,28 +11,16 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation.EMConversationType;
- import easeui.model.EaseAtMessageHelper;
- import easeui.ui.EaseConversationListFragment;
 import com.hyphenate.util.NetUtils;
 import com.ruiping.BankApp.MainActivity;
 import com.ruiping.BankApp.R;
-import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.huanxin.Constant;
 import com.ruiping.BankApp.huanxin.db.InviteMessgeDao;
 import com.ruiping.BankApp.huanxin.mine.MyEMConversation;
-import com.ruiping.BankApp.util.Contance;
-import com.ruiping.BankApp.util.StringUtil;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
+import easeui.model.EaseAtMessageHelper;
+import easeui.ui.EaseConversationListFragment;
 
 public class ConversationListFragment extends EaseConversationListFragment{
 

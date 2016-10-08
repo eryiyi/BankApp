@@ -6,24 +6,15 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Filter;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.*;
 import android.widget.TextView.BufferType;
-
-import com.hyphenate.chat.EMChatRoom;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMConversation;
+import com.hyphenate.chat.*;
 import com.hyphenate.chat.EMConversation.EMConversationType;
-import com.hyphenate.chat.EMGroup;
-import com.hyphenate.chat.EMMessage;
-
 import com.hyphenate.util.DateUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ruiping.BankApp.BankAppApplication;
 import com.ruiping.BankApp.R;
+import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.entiy.BankEmpBean;
 import com.ruiping.BankApp.huanxin.mine.MyEMConversation;
 import easeui.domain.EaseUser;
@@ -136,7 +127,7 @@ public class EaseConversationAdapter extends ArrayAdapter<MyEMConversation> {
             EaseUserUtils.setUserNick(username, holder.name);
             holder.motioned.setVisibility(View.GONE);
             if(emp != null){
-                imageLoader.displayImage(emp.getEmpCover(),  holder.avatar, BankAppApplication.txOptions);
+                imageLoader.displayImage(InternetURL.INTERNAL + emp.getEmpCover(),  holder.avatar, BankAppApplication.txOptions);
             }
         }
 

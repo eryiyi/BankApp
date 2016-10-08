@@ -4,13 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.*;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
@@ -19,7 +13,6 @@ import com.hyphenate.chat.EMMessage.Direct;
 import com.hyphenate.util.DateUtils;
 import com.ruiping.BankApp.R;
 import easeui.adapter.EaseMessageAdapter;
-import easeui.utils.EaseUserUtils;
 import easeui.widget.EaseChatMessageList;
 
 import java.util.Date;
@@ -115,10 +108,10 @@ public abstract class EaseChatRow extends LinearLayout {
         }
         //set nickname and avatar
         if(message.direct() == Direct.SEND){
-            EaseUserUtils.setUserAvatar(context, EMClient.getInstance().getCurrentUser(), userAvatarView);
+//            EaseUserUtils.setUserAvatar(context, EMClient.getInstance().getCurrentUser(), userAvatarView);
         }else{
-            EaseUserUtils.setUserAvatar(context, message.getFrom(), userAvatarView);
-            EaseUserUtils.setUserNick(message.getFrom(), usernickView);
+//            EaseUserUtils.setUserAvatar(context, message.getFrom(), userAvatarView);
+//            EaseUserUtils.setUserNick(message.getFrom(), usernickView);
         }
         
         if(deliveredView != null){

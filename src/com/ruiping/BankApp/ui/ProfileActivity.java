@@ -19,6 +19,8 @@ import com.ruiping.BankApp.adapter.AnimateFirstDisplayListener;
 import com.ruiping.BankApp.base.BaseActivity;
 import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.data.BankEmpBeanData;
+import com.ruiping.BankApp.db.DBHelper;
+import com.ruiping.BankApp.db.Emp;
 import com.ruiping.BankApp.entiy.BankEmpBean;
 import com.ruiping.BankApp.huanxin.ui.ChatActivity;
 import com.ruiping.BankApp.util.Contance;
@@ -197,6 +199,8 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         }else {
             relate_chat.setVisibility(View.VISIBLE);
         }
+        Emp emp1 = new Emp(emp.getEmpId(), emp.getEmpMobile(), emp.getNewPhone(), emp.getEmpName(), emp.getEmpCover(), emp.getPushId(), emp.getDeviceId(), emp.getChannelId()) ;
+        DBHelper.getInstance(ProfileActivity.this).saveEmp(emp1);
     }
 
 }

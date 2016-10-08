@@ -21,15 +21,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
-
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
-
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.ruiping.BankApp.BankAppApplication;
 import com.ruiping.BankApp.adapter.AnimateFirstDisplayListener;
+import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.db.DBHelper;
 import com.ruiping.BankApp.db.Emp;
 import easeui.EaseConstant;
@@ -252,7 +251,7 @@ public class EaseMessageAdapter extends BaseAdapter{
 
 		Emp emp = DBHelper.getInstance(context).getEmpById(message.getFrom());
 		if(emp != null){
-			imageLoader.displayImage(emp.getEmpCover(), chatRow.userAvatarView, BankAppApplication.txOptions, animateFirstListener);
+			imageLoader.displayImage(InternetURL.INTERNAL+emp.getEmpCover(), chatRow.userAvatarView, BankAppApplication.txOptions, animateFirstListener);
 			if(chatRow.usernickView != null){
 				chatRow.usernickView.setText(emp.getEmpName()==null?"":emp.getEmpName());
 			}

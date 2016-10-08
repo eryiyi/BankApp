@@ -21,10 +21,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ProgressBar;
-
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.util.EMLog;

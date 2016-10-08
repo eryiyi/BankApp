@@ -1,7 +1,6 @@
 package easeui.widget.chatrow;
 
 import android.widget.BaseAdapter;
-
 import com.hyphenate.chat.EMMessage;
 
 /**

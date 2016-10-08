@@ -26,12 +26,12 @@ import com.hyphenate.chat.EMChatRoom;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMConversation.EMConversationType;
- import easeui.utils.EaseUserUtils;
- import easeui.widget.EaseAlertDialog;
- import easeui.widget.EaseAlertDialog.AlertDialogUser;
- import easeui.widget.EaseExpandGridView;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.BaseActivity;
+import easeui.utils.EaseUserUtils;
+import easeui.widget.EaseAlertDialog;
+import easeui.widget.EaseAlertDialog.AlertDialogUser;
+import easeui.widget.EaseExpandGridView;
 
 import java.util.ArrayList;
 import java.util.List;

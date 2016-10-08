@@ -15,7 +15,6 @@ import com.baidu.android.pushservice.PushMessageReceiver;
 import com.google.gson.Gson;
 import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.ui.MemoDetailActivity;
-import com.ruiping.BankApp.ui.MemoListActivity;
 import com.ruiping.BankApp.ui.NoticesActivity;
 import com.ruiping.BankApp.ui.RenwuListActivity;
 import com.ruiping.BankApp.util.Contance;

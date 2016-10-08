@@ -1,11 +1,5 @@
 package com.ruiping.BankApp.data;
 
-import com.ruiping.BankApp.entiy.BankJobTask;
-import com.ruiping.BankApp.entiy.BankNoteBean;
-import com.ruiping.BankApp.entiy.BankNoticesBean;
-
-import java.util.List;
-
 /**
  * Created by zhl on 2016/9/29.
  */

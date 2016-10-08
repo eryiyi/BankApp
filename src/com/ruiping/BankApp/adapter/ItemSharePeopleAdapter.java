@@ -13,9 +13,7 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.ruiping.BankApp.BankAppApplication;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.InternetURL;
-import com.ruiping.BankApp.entiy.BankNoticesBean;
 import com.ruiping.BankApp.entiy.BankTaskShareBean;
-import com.ruiping.BankApp.util.DateUtil;
 
 import java.util.List;
 

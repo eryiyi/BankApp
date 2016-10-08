@@ -1,8 +1,5 @@
 package easeui.widget;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
@@ -10,14 +7,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
+import android.widget.*;
 import com.hyphenate.util.DensityUtil;
 import com.ruiping.BankApp.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Extend menu when user want send image, voice clip, etc

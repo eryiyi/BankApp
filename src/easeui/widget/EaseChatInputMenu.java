@@ -1,9 +1,5 @@
 package easeui.widget;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
@@ -20,6 +16,10 @@ import easeui.model.EaseDefaultEmojiconDatas;
 import easeui.utils.EaseSmileUtils;
 import easeui.widget.emojicon.EaseEmojiconMenu;
 import easeui.widget.emojicon.EaseEmojiconMenuBase;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**

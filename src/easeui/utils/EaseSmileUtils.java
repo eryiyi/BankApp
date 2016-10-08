@@ -13,13 +13,6 @@
  */
 package easeui.utils;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import android.content.Context;
 import android.net.Uri;
 import android.text.Spannable;
@@ -28,6 +21,13 @@ import android.text.style.ImageSpan;
 import easeui.controller.EaseUI;
 import easeui.domain.EaseEmojicon;
 import easeui.model.EaseDefaultEmojiconDatas;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class EaseSmileUtils {

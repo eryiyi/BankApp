@@ -22,12 +22,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.HeaderViewListAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SectionIndexer;
-import android.widget.TextView;
-
+import android.widget.*;
 import com.hyphenate.util.DensityUtil;
 import com.ruiping.BankApp.R;
 

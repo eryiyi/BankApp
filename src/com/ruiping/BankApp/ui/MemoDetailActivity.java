@@ -15,10 +15,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.BaseActivity;
 import com.ruiping.BankApp.base.InternetURL;
-import com.ruiping.BankApp.data.BankNoteBeanData;
 import com.ruiping.BankApp.data.BankNoteBeanSingleData;
 import com.ruiping.BankApp.entiy.BankNoteBean;
-import com.ruiping.BankApp.util.Contance;
 import com.ruiping.BankApp.util.StringUtil;
 import org.json.JSONObject;
 

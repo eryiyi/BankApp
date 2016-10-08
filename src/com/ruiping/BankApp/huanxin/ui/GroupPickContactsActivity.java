@@ -26,7 +26,6 @@ import com.android.volley.*;
 import com.android.volley.toolbox.StringRequest;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMGroup;
- import easeui.widget.EaseSidebar;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.ruiping.BankApp.BankAppApplication;
@@ -39,6 +38,7 @@ import com.ruiping.BankApp.data.BankEmpData;
 import com.ruiping.BankApp.entiy.BankEmpBean;
 import com.ruiping.BankApp.pinyin.PinyinComparator;
 import com.ruiping.BankApp.util.StringUtil;
+import easeui.widget.EaseSidebar;
 import org.json.JSONObject;
 
 import java.util.*;

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;

@@ -13,25 +13,24 @@
  */
 package easeui.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.hyphenate.chat.EMConversation.EMConversationType;
-import com.hyphenate.chat.EMMessage;
-import com.hyphenate.chat.EMTextMessageBody;
-import com.hyphenate.util.EMLog;
-import com.hyphenate.util.HanziToPinyin;
-import com.hyphenate.util.HanziToPinyin.Token;
-
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.TextUtils;
+import com.hyphenate.chat.EMConversation.EMConversationType;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chat.EMTextMessageBody;
+import com.hyphenate.util.EMLog;
+import com.hyphenate.util.HanziToPinyin;
+import com.hyphenate.util.HanziToPinyin.Token;
 import com.ruiping.BankApp.R;
 import easeui.EaseConstant;
 import easeui.domain.EaseUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EaseCommonUtils {
 	private static final String TAG = "CommonUtils";

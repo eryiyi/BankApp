@@ -3,12 +3,11 @@ package com.ruiping.BankApp.huanxin.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
- import easeui.ui.EaseChatFragment;
 import com.hyphenate.util.EasyUtils;
-import com.ruiping.BankApp.MainActivity;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.BaseActivity;
 import com.ruiping.BankApp.huanxin.runtimepermissions.PermissionsManager;
+import easeui.ui.EaseChatFragment;
 
 /**
  *

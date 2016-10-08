@@ -23,7 +23,6 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMCmdMessageBody;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
- import easeui.utils.EaseCommonUtils;
 import com.ruiping.BankApp.base.BaseActivity;
 import com.ruiping.BankApp.fragment.FirstFragment;
 import com.ruiping.BankApp.fragment.FiveFragment;
@@ -40,6 +39,7 @@ import com.ruiping.BankApp.huanxin.ui.ConversationListFragment;
 import com.ruiping.BankApp.huanxin.ui.GroupsActivity;
 import com.ruiping.BankApp.ui.LoginActivity;
 import com.ruiping.BankApp.util.HttpUtils;
+import easeui.utils.EaseCommonUtils;
 
 import java.util.List;
 

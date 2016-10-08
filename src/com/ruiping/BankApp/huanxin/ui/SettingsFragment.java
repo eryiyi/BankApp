@@ -26,7 +26,6 @@ import android.widget.*;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
- import easeui.widget.EaseSwitchButton;
 import com.hyphenate.util.EMLog;
 import com.ruiping.BankApp.MainActivity;
 import com.ruiping.BankApp.R;
@@ -35,6 +34,7 @@ import com.ruiping.BankApp.huanxin.DemoHelper;
 import com.ruiping.BankApp.huanxin.DemoModel;
 import com.ruiping.BankApp.ui.LoginActivity;
 import com.ruiping.BankApp.ui.ProfileActivity;
+import easeui.widget.EaseSwitchButton;
 
 /**
  * settings screen

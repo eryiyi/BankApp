@@ -550,7 +550,8 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
                 if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString(Contance.EMP_EMAIL, ""), String.class))){
                     email.setText(getGson().fromJson(getSp().getString(Contance.EMP_EMAIL, ""), String.class));
                 }
-            }if (action.equals("update_mobile_success")) {
+            }
+            if (action.equals("update_mobile_success")) {
                 //更新手机号
                 if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString(Contance.EMP_MOBILE, ""), String.class))){
                     mobile.setText(getGson().fromJson(getSp().getString(Contance.EMP_MOBILE, ""), String.class));
@@ -558,6 +559,22 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
 
             }
             if(action.equals("add_memo_success")){
+                //查询主页面统计信息
+                getCountTj();
+            }
+            if(action.equals("add_year_success")){
+                //查询主页面统计信息
+                getCountTj();
+            }
+            if(action.equals("add_month_success")){
+                //查询主页面统计信息
+                getCountTj();
+            }
+            if(action.equals("update_weekly_success")){
+                //查询主页面统计信息
+                getCountTj();
+            }
+            if(action.equals("add_quarter_success")){
                 //查询主页面统计信息
                 getCountTj();
             }
@@ -570,6 +587,10 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
         myIntentFilter.addAction("update_email_success");
         myIntentFilter.addAction("update_mobile_success");
         myIntentFilter.addAction("add_memo_success");
+        myIntentFilter.addAction("add_year_success");
+        myIntentFilter.addAction("add_month_success");
+        myIntentFilter.addAction("update_weekly_success");
+        myIntentFilter.addAction("add_quarter_success");
         //注册广播
         getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
     }

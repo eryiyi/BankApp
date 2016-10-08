@@ -23,10 +23,10 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMGroupManager.EMGroupOptions;
 import com.hyphenate.chat.EMGroupManager.EMGroupStyle;
- import easeui.widget.EaseAlertDialog;
 import com.hyphenate.exceptions.HyphenateException;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.BaseActivity;
+import easeui.widget.EaseAlertDialog;
 
 public class NewGroupActivity extends BaseActivity {
 	private EditText groupNameEditText;

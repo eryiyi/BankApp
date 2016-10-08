@@ -10,10 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
-import com.ruiping.BankApp.BankAppApplication;
 import com.ruiping.BankApp.R;
-import com.ruiping.BankApp.base.InternetURL;
-import com.ruiping.BankApp.entiy.BankEmpBean;
 import com.ruiping.BankApp.entiy.BankGroupBean;
 
 import java.util.List;

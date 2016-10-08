@@ -1,8 +1,5 @@
 package easeui.widget;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -13,10 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.entiy.BankEmpBean;
 import easeui.adapter.EaseContactAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EaseContactList extends RelativeLayout {
     protected static final String TAG = EaseContactList.class.getSimpleName();

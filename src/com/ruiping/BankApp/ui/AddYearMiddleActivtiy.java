@@ -576,6 +576,8 @@ public class AddYearMiddleActivtiy extends BaseActivity implements View.OnClickL
                                 if (Integer.parseInt(code) == 200) {
                                     BankJobReportSingleData data = getGson().fromJson(s, BankJobReportSingleData.class);
                                     BankJobReport bankJobReportCommentBean = data.getData();
+                                    Intent intent1 = new Intent("add_year_success");
+                                    sendBroadcast(intent1);
 //                                    跳转到周报详情页面
                                     Intent intent = new Intent(AddYearMiddleActivtiy.this, YearMiddleDetailActivtiy.class);
                                     intent.putExtra("bankJobReport", bankJobReportCommentBean);

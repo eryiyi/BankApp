@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.*;
 import com.hyphenate.chat.EMClient;
- import easeui.utils.EaseUserUtils;
 import com.hyphenate.exceptions.HyphenateException;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.BaseActivity;
+import easeui.utils.EaseUserUtils;
 
 import java.util.Collections;
 import java.util.List;

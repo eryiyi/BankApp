@@ -1,16 +1,15 @@
 package easeui.widget.chatrow;
 
-import com.hyphenate.chat.EMFileMessageBody;
-import com.hyphenate.chat.EMMessage;
-import com.hyphenate.chat.EMVoiceMessageBody;
-import com.hyphenate.util.EMLog;
-
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.hyphenate.chat.EMFileMessageBody;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chat.EMVoiceMessageBody;
+import com.hyphenate.util.EMLog;
 import com.ruiping.BankApp.R;
 
 public class EaseChatRowVoice extends EaseChatRowFile{

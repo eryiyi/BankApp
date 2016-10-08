@@ -1,6 +1,5 @@
 package com.ruiping.BankApp.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
@@ -12,17 +11,12 @@ import com.android.volley.*;
 import com.android.volley.toolbox.StringRequest;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.adapter.ItemBangonghuiAdapter;
-import com.ruiping.BankApp.adapter.ItemDailyAdapter;
 import com.ruiping.BankApp.base.BaseActivity;
 import com.ruiping.BankApp.base.InternetURL;
-import com.ruiping.BankApp.data.BankJobReportData;
 import com.ruiping.BankApp.data.BankOfficeMeetingData;
-import com.ruiping.BankApp.entiy.BankJobReport;
 import com.ruiping.BankApp.entiy.BankOfficeMeeting;
 import com.ruiping.BankApp.library.PullToRefreshBase;
 import com.ruiping.BankApp.library.PullToRefreshListView;
-import com.ruiping.BankApp.util.Contance;
-import com.ruiping.BankApp.util.DateUtil;
 import com.ruiping.BankApp.util.HttpUtils;
 import com.ruiping.BankApp.util.StringUtil;
 import com.ruiping.BankApp.widget.CustomProgressDialog;

@@ -19,7 +19,6 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ProgressBar;
-
 import com.hyphenate.util.ImageUtils;
 import com.ruiping.BankApp.R;
 import easeui.model.EaseImageCache;

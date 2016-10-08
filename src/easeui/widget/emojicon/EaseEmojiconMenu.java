@@ -11,7 +11,6 @@ import com.ruiping.BankApp.R;
 import easeui.domain.EaseEmojicon;
 import easeui.domain.EaseEmojiconGroupEntity;
 
-
 import java.util.ArrayList;
 import java.util.List;
 

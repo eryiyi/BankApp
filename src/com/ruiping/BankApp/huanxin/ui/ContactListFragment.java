@@ -26,8 +26,6 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 import com.hyphenate.chat.EMClient;
- import easeui.domain.EaseUser;
- import easeui.ui.EaseContactListFragment;
 import com.hyphenate.util.EMLog;
 import com.hyphenate.util.NetUtils;
 import com.ruiping.BankApp.R;
@@ -35,6 +33,8 @@ import com.ruiping.BankApp.huanxin.DemoHelper;
 import com.ruiping.BankApp.huanxin.db.InviteMessgeDao;
 import com.ruiping.BankApp.huanxin.db.UserDao;
 import com.ruiping.BankApp.huanxin.widget.ContactItemView;
+import easeui.domain.EaseUser;
+import easeui.ui.EaseContactListFragment;
 
 import java.util.Hashtable;
 import java.util.Map;

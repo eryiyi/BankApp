@@ -29,9 +29,6 @@ import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.data.BankEmpData;
 import com.ruiping.BankApp.data.NoteJobTaskObj;
 import com.ruiping.BankApp.entiy.BankEmpBean;
-import com.ruiping.BankApp.entiy.BankJobTask;
-import com.ruiping.BankApp.entiy.BankNoteBean;
-import com.ruiping.BankApp.entiy.BankNoticesBean;
 import com.ruiping.BankApp.huanxin.mine.MyEMConversation;
 import com.ruiping.BankApp.huanxin.ui.GroupsActivity;
 import com.ruiping.BankApp.ui.MemoListActivity;
@@ -41,7 +38,6 @@ import com.ruiping.BankApp.util.Contance;
 import com.ruiping.BankApp.util.StringUtil;
 import easeui.widget.EaseConversationList;
 import org.json.JSONObject;
-
 
 import java.util.*;
 

@@ -1,8 +1,5 @@
 package easeui.widget.emojicon;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -17,6 +14,9 @@ import easeui.adapter.EmojiconPagerAdapter;
 import easeui.domain.EaseEmojicon;
 import easeui.domain.EaseEmojiconGroupEntity;
 import easeui.utils.EaseSmileUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class EaseEmojiconPagerView extends ViewPager{

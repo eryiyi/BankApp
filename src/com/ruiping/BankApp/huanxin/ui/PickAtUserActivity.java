@@ -12,12 +12,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMGroup;
- import easeui.adapter.EaseContactAdapter;
- import easeui.domain.EaseUser;
- import easeui.widget.EaseSidebar;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.BaseActivity;
 import com.ruiping.BankApp.entiy.BankEmpBean;
+import easeui.adapter.EaseContactAdapter;
+import easeui.domain.EaseUser;
+import easeui.widget.EaseSidebar;
 
 import java.util.ArrayList;
 import java.util.List;
