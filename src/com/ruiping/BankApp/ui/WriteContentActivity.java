@@ -29,7 +29,7 @@ public class WriteContentActivity extends BaseActivity implements View.OnClickLi
         typeWrite_content = getIntent().getExtras().getString("typeWrite_content");
         this.findViewById(R.id.back).setOnClickListener(this);
         right_btn = (TextView) this.findViewById(R.id.right_btn);
-        right_btn.setText("保存");
+        right_btn.setText("确定");
         right_btn.setVisibility(View.VISIBLE);
         right_btn.setOnClickListener(this);
         title = (TextView) this.findViewById(R.id.title);

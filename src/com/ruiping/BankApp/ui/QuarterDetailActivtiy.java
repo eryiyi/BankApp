@@ -117,7 +117,7 @@ public class QuarterDetailActivtiy extends BaseActivity implements View.OnClickL
     void initHeader(){
         if(bankJobReport != null && bankJobReport.getBankEmp() != null){
             if(!StringUtil.isNullOrEmpty(bankJobReport.getBankEmp().getEmpCover())){
-                imageLoader.displayImage(bankJobReport.getBankEmp().getEmpCover(), head, animateFirstListener);
+                imageLoader.displayImage(InternetURL.INTERNAL+bankJobReport.getBankEmp().getEmpCover(), head, animateFirstListener);
             }
             if(!StringUtil.isNullOrEmpty(bankJobReport.getBankEmp().getEmpName())){
                 nickname.setText(bankJobReport.getBankEmp().getEmpName());
@@ -533,11 +533,8 @@ public class QuarterDetailActivtiy extends BaseActivity implements View.OnClickL
                                     BankJobReportSingleData data = getGson().fromJson(s, BankJobReportSingleData.class);
                                     bankJobReport = data.getData();
                                     showMsg(QuarterDetailActivtiy.this, "修改操作成功");
-////                                    跳转到周报详情页面
-//                                    Intent intent = new Intent(AddWeeklyActivtiy.this, WeeklyDetailActivtiy.class);
-//                                    intent.putExtra("bankJobReport", bankJobReportCommentBean);
-//                                    startActivity(intent);
-//                                    finish();
+                                    Intent intent1 = new Intent("add_quarter_success");
+                                    sendBroadcast(intent1);
                                 }else {
                                     showMsg(QuarterDetailActivtiy.this, jo.getString("message"));
                                 }

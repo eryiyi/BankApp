@@ -16,7 +16,7 @@
     <RelativeLayout android:layout_width="match_parent"
                     android:background="@color/white"
                     android:layout_height="50dp">
-        <TextView android:layout_width="wrap_content"
+        <TextView android:layout_width="100dp"
                   android:layout_marginLeft="8dp"
                   android:text="原密码："
                   android:gravity="center"
@@ -29,6 +29,7 @@
                   android:background="@null"
                   android:password="true"
                   android:singleLine="true"
+                  android:hint="填写原始密码"
                   android:textSize="16sp"
                   android:layout_toRightOf="@+id/pwr_one"
                   android:id="@+id/password_one"
@@ -41,7 +42,7 @@
     <RelativeLayout android:layout_width="match_parent"
                     android:background="@color/white"
                     android:layout_height="50dp">
-        <TextView android:layout_width="wrap_content"
+        <TextView android:layout_width="100dp"
                   android:text="新密码："
                   android:layout_marginLeft="8dp"
                   android:id="@+id/pwr_two"
@@ -52,6 +53,7 @@
         <EditText android:layout_width="match_parent"
                   android:password="true"
                   android:singleLine="true"
+                  android:hint="填写新密码"
                   android:background="@null"
                   android:layout_toRightOf="@+id/pwr_two"
                   android:id="@+id/password_two"
@@ -65,7 +67,7 @@
     <RelativeLayout android:layout_width="match_parent"
                     android:background="@color/white"
                     android:layout_height="50dp">
-        <TextView android:layout_width="wrap_content"
+        <TextView android:layout_width="100dp"
                   android:text="确认密码："
                   android:layout_marginLeft="8dp"
                   android:id="@+id/pwr_three"
@@ -75,6 +77,7 @@
                   android:layout_height="50dp"/>
         <EditText android:layout_width="match_parent"
                   android:password="true"
+                  android:hint="填写确认密码"
                   android:singleLine="true"
                   android:background="@null"
                   android:layout_toRightOf="@+id/pwr_three"

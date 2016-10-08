@@ -655,7 +655,8 @@ public class AddYearMiddleActivtiy extends BaseActivity implements View.OnClickL
                                     BankJobReportSingleData data = getGson().fromJson(s, BankJobReportSingleData.class);
                                     bankJobReportTwo = data.getData();
                                     showMsg(AddYearMiddleActivtiy.this, "修改操作成功");
-//                                    跳转到周报详情页面
+                                    Intent intent1 = new Intent("add_year_success");
+                                    sendBroadcast(intent1);
                                     Intent intent = new Intent(AddYearMiddleActivtiy.this, YearMiddleDetailActivtiy.class);
                                     intent.putExtra("bankJobReport", data.getData());
                                     startActivity(intent);

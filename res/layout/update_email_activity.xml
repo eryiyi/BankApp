@@ -27,6 +27,7 @@
         <EditText android:layout_width="match_parent"
                   android:background="@null"
                   android:singleLine="true"
+                  android:hint="输入邮箱"
                   android:textSize="16sp"
                   android:layout_toRightOf="@+id/pwr_one"
                   android:id="@+id/email"

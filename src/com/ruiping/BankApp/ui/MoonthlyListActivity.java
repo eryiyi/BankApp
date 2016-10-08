@@ -1,6 +1,9 @@
 package com.ruiping.BankApp.ui;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
@@ -51,6 +54,7 @@ public class MoonthlyListActivity extends BaseActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weekly_list_activity);
+        registerBoradcastReceiver();
         initView();
         progressDialog = new CustomProgressDialog(MoonthlyListActivity.this, "正在加载中",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
@@ -192,4 +196,32 @@ public class MoonthlyListActivity extends BaseActivity implements View.OnClickLi
                 break;
         }
     }
+    //广播接收动作
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("add_month_success")) {
+                IS_REFRESH = true;
+                pageIndex = 1;
+                getWeekDate();
+            }
+
+        }
+    };
+
+    //注册广播
+    public void registerBoradcastReceiver() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction("add_month_success");
+        //注册广播
+        registerReceiver(mBroadcastReceiver, myIntentFilter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mBroadcastReceiver);
+    }
+
 }

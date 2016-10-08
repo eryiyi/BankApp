@@ -1,6 +1,7 @@
 package com.ruiping.BankApp.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -73,6 +74,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         email = (TextView) this.findViewById(R.id.email);
         mobile = (TextView) this.findViewById(R.id.mobile);
         relate_chat.setOnClickListener(this);
+        this.findViewById(R.id.relate_mobile).setOnClickListener(this);
     }
 
     @Override
@@ -92,6 +94,12 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                     chatV.putExtra("userName", emp.getEmpName());
                     startActivity(chatV);
                 }
+            }
+                break;
+            case R.id.relate_mobile:
+            {
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mobile.getText().toString()));
+                startActivity(intent);
             }
                 break;
         }
@@ -149,7 +157,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 
     void initData(){
         if(!StringUtil.isNullOrEmpty(emp.getEmpCover())){
-            imageLoader.displayImage(emp.getEmpCover(), cover, animateFirstListener);
+            imageLoader.displayImage(InternetURL.INTERNAL+emp.getEmpCover(), cover, animateFirstListener);
         }
 
         if(!StringUtil.isNullOrEmpty(emp.getEmpName())){
@@ -186,6 +194,8 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         if(emp.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))){
             //说明是自己
             relate_chat.setVisibility(View.GONE);
+        }else {
+            relate_chat.setVisibility(View.VISIBLE);
         }
     }
 

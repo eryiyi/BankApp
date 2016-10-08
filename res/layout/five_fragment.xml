@@ -170,7 +170,6 @@
                     android:stretchMode="columnWidth"
                     android:verticalSpacing="2dip"
                     android:padding="1dip"/>
-
         </LinearLayout>
     </com.ruiping.BankApp.widget.ReboundScrollView>
 </LinearLayout>

@@ -131,7 +131,7 @@ public class AddMemoActivity extends BaseActivity implements View.OnClickListene
                                         finish();
                                     }
                                 } else {
-                                    Toast.makeText(AddMemoActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(AddMemoActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();

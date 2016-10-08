@@ -1034,6 +1034,8 @@ public class AddMineMonthActivtiy extends BaseActivity implements View.OnClickLi
                                 if (Integer.parseInt(code) == 200) {
                                     BankJobReportSingleData data = getGson().fromJson(s, BankJobReportSingleData.class);
                                     BankJobReport bankJobReportCommentBean = data.getData();
+                                    Intent intent1 = new Intent("add_month_success");
+                                    sendBroadcast(intent1);
 //                                    跳转到周报详情页面
                                     Intent intent = new Intent(AddMineMonthActivtiy.this, MoonthDetailActivtiy.class);
                                     intent.putExtra("bankJobReport", bankJobReportCommentBean);
@@ -1125,6 +1127,8 @@ public class AddMineMonthActivtiy extends BaseActivity implements View.OnClickLi
                                         bankJobReportTwo = data.getData();
                                     }
                                     showMsg(AddMineMonthActivtiy.this, "修改操作成功");
+                                    Intent intent1 = new Intent("add_month_success");
+                                    sendBroadcast(intent1);
 //                                    跳转到周报详情页面
                                     Intent intent = new Intent(AddMineMonthActivtiy.this, MoonthDetailActivtiy.class);
                                     intent.putExtra("bankJobReport", data.getData());

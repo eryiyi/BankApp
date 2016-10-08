@@ -268,7 +268,7 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
             case R.id.relate_mobile:
             {
                 //修改手机号
-                Intent intent  = new Intent(getActivity(), BangonghuiActivity.class);
+                Intent intent  = new Intent(getActivity(), UpdateMobileActivity.class);
                 startActivity(intent);
             }
                 break;
@@ -426,6 +426,7 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
 
     //填充统计的数据
     void initCount(){
+        lists.clear();
         lists.add(new IndexObj("任务", R.drawable.md_h_blue, indexCountObj.getKey8()));
         lists.add(new IndexObj("日报", R.drawable.md_h_green, indexCountObj.getKey1()));
         lists.add(new IndexObj("备忘录", R.drawable.md_h_purple, indexCountObj.getKey7()));
@@ -554,9 +555,11 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
                 if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString(Contance.EMP_MOBILE, ""), String.class))){
                     mobile.setText(getGson().fromJson(getSp().getString(Contance.EMP_MOBILE, ""), String.class));
                 }
+
             }
             if(action.equals("add_memo_success")){
-                //todo
+                //查询主页面统计信息
+                getCountTj();
             }
         }
     };

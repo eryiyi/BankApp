@@ -1,6 +1,9 @@
 package com.ruiping.BankApp.ui;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -42,6 +45,7 @@ public class WeeklyActivity extends BaseActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weekly_activity);
         initView();
+        registerBoradcastReceiver();
 
         progressDialog = new CustomProgressDialog(WeeklyActivity.this, "正在加载中",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
@@ -175,4 +179,30 @@ public class WeeklyActivity extends BaseActivity implements View.OnClickListener
         xiashuCount.setText(String.valueOf(indexCountObj.getKey2()));
         comment_count.setText(String.valueOf(indexCountObj.getKey3()));
     }
+
+    //广播接收动作
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("update_weekly_success")) {
+                getMineCount();
+            }
+        }
+    };
+
+    //注册广播
+    public void registerBoradcastReceiver() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction("update_weekly_success");
+        //注册广播
+        registerReceiver(mBroadcastReceiver, myIntentFilter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mBroadcastReceiver);
+    }
+
 }

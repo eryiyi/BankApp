@@ -115,7 +115,7 @@ public class YearMiddleDetailActivtiy extends BaseActivity implements View.OnCli
     void initHeader(){
         if(bankJobReport != null && bankJobReport.getBankEmp() != null){
             if(!StringUtil.isNullOrEmpty(bankJobReport.getBankEmp().getEmpCover())){
-                imageLoader.displayImage(bankJobReport.getBankEmp().getEmpCover(), head, animateFirstListener);
+                imageLoader.displayImage(InternetURL.INTERNAL+bankJobReport.getBankEmp().getEmpCover(), head, animateFirstListener);
             }
             if(!StringUtil.isNullOrEmpty(bankJobReport.getBankEmp().getEmpName())){
                 nickname.setText(bankJobReport.getBankEmp().getEmpName());
@@ -531,11 +531,9 @@ public class YearMiddleDetailActivtiy extends BaseActivity implements View.OnCli
                                     BankJobReportSingleData data = getGson().fromJson(s, BankJobReportSingleData.class);
                                     bankJobReport = data.getData();
                                     showMsg(YearMiddleDetailActivtiy.this, "修改操作成功");
-////                                    跳转到周报详情页面
-//                                    Intent intent = new Intent(AddWeeklyActivtiy.this, WeeklyDetailActivtiy.class);
-//                                    intent.putExtra("bankJobReport", bankJobReportCommentBean);
-//                                    startActivity(intent);
-//                                    finish();
+
+                                    Intent intent1 = new Intent("add_year_success");
+                                    sendBroadcast(intent1);
                                 }else {
                                     showMsg(YearMiddleDetailActivtiy.this, jo.getString("message"));
                                 }

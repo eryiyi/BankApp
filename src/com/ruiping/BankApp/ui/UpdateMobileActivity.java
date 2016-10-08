@@ -86,7 +86,6 @@ public class UpdateMobileActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
-    //TODO
     //修改手机号
     private void sendMobile() {
         StringRequest request = new StringRequest(
@@ -105,6 +104,7 @@ public class UpdateMobileActivity extends BaseActivity implements View.OnClickLi
                                     Intent intent1 = new Intent("update_mobile_success");
                                     sendBroadcast(intent1);
                                     showMsg(UpdateMobileActivity.this, "更新手机号成功！");
+                                    save(Contance.EMP_MOBILE, mobile_two_edit.getText().toString());
                                     finish();
                                 }else {
                                     Toast.makeText(UpdateMobileActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();

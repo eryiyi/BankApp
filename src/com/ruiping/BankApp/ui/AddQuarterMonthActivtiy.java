@@ -590,8 +590,11 @@ public class AddQuarterMonthActivtiy extends BaseActivity implements View.OnClic
                                 if (Integer.parseInt(code) == 200) {
                                     BankJobReportSingleData data = getGson().fromJson(s, BankJobReportSingleData.class);
                                     BankJobReport bankJobReportCommentBean = data.getData();
+                                    showMsg(AddQuarterMonthActivtiy.this, "修改操作成功");
+                                    Intent intent1 = new Intent("add_quarter_success");
+                                    sendBroadcast(intent1);
 //                                    跳转到周报详情页面
-                                    Intent intent = new Intent(AddQuarterMonthActivtiy.this, MoonthDetailActivtiy.class);
+                                    Intent intent = new Intent(AddQuarterMonthActivtiy.this, QuarterDetailActivtiy.class);
                                     intent.putExtra("bankJobReport", bankJobReportCommentBean);
                                     startActivity(intent);
                                     finish();
@@ -678,6 +681,8 @@ public class AddQuarterMonthActivtiy extends BaseActivity implements View.OnClic
                                     BankJobReportSingleData data = getGson().fromJson(s, BankJobReportSingleData.class);
                                     bankJobReportTwo = data.getData();
                                     showMsg(AddQuarterMonthActivtiy.this, "修改操作成功");
+                                    Intent intent1 = new Intent("add_quarter_success");
+                                    sendBroadcast(intent1);
 //                                    跳转到周报详情页面
                                     Intent intent = new Intent(AddQuarterMonthActivtiy.this, QuarterDetailActivtiy.class);
                                     intent.putExtra("bankJobReport", data.getData());
