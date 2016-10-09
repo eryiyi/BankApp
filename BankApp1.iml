@@ -15,5 +15,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="bolts-tasks-1.4.0" level="project" />
     <orderEntry type="library" name="android-support-v4" level="project" />
+    <orderEntry type="library" name="httpcore-4.2.4" level="project" />
+    <orderEntry type="library" name="httpmime-4.3.5" level="project" />
   </component>
 </module>

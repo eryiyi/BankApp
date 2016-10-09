@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="httpcore-4.2.4">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/fluent-hc-4.2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/httpclient-cache-4.2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/httpclient-4.2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/httpcore-4.3.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

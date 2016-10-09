@@ -21,6 +21,8 @@ import org.apache.http.params.HttpParams;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import org.apache.http.entity.ContentType;
+import org.apache.http.protocol.HTTP;
 
 /**
  * @author ZhiCheng Guo
@@ -149,13 +151,13 @@ public class MultiPartStack extends HurlStack {
             builder.addPart(((String) entry.getKey()), new FileBody((File) entry.getValue()));
         }
 
-//        ContentType contentType = ContentType.create(HTTP.PLAIN_TEXT_TYPE, HTTP.UTF_8);
+        ContentType contentType = ContentType.create(HTTP.PLAIN_TEXT_TYPE, HTTP.UTF_8);
         // Iterate the stringUploads
         Map<String, String> stringUpload = ((MultiPartRequest) request).getStringUploads();
         for (Map.Entry<String, String> entry : stringUpload.entrySet()) {
             try {
                 builder.addPart(((String) entry.getKey()),
-                        new StringBody((String) entry.getValue()));
+                        new StringBody((String) entry.getValue(), contentType));
             } catch (Exception e) {
                 e.printStackTrace();
             }

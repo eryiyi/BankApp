@@ -15,6 +15,7 @@ import com.ruiping.BankApp.base.BaseActivity;
 import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.data.BankNoticesSingleData;
 import com.ruiping.BankApp.entiy.BankNoticesBean;
+import com.ruiping.BankApp.util.Contance;
 import com.ruiping.BankApp.util.DateUtil;
 import com.ruiping.BankApp.util.StringUtil;
 import org.json.JSONObject;
@@ -88,6 +89,7 @@ public class NoticeDetailActivity extends BaseActivity implements View.OnClickLi
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("noticeId", id);
+                params.put("empId", getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class));
                 return params;
             }
 
