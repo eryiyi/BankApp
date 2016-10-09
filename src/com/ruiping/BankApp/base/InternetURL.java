@@ -4,8 +4,9 @@ package com.ruiping.BankApp.base;
  * Created by zhanghl on 2015/1/12.
  */
 public class InternetURL {
+//    public static final String INTERNAL = "http://192.168.0.188:8080/Manage_ssm/";
     public static final String INTERNAL = "http://192.168.0.188:8080/Manage_ssm/";
-//    public static final String INTERNAL = "http://192.168.0.240:8080/Manage_ssm/";
+
     //多媒体文件上传接口
     public static final String UPLOAD_FILE = INTERNAL + "uploadFileController.do?uploadImage";
 
@@ -204,5 +205,9 @@ public class InternetURL {
     public static final String GET_MEETING_URL = INTERNAL + "appMeeting.do?find";
     //保存消息对象给服务器
     public static final String SAVE_MSG_URL = INTERNAL + "bankMessage.do?saveMsg";
+    //查询关于我们
+    public static final String GET_ABOUT_US_URL = INTERNAL + "aboutUs.do?find";
+    //检查新版本
+    public static final String CHECK_VERSION_CODE_URL = INTERNAL + "appBankVersion.do?byVersion";
 
 }

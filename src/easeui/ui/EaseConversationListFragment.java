@@ -425,30 +425,7 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
         }
     }
 
-    //注册广播
-    public void registerBoradcastReceiver() {
-        IntentFilter myIntentFilter = new IntentFilter();
-        myIntentFilter.addAction("arrived_msg_andMe");//有与我相关
-        getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
-    }
 
-
-    //广播接收动作
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if(action.equals("arrived_msg_andMe")){
-            }
-        }
-    }  ;
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        getActivity().unregisterReceiver(mBroadcastReceiver);
-        EMClient.getInstance().removeConnectionListener(connectionListener);
-    }
 
      //根据会员id获取未完成任务列表，公告列表，备忘录列表
     private void getData() {
@@ -509,6 +486,38 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
             }
         };
         getRequestQueue().add(request);
+    }
+
+
+
+    //广播接收动作
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if(action.equals("arrived_msg_andMe")){
+            }
+            if(action.equals("quite_group_success")){
+                //退群
+                refresh();
+            }
+        }
+    }  ;
+
+
+    //注册广播
+    public void registerBoradcastReceiver() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction("arrived_msg_andMe");//有与我相关
+        myIntentFilter.addAction("quite_group_success");//退群
+        getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(mBroadcastReceiver);
+        EMClient.getInstance().removeConnectionListener(connectionListener);
     }
 
 }

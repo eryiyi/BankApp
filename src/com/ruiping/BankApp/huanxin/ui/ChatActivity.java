@@ -1,8 +1,12 @@
 package com.ruiping.BankApp.huanxin.ui;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import com.hyphenate.chat.EMClient;
 import com.hyphenate.util.EasyUtils;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.BaseActivity;
@@ -21,6 +25,7 @@ public class ChatActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
+        registerBoradcastReceiver();
         setContentView(R.layout.em_activity_chat);
         activityInstance = this;
         //get user id or group id
@@ -34,11 +39,7 @@ public class ChatActivity extends BaseActivity {
         
     }
     
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        activityInstance = null;
-    }
+
     
     @Override
     protected void onNewIntent(Intent intent) {
@@ -71,4 +72,32 @@ public class ChatActivity extends BaseActivity {
         @NonNull int[] grantResults) {
         PermissionsManager.getInstance().notifyPermissionsChange(permissions, grantResults);
     }
+
+
+    //广播接收动作
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if(action.equals("quite_group_success")){
+                finish();
+            }
+        }
+    }  ;
+
+
+    //注册广播
+    public void registerBoradcastReceiver() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction("quite_group_success");//退群
+       registerReceiver(mBroadcastReceiver, myIntentFilter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        activityInstance = null;
+        unregisterReceiver(mBroadcastReceiver);
+    }
+
 }

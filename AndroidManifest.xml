@@ -313,13 +313,13 @@
         </activity>
         <!-- 显示下载大图页面 -->
         <activity
-                android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"
+                android:name="easeui.ui.EaseShowBigImageActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/horizontal_slide" >
         </activity>
         <!-- 下载文件 -->
         <activity
-                android:name="com.hyphenate.easeui.ui.EaseShowNormalFileActivity"
+                android:name="easeui.ui.EaseShowNormalFileActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/horizontal_slide" >
         </activity>
@@ -372,7 +372,7 @@
         </activity>
 
         <activity
-                android:name="com.hyphenate.easeui.ui.EaseShowVideoActivity"
+                android:name="easeui.ui.EaseShowVideoActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/horizontal_slide"
                 android:windowSoftInputMode="stateAlwaysHidden" >

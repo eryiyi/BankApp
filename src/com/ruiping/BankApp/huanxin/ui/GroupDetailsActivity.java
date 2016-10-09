@@ -27,6 +27,7 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.*;
 import com.hyphenate.EMGroupChangeListener;
+import com.hyphenate.chat.EMChatManager;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMConversation.EMConversationType;
@@ -34,8 +35,16 @@ import com.hyphenate.chat.EMGroup;
 import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.EMLog;
 import com.hyphenate.util.NetUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.ruiping.BankApp.BankAppApplication;
 import com.ruiping.BankApp.R;
+import com.ruiping.BankApp.adapter.AnimateFirstDisplayListener;
 import com.ruiping.BankApp.base.BaseActivity;
+import com.ruiping.BankApp.base.InternetURL;
+import com.ruiping.BankApp.db.DBHelper;
+import com.ruiping.BankApp.db.Emp;
+import easeui.ui.EaseConversationListFragment;
 import easeui.utils.EaseUserUtils;
 import easeui.widget.EaseAlertDialog;
 import easeui.widget.EaseExpandGridView;
@@ -76,6 +85,9 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
     private GroupChangeListener groupChangeListener;
     private RelativeLayout searchLayout;
 
+	ImageLoader imageLoader = ImageLoader.getInstance();//图片加载类
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -100,7 +112,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 		blacklistLayout = (RelativeLayout) findViewById(R.id.rl_blacklist);
 		changeGroupNameLayout = (RelativeLayout) findViewById(R.id.rl_change_group_name);
 		idLayout = (RelativeLayout) findViewById(R.id.rl_group_id);
-		idLayout.setVisibility(View.VISIBLE);
+		idLayout.setVisibility(View.GONE);
 		idText = (TextView) findViewById(R.id.tv_group_id_value);
 		
 		rl_switch_block_groupmsg = (RelativeLayout) findViewById(R.id.rl_switch_block_groupmsg);
@@ -213,7 +225,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 										((TextView) findViewById(R.id.group_name)).setText(returnData + "(" + group.getAffiliationsCount()
 												+ st);
 										progressDialog.dismiss();
-										Toast.makeText(getApplicationContext(), st6, 0).show();
+										Toast.makeText(getApplicationContext(), st6, Toast.LENGTH_SHORT).show();
 									}
 								});
 								
@@ -222,7 +234,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 								runOnUiThread(new Runnable() {
 									public void run() {
 										progressDialog.dismiss();
-										Toast.makeText(getApplicationContext(), st7, 0).show();
+										Toast.makeText(getApplicationContext(), st7, Toast.LENGTH_SHORT).show();
 									}
 								});
 							}
@@ -249,14 +261,14 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
         				public void run() {
         				    refreshMembers();
         				    pd.dismiss();
-        					Toast.makeText(getApplicationContext(), R.string.Move_into_blacklist_success, 0).show();
+        					Toast.makeText(getApplicationContext(), R.string.Move_into_blacklist_success, Toast.LENGTH_SHORT).show();
         				}
         			});
         		} catch (HyphenateException e) {
         			runOnUiThread(new Runnable() {
         				public void run() {
         				    pd.dismiss();
-        					Toast.makeText(getApplicationContext(), R.string.failed_to_move_into, 0).show();
+        					Toast.makeText(getApplicationContext(), R.string.failed_to_move_into, Toast.LENGTH_SHORT).show();
         				}
         			});
         		}
@@ -303,7 +315,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 		if (conversation != null) {
 			conversation.clearAllMessages();
 		}
-		Toast.makeText(this, R.string.messages_are_empty, 0).show();
+		Toast.makeText(this, R.string.messages_are_empty, Toast.LENGTH_SHORT).show();
 	}
 
 	/**
@@ -329,7 +341,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 					runOnUiThread(new Runnable() {
 						public void run() {
 							progressDialog.dismiss();
-							Toast.makeText(getApplicationContext(), getResources().getString(R.string.Exit_the_group_chat_failure) + " " + e.getMessage(), 1).show();
+							Toast.makeText(getApplicationContext(), getResources().getString(R.string.Exit_the_group_chat_failure) + " " + e.getMessage(), Toast.LENGTH_SHORT).show();
 						}
 					});
 				}
@@ -351,16 +363,19 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 						public void run() {
 							progressDialog.dismiss();
 							setResult(RESULT_OK);
+							if(ChatActivity.activityInstance != null){
+								ChatActivity.activityInstance.finish();
+							}
+							Intent intent1 = new Intent("quite_group_success");
+							sendBroadcast(intent1);
 							finish();
-							if(ChatActivity.activityInstance != null)
-							    ChatActivity.activityInstance.finish();
 						}
 					});
 				} catch (final Exception e) {
 					runOnUiThread(new Runnable() {
 						public void run() {
 							progressDialog.dismiss();
-							Toast.makeText(getApplicationContext(), st5 + e.getMessage(), 1).show();
+							Toast.makeText(getApplicationContext(), st5 + e.getMessage(), Toast.LENGTH_SHORT).show();
 						}
 					});
 				}
@@ -398,7 +413,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 					runOnUiThread(new Runnable() {
 						public void run() {
 							progressDialog.dismiss();
-							Toast.makeText(getApplicationContext(), st6 + e.getMessage(), 1).show();
+							Toast.makeText(getApplicationContext(), st6 + e.getMessage(), Toast.LENGTH_SHORT).show();
 						}
 					});
 				}
@@ -445,6 +460,12 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 	}
 
 	private void toggleBlockGroup() {
+		//判断是否是自己
+		if ( EMClient.getInstance().getCurrentUser().equals(group.getOwner())) {
+			// 如果自己是房间主，显示解散按钮
+			Toast.makeText(getApplicationContext(), "您是房间主，不能屏蔽房间消息哦", Toast.LENGTH_LONG).show();
+			return;
+		}
 		if(switchButton.isSwitchOpen()){
 			EMLog.d(TAG, "change to unblock group msg");
 			if (progressDialog == null) {
@@ -468,7 +489,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 		                runOnUiThread(new Runnable() {
 		                    public void run() {
 		                        progressDialog.dismiss();
-		                        Toast.makeText(getApplicationContext(), R.string.remove_group_of, 1).show();
+		                        Toast.makeText(getApplicationContext(), R.string.remove_group_of, Toast.LENGTH_SHORT).show();
 		                    }
 		                });
 		                
@@ -501,7 +522,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 		                runOnUiThread(new Runnable() {
 		                    public void run() {
 		                        progressDialog.dismiss();
-		                        Toast.makeText(getApplicationContext(), st9, 1).show();
+		                        Toast.makeText(getApplicationContext(), st9, Toast.LENGTH_SHORT).show();
 		                    }
 		                });
 		            }
@@ -608,8 +629,17 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 //				Drawable avatar = getResources().getDrawable(R.drawable.default_avatar);
 //				avatar.setBounds(0, 0, referenceWidth, referenceHeight);
 //				button.setCompoundDrawables(null, avatar, null, null);
-				EaseUserUtils.setUserNick(username, holder.textView);
-				EaseUserUtils.setUserAvatar(getContext(), username, holder.imageView);
+//				EaseUserUtils.setUserNick(username, holder.textView);
+//				EaseUserUtils.setUserAvatar(getContext(), username, holder.imageView);
+				Emp emp= DBHelper.getInstance(GroupDetailsActivity.this).getEmpById(username);
+				if(emp != null){
+					holder.textView.setText(emp.getEmpName());
+					imageLoader.displayImage(InternetURL.INTERNAL + emp.getEmpCover(), holder.imageView, BankAppApplication.txOptions, animateFirstListener);
+				}else {
+					EaseUserUtils.setUserAvatar(getContext(), username, holder.imageView);
+					EaseUserUtils.setUserNick(username, holder.textView);
+				}
+
 				if (isInDeleteMode) {
 					// 如果是删除模式下，显示减人图标
 					convertView.findViewById(R.id.badge_delete).setVisibility(View.VISIBLE);
@@ -747,6 +777,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 							} else {
 							    switchButton.closeSwitch();
 							}
+
 						}
 					});
 

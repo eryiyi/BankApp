@@ -396,4 +396,8 @@
     <string name="sure_quite">确定退出该账号？</string>
     <string name="sure">确定</string>
 
+    <string name="check_new_version">检查中...</string>
+    <string name="version_name">"检查版本"</string>
+    <string name="can_not_find_version_name">"没有最新版本信息"</string>
+
 </resources>

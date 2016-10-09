@@ -113,7 +113,7 @@ public class EaseConversationAdapter extends ArrayAdapter<MyEMConversation> {
             }
             // group message, show group avatar
             holder.avatar.setImageResource(R.drawable.ease_group_icon);
-            EMGroup group = EMClient.getInstance().groupManager().getGroup(username);
+            EMGroup group = EMClient.getInstance().groupManager().getGroup(emConversation.getUserName());
             holder.name.setText(group != null ? group.getGroupName() : username);
         } else if(conversation.getEmConversation().getType() == EMConversationType.ChatRoom){
             //聊天室
@@ -123,7 +123,7 @@ public class EaseConversationAdapter extends ArrayAdapter<MyEMConversation> {
             holder.motioned.setVisibility(View.GONE);
         }else {
             //单聊
-            EaseUserUtils.setUserAvatar(getContext(), username, holder.avatar);
+//            EaseUserUtils.setUserAvatar(getContext(), username, holder.avatar);
             EaseUserUtils.setUserNick(username, holder.name);
             holder.motioned.setVisibility(View.GONE);
             if(emp != null){

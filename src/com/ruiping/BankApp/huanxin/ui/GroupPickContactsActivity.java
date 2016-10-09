@@ -295,7 +295,7 @@ public class GroupPickContactsActivity extends BaseActivity {
 			final BankEmpBean cell = lists.get(position);
 			if (cell != null) {
 				holder.name.setText(cell.getEmpName());
-				imageLoader.displayImage(cell.getEmpCover(), holder.avatar, BankAppApplication.txOptions, animateFirstListener);
+				imageLoader.displayImage(InternetURL.INTERNAL+cell.getEmpCover(), holder.avatar, BankAppApplication.txOptions, animateFirstListener);
 
 				if (holder.checkbox != null) {
 			    if(existMembers != null && existMembers.contains(cell.getHx_name())){

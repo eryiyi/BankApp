@@ -210,6 +210,7 @@
             <RelativeLayout
                 android:id="@+id/rl_change_group_name"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="50dip"
                 android:background="@drawable/em_btn_bottom_selector" >
 
@@ -236,6 +237,7 @@
             <RelativeLayout
                 android:id="@+id/rl_blacklist"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="50dip"
                 android:background="@drawable/em_btn_bottom_selector" >
 
@@ -292,6 +294,7 @@
                 android:background="#E6E6E6" />
              <RelativeLayout
                 android:id="@+id/rl_search"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="50dip"
                 android:background="@drawable/em_btn_bottom_selector" >
