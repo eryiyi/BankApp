@@ -3,7 +3,7 @@
           package="com.ruiping.BankApp"
           android:versionCode="1"
           android:versionName="1.0">
-    <uses-sdk android:minSdkVersion="18"/>
+    <uses-sdk android:minSdkVersion="14"/>
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -214,13 +214,10 @@
                 android:launchMode="singleInstance"
                 android:name="com.baidu.android.pushservice.PushKeepAlive"
                 android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-
         <!-- push结束 -->
 
         <!-- 在百度开发者中心查询应用的API Key -->
         <meta-data android:name="api_key" android:value="HUs4DmXHRXyzF1BackTcT1U4"/>
-
-
 
         <!-- 注册 -->
         <activity

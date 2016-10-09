@@ -20,11 +20,12 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/search_pubic_group"
-            android:textColor="#fff"
+            android:textColor="@color/text_color"
             android:textSize="18sp" />
 
         <Button
             android:id="@+id/search"
+            android:visibility="gone"
             android:layout_width="54dp"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
@@ -32,7 +33,7 @@
             android:background="@drawable/ease_common_tab_bg"
             android:onClick="searchGroup"
             android:text="@string/button_search"
-            android:textColor="#fff"
+            android:textColor="@color/text_color"
             android:textSize="16sp" />
     </RelativeLayout>
 
@@ -42,7 +43,7 @@
         android:layout_height="39dp"
         android:layout_margin="10dp"
         android:background="@drawable/em_button_normal_shape"
-        android:hint="@string/group_id"
+        android:hint="群昵称"
         android:paddingLeft="5dp"
         android:singleLine="true"
         android:textColorHint="#b3b3b3"

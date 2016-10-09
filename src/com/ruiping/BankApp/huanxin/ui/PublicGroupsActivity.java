@@ -114,7 +114,7 @@ public class PublicGroupsActivity extends BaseActivity {
                     runOnUiThread(new Runnable() {
 
                         public void run() {
-                            searchBtn.setVisibility(View.VISIBLE);
+                            searchBtn.setVisibility(View.GONE);
                             groupsList.addAll(returnGroups);
                             if(returnGroups.size() != 0){
                                 cursor = result.getCursor();
