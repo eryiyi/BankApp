@@ -27,7 +27,8 @@ import com.hyphenate.chat.EMConversation;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.data.BankEmpData;
-import com.ruiping.BankApp.data.NoteJobTaskObj;
+import com.ruiping.BankApp.data.NoteJobTaskObjData;
+import com.ruiping.BankApp.entiy.NoteJobTaskObj;
 import com.ruiping.BankApp.entiy.BankEmpBean;
 import com.ruiping.BankApp.huanxin.mine.MyEMConversation;
 import com.ruiping.BankApp.huanxin.ui.GroupsActivity;
@@ -411,21 +412,26 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.relate_renwu) {
+
+            unread_renwu_number.setVisibility(View.GONE);
+            unread_renwu_number.setText("0");
             Intent intent = new Intent(getActivity(), RenwuListActivity.class);
             intent.putExtra("type", "3");
             startActivity(intent);
         }
         if (i == R.id.relate_beiwanglu) {
+            unread_beiwang_number.setVisibility(View.GONE);
+            unread_beiwang_number.setText("0");
             Intent intent = new Intent(getActivity(), MemoListActivity.class);
             startActivity(intent);
         }
         if (i == R.id.relate_notice) {
+            unread_notice_number.setVisibility(View.GONE);
+            unread_notice_number.setText("0");
             Intent intent = new Intent(getActivity(), NoticesActivity.class);
             startActivity(intent);
         }
     }
-
-
 
      //根据会员id获取未完成任务列表，公告列表，备忘录列表
     private void getData() {
@@ -440,19 +446,20 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
                                 JSONObject jo = new JSONObject(s);
                                 String code1 = jo.getString("code");
                                 if (Integer.parseInt(code1) == 200) {
-                                    NoteJobTaskObj data = getGson().fromJson(s, NoteJobTaskObj.class);
+                                    NoteJobTaskObjData data = getGson().fromJson(s, NoteJobTaskObjData.class);
+                                    NoteJobTaskObj noteJobTaskObj = data.getData();
                                     if(data != null){
-                                        if(data.getNoticesList()>0){
+                                        if(noteJobTaskObj.getNoticesList()>0){
                                             unread_notice_number.setVisibility(View.VISIBLE);
-                                            unread_notice_number.setText(String.valueOf(data.getNoticesList()));
+                                            unread_notice_number.setText(String.valueOf(noteJobTaskObj.getNoticesList()));
                                         }
-                                        if(data.getNote()>0){
+                                        if(noteJobTaskObj.getNote()>0){
                                             unread_beiwang_number.setVisibility(View.VISIBLE);
-                                            unread_beiwang_number.setText(String.valueOf(data.getNote()));
+                                            unread_beiwang_number.setText(String.valueOf(noteJobTaskObj.getNote()));
                                         }
-                                        if(data.getJobTask()>0){
+                                        if(noteJobTaskObj.getJobTask()>0){
                                             unread_renwu_number.setVisibility(View.VISIBLE);
-                                            unread_renwu_number.setText(String.valueOf(data.getJobTask()));
+                                            unread_renwu_number.setText(String.valueOf(noteJobTaskObj.getJobTask()));
                                         }
                                     }
 

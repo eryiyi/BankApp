@@ -1,12 +1,15 @@
-package com.ruiping.BankApp.data;
+package com.ruiping.BankApp.entiy;
+
+import com.ruiping.BankApp.data.Data;
 
 /**
  * Created by zhl on 2016/9/29.
  */
-public class NoteJobTaskObj extends Data {
+public class NoteJobTaskObj {
     private int noticesList;
     private int Note;
     private int JobTask;
+
 
     public int getNoticesList() {
         return noticesList;
