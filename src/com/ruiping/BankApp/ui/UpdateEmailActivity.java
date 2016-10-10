@@ -63,6 +63,10 @@ public class UpdateEmailActivity extends BaseActivity implements View.OnClickLis
                     showMsg(UpdateEmailActivity.this, "请输入邮箱");
                     return;
                 }
+                if(!StringUtil.emailFormat(email.getText().toString())){
+                    showMsg(UpdateEmailActivity.this, "请输入正确的邮箱格式");
+                    return;
+                }
                 progressDialog = new CustomProgressDialog(UpdateEmailActivity.this, "正在加载中",R.anim.custom_dialog_frame);
                 progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
