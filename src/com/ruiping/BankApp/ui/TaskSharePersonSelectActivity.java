@@ -172,6 +172,8 @@ public class TaskSharePersonSelectActivity extends BaseActivity implements View.
 //                                    intent.putExtra("bankEmpBean", bankEmpBean);
                                     setResult(10001, intent);
                                     finish();
+                                    Intent intent1 = new Intent("add_person_task_share_success");
+                                    sendBroadcast(intent1);
                                 } else {
                                     Toast.makeText(TaskSharePersonSelectActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
                                 }

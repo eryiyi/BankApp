@@ -166,7 +166,10 @@ public class TaskShareGroupsSelectActivity extends BaseActivity implements View.
                                 if (Integer.parseInt(code1) == 200) {
                                     Intent intent = new Intent();
                                     setResult(10001, intent);
+                                    Intent intent1 = new Intent("add_person_task_share_success");
+                                    sendBroadcast(intent1);
                                     finish();
+
                                 } else {
                                     Toast.makeText(TaskShareGroupsSelectActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
                                 }

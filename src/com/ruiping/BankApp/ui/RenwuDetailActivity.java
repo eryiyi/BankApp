@@ -377,6 +377,7 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                 //共享人
                 Intent intent = new Intent(RenwuDetailActivity.this, RenwuShareActivity.class);
                 intent.putExtra("taskId", taskId);
+                intent.putExtra("flag", String.valueOf(flag));
                 startActivity(intent);
 
             }
@@ -681,53 +682,7 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
     }
 
 
-    //广播接收动作
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action.equals("add_task_comment_success")) {
-                BankJobTaskComment bankJobTaskComment = (BankJobTaskComment) intent.getExtras().get("bankJobTaskComment");
-                lists.add(0,bankJobTaskComment);
-                adapter.notifyDataSetChanged();
-            }
-            if(action.equals("update_task_file_success")){
-                String attach_file = intent.getExtras().getString("attach_file");
-                bankJobTask.setTaskFile(attach_file);
-                if(!StringUtil.isNullOrEmpty(attach.getText().toString())){
-                    attach.setText(String.valueOf((Integer.parseInt(attach.getText().toString())+1)));
-                }
-                else {
-                    attach.setText("1");
-                }
-            }
-            if(action.equals("update_task_person_count_success")){
-                if(!StringUtil.isNullOrEmpty(people.getText().toString())){
-                    people.setText(String.valueOf(Integer.parseInt(people.getText().toString()) + 1));
-                    taskBeanObj.setJoinEmpNum(String.valueOf(Integer.parseInt(people.getText().toString()) + 1));
-                }else {
-                    people.setText("1");
-                    taskBeanObj.setJoinEmpNum("1");
-                }
-            }
-        }
-    };
 
-    //注册广播
-    public void registerBoradcastReceiver() {
-        IntentFilter myIntentFilter = new IntentFilter();
-        myIntentFilter.addAction("add_task_comment_success");
-        myIntentFilter.addAction("update_task_file_success");//更新报表附件成功
-        myIntentFilter.addAction("update_task_person_count_success");//更新参与人数
-        //注册广播
-        registerReceiver(mBroadcastReceiver, myIntentFilter);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(mBroadcastReceiver);
-    }
 
 
     @Override
@@ -1164,5 +1119,58 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
         getRequestQueue().add(request);
     }
 
+
+
+    //广播接收动作
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("add_task_comment_success")) {
+                BankJobTaskComment bankJobTaskComment = (BankJobTaskComment) intent.getExtras().get("bankJobTaskComment");
+                lists.add(0,bankJobTaskComment);
+                adapter.notifyDataSetChanged();
+            }
+            if(action.equals("update_task_file_success")){
+                String attach_file = intent.getExtras().getString("attach_file");
+                bankJobTask.setTaskFile(attach_file);
+                if(!StringUtil.isNullOrEmpty(attach.getText().toString())){
+                    attach.setText(String.valueOf((Integer.parseInt(attach.getText().toString())+1)));
+                }
+                else {
+                    attach.setText("1");
+                }
+            }
+            if(action.equals("update_task_person_count_success")){
+                if(!StringUtil.isNullOrEmpty(people.getText().toString())){
+                    people.setText(String.valueOf(Integer.parseInt(people.getText().toString()) + 1));
+                    taskBeanObj.setJoinEmpNum(String.valueOf(Integer.parseInt(people.getText().toString()) + 1));
+                }else {
+                    people.setText("1");
+                    taskBeanObj.setJoinEmpNum("1");
+                }
+            }
+            if(action.equals("add_person_task_share_success")){
+                getShareCount();
+            }
+        }
+    };
+
+    //注册广播
+    public void registerBoradcastReceiver() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction("add_task_comment_success");
+        myIntentFilter.addAction("update_task_file_success");//更新报表附件成功
+        myIntentFilter.addAction("update_task_person_count_success");//更新参与人数
+        myIntentFilter.addAction("add_person_task_share_success");//更新共享人数
+        //注册广播
+        registerReceiver(mBroadcastReceiver, myIntentFilter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mBroadcastReceiver);
+    }
 
 }

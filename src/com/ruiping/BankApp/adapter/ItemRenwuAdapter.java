@@ -12,6 +12,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.ruiping.BankApp.BankAppApplication;
 import com.ruiping.BankApp.R;
+import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.entiy.BankJobTask;
 import com.ruiping.BankApp.util.DateUtil;
 
@@ -73,7 +74,7 @@ public class ItemRenwuAdapter extends BaseAdapter {
         }
         BankJobTask cell = lists.get(position);
         if (cell != null) {
-            imageLoader.displayImage(cell.getBankEmpf().getEmpCover(), holder.item_head, BankAppApplication.txOptions, animateFirstListener);
+            imageLoader.displayImage(InternetURL.INTERNAL+cell.getBankEmpf().getEmpCover(), holder.item_head, BankAppApplication.txOptions, animateFirstListener);
             holder.item_title.setText(cell.getTaskTitle());
             holder.item_nickname.setText(cell.getBankEmpf().getEmpName());
             holder.item_jindu.setText(cell.getTaskProgress());

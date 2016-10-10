@@ -72,6 +72,8 @@ public class ItemSharePeopleAdapter extends BaseAdapter {
         if (cell != null) {
             if(cell.getFlag() == 0){
                 imageLoader.displayImage(InternetURL.INTERNAL+cell.getBankEmp().getEmpCover(), holder.item_cover, BankAppApplication.txOptions, animateFirstListener);
+            }else {
+                holder.item_cover.setImageResource(R.drawable.ic_launcher);
             }
             holder.item_name.setText(cell.getName());
         }

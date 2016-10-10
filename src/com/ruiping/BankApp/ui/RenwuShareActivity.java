@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.AuthFailureError;
@@ -40,11 +41,17 @@ public class RenwuShareActivity extends BaseActivity implements View.OnClickList
 
 
     private String taskId;//任务ID
+    private String flag;//true是负责人或者创建人 false是他人的
+
+    private RelativeLayout liner_one;
+    private RelativeLayout liner_two;
+    private RelativeLayout liner_three;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         taskId = getIntent().getExtras().getString("taskId");
+        flag = getIntent().getExtras().getString("flag");
         setContentView(R.layout.renwu_share_activity);
         initView();
         //获得任务共享人员列表
@@ -67,18 +74,40 @@ public class RenwuShareActivity extends BaseActivity implements View.OnClickList
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 if (listsPerson.size() > position) {
                     BankTaskShareBean bankTaskShareBean = listsPerson.get(position);
+
                     if (bankTaskShareBean != null) {
-                        deleteShare(bankTaskShareBean);
+                        if ("true".equals(flag)) {
+                            deleteShare(bankTaskShareBean);
+                        } else {
+                            if(bankTaskShareBean.getFlag() == 0){
+                                Intent intent = new Intent(RenwuShareActivity.this, ProfileActivity.class);
+                                intent.putExtra("emp_id", bankTaskShareBean.getEmpid());
+                                startActivity(intent);
+                            }
+                        }
+
                     }
                 }
             }
         });
-        this.findViewById(R.id.liner_one).setOnClickListener(this);
-        this.findViewById(R.id.liner_two).setOnClickListener(this);
-        this.findViewById(R.id.liner_three).setOnClickListener(this);
-
+        liner_one = (RelativeLayout) this.findViewById(R.id.liner_one);
+        liner_two = (RelativeLayout) this.findViewById(R.id.liner_two);
+        liner_three = (RelativeLayout) this.findViewById(R.id.liner_three);
+        liner_one.setOnClickListener(this);
+        liner_two.setOnClickListener(this);
+        liner_three.setOnClickListener(this);
+        if("true".equals(flag)){
+            liner_one.setVisibility(View.VISIBLE);
+            liner_two.setVisibility(View.VISIBLE);
+            liner_three.setVisibility(View.VISIBLE);
+        }else {
+            liner_one.setVisibility(View.GONE);
+            liner_two.setVisibility(View.GONE);
+            liner_three.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -89,24 +118,33 @@ public class RenwuShareActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.liner_three:
             {
-                //选择所有人
-                addPerson();
+                if("true".equals(flag)){
+                    //选择所有人
+                    addPerson();
+                }
+
             }
                 break;
             case R.id.liner_one:
             {
-                //选择人员
-                Intent intent= new Intent(RenwuShareActivity.this, TaskSharePersonSelectActivity.class);
-                intent.putExtra("taskId", taskId);
-                startActivityForResult(intent, 1000);
+                if("true".equals(flag)){
+                    //选择人员
+                    Intent intent= new Intent(RenwuShareActivity.this, TaskSharePersonSelectActivity.class);
+                    intent.putExtra("taskId", taskId);
+                    startActivityForResult(intent, 1000);
+                }
+
             }
                 break;
             case R.id.liner_two:
             {
-                //选择部门
-                Intent intent= new Intent(RenwuShareActivity.this, TaskShareGroupsSelectActivity.class);
-                intent.putExtra("taskId", taskId);
-                startActivityForResult(intent, 1001);
+                if("true".equals(flag)){
+                    //选择部门
+                    Intent intent= new Intent(RenwuShareActivity.this, TaskShareGroupsSelectActivity.class);
+                    intent.putExtra("taskId", taskId);
+                    startActivityForResult(intent, 1001);
+                }
+
             }
                 break;
         }
@@ -194,6 +232,8 @@ public class RenwuShareActivity extends BaseActivity implements View.OnClickList
                                 JSONObject jo = new JSONObject(s);
                                 String code1 = jo.getString("code");
                                 if (Integer.parseInt(code1) == 200) {
+                                    Intent intent1 = new Intent("add_person_task_share_success");
+                                    sendBroadcast(intent1);
                                     getPersons();
                                 } else {
                                     Toast.makeText(RenwuShareActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
@@ -249,6 +289,8 @@ public class RenwuShareActivity extends BaseActivity implements View.OnClickList
                                 String code1 = jo.getString("code");
                                 if (Integer.parseInt(code1) == 200) {
                                     getPersons();
+                                    Intent intent1 = new Intent("add_person_task_share_success");
+                                    sendBroadcast(intent1);
                                 } else {
                                     Toast.makeText(RenwuShareActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
                                 }

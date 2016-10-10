@@ -209,5 +209,7 @@ public class InternetURL {
     public static final String GET_ABOUT_US_URL = INTERNAL + "aboutUs.do?find";
     //检查新版本
     public static final String CHECK_VERSION_CODE_URL = INTERNAL + "appBankVersion.do?byVersion";
+    //7. 查询共享任务
+    public static final String GET_BANK_TASK_SHARE_URL = INTERNAL + "appBankJobTask.do?findShareTask";
 
 }

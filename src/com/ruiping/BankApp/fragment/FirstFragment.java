@@ -41,6 +41,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
     private TextView task_mine_number_do;
     private TextView task_mine_number_finish;
     private TextView task_mine_number_all;
+    private TextView task_mine_number_share;
 
     private IndexCountObj indexCountObj ;//任务统计对象
 
@@ -72,11 +73,13 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         view.findViewById(R.id.liner_two).setOnClickListener(this);
         view.findViewById(R.id.liner_three).setOnClickListener(this);
         view.findViewById(R.id.liner_four).setOnClickListener(this);
+        view.findViewById(R.id.liner_share).setOnClickListener(this);
 
         task_mine_number = (TextView) view.findViewById(R.id.task_mine_number);
         task_mine_number_do = (TextView) view.findViewById(R.id.task_mine_number_do);
         task_mine_number_finish = (TextView) view.findViewById(R.id.task_mine_number_finish);
         task_mine_number_all = (TextView) view.findViewById(R.id.task_mine_number_all);
+        task_mine_number_share = (TextView) view.findViewById(R.id.task_mine_number_share);
     }
 
     @Override
@@ -118,6 +121,14 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
             {
                 Intent intent = new Intent(getActivity(), RenwuListActivity.class);
                 intent.putExtra("type", "4");
+                startActivity(intent);
+            }
+                break;
+            case R.id.liner_share:
+            {
+                //共享
+                Intent intent = new Intent(getActivity(), RenwuListActivity.class);
+                intent.putExtra("type", "5");
                 startActivity(intent);
             }
                 break;
@@ -178,6 +189,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
             task_mine_number_do.setText(indexCountObj.getKey4()==null?"0":indexCountObj.getKey4());
             task_mine_number_finish.setText(indexCountObj.getKey2()==null?"0":indexCountObj.getKey2());
             task_mine_number_all.setText(indexCountObj.getKey5()==null?"0":indexCountObj.getKey5());
+            task_mine_number_share.setText(indexCountObj.getKey6()==null?"":indexCountObj.getKey6());
         }
     }
 }

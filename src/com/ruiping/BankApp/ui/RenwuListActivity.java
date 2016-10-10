@@ -91,6 +91,10 @@ public class RenwuListActivity extends BaseActivity implements View.OnClickListe
                 title.setText("全部任务");
                 urlInternet = InternetURL.GET_TASK_ALL_BY_EMP_ID_URL;
                 break;
+            case 5:
+                title.setText("共享任务");
+                urlInternet = InternetURL.GET_BANK_TASK_SHARE_URL;
+                break;
         }
 
         adapter = new ItemRenwuAdapter(lists, RenwuListActivity.this);

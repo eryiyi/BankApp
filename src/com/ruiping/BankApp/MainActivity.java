@@ -38,6 +38,7 @@ import com.ruiping.BankApp.huanxin.ui.ChatActivity;
 import com.ruiping.BankApp.huanxin.ui.ConversationListFragment;
 import com.ruiping.BankApp.huanxin.ui.GroupsActivity;
 import com.ruiping.BankApp.ui.LoginActivity;
+import com.ruiping.BankApp.util.Contance;
 import com.ruiping.BankApp.util.HttpUtils;
 import easeui.utils.EaseCommonUtils;
 
@@ -308,9 +309,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 updateUnreadLabel();
                 if (currentTabIndex == 0) {
                     // refresh conversation list
-//                    if (conversationListFragment != null) {
-//                        conversationListFragment.refresh();
-//                    }
+                    if (oneFragment != null) {
+                        oneFragment.refresh();
+                    }
                 }
             }
         });
@@ -339,9 +340,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                         oneFragment.refresh();
                     }
                 } else if (currentTabIndex == 1) {
-//                    if(contactListFragment != null) {
-//                        contactListFragment.refresh();
-//                    }
+                    if(oneFragment != null) {
+                        oneFragment.refresh();
+                    }
                 }
                 String action = intent.getAction();
                 if(action.equals(Constant.ACTION_GROUP_CHANAGED)){
@@ -539,6 +540,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                         conflictBuilder = null;
                         finish();
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        save(Contance.EMP_PWD, "");
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }
