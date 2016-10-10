@@ -264,6 +264,9 @@ public class DailyListActivity extends BaseActivity implements View.OnClickListe
                 lists.add(0,bankJobReport);
                 adapter.notifyDataSetChanged();
             }
+            if(action.equals("update_report_daily_success")){
+                initData();
+            }
 
         }
     };
@@ -272,6 +275,7 @@ public class DailyListActivity extends BaseActivity implements View.OnClickListe
     public void registerBoradcastReceiver() {
         IntentFilter myIntentFilter = new IntentFilter();
         myIntentFilter.addAction("add_report_daily_success");
+        myIntentFilter.addAction("update_report_daily_success");
         //注册广播
         registerReceiver(mBroadcastReceiver, myIntentFilter);
     }

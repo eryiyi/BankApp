@@ -206,4 +206,13 @@ public class StringUtil {
     }
 
 
+    public static boolean checkEndsWithInStringArray(String checkItsEnd,
+                                               String[] fileEndings){
+        for(String aEnd : fileEndings){
+            if(checkItsEnd.endsWith(aEnd))
+                return true;
+        }
+        return false;
+    }
+
 }

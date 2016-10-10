@@ -513,8 +513,7 @@ public class DailyDetailActivtiy extends BaseActivity implements View.OnClickLis
                                     BankJobReportSingleData data = getGson().fromJson(s, BankJobReportSingleData.class);
                                     BankJobReport bankJobReportCommentBean = data.getData();
                                     //调用广播，刷新主页
-                                    Intent intent1 = new Intent("add_report_daily_success");
-                                    intent1.putExtra("bankJobReportCommentBean", bankJobReportCommentBean);
+                                    Intent intent1 = new Intent("update_report_daily_success");
                                     sendBroadcast(intent1);
                                     finish();
                                 }else {

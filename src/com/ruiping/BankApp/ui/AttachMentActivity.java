@@ -23,11 +23,14 @@ import com.ruiping.BankApp.data.BankJobReportSingleData;
 import com.ruiping.BankApp.entiy.AttachMentObj;
 import com.ruiping.BankApp.upload.CommonUtil;
 import com.ruiping.BankApp.util.Contance;
+import com.ruiping.BankApp.util.OpenFilesMine;
 import com.ruiping.BankApp.util.StringUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -109,21 +112,68 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //todo
-                if(lists.size() > i){
-                    AttachMentObj attachMentObj = lists.get(i);
-                    if(attachMentObj != null){
-                        String filePath = attachMentObj.getUrlStr();
-                        File file = new File(filePath);
-                        if (file.exists()) {
-                            // open files if it exist
-                            FileUtils.openFile(file, AttachMentActivity.this);
-                        } else {
-                            // download the file
-//                            startActivity(new Intent(AttachMentActivity.this, EaseShowNormalFileActivity.class).putExtra("msgbody", message.getBody()));
-                        }
-                    }
+//                if(lists.size() > i){
+//                    AttachMentObj attachMentObj = lists.get(i);
+//                    if(attachMentObj != null) {
+//                        if (!StringUtil.isNullOrEmpty(attachMentObj.getUrlStr())) {
+//                            String fileName = InternetURL.INTERNAL+attachMentObj.getUrlStr();
+//                            File currentPath = null;
+//                            try {
+//                                currentPath = new File(new URI(fileName));
+//                            } catch (URISyntaxException e) {
+//                                e.printStackTrace();
+//                            }
+//                            Intent intent;
+//                            if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
+//                                    getStringArray(R.array.fileEndingImage))) {
+//                                intent = OpenFilesMine.getImageFileIntent(currentPath);
+//                                startActivity(intent);
+//                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
+//                                    getStringArray(R.array.fileEndingWebText))) {
+//                                intent = OpenFilesMine.getHtmlFileIntent(currentPath);
+//                                startActivity(intent);
+//                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
+//                                    getStringArray(R.array.fileEndingPackage))) {
+//                                intent = OpenFilesMine.getApkFileIntent(currentPath);
+//                                startActivity(intent);
+//
+//                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
+//                                    getStringArray(R.array.fileEndingAudio))) {
+//                                intent = OpenFilesMine.getAudioFileIntent(currentPath);
+//                                startActivity(intent);
+//                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
+//                                    getStringArray(R.array.fileEndingVideo))) {
+//                                intent = OpenFilesMine.getVideoFileIntent(currentPath);
+//                                startActivity(intent);
+//                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
+//                                    getStringArray(R.array.fileEndingText))) {
+//                                intent = OpenFilesMine.getTextFileIntent(currentPath);
+//                                startActivity(intent);
+//                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
+//                                    getStringArray(R.array.fileEndingPdf))) {
+//                                intent = OpenFilesMine.getPdfFileIntent(currentPath);
+//                                startActivity(intent);
+//                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
+//                                    getStringArray(R.array.fileEndingWord))) {
+//                                intent = OpenFilesMine.getWordFileIntent(currentPath);
+//                                startActivity(intent);
+//                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
+//                                    getStringArray(R.array.fileEndingExcel))) {
+//                                intent = OpenFilesMine.getExcelFileIntent(currentPath);
+//                                startActivity(intent);
+//                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
+//                                    getStringArray(R.array.fileEndingPPT))) {
+//                                intent = OpenFilesMine.getPPTFileIntent(currentPath);
+//                                startActivity(intent);
+//                            } else {
+//                                showMsg(AttachMentActivity.this, "无法打开，请安装相应的软件！");
+//                            }
+//                        } else {
+//                            showMsg(AttachMentActivity.this, "对不起，暂无文件");
+//                        }
+//                    }
+//                    }
                 }
-            }
         });
     }
 
