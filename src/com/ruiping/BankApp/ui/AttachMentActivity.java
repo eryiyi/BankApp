@@ -1,8 +1,8 @@
 package com.ruiping.BankApp.ui;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Environment;
+import android.os.*;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -13,6 +13,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.hyphenate.util.FileUtils;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.adapter.ItemAttachMentAdapter;
@@ -23,8 +25,10 @@ import com.ruiping.BankApp.data.BankJobReportSingleData;
 import com.ruiping.BankApp.entiy.AttachMentObj;
 import com.ruiping.BankApp.upload.CommonUtil;
 import com.ruiping.BankApp.util.Contance;
+import com.ruiping.BankApp.util.HttpDownloader;
 import com.ruiping.BankApp.util.OpenFilesMine;
 import com.ruiping.BankApp.util.StringUtil;
+import easeui.ui.EaseShowNormalFileActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -64,6 +68,10 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.attach_ment_activity);
+
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
+        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
+
         attach_file = getIntent().getExtras().getString("attach_file");
         reportId = getIntent().getExtras().getString("reportId");
         empId = getIntent().getExtras().getString("empId");
@@ -90,6 +98,7 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
         initView();
     }
 
+
     private void initView() {
         lstv = (ListView) this.findViewById(R.id.lstv);
         this.findViewById(R.id.back).setOnClickListener(this);
@@ -112,70 +121,84 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //todo
-//                if(lists.size() > i){
-//                    AttachMentObj attachMentObj = lists.get(i);
-//                    if(attachMentObj != null) {
-//                        if (!StringUtil.isNullOrEmpty(attachMentObj.getUrlStr())) {
-//                            String fileName = InternetURL.INTERNAL+attachMentObj.getUrlStr();
-//                            File currentPath = null;
-//                            try {
-//                                currentPath = new File(new URI(fileName));
-//                            } catch (URISyntaxException e) {
-//                                e.printStackTrace();
-//                            }
-//                            Intent intent;
-//                            if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
-//                                    getStringArray(R.array.fileEndingImage))) {
-//                                intent = OpenFilesMine.getImageFileIntent(currentPath);
-//                                startActivity(intent);
-//                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
-//                                    getStringArray(R.array.fileEndingWebText))) {
-//                                intent = OpenFilesMine.getHtmlFileIntent(currentPath);
-//                                startActivity(intent);
-//                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
-//                                    getStringArray(R.array.fileEndingPackage))) {
-//                                intent = OpenFilesMine.getApkFileIntent(currentPath);
-//                                startActivity(intent);
-//
-//                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
-//                                    getStringArray(R.array.fileEndingAudio))) {
-//                                intent = OpenFilesMine.getAudioFileIntent(currentPath);
-//                                startActivity(intent);
-//                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
-//                                    getStringArray(R.array.fileEndingVideo))) {
-//                                intent = OpenFilesMine.getVideoFileIntent(currentPath);
-//                                startActivity(intent);
-//                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
-//                                    getStringArray(R.array.fileEndingText))) {
-//                                intent = OpenFilesMine.getTextFileIntent(currentPath);
-//                                startActivity(intent);
-//                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
-//                                    getStringArray(R.array.fileEndingPdf))) {
-//                                intent = OpenFilesMine.getPdfFileIntent(currentPath);
-//                                startActivity(intent);
-//                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
-//                                    getStringArray(R.array.fileEndingWord))) {
-//                                intent = OpenFilesMine.getWordFileIntent(currentPath);
-//                                startActivity(intent);
-//                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
-//                                    getStringArray(R.array.fileEndingExcel))) {
-//                                intent = OpenFilesMine.getExcelFileIntent(currentPath);
-//                                startActivity(intent);
-//                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
-//                                    getStringArray(R.array.fileEndingPPT))) {
-//                                intent = OpenFilesMine.getPPTFileIntent(currentPath);
-//                                startActivity(intent);
-//                            } else {
-//                                showMsg(AttachMentActivity.this, "无法打开，请安装相应的软件！");
-//                            }
-//                        } else {
-//                            showMsg(AttachMentActivity.this, "对不起，暂无文件");
-//                        }
-//                    }
-//                    }
+                if(lists.size() > i){
+                    AttachMentObj attachMentObj = lists.get(i);
+                    if(attachMentObj != null) {
+                        if (!StringUtil.isNullOrEmpty(attachMentObj.getUrlStr())) {
+                            HttpDownloader httpDownLoader=new HttpDownloader();
+                            int result=httpDownLoader.downfile(InternetURL.INTERNAL + attachMentObj.getUrlStr(), "test/", attachMentObj.getTitle());
+                            if(result==0)
+                            {
+                                openFIle(attachMentObj.getTitle(), "test/");
+                                Toast.makeText(AttachMentActivity.this, "下载成功！", Toast.LENGTH_SHORT).show();
+                            }
+                            else if(result==1) {
+                                openFIle("notifications.txt", "test/notifications.txt");
+                                Toast.makeText(AttachMentActivity.this, "已有文件！", Toast.LENGTH_SHORT).show();
+                            }
+                            else if(result==-1){
+                                Toast.makeText(AttachMentActivity.this, "下载失败！", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            showMsg(AttachMentActivity.this, "对不起，暂无文件");
+                        }
+                    }
+                    }
                 }
         });
     }
+
+    void openFIle(String fileName, String filepath){
+        File currentPath = null;
+        currentPath = new File(filepath);
+        Intent intent;
+                            if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
+                                    getStringArray(R.array.fileEndingImage))) {
+                                intent = OpenFilesMine.getImageFileIntent(currentPath);
+                                startActivity(intent);
+                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
+                                    getStringArray(R.array.fileEndingWebText))) {
+                                intent = OpenFilesMine.getHtmlFileIntent(currentPath);
+                                startActivity(intent);
+                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
+                                    getStringArray(R.array.fileEndingPackage))) {
+                                intent = OpenFilesMine.getApkFileIntent(currentPath);
+                                startActivity(intent);
+
+                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
+                                    getStringArray(R.array.fileEndingAudio))) {
+                                intent = OpenFilesMine.getAudioFileIntent(currentPath);
+                                startActivity(intent);
+                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
+                                    getStringArray(R.array.fileEndingVideo))) {
+                                intent = OpenFilesMine.getVideoFileIntent(currentPath);
+                                startActivity(intent);
+                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
+                                    getStringArray(R.array.fileEndingText))) {
+                                intent = OpenFilesMine.getTextFileIntent(currentPath);
+                                startActivity(intent);
+                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
+                                    getStringArray(R.array.fileEndingPdf))) {
+                                intent = OpenFilesMine.getPdfFileIntent(currentPath);
+                                startActivity(intent);
+                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
+                                    getStringArray(R.array.fileEndingWord))) {
+                                intent = OpenFilesMine.getWordFileIntent(currentPath);
+                                startActivity(intent);
+                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
+                                    getStringArray(R.array.fileEndingExcel))) {
+                                intent = OpenFilesMine.getExcelFileIntent(currentPath);
+                                startActivity(intent);
+                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
+                                    getStringArray(R.array.fileEndingPPT))) {
+                                intent = OpenFilesMine.getPPTFileIntent(currentPath);
+                                startActivity(intent);
+                            } else {
+                                showMsg(AttachMentActivity.this, "无法打开，请安装相应的软件！");
+                            }
+    }
+
+
 
     @Override
     public void onClick(View view) {

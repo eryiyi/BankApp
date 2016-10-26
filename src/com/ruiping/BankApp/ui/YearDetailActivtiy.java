@@ -223,15 +223,19 @@ public class YearDetailActivtiy extends BaseActivity implements View.OnClickList
                     showMsg(YearDetailActivtiy.this, "请输入工作成效！");
                     return;
                 }
-                if(StringUtil.isNullOrEmpty(content_two.getText().toString())){
-                    showMsg(YearDetailActivtiy.this, "请输入工作总结！");
-                    return;
-                }
-                if(StringUtil.isNullOrEmpty(content_three.getText().toString())){
-                    showMsg(YearDetailActivtiy.this, "请输入工作计划！");
-                    return;
-                }
+//                if(StringUtil.isNullOrEmpty(content_two.getText().toString())){
+//                    showMsg(YearDetailActivtiy.this, "请输入工作总结！");
+//                    return;
+//                }
+//                if(StringUtil.isNullOrEmpty(content_three.getText().toString())){
+//                    showMsg(YearDetailActivtiy.this, "请输入工作计划！");
+//                    return;
+//                }
                 if(bankJobReport !=null){
+                    progressDialog = new CustomProgressDialog(YearDetailActivtiy.this, "正在加载中",R.anim.custom_dialog_frame);
+                    progressDialog.setCancelable(true);
+                    progressDialog.setIndeterminate(true);
+                    progressDialog.show();
                     updateWeekly();
                 }
             }

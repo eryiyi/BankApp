@@ -18,6 +18,7 @@ import com.hyphenate.chat.EMClient;
 import com.ruiping.BankApp.BankAppApplication;
 import com.ruiping.BankApp.MainActivity;
 import com.ruiping.BankApp.R;
+import com.ruiping.BankApp.base.ActivityTack;
 import com.ruiping.BankApp.base.BaseActivity;
 import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.data.BankEmpBeanData;
@@ -45,6 +46,22 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
+        DemoHelper.getInstance().logout(false,new EMCallBack() {
+
+            @Override
+            public void onSuccess() {
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                    }
+                });
+            }
+            @Override
+            public void onProgress(int progress, String status) {
+            }
+            @Override
+            public void onError(int code, String message) {
+            }
+        });
         initView();
 
         PushManager.startWork(getApplicationContext(),
@@ -183,6 +200,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         save(Contance.EMP_YEAR_REPORT, bankEmpBean.getYearreport());
         save(Contance.EMP_LOGIN_NUM, bankEmpBean.getLoginnum());
         save(Contance.EMP_EMAIL, bankEmpBean.getEmail());
+        save(Contance.IS_MEETING, bankEmpBean.getIsMeeting());
         if(!StringUtil.isNullOrEmpty(bankEmpBean.getEmpIdUp())){
             save(Contance.EMP_NAME_UP, bankEmpBean.getBankemp().getEmpName());
         }

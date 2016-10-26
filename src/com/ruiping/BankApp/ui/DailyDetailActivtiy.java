@@ -482,7 +482,7 @@ public class DailyDetailActivtiy extends BaseActivity implements View.OnClickLis
     //注册广播
     public void registerBoradcastReceiver() {
         IntentFilter myIntentFilter = new IntentFilter();
-        myIntentFilter.addAction("add_report_comment_success");
+        myIntentFilter.addAction("add_report_comment_success");//添加日报评论
         myIntentFilter.addAction("update_report_file_success");//更新报表附件成功
         //注册广播
         registerReceiver(mBroadcastReceiver, myIntentFilter);

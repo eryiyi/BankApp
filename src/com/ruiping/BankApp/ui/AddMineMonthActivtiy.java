@@ -344,23 +344,23 @@ public class AddMineMonthActivtiy extends BaseActivity implements View.OnClickLi
                         return;
                     }
                     if(content_one1.getText().toString().length() > 2000){
-                        showMsg(AddMineMonthActivtiy.this, "最多输入2000字！");
+                        showMsg(AddMineMonthActivtiy.this, "工作成效最多输入2000字！");
                         return;
                     }
-                    if(StringUtil.isNullOrEmpty(content_two1.getText().toString())){
-                        showMsg(AddMineMonthActivtiy.this, "请输入工作总结！");
+//                    if(StringUtil.isNullOrEmpty(content_two1.getText().toString())){
+//                        showMsg(AddMineMonthActivtiy.this, "请输入工作总结！");
+//                        return;
+//                    }
+                    if(!StringUtil.isNullOrEmpty(content_two1.getText().toString()) && content_two1.getText().toString().length() > 2000){
+                        showMsg(AddMineMonthActivtiy.this, "工作总结最多输入2000字！");
                         return;
                     }
-                    if(content_two1.getText().toString().length() > 2000){
-                        showMsg(AddMineMonthActivtiy.this, "最多输入2000字！");
-                        return;
-                    }
-                    if(StringUtil.isNullOrEmpty(content_three1.getText().toString())){
-                        showMsg(AddMineMonthActivtiy.this, "请输入工作计划！");
-                        return;
-                    }
-                    if(content_three1.getText().toString().length() > 2000){
-                        showMsg(AddMineMonthActivtiy.this, "最多输入2000字！");
+//                    if(StringUtil.isNullOrEmpty(content_three1.getText().toString())){
+//                        showMsg(AddMineMonthActivtiy.this, "请输入工作计划！");
+//                        return;
+//                    }
+                    if(!StringUtil.isNullOrEmpty(content_three1.getText().toString()) && content_three1.getText().toString().length() > 2000){
+                        showMsg(AddMineMonthActivtiy.this, "工作计划最多输入2000字！");
                         return;
                     }
 
@@ -395,23 +395,23 @@ public class AddMineMonthActivtiy extends BaseActivity implements View.OnClickLi
                         return;
                     }
                     if(content_one2.getText().toString().length() > 2000){
-                        showMsg(AddMineMonthActivtiy.this, "最多输入2000字！");
+                        showMsg(AddMineMonthActivtiy.this, "工作成效最多输入2000字！");
                         return;
                     }
-                    if(StringUtil.isNullOrEmpty(content_two2.getText().toString())){
-                        showMsg(AddMineMonthActivtiy.this, "请输入工作总结！");
+//                    if(StringUtil.isNullOrEmpty(content_two2.getText().toString())){
+//                        showMsg(AddMineMonthActivtiy.this, "请输入工作总结！");
+//                        return;
+//                    }
+                    if(!StringUtil.isNullOrEmpty(content_two2.getText().toString()) && content_two2.getText().toString().length() > 2000){
+                        showMsg(AddMineMonthActivtiy.this, "工作总结最多输入2000字！");
                         return;
                     }
-                    if(content_two2.getText().toString().length() > 2000){
-                        showMsg(AddMineMonthActivtiy.this, "最多输入2000字！");
-                        return;
-                    }
-                    if(StringUtil.isNullOrEmpty(content_three2.getText().toString())){
-                        showMsg(AddMineMonthActivtiy.this, "请输入工作计划！");
-                        return;
-                    }
-                    if(content_three2.getText().toString().length() > 2000){
-                        showMsg(AddMineMonthActivtiy.this, "最多输入2000字！");
+//                    if(StringUtil.isNullOrEmpty(content_three2.getText().toString())){
+//                        showMsg(AddMineMonthActivtiy.this, "请输入工作计划！");
+//                        return;
+//                    }
+                    if(!StringUtil.isNullOrEmpty(content_three2.getText().toString()) && content_three2.getText().toString().length() > 2000){
+                        showMsg(AddMineMonthActivtiy.this, "工作计划最多输入2000字！");
                         return;
                     }
 
@@ -1073,16 +1073,32 @@ public class AddMineMonthActivtiy extends BaseActivity implements View.OnClickLi
                 if(currentSelect == 0){
                     //上月
                     params.put("reportTitle", content_one1.getText().toString());
-                    params.put("reportCont", content_two1.getText().toString());
-                    params.put("reportNext", content_three1.getText().toString());
+                    if(!StringUtil.isNullOrEmpty(content_two1.getText().toString())){
+                        params.put("reportCont", content_two1.getText().toString());
+                    }else{
+                        params.put("reportCont", "");
+                    }
+                   if(!StringUtil.isNullOrEmpty(content_three1.getText().toString())){
+                       params.put("reportNext", content_three1.getText().toString());
+                   }else{
+                       params.put("reportNext", "");
+                   }
                     params.put("reportNumber", dateline1.getText().toString());
                     params.put("dateLine", DateUtil.getYear()+"-"+(currentMoonth - 1)+"-"+DateUtil.getPreLastMonthDay() + " 00:00:00.000");
                     params.put("dateStartEnd", week1.getText().toString());
                 }else {
                     //本月
                     params.put("reportTitle", content_one2.getText().toString());
-                    params.put("reportCont", content_two2.getText().toString());
-                    params.put("reportNext", content_three2.getText().toString());
+                    if(!StringUtil.isNullOrEmpty(content_two2.getText().toString())){
+                        params.put("reportCont", content_two2.getText().toString());
+                    }else{
+                        params.put("reportCont", "");
+                    }
+                    if(!StringUtil.isNullOrEmpty(content_three2.getText().toString())){
+                        params.put("reportNext", content_three2.getText().toString());
+                    }else{
+                        params.put("reportNext", content_three2.getText().toString());
+                    }
                     params.put("reportNumber", dateline2.getText().toString());
                     params.put("dateLine", DateUtil.getYear()+"-"+(currentMoonth )+"-"+DateUtil.getLastMonthDay() + " 00:00:00.000");
                     params.put("dateStartEnd", week2.getText().toString());
@@ -1168,8 +1184,16 @@ public class AddMineMonthActivtiy extends BaseActivity implements View.OnClickLi
                     //上周
                     params.put("reportId", bankJobReportOne.getReportId());
                     params.put("reportTitle", content_one1.getText().toString());
-                    params.put("reportCont", content_two1.getText().toString());
-                    params.put("reportNext", content_three1.getText().toString());
+                    if(!StringUtil.isNullOrEmpty(content_two1.getText().toString())){
+                        params.put("reportCont", content_two1.getText().toString());
+                    }else{
+                        params.put("reportCont", "");
+                    }
+                    if(!StringUtil.isNullOrEmpty(content_three1.getText().toString())){
+                        params.put("reportNext", content_three1.getText().toString());
+                    }else{
+                        params.put("reportNext", "");
+                    }
                     params.put("reportNumber", dateline1.getText().toString());
                     params.put("dateLine", bankJobReportOne.getDateLine());
                     params.put("dateStartEnd", week1.getText().toString());
@@ -1177,8 +1201,17 @@ public class AddMineMonthActivtiy extends BaseActivity implements View.OnClickLi
                     //本周
                     params.put("reportId", bankJobReportTwo.getReportId());
                     params.put("reportTitle", content_one2.getText().toString());
-                    params.put("reportCont", content_two2.getText().toString());
-                    params.put("reportNext", content_three2.getText().toString());
+                    if(!StringUtil.isNullOrEmpty(content_two2.getText().toString())){
+                        params.put("reportCont", content_two2.getText().toString());
+                    }else{
+                        params.put("reportCont", "");
+                    }
+                    if(!StringUtil.isNullOrEmpty(content_three2.getText().toString())){
+                        params.put("reportNext", content_three2.getText().toString());
+                    }else{
+                        params.put("reportNext", "");
+                    }
+
                     params.put("reportNumber", dateline2.getText().toString());
                     params.put("dateLine", bankJobReportTwo.getDateLine());
                     params.put("dateStartEnd", week2.getText().toString());

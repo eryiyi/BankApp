@@ -205,23 +205,23 @@ public class AddYearActivtiy extends BaseActivity implements View.OnClickListene
                         return;
                     }
                     if(content_one2.getText().toString().length() > 2000){
-                        showMsg(AddYearActivtiy.this, "最多输入2000字！");
+                        showMsg(AddYearActivtiy.this, "工作成效最多输入2000字！");
                         return;
                     }
-                    if(StringUtil.isNullOrEmpty(content_two2.getText().toString())){
-                        showMsg(AddYearActivtiy.this, "请输入工作总结！");
+//                    if(StringUtil.isNullOrEmpty(content_two2.getText().toString())){
+//                        showMsg(AddYearActivtiy.this, "请输入工作总结！");
+//                        return;
+//                    }
+                    if(!StringUtil.isNullOrEmpty(content_two2.getText().toString()) && content_two2.getText().toString().length() > 2000){
+                        showMsg(AddYearActivtiy.this, "工作总结最多输入2000字！");
                         return;
                     }
-                    if(content_two2.getText().toString().length() > 2000){
-                        showMsg(AddYearActivtiy.this, "最多输入2000字！");
-                        return;
-                    }
-                    if(StringUtil.isNullOrEmpty(content_three2.getText().toString())){
-                        showMsg(AddYearActivtiy.this, "请输入工作计划！");
-                        return;
-                    }
-                    if(content_three2.getText().toString().length() > 2000){
-                        showMsg(AddYearActivtiy.this, "最多输入2000字！");
+//                    if(StringUtil.isNullOrEmpty(content_three2.getText().toString())){
+//                        showMsg(AddYearActivtiy.this, "请输入工作计划！");
+//                        return;
+//                    }
+                    if(!StringUtil.isNullOrEmpty(content_three2.getText().toString()) && content_three2.getText().toString().length() > 2000){
+                        showMsg(AddYearActivtiy.this, "工作计划最多输入2000字！");
                         return;
                     }
 
@@ -690,13 +690,13 @@ public class AddYearActivtiy extends BaseActivity implements View.OnClickListene
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("empId", getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class));
 
-                    params.put("reportId", bankJobReportTwo.getReportId());
-                    params.put("reportTitle", content_one2.getText().toString());
-                    params.put("reportCont", content_two2.getText().toString());
-                    params.put("reportNext", content_three2.getText().toString());
-                    params.put("reportNumber", dateline2.getText().toString());
-                    params.put("dateLine", bankJobReportTwo.getDateLine());
-                    params.put("dateStartEnd", week2.getText().toString());
+                params.put("reportId", bankJobReportTwo.getReportId());
+                params.put("reportTitle", content_one2.getText().toString());
+                params.put("reportCont", content_two2.getText().toString());
+                params.put("reportNext", content_three2.getText().toString());
+                params.put("reportNumber", dateline2.getText().toString());
+                params.put("dateLine", bankJobReportTwo.getDateLine());
+                params.put("dateStartEnd", week2.getText().toString());
 
                 params.put("reportType", "6");
                 params.put("isUse", "0");

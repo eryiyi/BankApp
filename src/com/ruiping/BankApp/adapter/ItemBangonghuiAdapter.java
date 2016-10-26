@@ -82,7 +82,8 @@ public class ItemBangonghuiAdapter extends BaseAdapter {
                     }
                 }
             }
-            holder.item_cont.setText(String.valueOf(strb).substring(0,strb.length()-1));
+            String str = String.valueOf(strb).substring(0,strb.length()-1).replaceAll("\n","").replaceAll(" ", "").replaceAll("\t", "");
+            holder.item_cont.setText(str);
         }
 
         return convertView;

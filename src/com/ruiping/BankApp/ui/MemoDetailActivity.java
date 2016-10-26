@@ -18,6 +18,7 @@ import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.data.BankNoteBeanSingleData;
 import com.ruiping.BankApp.entiy.BankNoteBean;
 import com.ruiping.BankApp.util.StringUtil;
+import com.ruiping.BankApp.widget.CustomProgressDialog;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -46,6 +47,10 @@ public class MemoDetailActivity extends BaseActivity implements View.OnClickList
         bankNoteBeanId = getIntent().getExtras().getString("bankNoteBeanId");
 
         initView();
+        progressDialog = new CustomProgressDialog(MemoDetailActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog.setCancelable(true);
+        progressDialog.setIndeterminate(true);
+        progressDialog.show();
         getData();
 
     }
@@ -146,6 +151,7 @@ public class MemoDetailActivity extends BaseActivity implements View.OnClickList
             case R.id.right_btn:
             {
                 //删除
+
                 showWindows();
             }
                 break;
@@ -163,6 +169,10 @@ public class MemoDetailActivity extends BaseActivity implements View.OnClickList
         btn_sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog = new CustomProgressDialog(MemoDetailActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
                 deleteById();
                 picAddDialog.dismiss();
             }

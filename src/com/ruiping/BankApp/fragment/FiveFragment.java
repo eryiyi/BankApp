@@ -435,7 +435,12 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
         lists.add(new IndexObj("季报", R.drawable.md_h_brown, indexCountObj.getKey4()));
         lists.add(new IndexObj("年中", R.drawable.md_h_blue_dark, indexCountObj.getKey5()));
         lists.add(new IndexObj("年报", R.drawable.md_h_red, indexCountObj.getKey6()));
-        lists.add(new IndexObj("办公会", R.drawable.md_h_red, indexCountObj.getKey9()));
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString(Contance.IS_MEETING, ""), String.class))){
+            if("2".equals(getGson().fromJson(getSp().getString(Contance.IS_MEETING, ""), String.class))){
+                //允许
+                lists.add(new IndexObj("办公会", R.drawable.md_h_red, indexCountObj.getKey9()));
+            }
+        }
         adapter.notifyDataSetChanged();
     }
 

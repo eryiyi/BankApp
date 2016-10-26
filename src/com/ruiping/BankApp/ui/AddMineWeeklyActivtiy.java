@@ -332,23 +332,23 @@ public class AddMineWeeklyActivtiy extends BaseActivity implements View.OnClickL
                         return;
                     }
                     if(content_one1.getText().toString().length() > 2000){
-                        showMsg(AddMineWeeklyActivtiy.this, "最多输入2000字！");
+                        showMsg(AddMineWeeklyActivtiy.this, "工作成效最多输入2000字！");
                         return;
                     }
-                    if(StringUtil.isNullOrEmpty(content_two1.getText().toString())){
-                        showMsg(AddMineWeeklyActivtiy.this, "请输入工作总结！");
+//                    if(StringUtil.isNullOrEmpty(content_two1.getText().toString())){
+//                        showMsg(AddMineWeeklyActivtiy.this, "请输入工作总结！");
+//                        return;
+//                    }
+                    if(!StringUtil.isNullOrEmpty(content_two1.getText().toString()) && content_two1.getText().toString().length() > 2000){
+                        showMsg(AddMineWeeklyActivtiy.this, "工作总结最多输入2000字！");
                         return;
                     }
-                    if(content_two1.getText().toString().length() > 2000){
-                        showMsg(AddMineWeeklyActivtiy.this, "最多输入2000字！");
-                        return;
-                    }
-                    if(StringUtil.isNullOrEmpty(content_three1.getText().toString())){
-                        showMsg(AddMineWeeklyActivtiy.this, "请输入工作计划！");
-                        return;
-                    }
-                    if(content_three1.getText().toString().length() > 2000){
-                        showMsg(AddMineWeeklyActivtiy.this, "最多输入2000字！");
+//                    if(StringUtil.isNullOrEmpty(content_three1.getText().toString())){
+//                        showMsg(AddMineWeeklyActivtiy.this, "请输入工作计划！");
+//                        return;
+//                    }
+                    if(!StringUtil.isNullOrEmpty(content_three1.getText().toString()) && content_three1.getText().toString().length() > 2000){
+                        showMsg(AddMineWeeklyActivtiy.this, "工作计划最多输入2000字！");
                         return;
                     }
 
@@ -383,23 +383,23 @@ public class AddMineWeeklyActivtiy extends BaseActivity implements View.OnClickL
                         return;
                     }
                     if(content_one2.getText().toString().length() > 2000){
-                        showMsg(AddMineWeeklyActivtiy.this, "最多输入2000字！");
+                        showMsg(AddMineWeeklyActivtiy.this, "工作成效最多输入2000字！");
                         return;
                     }
-                    if(StringUtil.isNullOrEmpty(content_two2.getText().toString())){
-                        showMsg(AddMineWeeklyActivtiy.this, "请输入工作总结！");
+//                    if(StringUtil.isNullOrEmpty(content_two2.getText().toString())){
+//                        showMsg(AddMineWeeklyActivtiy.this, "请输入工作总结！");
+//                        return;
+//                    }
+                    if(!StringUtil.isNullOrEmpty(content_two2.getText().toString()) && content_two2.getText().toString().length() > 2000){
+                        showMsg(AddMineWeeklyActivtiy.this, "工作总结最多输入2000字！");
                         return;
                     }
-                    if(content_two2.getText().toString().length() > 2000){
-                        showMsg(AddMineWeeklyActivtiy.this, "最多输入2000字！");
-                        return;
-                    }
-                    if(StringUtil.isNullOrEmpty(content_three2.getText().toString())){
-                        showMsg(AddMineWeeklyActivtiy.this, "请输入工作计划！");
-                        return;
-                    }
-                    if(content_three2.getText().toString().length() > 2000){
-                        showMsg(AddMineWeeklyActivtiy.this, "最多输入2000字！");
+//                    if(StringUtil.isNullOrEmpty(content_three2.getText().toString())){
+//                        showMsg(AddMineWeeklyActivtiy.this, "请输入工作计划！");
+//                        return;
+//                    }
+                    if(!StringUtil.isNullOrEmpty(content_three2.getText().toString()) && content_three2.getText().toString().length() > 2000){
+                        showMsg(AddMineWeeklyActivtiy.this, "工作计划最多输入2000字！");
                         return;
                     }
 

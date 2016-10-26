@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.ruiping.BankApp.BankAppApplication;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.entiy.BankJobReportCommentBean;
@@ -74,16 +75,24 @@ public class ItemCommentAdapter extends BaseAdapter {
         }
         BankJobReportCommentBean cell = lists.get(position);
         if (cell != null) {
-            holder.item_nickname.setText(cell.getBankEmp().getEmpName());
-            imageLoader.displayImage(InternetURL.INTERNAL + cell.getBankEmp().getEmpCover(), holder.item_head, animateFirstListener);
+            if(cell.getBankEmp() != null){
+                holder.item_nickname.setText(cell.getBankEmp().getEmpName());
+                imageLoader.displayImage(InternetURL.INTERNAL + cell.getBankEmp().getEmpCover(), holder.item_head, BankAppApplication.txOptions, animateFirstListener);
+            }
             holder.item_dateline.setText(DateUtil.getDate(cell.getDateLine(),"MM-dd HH:mm"));
             if(StringUtil.isNullOrEmpty(cell.getCommentId())){
                 holder.item_reply.setVisibility(View.GONE);
             }else {
                 holder.item_reply.setVisibility(View.VISIBLE);
-                holder.item_reply.setText(String.format(mContect.getResources().getString(R.string.comment_reply_person), cell.getJobReportComment().getBankEmp().getEmpName()));
+                if(cell.getJobReportComment() != null){
+                    if( cell.getJobReportComment().getBankEmp() != null){
+                        if(!StringUtil.isNullOrEmpty(cell.getJobReportComment().getBankEmp().getEmpName())){
+                            holder.item_reply.setText(String.format(mContect.getResources().getString(R.string.comment_reply_person), cell.getJobReportComment().getBankEmp().getEmpName()));
+                        }
+                    }
+                }
             }
-            holder.item_cont.setText(cell.getCommentCont());
+            holder.item_cont.setText(cell.getCommentCont()==null?"":cell.getCommentCont());
         }
 
         return convertView;

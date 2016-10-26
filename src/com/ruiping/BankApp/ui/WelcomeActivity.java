@@ -51,7 +51,7 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
     public void run() {
         try {
             // 3秒后跳转到登录界面
-            Thread.sleep(1500);
+            Thread.sleep(1000);
             SharedPreferences.Editor editor = getSp().edit();
             boolean isFirstRun = getSp().getBoolean("isFirstRun", true);
             if (isFirstRun) {
@@ -166,6 +166,7 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
         save(Contance.EMP_YEAR_REPORT, bankEmpBean.getYearreport());
         save(Contance.EMP_LOGIN_NUM, bankEmpBean.getLoginnum());
         save(Contance.EMP_EMAIL, bankEmpBean.getEmail());
+        save(Contance.IS_MEETING, bankEmpBean.getIsMeeting());
         if(!StringUtil.isNullOrEmpty(bankEmpBean.getEmpIdUp())){
             save(Contance.EMP_NAME_UP, bankEmpBean.getBankemp().getEmpName());
         }
@@ -214,6 +215,12 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
                     public void run() {
                         Toast.makeText(WelcomeActivity.this, getString(R.string.Login_failed) + message,
                                 Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(WelcomeActivity.this,
+                                LoginActivity.class);
+                        startActivity(intent);
+
+                        finish();
                     }
                 });
             }

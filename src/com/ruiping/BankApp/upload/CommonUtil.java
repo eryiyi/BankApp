@@ -8,6 +8,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
 import java.io.File;
+import java.net.URLEncoder;
 import java.util.Map;
 
 /**
@@ -67,13 +68,13 @@ public class CommonUtil {
                 Request.Method.POST, url, responseListener, errorListener) {
 
             @Override
-            public Map<String, File> getFileUploads() {
-                return files;
+            public Map<String, String> getStringUploads() {
+                return params;
             }
 
             @Override
-            public Map<String, String> getStringUploads() {
-                return params;
+            public Map<String, File> getFileUploads() {
+                return files;
             }
 
         };

@@ -268,6 +268,10 @@ public class DailyListActivity extends BaseActivity implements View.OnClickListe
                 initData();
             }
 
+            if(action.equals("add_report_comment_success")){
+                initData();
+            }
+
         }
     };
 
@@ -276,6 +280,7 @@ public class DailyListActivity extends BaseActivity implements View.OnClickListe
         IntentFilter myIntentFilter = new IntentFilter();
         myIntentFilter.addAction("add_report_daily_success");
         myIntentFilter.addAction("update_report_daily_success");
+        myIntentFilter.addAction("add_report_comment_success");//添加日报评论
         //注册广播
         registerReceiver(mBroadcastReceiver, myIntentFilter);
     }

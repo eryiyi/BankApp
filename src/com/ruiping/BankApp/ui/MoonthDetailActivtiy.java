@@ -223,14 +223,18 @@ public class MoonthDetailActivtiy extends BaseActivity implements View.OnClickLi
                     showMsg(MoonthDetailActivtiy.this, "请输入工作成效！");
                     return;
                 }
-                if(StringUtil.isNullOrEmpty(content_two.getText().toString())){
-                    showMsg(MoonthDetailActivtiy.this, "请输入工作总结！");
-                    return;
-                }
-                if(StringUtil.isNullOrEmpty(content_three.getText().toString())){
-                    showMsg(MoonthDetailActivtiy.this, "请输入工作计划！");
-                    return;
-                }
+//                if(StringUtil.isNullOrEmpty(content_two.getText().toString())){
+//                    showMsg(MoonthDetailActivtiy.this, "请输入工作总结！");
+//                    return;
+//                }
+//                if(StringUtil.isNullOrEmpty(content_three.getText().toString())){
+//                    showMsg(MoonthDetailActivtiy.this, "请输入工作计划！");
+//                    return;
+//                }
+                progressDialog = new CustomProgressDialog(MoonthDetailActivtiy.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
                 if(bankJobReport !=null){
                     updateWeekly();
                 }

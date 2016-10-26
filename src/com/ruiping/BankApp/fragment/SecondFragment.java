@@ -1,6 +1,9 @@
 package com.ruiping.BankApp.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -128,7 +131,7 @@ public class SecondFragment extends BaseFragment implements View.OnClickListener
     }
 
     IndexCountObj indexCountObj;
-    //查询评论我的日报数
+    //查询日报数统计
     private void getMineCount() {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
@@ -245,4 +248,36 @@ public class SecondFragment extends BaseFragment implements View.OnClickListener
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         getRequestQueue().add(request);
     }
+
+
+    //广播接收动作
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("add_report_daily_success")) {
+                getMineCount();
+            }
+            if(action.equals("add_report_comment_success")){
+                getMineCount();
+            }
+        }
+    };
+
+    //注册广播
+    public void registerBoradcastReceiver() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction("add_report_daily_success");//添加日报成功
+        myIntentFilter.addAction("add_report_comment_success");//添加日报评论
+        //注册广播
+        getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(mBroadcastReceiver);
+    }
+
+
 }

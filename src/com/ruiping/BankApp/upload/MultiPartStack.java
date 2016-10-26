@@ -147,7 +147,6 @@ public class MultiPartStack extends HurlStack {
         // Iterate the fileUploads
         Map<String, File> fileUpload = ((MultiPartRequest) request).getFileUploads();
         for (Map.Entry<String, File> entry : fileUpload.entrySet()) {
-
             builder.addPart(((String) entry.getKey()), new FileBody((File) entry.getValue()));
         }
 

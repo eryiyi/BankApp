@@ -34,6 +34,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -205,23 +208,23 @@ public class AddYearMiddleActivtiy extends BaseActivity implements View.OnClickL
                         return;
                     }
                     if(content_one2.getText().toString().length() > 2000){
-                        showMsg(AddYearMiddleActivtiy.this, "最多输入2000字！");
+                        showMsg(AddYearMiddleActivtiy.this, "工作成效最多输入2000字！");
                         return;
                     }
-                    if(StringUtil.isNullOrEmpty(content_two2.getText().toString())){
-                        showMsg(AddYearMiddleActivtiy.this, "请输入工作总结！");
+//                    if(StringUtil.isNullOrEmpty(content_two2.getText().toString())){
+//                        showMsg(AddYearMiddleActivtiy.this, "请输入工作总结！");
+//                        return;
+//                    }
+                    if(!StringUtil.isNullOrEmpty(content_two2.getText().toString()) && content_two2.getText().toString().length() > 2000){
+                        showMsg(AddYearMiddleActivtiy.this, "工作总结最多输入2000字！");
                         return;
                     }
-                    if(content_two2.getText().toString().length() > 2000){
-                        showMsg(AddYearMiddleActivtiy.this, "最多输入2000字！");
-                        return;
-                    }
-                    if(StringUtil.isNullOrEmpty(content_three2.getText().toString())){
-                        showMsg(AddYearMiddleActivtiy.this, "请输入工作计划！");
-                        return;
-                    }
-                    if(content_three2.getText().toString().length() > 2000){
-                        showMsg(AddYearMiddleActivtiy.this, "最多输入2000字！");
+//                    if(StringUtil.isNullOrEmpty(content_three2.getText().toString())){
+//                        showMsg(AddYearMiddleActivtiy.this, "请输入工作计划！");
+//                        return;
+//                    }
+                    if(!StringUtil.isNullOrEmpty(content_three2.getText().toString()) && content_three2.getText().toString().length() > 2000){
+                        showMsg(AddYearMiddleActivtiy.this, "工作计划最多输入2000字！");
                         return;
                     }
 
@@ -231,7 +234,11 @@ public class AddYearMiddleActivtiy extends BaseActivity implements View.OnClickL
                     progressDialog.setIndeterminate(true);
                     progressDialog.show();
                     if(dataList2 != null && dataList2.size() > 0){
-                        sendFile2();
+                        try {
+                            sendFile2();
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
                     }else {
                         if(bankJobReportTwo == null){
                             //没有附件 且是新增 并且没有附件
@@ -500,7 +507,7 @@ public class AddYearMiddleActivtiy extends BaseActivity implements View.OnClickL
         getRequestQueue().add(request);
     }
 
-    public void sendFile2() {
+    public void sendFile2() throws UnsupportedEncodingException {
         fileUrls2.clear();
         fileNames2.clear();
         for (int i = 0; i < dataList2.size(); i++) {
@@ -693,13 +700,13 @@ public class AddYearMiddleActivtiy extends BaseActivity implements View.OnClickL
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("empId", getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class));
 
-                    params.put("reportId", bankJobReportTwo.getReportId());
-                    params.put("reportTitle", content_one2.getText().toString());
-                    params.put("reportCont", content_two2.getText().toString());
-                    params.put("reportNext", content_three2.getText().toString());
-                    params.put("reportNumber", dateline2.getText().toString());
-                    params.put("dateLine", bankJobReportTwo.getDateLine());
-                    params.put("dateStartEnd", week2.getText().toString());
+                params.put("reportId", bankJobReportTwo.getReportId());
+                params.put("reportTitle", content_one2.getText().toString());
+                params.put("reportCont", content_two2.getText().toString());
+                params.put("reportNext", content_three2.getText().toString());
+                params.put("reportNumber", dateline2.getText().toString());
+                params.put("dateLine", bankJobReportTwo.getDateLine());
+                params.put("dateStartEnd", week2.getText().toString());
 
                 params.put("reportType", "5");
                 params.put("isUse", "0");

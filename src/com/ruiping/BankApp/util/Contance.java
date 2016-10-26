@@ -25,6 +25,7 @@ public class Contance {
     public  static  final String EMP_YEAR_REPORT = "yearreport";
     public  static  final String EMP_LOGIN_NUM = "loginnum";
     public  static  final String EMP_EMAIL = "empEmail";
+    public  static  final String IS_MEETING = "isMeeting";
 
     public  static  final String EMP_NAME_UP = "empName_up";
     public  static  final String GROUP_ID = "groupId";

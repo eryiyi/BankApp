@@ -219,23 +219,23 @@ public class AddQuarterMonthActivtiy extends BaseActivity implements View.OnClic
                         return;
                     }
                     if(content_one2.getText().toString().length() > 2000){
-                        showMsg(AddQuarterMonthActivtiy.this, "最多输入2000字！");
+                        showMsg(AddQuarterMonthActivtiy.this, "工作成效最多输入2000字！");
                         return;
                     }
-                    if(StringUtil.isNullOrEmpty(content_two2.getText().toString())){
-                        showMsg(AddQuarterMonthActivtiy.this, "请输入工作总结！");
+//                    if(StringUtil.isNullOrEmpty(content_two2.getText().toString())){
+//                        showMsg(AddQuarterMonthActivtiy.this, "请输入工作总结！");
+//                        return;
+//                    }
+                    if(!StringUtil.isNullOrEmpty(content_two2.getText().toString()) && content_two2.getText().toString().length() > 2000){
+                        showMsg(AddQuarterMonthActivtiy.this, "工作总结最多输入2000字！");
                         return;
                     }
-                    if(content_two2.getText().toString().length() > 2000){
-                        showMsg(AddQuarterMonthActivtiy.this, "最多输入2000字！");
-                        return;
-                    }
-                    if(StringUtil.isNullOrEmpty(content_three2.getText().toString())){
-                        showMsg(AddQuarterMonthActivtiy.this, "请输入工作计划！");
-                        return;
-                    }
-                    if(content_three2.getText().toString().length() > 2000){
-                        showMsg(AddQuarterMonthActivtiy.this, "最多输入2000字！");
+//                    if(StringUtil.isNullOrEmpty(content_three2.getText().toString())){
+//                        showMsg(AddQuarterMonthActivtiy.this, "请输入工作计划！");
+//                        return;
+//                    }
+                    if(!StringUtil.isNullOrEmpty(content_three2.getText().toString()) && content_three2.getText().toString().length() > 2000){
+                        showMsg(AddQuarterMonthActivtiy.this, "工作计划最多输入2000字！");
                         return;
                     }
 
