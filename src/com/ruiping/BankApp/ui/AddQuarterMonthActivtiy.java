@@ -683,11 +683,10 @@ public class AddQuarterMonthActivtiy extends BaseActivity implements View.OnClic
                                     showMsg(AddQuarterMonthActivtiy.this, "修改操作成功");
                                     Intent intent1 = new Intent("add_quarter_success");
                                     sendBroadcast(intent1);
-//                                    跳转到周报详情页面
-                                    Intent intent = new Intent(AddQuarterMonthActivtiy.this, QuarterDetailActivtiy.class);
-                                    intent.putExtra("bankJobReport", data.getData());
-                                    startActivity(intent);
-                                    finish();
+//                                    Intent intent = new Intent(AddQuarterMonthActivtiy.this, QuarterDetailActivtiy.class);
+//                                    intent.putExtra("bankJobReport", data.getData());
+//                                    startActivity(intent);
+//                                    finish();
                                 }else {
                                     showMsg(AddQuarterMonthActivtiy.this, jo.getString("message"));
                                 }

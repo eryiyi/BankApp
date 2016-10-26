@@ -535,7 +535,6 @@ public class YearDetailActivtiy extends BaseActivity implements View.OnClickList
                                     BankJobReportSingleData data = getGson().fromJson(s, BankJobReportSingleData.class);
                                     bankJobReport = data.getData();
                                     showMsg(YearDetailActivtiy.this, "修改操作成功");
-////                                    跳转到周报详情页面
 //                                    Intent intent = new Intent(AddWeeklyActivtiy.this, WeeklyDetailActivtiy.class);
 //                                    intent.putExtra("bankJobReport", bankJobReportCommentBean);
 //                                    startActivity(intent);
