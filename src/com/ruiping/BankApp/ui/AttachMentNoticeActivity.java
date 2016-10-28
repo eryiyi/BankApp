@@ -5,11 +5,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.hyphenate.util.FileUtils;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.adapter.ItemAttachNoticeAdapter;
 import com.ruiping.BankApp.base.BaseActivity;
+import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.entiy.AttachMentObj;
+import com.ruiping.BankApp.util.HttpDownloader;
 import com.ruiping.BankApp.util.StringUtil;
 
 import java.io.File;
@@ -19,7 +22,7 @@ import java.util.List;
 /**
  * Created by zhl on 2016/8/30.
  */
-public class AttachMentNoticeActivity extends BaseActivity implements View.OnClickListener{
+public class AttachMentNoticeActivity extends BaseActivity implements View.OnClickListener,Runnable{
     private ListView lstv;
     private TextView title;
     private TextView right_btn;
@@ -65,16 +68,32 @@ public class AttachMentNoticeActivity extends BaseActivity implements View.OnCli
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //todo
                 if(lists.size() > i){
-                    AttachMentObj attachMentObj = lists.get(i);
-                    if(attachMentObj != null){
-                        String filePath = attachMentObj.getUrlStr();
-                        File file = new File(filePath);
-                        if (file.exists()) {
-                            // open files if it exist
-                            FileUtils.openFile(file, AttachMentNoticeActivity.this);
+                    final AttachMentObj attachMentObj = lists.get(i);
+                    if(attachMentObj != null) {
+                        if (!StringUtil.isNullOrEmpty(attachMentObj.getUrlStr())) {
+                            new Thread(new Runnable(){
+                                @Override
+                                public void run() {
+                                    HttpDownloader httpDownLoader=new HttpDownloader();
+                                    int result=httpDownLoader.downfile(InternetURL.INTERNAL + attachMentObj.getUrlStr(), InternetURL.DOWNLOAD_FILE_URL, attachMentObj.getTitle());
+                                    if(result==0)
+                                    {
+                                        Toast.makeText(AttachMentNoticeActivity.this, "下载成功！", Toast.LENGTH_SHORT).show();
+                                        File file = new File(InternetURL.OPEN_FILE_URL + attachMentObj.getTitle());
+                                        FileUtils.openFile(file, AttachMentNoticeActivity.this);
+                                    }
+                                    else if(result==1) {
+                                        Toast.makeText(AttachMentNoticeActivity.this, "已有文件！", Toast.LENGTH_SHORT).show();
+                                        File file = new File(InternetURL.OPEN_FILE_URL + attachMentObj.getTitle());
+                                        FileUtils.openFile(file, AttachMentNoticeActivity.this);
+                                    }
+                                    else if(result==-1){
+                                        Toast.makeText(AttachMentNoticeActivity.this, "下载失败！", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }).start();
                         } else {
-                            // download the file
-//                            startActivity(new Intent(AttachMentActivity.this, EaseShowNormalFileActivity.class).putExtra("msgbody", message.getBody()));
+                            showMsg(AttachMentNoticeActivity.this, "对不起，暂无文件");
                         }
                     }
                 }
@@ -91,4 +110,8 @@ public class AttachMentNoticeActivity extends BaseActivity implements View.OnCli
         }
     }
 
+    @Override
+    public void run() {
+
+    }
 }

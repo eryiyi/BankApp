@@ -7,8 +7,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.hyphenate.util.FileUtils;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.adapter.ItemAttachMentAdapter;
 import com.ruiping.BankApp.adapter.OnClickContentItemListener;
@@ -17,6 +19,7 @@ import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.entiy.AttachMentObj;
 import com.ruiping.BankApp.upload.CommonUtil;
 import com.ruiping.BankApp.util.Contance;
+import com.ruiping.BankApp.util.HttpDownloader;
 import com.ruiping.BankApp.util.StringUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,7 +75,36 @@ public class AttachMentUpWeekActivity extends BaseActivity implements View.OnCli
         lstv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //todo
+                if(lists.size() > i){
+                   final  AttachMentObj attachMentObj = lists.get(i);
+                    if(attachMentObj != null) {
+                        if (!StringUtil.isNullOrEmpty(attachMentObj.getUrlStr())) {
+                            new Thread(new Runnable(){
+                                @Override
+                                public void run() {
+                                    HttpDownloader httpDownLoader=new HttpDownloader();
+                                    int result=httpDownLoader.downfile(InternetURL.INTERNAL + attachMentObj.getUrlStr(), InternetURL.DOWNLOAD_FILE_URL, attachMentObj.getTitle());
+                                    if(result==0)
+                                    {
+                                        Toast.makeText(AttachMentUpWeekActivity.this, "下载成功！", Toast.LENGTH_SHORT).show();
+                                        File file = new File(InternetURL.OPEN_FILE_URL + attachMentObj.getTitle());
+                                        FileUtils.openFile(file, AttachMentUpWeekActivity.this);
+                                    }
+                                    else if(result==1) {
+                                        Toast.makeText(AttachMentUpWeekActivity.this, "已有文件！", Toast.LENGTH_SHORT).show();
+                                        File file = new File(InternetURL.OPEN_FILE_URL + attachMentObj.getTitle());
+                                        FileUtils.openFile(file, AttachMentUpWeekActivity.this);
+                                    }
+                                    else if(result==-1){
+                                        Toast.makeText(AttachMentUpWeekActivity.this, "下载失败！", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }).start();
+                        } else {
+                            showMsg(AttachMentUpWeekActivity.this, "对不起，暂无文件");
+                        }
+                    }
+                }
             }
         });
 

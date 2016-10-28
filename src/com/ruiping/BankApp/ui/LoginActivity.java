@@ -138,9 +138,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         } else {
                             Toast.makeText(LoginActivity.this, R.string.add_failed, Toast.LENGTH_SHORT).show();
                         }
-                        if(progressDialog != null){
-                            progressDialog.dismiss();
-                        }
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -249,6 +247,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             public void onError(final int code, final String message) {
                 runOnUiThread(new Runnable() {
                     public void run() {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
                         Toast.makeText(getApplicationContext(), getString(R.string.Login_failed) + message,
                                 Toast.LENGTH_SHORT).show();
                     }

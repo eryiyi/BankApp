@@ -10,6 +10,10 @@ public class InternetURL {
     //多媒体文件上传接口
     public static final String UPLOAD_FILE = INTERNAL + "uploadFileController.do?uploadImage";
 
+    //下载路径
+    public static final String DOWNLOAD_FILE_URL = "/Android/data/com.ruiping.BankApp/";
+    public static final String OPEN_FILE_URL = "/storage/emulated/0/Android/data/com.ruiping.BankApp/";
+
     //登陆
     public static final String LOGIN_URL = INTERNAL + "appBankEmp.do?empLogin";
 

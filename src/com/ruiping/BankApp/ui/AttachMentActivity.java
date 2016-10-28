@@ -122,23 +122,30 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //todo
                 if(lists.size() > i){
-                    AttachMentObj attachMentObj = lists.get(i);
+                    final AttachMentObj attachMentObj = lists.get(i);
                     if(attachMentObj != null) {
                         if (!StringUtil.isNullOrEmpty(attachMentObj.getUrlStr())) {
-                            HttpDownloader httpDownLoader=new HttpDownloader();
-                            int result=httpDownLoader.downfile(InternetURL.INTERNAL + attachMentObj.getUrlStr(), "test/", attachMentObj.getTitle());
-                            if(result==0)
-                            {
-                                openFIle(attachMentObj.getTitle(), "test/");
-                                Toast.makeText(AttachMentActivity.this, "下载成功！", Toast.LENGTH_SHORT).show();
-                            }
-                            else if(result==1) {
-                                openFIle("notifications.txt", "test/notifications.txt");
-                                Toast.makeText(AttachMentActivity.this, "已有文件！", Toast.LENGTH_SHORT).show();
-                            }
-                            else if(result==-1){
-                                Toast.makeText(AttachMentActivity.this, "下载失败！", Toast.LENGTH_SHORT).show();
-                            }
+                            new Thread(new Runnable(){
+                                @Override
+                                public void run() {
+                                    HttpDownloader httpDownLoader=new HttpDownloader();
+                                    int result=httpDownLoader.downfile(InternetURL.INTERNAL + attachMentObj.getUrlStr(), InternetURL.DOWNLOAD_FILE_URL, attachMentObj.getTitle());
+                                    if(result==0)
+                                    {
+                                        Toast.makeText(AttachMentActivity.this, "下载成功！", Toast.LENGTH_SHORT).show();
+                                        File file = new File(InternetURL.OPEN_FILE_URL + attachMentObj.getTitle());
+                                        FileUtils.openFile(file, AttachMentActivity.this);
+                                    }
+                                    else if(result==1) {
+                                        Toast.makeText(AttachMentActivity.this, "已有文件！", Toast.LENGTH_SHORT).show();
+                                        File file = new File(InternetURL.OPEN_FILE_URL + attachMentObj.getTitle());
+                                        FileUtils.openFile(file, AttachMentActivity.this);
+                                    }
+                                    else if(result==-1){
+                                        Toast.makeText(AttachMentActivity.this, "下载失败！", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }).start();
                         } else {
                             showMsg(AttachMentActivity.this, "对不起，暂无文件");
                         }
@@ -147,57 +154,6 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
                 }
         });
     }
-
-    void openFIle(String fileName, String filepath){
-        File currentPath = null;
-        currentPath = new File(filepath);
-        Intent intent;
-                            if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
-                                    getStringArray(R.array.fileEndingImage))) {
-                                intent = OpenFilesMine.getImageFileIntent(currentPath);
-                                startActivity(intent);
-                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
-                                    getStringArray(R.array.fileEndingWebText))) {
-                                intent = OpenFilesMine.getHtmlFileIntent(currentPath);
-                                startActivity(intent);
-                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
-                                    getStringArray(R.array.fileEndingPackage))) {
-                                intent = OpenFilesMine.getApkFileIntent(currentPath);
-                                startActivity(intent);
-
-                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
-                                    getStringArray(R.array.fileEndingAudio))) {
-                                intent = OpenFilesMine.getAudioFileIntent(currentPath);
-                                startActivity(intent);
-                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
-                                    getStringArray(R.array.fileEndingVideo))) {
-                                intent = OpenFilesMine.getVideoFileIntent(currentPath);
-                                startActivity(intent);
-                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
-                                    getStringArray(R.array.fileEndingText))) {
-                                intent = OpenFilesMine.getTextFileIntent(currentPath);
-                                startActivity(intent);
-                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
-                                    getStringArray(R.array.fileEndingPdf))) {
-                                intent = OpenFilesMine.getPdfFileIntent(currentPath);
-                                startActivity(intent);
-                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
-                                    getStringArray(R.array.fileEndingWord))) {
-                                intent = OpenFilesMine.getWordFileIntent(currentPath);
-                                startActivity(intent);
-                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
-                                    getStringArray(R.array.fileEndingExcel))) {
-                                intent = OpenFilesMine.getExcelFileIntent(currentPath);
-                                startActivity(intent);
-                            } else if (StringUtil.checkEndsWithInStringArray(fileName, getResources().
-                                    getStringArray(R.array.fileEndingPPT))) {
-                                intent = OpenFilesMine.getPPTFileIntent(currentPath);
-                                startActivity(intent);
-                            } else {
-                                showMsg(AttachMentActivity.this, "无法打开，请安装相应的软件！");
-                            }
-    }
-
 
 
     @Override
