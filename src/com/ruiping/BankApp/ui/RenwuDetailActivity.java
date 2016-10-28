@@ -224,6 +224,11 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                 seekBar.setProgress(Integer.parseInt(str));
             }
         }
+        if(flag){
+            seekBar.setEnabled(true);
+        }else {
+            seekBar.setEnabled(false);
+        }
         if(!StringUtil.isNullOrEmpty(bankJobTask.getTaskType())){
             switch (Integer.parseInt(bankJobTask.getTaskType()))
             {
@@ -370,7 +375,9 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
             }
             break;
             case R.id.liner_pro:
-                updatePro("");
+                if(flag){
+                    updatePro("");
+                }
                 break;
             case R.id.liner_share:
             {
