@@ -20,6 +20,7 @@ import org.apache.http.params.HttpParams;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Map;
 import org.apache.http.entity.ContentType;
 import org.apache.http.protocol.HTTP;
@@ -143,6 +144,7 @@ public class MultiPartStack extends HurlStack {
 
 		/* example for setting a HttpMultipartMode */
         builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+        builder.setCharset(Charset.forName(HTTP.UTF_8));//设置请求的编码格式
 
         // Iterate the fileUploads
         Map<String, File> fileUpload = ((MultiPartRequest) request).getFileUploads();
