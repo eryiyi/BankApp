@@ -52,7 +52,6 @@
                   android:layout_marginLeft="8dp"
                   android:layout_marginTop="6dp"
                   android:textColor="@color/text_color"
-                  android:text="张三的年度工作报告"
                   android:layout_height="wrap_content"/>
         <TextView android:layout_width="wrap_content"
                   android:layout_toRightOf="@+id/head"
@@ -62,10 +61,8 @@
                   android:layout_marginLeft="8dp"
                   android:layout_marginTop="6dp"
                   android:textColor="@color/text_color_two"
-                  android:text="16-07-02 16:00"
                   android:layout_height="wrap_content"/>
         <TextView android:layout_width="wrap_content"
-                  android:text="2016.01-2017.01"
                   android:textColor="@color/blue_btn_normal"
                   android:id="@+id/week"
                   android:textSize="16sp"

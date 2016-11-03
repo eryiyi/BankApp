@@ -6,13 +6,11 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
     <TextView android:layout_width="wrap_content"
-              android:text="昨天 01：:12"
               android:textSize="14sp"
               android:id="@+id/item_dateline"
               android:textColor="@color/blue_btn_normal"
               android:layout_height="wrap_content"/>
     <TextView android:layout_width="wrap_content"
-              android:text="张三"
               android:textColor="@color/text_color"
               android:textSize="14sp"
               android:layout_toRightOf="@id/item_dateline"
@@ -25,11 +23,9 @@
               android:layout_below="@+id/item_dateline"
               android:id="@+id/item_cont"
               android:textColor="@color/text_color"
-              android:text="完成安卓版OA系统框架搭建，完成主要页面，接口待完成..."
               android:lineSpacingMultiplier="1.2"
               android:layout_height="wrap_content"/>
     <TextView android:layout_width="wrap_content"
-              android:text="4"
               android:layout_marginTop="8dp"
               android:layout_below="@+id/item_cont"
               android:id="@+id/item_brose"
@@ -41,7 +37,6 @@
               android:drawableLeft="@drawable/sm_view"
               android:layout_height="wrap_content"/>
     <TextView android:layout_width="wrap_content"
-              android:text="2"
               android:layout_marginTop="8dp"
               android:layout_below="@+id/item_cont"
               android:id="@+id/item_comment"

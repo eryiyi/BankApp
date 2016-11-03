@@ -12,7 +12,6 @@
              android:drawablePadding="8dp"
              android:gravity="center_vertical"
              android:drawableLeft="@drawable/md_icon_doc"
-             android:text="商业银行办公OA系统"
              android:layout_marginRight="40dp"
              android:layout_height="wrap_content"/>
 

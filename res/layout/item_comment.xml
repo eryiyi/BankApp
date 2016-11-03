@@ -17,7 +17,6 @@
               android:id="@+id/item_nickname"
               android:layout_height="wrap_content"/>
     <TextView android:layout_width="wrap_content"
-              android:text="2019-01-01 06:00"
               android:textSize="13sp"
               android:layout_marginTop="3dp"
               android:layout_below="@+id/item_nickname"

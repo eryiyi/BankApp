@@ -25,7 +25,6 @@
               android:layout_below="@+id/item_daline_1"
               android:id="@+id/item_cont"
               android:textColor="@color/text_color"
-              android:text="完成安卓版OA系统框架搭建，完成主要页面，接口待完成..."
               android:lineSpacingMultiplier="1.2"
               android:layout_height="wrap_content"/>
 

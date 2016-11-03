@@ -33,7 +33,6 @@
               android:layout_height="0.2dp"></View>
 
         <TextView android:layout_width="wrap_content"
-                  android:text="@string/app_content"
                   android:textSize="16sp"
                   android:layout_marginLeft="15dp"
                   android:layout_marginRight="15dp"

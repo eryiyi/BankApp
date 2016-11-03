@@ -11,7 +11,6 @@
                android:src="@drawable/ic_launcher"
                android:layout_height="35dp"/>
     <TextView android:layout_width="match_parent"
-              android:text="张三张"
               android:layout_marginTop="3dp"
               android:layout_gravity="center"
               android:gravity="center"

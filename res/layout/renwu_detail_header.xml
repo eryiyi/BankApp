@@ -12,14 +12,12 @@
                     android:layout_marginTop="15dp"
                     android:layout_height="wrap_content">
        <TextView android:layout_width="wrap_content"
-                 android:text="商业银行办公OA系统"
                  android:textColor="@color/text_color"
                  android:textSize="16sp"
                  android:id="@+id/task_title"
                  android:lineSpacingMultiplier="1.2"
                  android:layout_height="wrap_content"/>
         <TextView android:layout_width="wrap_content"
-                  android:text="16-07-02 16:40"
                   android:textSize="14sp"
                   android:textColor="@color/text_color_two"
                   android:id="@+id/dateline"
@@ -48,7 +46,6 @@
                       android:textColor="@color/text_color"
                       android:layout_height="wrap_content"/>
             <TextView android:layout_width="wrap_content"
-                      android:text="张三"
                       android:id="@+id/nickname"
                       android:layout_centerVertical="true"
                       android:textSize="16sp"
@@ -78,7 +75,6 @@
                       android:textColor="@color/text_color"
                       android:layout_height="wrap_content"/>
             <TextView android:layout_width="wrap_content"
-                      android:text="2016-07-07 "
                       android:id="@+id/starttime"
                       android:layout_centerVertical="true"
                       android:textSize="16sp"
@@ -101,7 +97,6 @@
                       android:textColor="@color/text_color"
                       android:layout_height="wrap_content"/>
             <TextView android:layout_width="wrap_content"
-                      android:text="2016-07-07 "
                       android:id="@+id/endtime"
                       android:layout_centerVertical="true"
                       android:textSize="16sp"
@@ -156,7 +151,6 @@
                       android:textColor="@color/text_color"
                       android:layout_height="wrap_content"/>
             <TextView android:layout_width="wrap_content"
-                      android:text="非常紧急"
                       android:id="@+id/task_type"
                       android:layout_centerVertical="true"
                       android:textSize="16sp"

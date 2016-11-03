@@ -11,7 +11,6 @@
                android:src="@drawable/ic_launcher"
                android:layout_height="40dp"/>
     <TextView android:layout_width="wrap_content"
-              android:text="商业银行办公OA系统"
               android:textSize="16sp"
               android:layout_centerVertical="true"
               android:layout_toRightOf="@+id/item_head"
