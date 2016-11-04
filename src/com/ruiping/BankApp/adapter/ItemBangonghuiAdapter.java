@@ -69,8 +69,8 @@ public class ItemBangonghuiAdapter extends BaseAdapter {
         }
         BankOfficeMeeting cell = lists.get(position);
         if (cell != null) {
-            holder.item_daline_1.setText(cell.getCreateDate());
-            holder.item_daline_2.setText(cell.getMeetingDate());
+            holder.item_daline_1.setText("上传时间:"+cell.getCreateDate());
+            holder.item_daline_2.setText("会议时间:"+cell.getMeetingDate());
             String filePath = cell.getFilePath();
             String[] arras = filePath.split(",");
             StringBuffer strb = new StringBuffer();

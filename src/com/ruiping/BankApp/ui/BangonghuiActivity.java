@@ -1,5 +1,6 @@
 package com.ruiping.BankApp.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
@@ -92,10 +93,14 @@ public class BangonghuiActivity extends BaseActivity implements View.OnClickList
         lstv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(BangonghuiActivity.this, DailyDetailActivtiy.class);
-//                BankOfficeMeeting bankJobReport = lists.get(position-1);
-//                intent.putExtra("bankJobReport", bankJobReport);
-//                startActivity(intent);
+                if(lists.size()>(position - 1)){
+                    BankOfficeMeeting bankJobReport = lists.get(position-1);
+                    if(bankJobReport != null){
+                        Intent intent = new Intent(BangonghuiActivity.this, AttachMentNoticeActivity.class);
+                        intent.putExtra("attach_file", bankJobReport.getFilePath());
+                        startActivity(intent);
+                    }
+                }
             }
         });
     }

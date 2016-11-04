@@ -132,17 +132,14 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
                                     int result=httpDownLoader.downfile(InternetURL.INTERNAL + attachMentObj.getUrlStr(), InternetURL.DOWNLOAD_FILE_URL, attachMentObj.getTitle());
                                     if(result==0)
                                     {
-                                        Toast.makeText(AttachMentActivity.this, "下载成功！", Toast.LENGTH_SHORT).show();
                                         File file = new File(InternetURL.OPEN_FILE_URL + attachMentObj.getTitle());
                                         FileUtils.openFile(file, AttachMentActivity.this);
                                     }
                                     else if(result==1) {
-                                        Toast.makeText(AttachMentActivity.this, "已有文件！", Toast.LENGTH_SHORT).show();
                                         File file = new File(InternetURL.OPEN_FILE_URL + attachMentObj.getTitle());
                                         FileUtils.openFile(file, AttachMentActivity.this);
                                     }
                                     else if(result==-1){
-                                        Toast.makeText(AttachMentActivity.this, "下载失败！", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }).start();

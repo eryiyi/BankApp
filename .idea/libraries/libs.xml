@@ -11,7 +11,6 @@
       <root url="jar://$PROJECT_DIR$/libs/pinyin4j-2.5.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/pushservice-5.0.0.66.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/universal-image-loader-1.9.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/libs/org.apache.http.legacy.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

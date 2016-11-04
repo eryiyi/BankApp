@@ -78,17 +78,14 @@ public class AttachMentNoticeActivity extends BaseActivity implements View.OnCli
                                     int result=httpDownLoader.downfile(InternetURL.INTERNAL + attachMentObj.getUrlStr(), InternetURL.DOWNLOAD_FILE_URL, attachMentObj.getTitle());
                                     if(result==0)
                                     {
-                                        Toast.makeText(AttachMentNoticeActivity.this, "下载成功！", Toast.LENGTH_SHORT).show();
                                         File file = new File(InternetURL.OPEN_FILE_URL + attachMentObj.getTitle());
                                         FileUtils.openFile(file, AttachMentNoticeActivity.this);
                                     }
                                     else if(result==1) {
-                                        Toast.makeText(AttachMentNoticeActivity.this, "已有文件！", Toast.LENGTH_SHORT).show();
                                         File file = new File(InternetURL.OPEN_FILE_URL + attachMentObj.getTitle());
                                         FileUtils.openFile(file, AttachMentNoticeActivity.this);
                                     }
                                     else if(result==-1){
-                                        Toast.makeText(AttachMentNoticeActivity.this, "下载失败！", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }).start();
