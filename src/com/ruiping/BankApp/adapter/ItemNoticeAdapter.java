@@ -12,6 +12,7 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.entiy.BankNoticesBean;
 import com.ruiping.BankApp.util.DateUtil;
+import com.ruiping.BankApp.util.StringUtil;
 
 import java.util.List;
 
@@ -68,8 +69,11 @@ public class ItemNoticeAdapter extends BaseAdapter {
         }
         BankNoticesBean cell = lists.get(position);
         if (cell != null) {
-            holder.item_cont.setText(cell.getTitle());
-            holder.item_dateline.setText(DateUtil.getDate(cell.getReleaseTime(),"yyyy-MM-dd HH:mm"));
+            holder.item_cont.setText(cell.getTitle()==null?"":cell.getTitle());
+            if(!StringUtil.isNullOrEmpty(cell.getReleaseTime())){
+                holder.item_dateline.setText(DateUtil.getDate(cell.getReleaseTime(),"yyyy-MM-dd HH:mm"));
+            }
+
         }
 
         return convertView;

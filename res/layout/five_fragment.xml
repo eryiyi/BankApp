@@ -170,6 +170,19 @@
                     android:stretchMode="columnWidth"
                     android:verticalSpacing="2dip"
                     android:padding="1dip"/>
+            <Button android:layout_width="match_parent"
+                    android:text="退 出"
+                    android:padding="12dp"
+                    android:id="@+id/quite_btn"
+                    android:textStyle="bold"
+                    android:layout_marginTop="25dp"
+                    android:textColor="@color/white"
+                    android:layout_below="@+id/liner_one"
+                    android:layout_marginLeft="25dp"
+                    android:textSize="16sp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/btn_red_shape"
+                    android:layout_height="wrap_content"/>
         </LinearLayout>
     </com.ruiping.BankApp.widget.ReboundScrollView>
 </LinearLayout>

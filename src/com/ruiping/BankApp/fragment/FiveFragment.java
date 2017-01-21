@@ -1,9 +1,7 @@
 package com.ruiping.BankApp.fragment;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
+import android.app.AlertDialog;
+import android.content.*;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -27,16 +25,19 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.hyphenate.EMCallBack;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.adapter.AnimateFirstDisplayListener;
 import com.ruiping.BankApp.adapter.ItemIndexAdapter;
+import com.ruiping.BankApp.base.ActivityTack;
 import com.ruiping.BankApp.base.BaseFragment;
 import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.data.IndexCountObjData;
 import com.ruiping.BankApp.entiy.IndexCountObj;
 import com.ruiping.BankApp.entiy.IndexObj;
+import com.ruiping.BankApp.huanxin.DemoHelper;
 import com.ruiping.BankApp.ui.*;
 import com.ruiping.BankApp.upload.CommonUtil;
 import com.ruiping.BankApp.util.CompressPhotoUtil;
@@ -234,6 +235,8 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
                 }
             }
         });
+
+        view.findViewById(R.id.quite_btn).setOnClickListener(this);
     }
 
     @Override
@@ -270,6 +273,26 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
                 //修改手机号
                 Intent intent  = new Intent(getActivity(), UpdateMobileActivity.class);
                 startActivity(intent);
+            }
+                break;
+            case R.id.quite_btn:
+            {
+                //退出
+                //退出
+                AlertDialog dialog = new AlertDialog.Builder(getActivity())
+                        .setIcon(R.drawable.ic_launcher)
+                        .setTitle(getResources().getString(R.string.sure_quite))
+                        .setPositiveButton(getResources().getString(R.string.sure), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                logout();
+                            }
+                        })
+                        .setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .create();
+                dialog.show();
             }
                 break;
         }
@@ -605,4 +628,28 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
         super.onDestroy();
         getActivity().unregisterReceiver(mBroadcastReceiver);
     }
+
+    void logout() {
+        save(Contance.EMP_PWD, "");
+        //调用广播，刷新主页
+        DemoHelper.getInstance().logout(false,new EMCallBack() {
+
+            @Override
+            public void onSuccess() {
+                getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        getActivity().finish();
+                        ActivityTack.getInstanse().exit(getActivity());
+                    }
+                });
+            }
+            @Override
+            public void onProgress(int progress, String status) {
+            }
+            @Override
+            public void onError(int code, String message) {
+            }
+        });
+    }
+
 }

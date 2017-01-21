@@ -69,7 +69,6 @@ public class ItemAttachNoticeAdapter extends BaseAdapter {
         AttachMentObj cell = lists.get(position);
         if (cell != null) {
             holder.item_title.setText(cell.getTitle());
-
             holder.btn_delete.setVisibility(View.GONE);//隐藏
 
         }

@@ -70,7 +70,11 @@ public class ItemWeeklyAdapter extends BaseAdapter {
         }
         BankJobReport cell = lists.get(position);
         if (cell != null) {
-            holder.item_title.setText(cell.getReportNumber() +"--" +cell.getBankEmp().getEmpName());
+            if(cell.getBankEmp() != null){
+                holder.item_title.setText(cell.getReportNumber() +"--" +cell.getBankEmp().getEmpName());
+            }else {
+                holder.item_title.setText(cell.getReportNumber());
+            }
             String strContent = cell.getReportTitle();
             if(!StringUtil.isNullOrEmpty(strContent) && strContent.length() > 50){
                 strContent = strContent.substring(0,49);

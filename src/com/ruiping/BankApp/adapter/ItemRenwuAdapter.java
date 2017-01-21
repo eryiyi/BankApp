@@ -15,6 +15,7 @@ import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.entiy.BankJobTask;
 import com.ruiping.BankApp.util.DateUtil;
+import com.ruiping.BankApp.util.StringUtil;
 
 import java.util.List;
 
@@ -74,11 +75,16 @@ public class ItemRenwuAdapter extends BaseAdapter {
         }
         BankJobTask cell = lists.get(position);
         if (cell != null) {
-            imageLoader.displayImage(InternetURL.INTERNAL+cell.getBankEmpf().getEmpCover(), holder.item_head, BankAppApplication.txOptions, animateFirstListener);
+            if(cell.getBankEmpf() != null){
+                imageLoader.displayImage(InternetURL.INTERNAL+cell.getBankEmpf().getEmpCover(), holder.item_head, BankAppApplication.txOptions, animateFirstListener);
+                holder.item_nickname.setText(cell.getBankEmpf().getEmpName());
+            }
+
             holder.item_title.setText(cell.getTaskTitle());
-            holder.item_nickname.setText(cell.getBankEmpf().getEmpName());
             holder.item_jindu.setText(cell.getTaskProgress());
-            holder.item_dateline.setText(DateUtil.getDate(cell.getDateLine(), "yy-MM-dd HH:mm"));
+            if(!StringUtil.isNullOrEmpty(cell.getDateLine())){
+                holder.item_dateline.setText(DateUtil.getDate(cell.getDateLine(), "yy-MM-dd HH:mm"));
+            }
         }
         return convertView;
     }

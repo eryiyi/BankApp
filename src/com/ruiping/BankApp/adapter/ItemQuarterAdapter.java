@@ -64,8 +64,6 @@ public class ItemQuarterAdapter extends BaseAdapter {
         }
         String cell = lists.get(position);
         if (cell != null) {
-
-
         }
 
         return convertView;

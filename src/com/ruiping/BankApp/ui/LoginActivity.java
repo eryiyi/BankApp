@@ -106,7 +106,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             showMsg(LoginActivity.this, "请输入密码");
             return;
         }
-        progressDialog = new CustomProgressDialog(LoginActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog = new CustomProgressDialog(LoginActivity.this, "登陆中",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();
@@ -130,6 +130,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                     saveEmp();
                                 }else {
                                     showMsg(LoginActivity.this, jo.getString("message"));
+                                    if(progressDialog != null){
+                                        progressDialog.dismiss();
+                                    }
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -137,6 +140,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
                         } else {
                             Toast.makeText(LoginActivity.this, R.string.add_failed, Toast.LENGTH_SHORT).show();
+                            if(progressDialog != null){
+                                progressDialog.dismiss();
+                            }
                         }
 
                     }

@@ -69,7 +69,7 @@ public class ContactAdapter extends BaseAdapter implements SectionIndexer {
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-            String catalog = PingYinUtil.converterToFirstSpell(bankEmpBean.getEmpName())
+            String catalog = PingYinUtil.converterToFirstSpell(bankEmpBean.getEmpName()==null?"":bankEmpBean.getEmpName())
                     .substring(0, 1);
             if (position == 0) {
                 viewHolder.tvCatalog.setVisibility(View.VISIBLE);
@@ -87,7 +87,7 @@ public class ContactAdapter extends BaseAdapter implements SectionIndexer {
 
 //            viewHolder.ivAvatar.setImageResource(R.drawable.ic_launcher);
             imageLoader.displayImage(InternetURL.INTERNAL + bankEmpBean.getEmpCover(), viewHolder.ivAvatar, BankAppApplication.txOptions, animateFirstListener);
-            viewHolder.tvNick.setText(bankEmpBean.getEmpName());
+            viewHolder.tvNick.setText(bankEmpBean.getEmpName()==null?"":bankEmpBean.getEmpName());
             return convertView;
         }
 

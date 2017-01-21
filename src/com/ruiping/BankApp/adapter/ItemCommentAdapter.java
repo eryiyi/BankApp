@@ -79,7 +79,9 @@ public class ItemCommentAdapter extends BaseAdapter {
                 holder.item_nickname.setText(cell.getBankEmp().getEmpName());
                 imageLoader.displayImage(InternetURL.INTERNAL + cell.getBankEmp().getEmpCover(), holder.item_head, BankAppApplication.txOptions, animateFirstListener);
             }
-            holder.item_dateline.setText(DateUtil.getDate(cell.getDateLine(),"MM-dd HH:mm"));
+            if(!StringUtil.isNullOrEmpty(cell.getDateLine())){
+                holder.item_dateline.setText(DateUtil.getDate(cell.getDateLine(),"MM-dd HH:mm"));
+            }
             if(StringUtil.isNullOrEmpty(cell.getCommentId())){
                 holder.item_reply.setVisibility(View.GONE);
             }else {

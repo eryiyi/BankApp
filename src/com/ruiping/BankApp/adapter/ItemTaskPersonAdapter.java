@@ -72,9 +72,11 @@ public class ItemTaskPersonAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         BankJobTaskEmp cell = lists.get(position);
-        if (cell != null && cell.getBankEmp() != null) {
-            imageLoader.displayImage(InternetURL.INTERNAL + cell.getBankEmp().getEmpCover(), holder.item_head, BankAppApplication.txOptions, animateFirstListener);
-            holder.item_title.setText(cell.getBankEmp().getEmpName());
+        if (cell != null) {
+            if( cell.getBankEmp() != null ){
+                imageLoader.displayImage(InternetURL.INTERNAL + cell.getBankEmp().getEmpCover(), holder.item_head, BankAppApplication.txOptions, animateFirstListener);
+                holder.item_title.setText(cell.getBankEmp().getEmpName());
+            }
             if(flag){
                 holder.btn_delete.setVisibility(View.VISIBLE);
             }else{

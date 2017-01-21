@@ -95,7 +95,9 @@ public class ItemIndexAdapter extends BaseAdapter {
             if(position == 7){
                 holder.item_number.setTextColor(res.getColor(R.color.index_seven));
             }
-
+            if(position == 8){
+                holder.item_number.setTextColor(res.getColor(R.color.index_seven));
+            }
 
         }
 

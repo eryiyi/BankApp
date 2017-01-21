@@ -14,6 +14,7 @@ import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.entiy.BankJobReportDoneBean;
 import com.ruiping.BankApp.util.DateUtil;
+import com.ruiping.BankApp.util.StringUtil;
 
 import java.util.List;
 
@@ -72,9 +73,13 @@ public class ItemDoneAdapter extends BaseAdapter {
         }
         BankJobReportDoneBean cell = lists.get(position);
         if (cell != null) {
-            holder.item_nickname.setText(cell.getBankEmp().getEmpName());
-            imageLoader.displayImage(InternetURL.INTERNAL + cell.getBankEmp().getEmpCover(), holder.item_head, animateFirstListener);
-            holder.item_dateline.setText(DateUtil.getDate(cell.getDateLine(),"MM-dd HH:mm"));
+            if(cell.getBankEmp() != null){
+                holder.item_nickname.setText(cell.getBankEmp().getEmpName());
+                imageLoader.displayImage(InternetURL.INTERNAL + cell.getBankEmp().getEmpCover(), holder.item_head, animateFirstListener);
+            }
+            if(!StringUtil.isNullOrEmpty(cell.getDateLine())){
+                holder.item_dateline.setText(DateUtil.getDate(cell.getDateLine(),"MM-dd HH:mm"));
+            }
             holder.item_cont.setText("已查阅");
         }
 

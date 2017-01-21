@@ -12,6 +12,7 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.entiy.BankNoteBean;
 import com.ruiping.BankApp.util.DateUtil;
+import com.ruiping.BankApp.util.StringUtil;
 
 import java.util.List;
 
@@ -69,7 +70,9 @@ public class ItemMemoAdapter extends BaseAdapter {
         BankNoteBean cell = lists.get(position);
         if (cell != null) {
             holder.item_cont.setText(cell.getNoteContent());
-            holder.item_dateline.setText(DateUtil.getDate(cell.getDateLine(),"yyyy-MM-dd HH:mm"));
+            if(!StringUtil.isNullOrEmpty(cell.getDateLine())){
+                holder.item_dateline.setText(DateUtil.getDate(cell.getDateLine(),"yyyy-MM-dd HH:mm"));
+            }
         }
 
         return convertView;

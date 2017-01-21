@@ -24,7 +24,7 @@
                   android:textSize="18sp"
                   android:gravity="center"
                   android:padding="12dp"
-                  android:text="扫一扫，下载农商银行办公手机app"
+                  android:text="扫一扫，下载农商银行办公手机客户端"
                   android:layout_height="wrap_content"/>
     </LinearLayout>
 

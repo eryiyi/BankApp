@@ -73,14 +73,22 @@ public class ItemTaskCommentAdapter extends BaseAdapter {
         }
         BankJobTaskComment cell = lists.get(position);
         if (cell != null) {
-            holder.item_nickname.setText(cell.getBankEmp().getEmpName());
-            imageLoader.displayImage(InternetURL.INTERNAL + cell.getBankEmp().getEmpCover(), holder.item_head, animateFirstListener);
+            if(cell.getBankEmp() != null){
+                holder.item_nickname.setText(cell.getBankEmp().getEmpName());
+                imageLoader.displayImage(InternetURL.INTERNAL + cell.getBankEmp().getEmpCover(), holder.item_head, animateFirstListener);
+
+            }
+
             holder.item_dateline.setText(cell.getDateLine());
             if(StringUtil.isNullOrEmpty(cell.getCommentId())){
                 holder.item_reply.setVisibility(View.GONE);
             }else {
                 holder.item_reply.setVisibility(View.VISIBLE);
-                holder.item_reply.setText(String.format(mContect.getResources().getString(R.string.comment_reply_person), cell.getBankJobTaskComment().getBankEmp().getEmpName()));
+                if(cell.getBankJobTaskComment() != null){
+                    if(cell.getBankJobTaskComment().getBankEmp() != null){
+                        holder.item_reply.setText(String.format(mContect.getResources().getString(R.string.comment_reply_person), cell.getBankJobTaskComment().getBankEmp().getEmpName()));
+                    }
+                }
             }
             holder.item_cont.setText(cell.getCommentCont());
         }
