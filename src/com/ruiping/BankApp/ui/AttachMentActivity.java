@@ -28,6 +28,7 @@ import com.ruiping.BankApp.util.Contance;
 import com.ruiping.BankApp.util.HttpDownloader;
 import com.ruiping.BankApp.util.OpenFilesMine;
 import com.ruiping.BankApp.util.StringUtil;
+import com.ruiping.BankApp.widget.CustomProgressDialog;
 import easeui.ui.EaseShowNormalFileActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,7 +44,7 @@ import java.util.Map;
 /**
  * Created by zhl on 2016/8/30.
  */
-public class AttachMentActivity extends BaseActivity implements View.OnClickListener ,OnClickContentItemListener,Runnable{
+public class AttachMentActivity extends BaseActivity implements View.OnClickListener ,OnClickContentItemListener{
     private ListView lstv;
     private TextView title;
     private TextView right_btn;
@@ -192,9 +193,12 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
                 dataList = pptPath;
                 dataListName = pptName;
                 //上传
-                new Thread(AttachMentActivity.this).start();
-                lists.add(new AttachMentObj(pptName, pptPath));
-                adapter.notifyDataSetChanged();
+                File file = new File(dataList);
+                if (file.length() > 20 * 1024 * 1024) {
+                    Toast.makeText(AttachMentActivity.this, R.string.The_file_is_not_greater_than_20_m, Toast.LENGTH_SHORT).show();
+                }else {
+                    sendFile();
+                }
             }else {
                 showMsg(AttachMentActivity.this, getResources().getString(R.string.open_file_failed));
             }
@@ -202,6 +206,10 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
     }
 
     public void sendFile() {
+        progressDialog = new CustomProgressDialog(AttachMentActivity.this, "文件上传中，请稍后",R.anim.custom_dialog_frame);
+        progressDialog.setCancelable(true);
+        progressDialog.setIndeterminate(true);
+        progressDialog.show();
         fileUrls = "";
         fileNames = "";
             File f = new File(dataList);
@@ -224,11 +232,17 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
                                         fileUrls = jo.getString("data");
                                         fileNames = jo.getString("fileName");
                                         attach_file += fileNames + "|" + fileUrls + ",";
-
                                         updateWeekly();
                                     }
                                 } catch (JSONException e) {
+                                    if(progressDialog != null){
+                                        progressDialog.dismiss();
+                                    }
                                     e.printStackTrace();
+                                }
+                            }else {
+                                if(progressDialog != null){
+                                    progressDialog.dismiss();
                                 }
                             }
                         }
@@ -256,7 +270,9 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
                                 JSONObject jo = new JSONObject(s);
                                 String code = jo.getString("code");
                                 if (Integer.parseInt(code) == 200) {
-//                                    showMsg(AttachMentActivity.this, getResources().getString(R.string.caozuo_success));
+                                    lists.add(new AttachMentObj(dataListName, dataList));
+                                    adapter.notifyDataSetChanged();
+
                                     BankJobReportSingleData data = getGson().fromJson(s, BankJobReportSingleData.class);
                                     //调用广播，刷新
                                     Intent intent1 = new Intent("update_report_file_success");
@@ -341,8 +357,8 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
         }
     }
 
-    @Override
-    public void run() {
-        sendFile();
-    }
+//    @Override
+//    public void run() {
+//        sendFile();
+//    }
 }

@@ -96,7 +96,7 @@
         <activity android:name=".ui.MineSetActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.AboutOaActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.ErweimaActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".ui.LoginActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.LoginActivity"  android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.AboutActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.UpdateMobileActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.UpdateEmailActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>

@@ -21,6 +21,7 @@ import com.ruiping.BankApp.upload.CommonUtil;
 import com.ruiping.BankApp.util.Contance;
 import com.ruiping.BankApp.util.HttpDownloader;
 import com.ruiping.BankApp.util.StringUtil;
+import com.ruiping.BankApp.widget.CustomProgressDialog;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,7 +34,7 @@ import java.util.Map;
 /**
  * Created by zhl on 2016/8/30.
  */
-public class AttachMentUpWeekActivity extends BaseActivity implements View.OnClickListener ,OnClickContentItemListener,Runnable{
+public class AttachMentUpWeekActivity extends BaseActivity implements View.OnClickListener ,OnClickContentItemListener{
     private ListView lstv;
     private TextView title;
     private TextView right_btn;
@@ -157,9 +158,12 @@ public class AttachMentUpWeekActivity extends BaseActivity implements View.OnCli
                 dataList = pptPath;
                 dataListName = pptName;
                 //上传
-                new Thread(AttachMentUpWeekActivity.this).start();
-                lists.add(new AttachMentObj(pptName, pptPath));
-                adapter.notifyDataSetChanged();
+                File file = new File(dataList);
+                if (file.length() > 20 * 1024 * 1024) {
+                    Toast.makeText(AttachMentUpWeekActivity.this, R.string.The_file_is_not_greater_than_20_m, Toast.LENGTH_SHORT).show();
+                }else {
+                    sendFile();
+                }
             }else {
                 showMsg(AttachMentUpWeekActivity.this, getResources().getString(R.string.open_file_failed));
             }
@@ -167,6 +171,10 @@ public class AttachMentUpWeekActivity extends BaseActivity implements View.OnCli
     }
 
     public void sendFile() {
+        progressDialog = new CustomProgressDialog(AttachMentUpWeekActivity.this, "文件上传中，请稍后",R.anim.custom_dialog_frame);
+        progressDialog.setCancelable(true);
+        progressDialog.setIndeterminate(true);
+        progressDialog.show();
         fileUrls = "";
         fileNames = "";
             File f = new File(dataList);
@@ -189,6 +197,10 @@ public class AttachMentUpWeekActivity extends BaseActivity implements View.OnCli
                                         fileUrls = jo.getString("data");
                                         fileNames = jo.getString("fileName");
                                         attach_file += fileNames + "|" + fileUrls + ",";
+
+                                        lists.add(new AttachMentObj(dataListName, dataList));
+                                        adapter.notifyDataSetChanged();
+
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -240,8 +252,4 @@ public class AttachMentUpWeekActivity extends BaseActivity implements View.OnCli
         }
     }
 
-    @Override
-    public void run() {
-        sendFile();
-    }
 }

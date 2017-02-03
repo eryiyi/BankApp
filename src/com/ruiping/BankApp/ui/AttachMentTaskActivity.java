@@ -24,6 +24,7 @@ import com.ruiping.BankApp.upload.CommonUtil;
 import com.ruiping.BankApp.util.Contance;
 import com.ruiping.BankApp.util.HttpDownloader;
 import com.ruiping.BankApp.util.StringUtil;
+import com.ruiping.BankApp.widget.CustomProgressDialog;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,7 +38,7 @@ import java.util.Map;
  * Created by zhl on 2016/8/30.
  * 添加附件   任务的
  */
-public class AttachMentTaskActivity extends BaseActivity implements View.OnClickListener ,OnClickContentItemListener,Runnable{
+public class AttachMentTaskActivity extends BaseActivity implements View.OnClickListener ,OnClickContentItemListener{
     private ListView lstv;
     private TextView title;
     private TextView right_btn;
@@ -183,9 +184,13 @@ public class AttachMentTaskActivity extends BaseActivity implements View.OnClick
                 dataList = pptPath;
                 dataListName = pptName;
                 //上传
-                new Thread(AttachMentTaskActivity.this).start();
-                lists.add(new AttachMentObj(pptName, pptPath));
-                adapter.notifyDataSetChanged();
+                File file = new File(dataList);
+                if (file.length() > 20 * 1024 * 1024) {
+                    Toast.makeText(AttachMentTaskActivity.this, R.string.The_file_is_not_greater_than_20_m, Toast.LENGTH_SHORT).show();
+                }else {
+                    sendFile();
+                }
+
             }else {
                 showMsg(AttachMentTaskActivity.this, getResources().getString(R.string.open_file_failed));
             }
@@ -193,6 +198,10 @@ public class AttachMentTaskActivity extends BaseActivity implements View.OnClick
     }
 
     public void sendFile() {
+        progressDialog = new CustomProgressDialog(AttachMentTaskActivity.this, "文件上传中，请稍后",R.anim.custom_dialog_frame);
+        progressDialog.setCancelable(true);
+        progressDialog.setIndeterminate(true);
+        progressDialog.show();
         fileUrls = "";
         fileNames = "";
             File f = new File(dataList);
@@ -218,7 +227,14 @@ public class AttachMentTaskActivity extends BaseActivity implements View.OnClick
                                         updateTask();
                                     }
                                 } catch (JSONException e) {
+                                    if(progressDialog != null){
+                                        progressDialog.dismiss();
+                                    }
                                     e.printStackTrace();
+                                }
+                            }else{
+                                if(progressDialog != null){
+                                    progressDialog.dismiss();
                                 }
                             }
                         }
@@ -246,6 +262,8 @@ public class AttachMentTaskActivity extends BaseActivity implements View.OnClick
                                 JSONObject jo = new JSONObject(s);
                                 String code = jo.getString("code");
                                 if (Integer.parseInt(code) == 200) {
+                                    lists.add(new AttachMentObj(dataListName, dataList));
+                                    adapter.notifyDataSetChanged();
                                     //调用广播，刷新
                                     Intent intent1 = new Intent("update_task_file_success");
                                     intent1.putExtra("attach_file", attach_file);
@@ -329,8 +347,8 @@ public class AttachMentTaskActivity extends BaseActivity implements View.OnClick
         }
     }
 
-    @Override
-    public void run() {
-        sendFile();
-    }
+//    @Override
+//    public void run() {
+//        sendFile();
+//    }
 }

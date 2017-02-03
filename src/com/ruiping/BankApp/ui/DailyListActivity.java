@@ -122,10 +122,12 @@ public class DailyListActivity extends BaseActivity implements View.OnClickListe
         lstv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(DailyListActivity.this, DailyDetailActivtiy.class);
-                BankJobReport bankJobReport = lists.get(position-1);
-                intent.putExtra("bankJobReport", bankJobReport);
-                startActivity(intent);
+                if(lists.size() > (position-1)){
+                    Intent intent = new Intent(DailyListActivity.this, DailyDetailActivtiy.class);
+                    BankJobReport bankJobReport = lists.get(position-1);
+                    intent.putExtra("bankJobReport", bankJobReport);
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -291,7 +293,8 @@ public class DailyListActivity extends BaseActivity implements View.OnClickListe
         unregisterReceiver(mBroadcastReceiver);
     }
 
-    BankJobReport bankJobReport;
+    BankJobReport bankJobReport;//今天的日报
+
     //查询日报 今天的
     void getData(){
         StringRequest request = new StringRequest(

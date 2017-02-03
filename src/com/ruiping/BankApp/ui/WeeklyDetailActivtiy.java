@@ -223,14 +223,7 @@ public class WeeklyDetailActivtiy extends BaseActivity implements View.OnClickLi
                     showMsg(WeeklyDetailActivtiy.this, "请输入工作成效！");
                     return;
                 }
-//                if(StringUtil.isNullOrEmpty(content_two.getText().toString())){
-//                    showMsg(WeeklyDetailActivtiy.this, "请输入工作总结！");
-//                    return;
-//                }
-//                if(StringUtil.isNullOrEmpty(content_three.getText().toString())){
-//                    showMsg(WeeklyDetailActivtiy.this, "请输入工作计划！");
-//                    return;
-//                }
+
                 if(bankJobReport !=null){
                     progressDialog = new CustomProgressDialog(WeeklyDetailActivtiy.this, "正在加载中",R.anim.custom_dialog_frame);
                     progressDialog.setCancelable(true);
@@ -534,7 +527,7 @@ public class WeeklyDetailActivtiy extends BaseActivity implements View.OnClickLi
                                 if (Integer.parseInt(code) == 200) {
                                     BankJobReportSingleData data = getGson().fromJson(s, BankJobReportSingleData.class);
                                     bankJobReport = data.getData();
-                                    showMsg(WeeklyDetailActivtiy.this, "修改周报成功");
+                                    showMsg(WeeklyDetailActivtiy.this, "操作成功");
                                     Intent intent1 = new Intent("update_weekly_success");
                                     sendBroadcast(intent1);
                                 }else {
