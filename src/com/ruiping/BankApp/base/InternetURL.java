@@ -216,4 +216,9 @@ public class InternetURL {
     //7. 查询共享任务
     public static final String GET_BANK_TASK_SHARE_URL = INTERNAL + "appBankJobTask.do?findShareTask";
 
+    //查询下属最新动态列表（含任务和报表）：
+    public static final String findBankRelation = INTERNAL + "appBankRelation.do?findBankRelation";
+    //修改阅读操作
+    public static final String updateIsRead = INTERNAL + "appBankRelation.do?updateIsRead";
+
 }

@@ -108,7 +108,7 @@ public class WeeklyDetailActivtiy extends BaseActivity implements View.OnClickLi
             getDone();
         }
         initHeader();
-        getDetailById();
+//        getDetailById();
     }
 
     //填充周报数据

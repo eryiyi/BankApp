@@ -143,6 +143,7 @@
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemMemoAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemNoticeAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemQuarterAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemRelateAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemRenwuAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemSelectFileAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemSharePeopleAdapter.java" charset="UTF-8" />

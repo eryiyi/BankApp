@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import com.hyphenate.chat.EMClient;
 import com.hyphenate.util.EasyUtils;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.BaseActivity;

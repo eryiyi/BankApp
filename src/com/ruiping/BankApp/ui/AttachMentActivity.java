@@ -1,8 +1,9 @@
 package com.ruiping.BankApp.ui;
 
 import android.content.Intent;
-import android.os.*;
-import android.text.TextUtils;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -13,8 +14,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.hyphenate.EMCallBack;
-import com.hyphenate.chat.EMClient;
 import com.hyphenate.util.FileUtils;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.adapter.ItemAttachMentAdapter;
@@ -26,16 +25,13 @@ import com.ruiping.BankApp.entiy.AttachMentObj;
 import com.ruiping.BankApp.upload.CommonUtil;
 import com.ruiping.BankApp.util.Contance;
 import com.ruiping.BankApp.util.HttpDownloader;
-import com.ruiping.BankApp.util.OpenFilesMine;
 import com.ruiping.BankApp.util.StringUtil;
 import com.ruiping.BankApp.widget.CustomProgressDialog;
-import easeui.ui.EaseShowNormalFileActivity;
+import easeui.ui.EaseShowNormalFileActivity2;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -121,33 +117,28 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
         lstv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //todo
                 if(lists.size() > i){
                     final AttachMentObj attachMentObj = lists.get(i);
-                    if(attachMentObj != null) {
-                        if (!StringUtil.isNullOrEmpty(attachMentObj.getUrlStr())) {
-                            new Thread(new Runnable(){
-                                @Override
-                                public void run() {
-                                    HttpDownloader httpDownLoader=new HttpDownloader();
-                                    int result=httpDownLoader.downfile(InternetURL.INTERNAL + attachMentObj.getUrlStr(), InternetURL.DOWNLOAD_FILE_URL, attachMentObj.getTitle());
-                                    if(result==0)
-                                    {
-                                        File file = new File(InternetURL.OPEN_FILE_URL + attachMentObj.getTitle());
-                                        FileUtils.openFile(file, AttachMentActivity.this);
+                        if(attachMentObj != null) {
+                            if (!StringUtil.isNullOrEmpty(attachMentObj.getUrlStr())) {
+                                if (!StringUtil.isNullOrEmpty(attachMentObj.getUrlStr())) {
+                                    String local_url = InternetURL.OPEN_FILE_URL + attachMentObj.getTitle();
+                                    File fileLocal = new File(local_url);
+                                    if (fileLocal.exists()) {
+                                        FileUtils.openFile(fileLocal,AttachMentActivity.this);
+                                    } else {
+                                        Intent intent = new Intent(AttachMentActivity.this, EaseShowNormalFileActivity2.class);
+                                        intent.putExtra("filePath", InternetURL.INTERNAL + attachMentObj.getUrlStr());
+                                        intent.putExtra("filePath_local", local_url);
+                                        startActivity(intent);
                                     }
-                                    else if(result==1) {
-                                        File file = new File(InternetURL.OPEN_FILE_URL + attachMentObj.getTitle());
-                                        FileUtils.openFile(file, AttachMentActivity.this);
-                                    }
-                                    else if(result==-1){
-                                    }
+                                } else {
+                                    showMsg(AttachMentActivity.this, "对不起，暂无文件");
                                 }
-                            }).start();
-                        } else {
-                            showMsg(AttachMentActivity.this, "对不起，暂无文件");
+                            } else {
+                                showMsg(AttachMentActivity.this, "对不起，暂无文件");
+                            }
                         }
-                    }
                     }
                 }
         });

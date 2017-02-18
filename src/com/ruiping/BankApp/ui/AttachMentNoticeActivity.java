@@ -1,11 +1,12 @@
 package com.ruiping.BankApp.ui;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.hyphenate.util.FileUtils;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.adapter.ItemAttachNoticeAdapter;
@@ -14,6 +15,8 @@ import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.entiy.AttachMentObj;
 import com.ruiping.BankApp.util.HttpDownloader;
 import com.ruiping.BankApp.util.StringUtil;
+import easeui.ui.EaseShowNormalFileActivity;
+import easeui.ui.EaseShowNormalFileActivity2;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -66,29 +69,20 @@ public class AttachMentNoticeActivity extends BaseActivity implements View.OnCli
         lstv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //todo
                 if(lists.size() > i){
                     final AttachMentObj attachMentObj = lists.get(i);
                     if(attachMentObj != null) {
                         if (!StringUtil.isNullOrEmpty(attachMentObj.getUrlStr())) {
-                            new Thread(new Runnable(){
-                                @Override
-                                public void run() {
-                                    HttpDownloader httpDownLoader=new HttpDownloader();
-                                    int result=httpDownLoader.downfile(InternetURL.INTERNAL + attachMentObj.getUrlStr(), InternetURL.DOWNLOAD_FILE_URL, attachMentObj.getTitle());
-                                    if(result==0)
-                                    {
-                                        File file = new File(InternetURL.OPEN_FILE_URL + attachMentObj.getTitle());
-                                        FileUtils.openFile(file, AttachMentNoticeActivity.this);
-                                    }
-                                    else if(result==1) {
-                                        File file = new File(InternetURL.OPEN_FILE_URL + attachMentObj.getTitle());
-                                        FileUtils.openFile(file, AttachMentNoticeActivity.this);
-                                    }
-                                    else if(result==-1){
-                                    }
-                                }
-                            }).start();
+                            String local_url = InternetURL.OPEN_FILE_URL + attachMentObj.getTitle();
+                            File fileLocal = new File(local_url);
+                            if (fileLocal.exists()) {
+                                FileUtils.openFile(fileLocal,AttachMentNoticeActivity.this);
+                            } else {
+                                Intent intent = new Intent(AttachMentNoticeActivity.this, EaseShowNormalFileActivity2.class);
+                                intent.putExtra("filePath", InternetURL.INTERNAL + attachMentObj.getUrlStr());
+                                intent.putExtra("filePath_local", local_url);
+                                startActivity(intent);
+                            }
                         } else {
                             showMsg(AttachMentNoticeActivity.this, "对不起，暂无文件");
                         }

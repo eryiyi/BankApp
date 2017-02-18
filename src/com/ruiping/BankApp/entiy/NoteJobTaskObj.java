@@ -1,7 +1,5 @@
 package com.ruiping.BankApp.entiy;
 
-import com.ruiping.BankApp.data.Data;
-
 /**
  * Created by zhl on 2016/9/29.
  */

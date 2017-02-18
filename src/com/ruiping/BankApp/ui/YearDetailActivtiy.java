@@ -108,7 +108,7 @@ public class YearDetailActivtiy extends BaseActivity implements View.OnClickList
             getDone();
         }
         initHeader();
-        getDetailById();
+//        getDetailById();
     }
 
     //填充季报数据
@@ -534,7 +534,7 @@ public class YearDetailActivtiy extends BaseActivity implements View.OnClickList
                                 if (Integer.parseInt(code) == 200) {
                                     BankJobReportSingleData data = getGson().fromJson(s, BankJobReportSingleData.class);
                                     bankJobReport = data.getData();
-                                    showMsg(YearDetailActivtiy.this, "修改操作成功");
+                                    showMsg(YearDetailActivtiy.this, "操作成功");
 //                                    Intent intent = new Intent(AddWeeklyActivtiy.this, WeeklyDetailActivtiy.class);
 //                                    intent.putExtra("bankJobReport", bankJobReportCommentBean);
 //                                    startActivity(intent);

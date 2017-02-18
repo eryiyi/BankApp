@@ -18,7 +18,6 @@ import com.hyphenate.chat.EMClient;
 import com.ruiping.BankApp.BankAppApplication;
 import com.ruiping.BankApp.MainActivity;
 import com.ruiping.BankApp.R;
-import com.ruiping.BankApp.base.ActivityTack;
 import com.ruiping.BankApp.base.BaseActivity;
 import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.data.BankEmpBeanData;
@@ -216,8 +215,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         DemoDBManager.getInstance().closeDB();
 
         // 将自己服务器返回的环信账号、昵称和头像URL设置到帮助类中。
-        DemoHelper.getInstance().getUserProfileManager().updateCurrentUserNickName(bankEmpBean.getEmpName());
-        DemoHelper.getInstance().getUserProfileManager().setCurrentUserAvatar(bankEmpBean.getEmpCover());
+//        DemoHelper.getInstance().getUserProfileManager().updateCurrentUserNickName(bankEmpBean.getEmpName());
+//        DemoHelper.getInstance().getUserProfileManager().setCurrentUserAvatar(bankEmpBean.getEmpCover());
         DemoHelper.getInstance().setCurrentUserName(bankEmpBean.getHx_name());// 环信Id
 
         final long start = System.currentTimeMillis();

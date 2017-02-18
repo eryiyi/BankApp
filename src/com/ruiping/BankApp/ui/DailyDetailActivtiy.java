@@ -102,7 +102,7 @@ public class DailyDetailActivtiy extends BaseActivity implements View.OnClickLis
         progressDialog.show();
         initData();//获得评论列表
         getDone();//获得日报查阅列表
-        getDetail();//获得日报详情
+//        getDetail();//获得日报详情
     }
     private void getDetail() {
         //判断是否有网
@@ -433,11 +433,17 @@ public class DailyDetailActivtiy extends BaseActivity implements View.OnClickLis
                         } else {
                             Toast.makeText(DailyDetailActivtiy.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                         }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
                         Toast.makeText(DailyDetailActivtiy.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                     }
                 }

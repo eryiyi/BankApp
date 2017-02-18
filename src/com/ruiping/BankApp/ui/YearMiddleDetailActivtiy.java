@@ -108,7 +108,7 @@ public class YearMiddleDetailActivtiy extends BaseActivity implements View.OnCli
             getDone();
         }
         initHeader();
-        getDetailById();
+//        getDetailById();
     }
 
     //填充季报数据
@@ -534,7 +534,7 @@ public class YearMiddleDetailActivtiy extends BaseActivity implements View.OnCli
                                 if (Integer.parseInt(code) == 200) {
                                     BankJobReportSingleData data = getGson().fromJson(s, BankJobReportSingleData.class);
                                     bankJobReport = data.getData();
-                                    showMsg(YearMiddleDetailActivtiy.this, "修改操作成功");
+                                    showMsg(YearMiddleDetailActivtiy.this, "操作成功");
 
                                     Intent intent1 = new Intent("add_year_success");
                                     sendBroadcast(intent1);

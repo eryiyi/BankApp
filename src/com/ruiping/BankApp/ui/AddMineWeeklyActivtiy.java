@@ -1022,7 +1022,7 @@ public class AddMineWeeklyActivtiy extends BaseActivity implements View.OnClickL
                                 if (Integer.parseInt(code) == 200) {
                                     BankJobReportSingleData data = getGson().fromJson(s, BankJobReportSingleData.class);
                                     BankJobReport bankJobReportCommentBean = data.getData();
-                                    showMsg(AddMineWeeklyActivtiy.this, "修改操作成功");
+                                    showMsg(AddMineWeeklyActivtiy.this, "操作成功");
                                     Intent intent1 = new Intent("update_weekly_success");
                                     sendBroadcast(intent1);
 //                                    跳转到周报详情页面
@@ -1115,7 +1115,7 @@ public class AddMineWeeklyActivtiy extends BaseActivity implements View.OnClickL
                                     }else if(currentSelect == 1){
                                         bankJobReportTwo = data.getData();
                                     }
-                                    showMsg(AddMineWeeklyActivtiy.this, "修改操作成功");
+                                    showMsg(AddMineWeeklyActivtiy.this, "操作成功");
                                     Intent intent1 = new Intent("update_weekly_success");
                                     sendBroadcast(intent1);
 //                                    跳转到周报详情页面

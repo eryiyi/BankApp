@@ -108,7 +108,7 @@ public class MoonthDetailActivtiy extends BaseActivity implements View.OnClickLi
             getDone();
         }
         initHeader();
-        getDetailById();
+//        getDetailById();
     }
 
     //填充周报数据
@@ -535,7 +535,7 @@ public class MoonthDetailActivtiy extends BaseActivity implements View.OnClickLi
                                 if (Integer.parseInt(code) == 200) {
                                     BankJobReportSingleData data = getGson().fromJson(s, BankJobReportSingleData.class);
                                     bankJobReport = data.getData();
-                                    showMsg(MoonthDetailActivtiy.this, "修改操作成功");
+                                    showMsg(MoonthDetailActivtiy.this, "操作成功");
                                     Intent intent1 = new Intent("add_month_success");
                                     sendBroadcast(intent1);
                                 }else {

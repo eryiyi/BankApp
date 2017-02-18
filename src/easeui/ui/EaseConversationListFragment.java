@@ -28,12 +28,15 @@ import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.data.BankEmpData;
 import com.ruiping.BankApp.data.NoteJobTaskObjData;
-import com.ruiping.BankApp.entiy.NoteJobTaskObj;
+import com.ruiping.BankApp.data.RelateObjData;
 import com.ruiping.BankApp.entiy.BankEmpBean;
+import com.ruiping.BankApp.entiy.NoteJobTaskObj;
+import com.ruiping.BankApp.entiy.RelateObj;
 import com.ruiping.BankApp.huanxin.mine.MyEMConversation;
 import com.ruiping.BankApp.huanxin.ui.GroupsActivity;
 import com.ruiping.BankApp.ui.MemoListActivity;
 import com.ruiping.BankApp.ui.NoticesActivity;
+import com.ruiping.BankApp.ui.RelateListActivity;
 import com.ruiping.BankApp.ui.RenwuListActivity;
 import com.ruiping.BankApp.util.Contance;
 import com.ruiping.BankApp.util.StringUtil;
@@ -63,6 +66,8 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
     private TextView unread_notice_number;
     private InputMethodManager inputMethodManager;
 
+    private RelativeLayout relate_xsdt;
+    private TextView xsdt_title;
 
     protected EMConversationListener convListener = new EMConversationListener(){
 		@Override
@@ -79,7 +84,6 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
         return view;
     }
 
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         if (savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false))
@@ -91,10 +95,14 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
         unread_renwu_number = (TextView) listViewHead.findViewById(R.id.unread_renwu_number);
         unread_beiwang_number = (TextView) listViewHead.findViewById(R.id.unread_beiwang_number);
         unread_notice_number = (TextView) listViewHead.findViewById(R.id.unread_notice_number);
+        xsdt_title = (TextView) listViewHead.findViewById(R.id.xsdt_title);
+        relate_xsdt = (RelativeLayout) listViewHead.findViewById(R.id.relate_xsdt);
+        relate_xsdt.setOnClickListener(this);
         listViewHead.findViewById(R.id.relate_renwu).setOnClickListener(this);
         listViewHead.findViewById(R.id.relate_beiwanglu).setOnClickListener(this);
         listViewHead.findViewById(R.id.relate_notice).setOnClickListener(this);
         getData();
+        getDataT();
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -106,8 +114,6 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
         // button to clear content in search bar
         errorItemContainer = (FrameLayout) view.findViewById(R.id.fl_error_item);
         conversationListView.addHeaderView(listViewHead);
-
-
     }
 
     @Override
@@ -148,7 +154,6 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
         if(!StringUtil.isNullOrEmpty(hxusernames)){
             getNickNamesByHxUserNames(hxusernames);
         }
-
     }
 
     private String getHxUsernames(List<MyEMConversation> conversationList) {
@@ -161,7 +166,6 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
         }
         return strUser.toString();
     }
-
 
     //获得好友资料
     List<BankEmpBean> emps = new ArrayList<BankEmpBean>();
@@ -431,6 +435,10 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
             Intent intent = new Intent(getActivity(), NoticesActivity.class);
             startActivity(intent);
         }
+        if(i == R.id.relate_xsdt){
+            Intent intent = new Intent(getActivity(), RelateListActivity.class);
+            startActivity(intent);
+        }
     }
 
      //根据会员id获取未完成任务列表，公告列表，备忘录列表
@@ -495,6 +503,70 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
         getRequestQueue().add(request);
     }
 
+
+
+    private void getDataT() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.findBankRelation,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                String code1 = jo.getString("code");
+                                if (Integer.parseInt(code1) == 200) {
+                                    RelateObjData data = getGson().fromJson(s, RelateObjData.class);
+                                    List<RelateObj> lists = data.getData();
+                                    if(data != null){
+                                        relate_xsdt.setVisibility(View.VISIBLE);
+                                        if(lists != null)
+                                        {
+                                            if(lists.size() > 0){
+                                                xsdt_title.setText(lists.get(0).getTitle());
+                                            }
+                                            xsdt_title.setText(lists.get(0).getTitle());
+                                            if(lists.size() > 1){
+                                                xsdt_title.setText(lists.get(0).getTitle() +"..."+lists.get(1).getTitle());
+                                            }
+                                        }
+                                    }
+                                } else{
+                                    relate_xsdt.setVisibility(View.GONE);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("empId", getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class));
+                params.put("type", "");
+                params.put("pagecurrent", "1");
+                params.put("pagesize", "10");
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
 
 
     //广播接收动作

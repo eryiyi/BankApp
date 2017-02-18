@@ -654,7 +654,7 @@ public class AddYearActivtiy extends BaseActivity implements View.OnClickListene
                                 if (Integer.parseInt(code) == 200) {
                                     BankJobReportSingleData data = getGson().fromJson(s, BankJobReportSingleData.class);
                                     bankJobReportTwo = data.getData();
-                                    showMsg(AddYearActivtiy.this, "修改操作成功");
+                                    showMsg(AddYearActivtiy.this, "操作成功");
 //                                    跳转到周报详情页面
                                     Intent intent = new Intent(AddYearActivtiy.this, YearDetailActivtiy.class);
                                     intent.putExtra("bankJobReport", data.getData());

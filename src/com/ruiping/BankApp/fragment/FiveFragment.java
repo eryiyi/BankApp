@@ -278,7 +278,6 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
             case R.id.quite_btn:
             {
                 //退出
-                //退出
                 AlertDialog dialog = new AlertDialog.Builder(getActivity())
                         .setIcon(R.drawable.ic_launcher)
                         .setTitle(getResources().getString(R.string.sure_quite))
@@ -638,6 +637,30 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
             public void onSuccess() {
                 getActivity().runOnUiThread(new Runnable() {
                     public void run() {
+                        save(Contance.EMP_ID, "");
+                        save(Contance.EMP_PWD, "");
+                        save(Contance.EMP_NAME, "");
+                        save(Contance.EMP_SEX, "");
+                        save(Contance.EMP_UP, "");
+                        save(Contance.EMP_COVER, "");
+                        save(Contance.EMP_IS_USE, "");
+                        save(Contance.EMP_IS_CHECK, "");
+                        save(Contance.EMP_DATELINE, "");
+                        save(Contance.EMP_PUSH_ID, "");
+                        save(Contance.EMP_DEVICE_ID, "");
+                        save(Contance.EMP_CHANNEL_ID, "");
+                        save(Contance.EMP_HX_NAME, "");
+                        save(Contance.EMP_ROLE_ID, "");
+                        save(Contance.EMP_TASK_NUM, "");
+                        save(Contance.EMP_DAY_REPORT, "");
+                        save(Contance.EMP_WEEK_REPORT, "");
+                        save(Contance.EMP_YEAR_REPORT, "");
+                        save(Contance.EMP_LOGIN_NUM, "");
+                        save(Contance.EMP_EMAIL, "");
+                        save(Contance.IS_MEETING, "");
+                        save(Contance.EMP_NAME_UP, "");
+                        save(Contance.GROUP_ID, "");
+                        save(Contance.GROUP_NAME, "");
                         getActivity().finish();
                         ActivityTack.getInstanse().exit(getActivity());
                     }

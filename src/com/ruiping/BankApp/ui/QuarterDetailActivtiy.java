@@ -110,7 +110,7 @@ public class QuarterDetailActivtiy extends BaseActivity implements View.OnClickL
             getDone();
         }
         initHeader();
-        getDetailById();
+//        getDetailById();
     }
 
     //填充季报数据
@@ -536,7 +536,7 @@ public class QuarterDetailActivtiy extends BaseActivity implements View.OnClickL
                                 if (Integer.parseInt(code) == 200) {
                                     BankJobReportSingleData data = getGson().fromJson(s, BankJobReportSingleData.class);
                                     bankJobReport = data.getData();
-                                    showMsg(QuarterDetailActivtiy.this, "修改操作成功");
+                                    showMsg(QuarterDetailActivtiy.this, "操作成功");
                                     Intent intent1 = new Intent("add_quarter_success");
                                     sendBroadcast(intent1);
                                 }else {

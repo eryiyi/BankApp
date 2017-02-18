@@ -25,6 +25,7 @@ import com.ruiping.BankApp.util.Contance;
 import com.ruiping.BankApp.util.HttpDownloader;
 import com.ruiping.BankApp.util.StringUtil;
 import com.ruiping.BankApp.widget.CustomProgressDialog;
+import easeui.ui.EaseShowNormalFileActivity2;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -114,28 +115,20 @@ public class AttachMentTaskActivity extends BaseActivity implements View.OnClick
                     final AttachMentObj attachMentObj = lists.get(i);
                     if(attachMentObj != null) {
                         if (!StringUtil.isNullOrEmpty(attachMentObj.getUrlStr())) {
-
-                            // Android 4.0 之后不能在主线程中请求HTTP请求
-                            new Thread(new Runnable(){
-                                @Override
-                                public void run() {
-                                    HttpDownloader httpDownLoader=new HttpDownloader();
-                                    int result=httpDownLoader.downfile(InternetURL.INTERNAL + attachMentObj.getUrlStr(), InternetURL.DOWNLOAD_FILE_URL, attachMentObj.getTitle());
-                                    if(result==0)
-                                    {
-                                        File file = new File(InternetURL.OPEN_FILE_URL + attachMentObj.getTitle());
-                                        FileUtils.openFile(file, AttachMentTaskActivity.this);
-                                    }
-                                    else if(result==1) {
-                                        File file = new File(InternetURL.OPEN_FILE_URL + attachMentObj.getTitle());
-                                        FileUtils.openFile(file, AttachMentTaskActivity.this);
-                                    }
-                                    else if(result==-1){
-                                    }
+                            if (!StringUtil.isNullOrEmpty(attachMentObj.getUrlStr())) {
+                                String local_url = InternetURL.OPEN_FILE_URL + attachMentObj.getTitle();
+                                File fileLocal = new File(local_url);
+                                if (fileLocal.exists()) {
+                                    FileUtils.openFile(fileLocal,AttachMentTaskActivity.this);
+                                } else {
+                                    Intent intent = new Intent(AttachMentTaskActivity.this, EaseShowNormalFileActivity2.class);
+                                    intent.putExtra("filePath", InternetURL.INTERNAL + attachMentObj.getUrlStr());
+                                    intent.putExtra("filePath_local", local_url);
+                                    startActivity(intent);
                                 }
-                            }).start();
-
-
+                            } else {
+                                showMsg(AttachMentTaskActivity.this, "对不起，暂无文件");
+                            }
                         } else {
                             showMsg(AttachMentTaskActivity.this, "对不起，暂无文件");
                         }

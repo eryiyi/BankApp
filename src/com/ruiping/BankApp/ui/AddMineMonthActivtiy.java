@@ -1142,7 +1142,7 @@ public class AddMineMonthActivtiy extends BaseActivity implements View.OnClickLi
                                     }else if(currentSelect == 1){
                                         bankJobReportTwo = data.getData();
                                     }
-                                    showMsg(AddMineMonthActivtiy.this, "修改操作成功");
+                                    showMsg(AddMineMonthActivtiy.this, "操作成功");
                                     Intent intent1 = new Intent("add_month_success");
                                     sendBroadcast(intent1);
 //                                    跳转到周报详情页面

@@ -7,7 +7,7 @@
               android:orientation="vertical">
 
 
-    <LinearLayout android:layout_width="280dp"
+    <LinearLayout android:layout_width="match_parent"
                   android:layout_height="37dp"
                   android:background="@color/blue"
             >
@@ -16,6 +16,8 @@
                   android:text="任务紧急程度"
                   android:textColor="@color/white"
                   android:textSize="16sp"
+                  android:layout_marginRight="10dp"
+                  android:layout_marginLeft="10dp"
                   android:textStyle="bold"
                   android:gravity="center"
                 />
@@ -44,10 +46,10 @@
                     android:clickable="true"
                     android:gravity="center"
                     android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
                     android:textSize="16dp"
                     android:text="正常"
                     android:background="@color/blue"
-                    android:layout_marginLeft="20dp"
                     android:textColor="@color/white"/>
 
         </LinearLayout>
@@ -65,11 +67,11 @@
                     android:paddingBottom="8dp"
                     android:clickable="true"
                     android:gravity="center"
-                    android:layout_marginRight="10dp"
                     android:textSize="16dp"
                     android:text="紧急"
                     android:background="@color/blue"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
                     android:textColor="@color/white"/>
 
         </LinearLayout>
@@ -87,11 +89,11 @@
                     android:paddingBottom="8dp"
                     android:clickable="true"
                     android:gravity="center"
-                    android:layout_marginRight="10dp"
                     android:textSize="16dp"
                     android:text="非常紧急"
                     android:background="@color/blue"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
                     android:textColor="@color/white"/>
 
         </LinearLayout>

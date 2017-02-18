@@ -35,8 +35,6 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -663,7 +661,7 @@ public class AddYearMiddleActivtiy extends BaseActivity implements View.OnClickL
                                 if (Integer.parseInt(code) == 200) {
                                     BankJobReportSingleData data = getGson().fromJson(s, BankJobReportSingleData.class);
                                     bankJobReportTwo = data.getData();
-                                    showMsg(AddYearMiddleActivtiy.this, "修改操作成功");
+                                    showMsg(AddYearMiddleActivtiy.this, "操作成功");
                                     Intent intent1 = new Intent("add_year_success");
                                     sendBroadcast(intent1);
                                     Intent intent = new Intent(AddYearMiddleActivtiy.this, YearMiddleDetailActivtiy.class);
