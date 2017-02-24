@@ -23,6 +23,7 @@ import com.ruiping.BankApp.entiy.IndexCountObj;
 import com.ruiping.BankApp.ui.AddDailyActivity;
 import com.ruiping.BankApp.ui.DailyDetailActivtiy;
 import com.ruiping.BankApp.ui.DailyListActivity;
+import com.ruiping.BankApp.ui.DailyWeekActivity;
 import com.ruiping.BankApp.util.Contance;
 import com.ruiping.BankApp.util.DateUtil;
 import com.ruiping.BankApp.util.StringUtil;
@@ -98,6 +99,7 @@ public class SecondFragment extends BaseFragment implements View.OnClickListener
                 }else{
                     //不存在日报信息
                     Intent intent = new Intent(getActivity(), AddDailyActivity.class);
+                    intent.putExtra("tmpDate", DateUtil.getDateAndTimeTwo());
                     startActivity(intent);
                 }
             }
@@ -105,8 +107,7 @@ public class SecondFragment extends BaseFragment implements View.OnClickListener
             case R.id.liner_one:
                 //我的日报
             {
-                Intent intent = new Intent(getActivity(), DailyListActivity.class);
-                intent.putExtra("type", "1");
+                Intent intent = new Intent(getActivity(), DailyWeekActivity.class);
                 startActivity(intent);
             }
             break;

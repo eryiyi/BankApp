@@ -64,10 +64,13 @@ public class AddDailyActivity extends BaseActivity implements View.OnClickListen
 
     private BankJobReport bankJobReport;//日报信息
 
+    String tmpDate = "";//要填加的日报日期格式2017-01-01
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_daily_activity);
+        tmpDate = getIntent().getExtras().getString("tmpDate");
         initView();
     }
 
@@ -199,7 +202,7 @@ public class AddDailyActivity extends BaseActivity implements View.OnClickListen
                 params.put("reportTitle", content.getText().toString());
                 params.put("reportCont", content.getText().toString());
                 params.put("reportType", "1");
-                params.put("dateLine", DateUtil.getDateAndTime());
+                params.put("dateLine",  tmpDate +" "+DateUtil.getHms());
                 params.put("isUse", "0");
                 params.put("status", "1");
                 if(!StringUtil.isNullOrEmpty(reportFile)){

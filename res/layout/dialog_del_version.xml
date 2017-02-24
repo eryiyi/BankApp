@@ -6,7 +6,7 @@
               android:layout_height="120dp"
               android:orientation="vertical">
    <TextView android:layout_width="match_parent"
-             android:text="发现新版本，确定更新吗"
+             android:text="删除操作不能恢复，确认删除？"
              android:gravity="center"
              android:textSize="18sp"
              android:padding="8dp"

@@ -66,13 +66,13 @@ public class BankAppApplication extends Application {
         sp = getSharedPreferences("university_manage", Context.MODE_PRIVATE);
         imageLoader = new com.android.volley.toolbox.ImageLoader(requestQueue, new BitmapCache());
         initImageLoader(this);
-        //init demo helper
         DemoHelper.getInstance().init(applicationContext);
     }
 
     public static Context getContext() {
         return application;
     }
+
     /**
      * 获取自定义线程池
      *

@@ -149,6 +149,7 @@ public class DailyListActivity extends BaseActivity implements View.OnClickListe
                 }else{
                     //不存在日报信息
                     Intent intent = new Intent(DailyListActivity.this, AddDailyActivity.class);
+                    intent.putExtra("tmpDate", DateUtil.getDateAndTimeTwo());
                     startActivity(intent);
                 }
             }
@@ -273,6 +274,9 @@ public class DailyListActivity extends BaseActivity implements View.OnClickListe
             if(action.equals("add_report_comment_success")){
                 initData();
             }
+            if(action.equals("del_report_daily_success")){
+                initData();
+            }
 
         }
     };
@@ -281,6 +285,7 @@ public class DailyListActivity extends BaseActivity implements View.OnClickListe
     public void registerBoradcastReceiver() {
         IntentFilter myIntentFilter = new IntentFilter();
         myIntentFilter.addAction("add_report_daily_success");
+        myIntentFilter.addAction("del_report_daily_success");
         myIntentFilter.addAction("update_report_daily_success");
         myIntentFilter.addAction("add_report_comment_success");//添加日报评论
         //注册广播

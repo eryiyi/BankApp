@@ -40,6 +40,21 @@ public class DateUtil {
         return dateFormat.format( new Date() );
     }
 
+    public static String getHms(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss.SSS");//可以方便地修改日期格式
+        return dateFormat.format( new Date() );
+    }
+
+    public static String getCurrentDay(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMM");
+        return dateFormat.format( new Date() );
+    }
+
+    public static String getCurrentDay2(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
+        return dateFormat.format( new Date() );
+    }
+
     public static String getNoteDateline(){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");//可以方便地修改日期格式
         return dateFormat.format( new Date() );

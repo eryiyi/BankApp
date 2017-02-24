@@ -523,13 +523,15 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
                                         relate_xsdt.setVisibility(View.VISIBLE);
                                         if(lists != null)
                                         {
-                                            if(lists.size() > 0){
+                                            if(lists.size() == 1){
                                                 xsdt_title.setText(lists.get(0).getTitle());
-                                            }
-                                            xsdt_title.setText(lists.get(0).getTitle());
-                                            if(lists.size() > 1){
+                                            }else if(lists.size() > 1){
                                                 xsdt_title.setText(lists.get(0).getTitle() +"..."+lists.get(1).getTitle());
+                                            }else{
+                                                relate_xsdt.setVisibility(View.GONE);
                                             }
+                                        }else{
+                                            relate_xsdt.setVisibility(View.GONE);
                                         }
                                     }
                                 } else{

@@ -1,9 +1,11 @@
 package com.ruiping.BankApp.ui;
 
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,6 +80,7 @@ public class DailyDetailActivtiy extends BaseActivity implements View.OnClickLis
 
     private TextView btn_edit;
     private TextView btn_delete;
+    private LinearLayout liner_bottom;
 
     boolean isMobileNet, isWifiNet;
     boolean flag = false;//true是自己 false是他人的
@@ -166,6 +169,7 @@ public class DailyDetailActivtiy extends BaseActivity implements View.OnClickLis
     private void initView() {
         btn_edit = (TextView) this.findViewById(R.id.btn_edit);
         btn_delete = (TextView) this.findViewById(R.id.btn_delete);
+        liner_bottom = (LinearLayout) this.findViewById(R.id.liner_bottom);
         btn_edit.setOnClickListener(this);
         btn_delete.setOnClickListener(this);
 
@@ -177,14 +181,17 @@ public class DailyDetailActivtiy extends BaseActivity implements View.OnClickLis
         back = (TextView) this.findViewById(R.id.back);
         title = (TextView) this.findViewById(R.id.title);
         right_btn = (TextView) this.findViewById(R.id.right_btn);
+        right_btn.setVisibility(View.GONE);
         if(flag){
             //是自己
             right_btn.setVisibility(View.VISIBLE);
             right_btn.setText("保存");
             right_btn.setOnClickListener(this);
+            liner_bottom.setVisibility(View.VISIBLE);
         }else{
             //他人
             right_btn.setVisibility(View.GONE);
+            liner_bottom.setVisibility(View.GONE);
         }
         back.setOnClickListener(this);
         title.setText("日报详情");
@@ -289,6 +296,7 @@ public class DailyDetailActivtiy extends BaseActivity implements View.OnClickLis
             }
             break;
             case R.id.content:
+            case R.id.btn_edit:
             {
                 //内容点击
                 if(flag){
@@ -299,7 +307,42 @@ public class DailyDetailActivtiy extends BaseActivity implements View.OnClickLis
                 }
             }
                 break;
+            case R.id.btn_delete:
+            {
+                if(flag){
+                    showVersionDialog();
+                }
+            }
+                break;
         }
+    }
+
+    private void showVersionDialog() {
+        final Dialog picAddDialog = new Dialog(DailyDetailActivtiy.this, R.style.dialog);
+        View picAddInflate = View.inflate(this, R.layout.dialog_del_version, null);
+        TextView btn_sure = (TextView) picAddInflate.findViewById(R.id.btn_sure);
+        btn_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressDialog = new CustomProgressDialog(DailyDetailActivtiy.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                deleteById();
+                picAddDialog.dismiss();
+            }
+        });
+
+        //取消
+        TextView btn_cancel = (TextView) picAddInflate.findViewById(R.id.btn_cancel);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                picAddDialog.dismiss();
+            }
+        });
+        picAddDialog.setContentView(picAddInflate);
+        picAddDialog.show();
     }
 
     @Override
@@ -573,4 +616,60 @@ public class DailyDetailActivtiy extends BaseActivity implements View.OnClickLis
         };
         getRequestQueue().add(request);
     }
+
+    private void deleteById() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.REPORT_DELETE_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            BankJobReportCommentBeanData data = getGson().fromJson(s, BankJobReportCommentBeanData.class);
+                            if (data.getCode() == 200) {
+                                Toast.makeText(DailyDetailActivtiy.this, "删除成功", Toast.LENGTH_SHORT).show();
+                                Intent intent1 = new Intent("del_report_daily_success");
+                                sendBroadcast(intent1);
+                                finish();
+                            } else {
+                                Toast.makeText(DailyDetailActivtiy.this, R.string.add_failed, Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(DailyDetailActivtiy.this, R.string.add_failed, Toast.LENGTH_SHORT).show();
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(DailyDetailActivtiy.this, R.string.add_failed, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("reportId", bankJobReport.getReportId());
+                params.put("empId", bankJobReport.getEmpId());
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
+
+
 }
