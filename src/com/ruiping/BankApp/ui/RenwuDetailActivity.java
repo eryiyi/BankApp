@@ -24,10 +24,7 @@ import com.ruiping.BankApp.base.BaseActivity;
 import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.data.BankJobTaskCommentData;
 import com.ruiping.BankApp.data.TaskBeanObjData;
-import com.ruiping.BankApp.entiy.BankJobTask;
-import com.ruiping.BankApp.entiy.BankJobTaskComment;
-import com.ruiping.BankApp.entiy.BankJobTaskEmp;
-import com.ruiping.BankApp.entiy.TaskBeanObj;
+import com.ruiping.BankApp.entiy.*;
 import com.ruiping.BankApp.popview.TaskPopMenu;
 import com.ruiping.BankApp.util.Contance;
 import com.ruiping.BankApp.util.DateUtil;
@@ -450,9 +447,9 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1000 && resultCode == 10002){
-            BankJobTaskEmp bankJobTaskEmp = (BankJobTaskEmp) data.getExtras().get("bankJobTaskEmp");
-            nickname.setText(bankJobTaskEmp.getBankEmp().getEmpName());
-            imageLoader.displayImage(InternetURL.INTERNAL + bankJobTaskEmp.getBankEmp().getEmpCover(), head, BankAppApplication.txOptions, animateFirstListener);
+            BankEmpBean bankJobTaskEmp = (BankEmpBean) data.getExtras().get("bankJobTaskEmp");
+            nickname.setText(bankJobTaskEmp.getEmpName());
+            imageLoader.displayImage(InternetURL.INTERNAL + bankJobTaskEmp.getEmpCover(), head, BankAppApplication.txOptions, animateFirstListener);
         }
         if(requestCode == 1001 && resultCode == 10001){
             String xontent = data.getExtras().getString("xontent");

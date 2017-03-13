@@ -14,9 +14,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.adapter.ItemTaskPersonAdapter;
+import com.ruiping.BankApp.adapter.ItemTaskPersonSelectAdapter;
 import com.ruiping.BankApp.base.BaseActivity;
 import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.data.BankJobTaskEmpData;
+import com.ruiping.BankApp.data.TaskManagerData;
+import com.ruiping.BankApp.entiy.BankEmpBean;
 import com.ruiping.BankApp.entiy.BankJobTaskEmp;
 import com.ruiping.BankApp.util.Contance;
 import com.ruiping.BankApp.util.StringUtil;
@@ -38,8 +41,8 @@ public class TaskPersonFuzerenSelectActivity extends BaseActivity implements Vie
     private String taskId;//主任务id
     private TextView no_data;//暂无数据
     private ListView lstv;//信息列表
-    private ItemTaskPersonAdapter adapter;
-    private List<BankJobTaskEmp> lists = new ArrayList<BankJobTaskEmp>();
+    private ItemTaskPersonSelectAdapter adapter;
+    private List<BankEmpBean> lists = new ArrayList<BankEmpBean>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +65,7 @@ public class TaskPersonFuzerenSelectActivity extends BaseActivity implements Vie
         title = (TextView) this.findViewById(R.id.title);
         title.setText("选择负责人");
         right_btn.setVisibility(View.GONE);
-        adapter = new ItemTaskPersonAdapter(lists, TaskPersonFuzerenSelectActivity.this, false);
+        adapter = new ItemTaskPersonSelectAdapter(lists, TaskPersonFuzerenSelectActivity.this);
         lstv = (ListView) this.findViewById(R.id.lstv);
         lstv.setAdapter(adapter);
         no_data.setVisibility(View.GONE);
@@ -70,7 +73,7 @@ public class TaskPersonFuzerenSelectActivity extends BaseActivity implements Vie
         lstv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                BankJobTaskEmp  bankJobTaskEmp= lists.get(position);
+                BankEmpBean  bankJobTaskEmp= lists.get(position);
                 if(bankJobTaskEmp != null){
                     addPerson(bankJobTaskEmp);
                 }
@@ -99,7 +102,7 @@ public class TaskPersonFuzerenSelectActivity extends BaseActivity implements Vie
     private void getData() {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-                InternetURL.GET_TASK_PERSON_URL,
+                InternetURL.GET_TASK_PERSON_ALL_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
@@ -108,7 +111,7 @@ public class TaskPersonFuzerenSelectActivity extends BaseActivity implements Vie
                                 JSONObject jo = new JSONObject(s);
                                 String code1 = jo.getString("code");
                                 if (Integer.parseInt(code1) == 200) {
-                                    BankJobTaskEmpData data = getGson().fromJson(s, BankJobTaskEmpData.class);
+                                    TaskManagerData data = getGson().fromJson(s, TaskManagerData.class);
                                     lists.clear();
                                     lists.addAll(data.getData());
                                     adapter.notifyDataSetChanged();
@@ -147,7 +150,7 @@ public class TaskPersonFuzerenSelectActivity extends BaseActivity implements Vie
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("empId", getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class));
-                params.put("taskId", taskId);
+//                params.put("taskId", taskId);
                 return params;
             }
 
@@ -162,7 +165,7 @@ public class TaskPersonFuzerenSelectActivity extends BaseActivity implements Vie
     }
 
 
-    private void addPerson(final BankJobTaskEmp bankJobTaskEmp) {
+    private void addPerson(final BankEmpBean bankJobTaskEmp) {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 InternetURL.TASK_UPDATE_MANAGER_URL,
@@ -210,7 +213,7 @@ public class TaskPersonFuzerenSelectActivity extends BaseActivity implements Vie
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("empIdF", bankJobTaskEmp.getBankEmp().getEmpId());
+                params.put("empIdF", bankJobTaskEmp.getEmpId());
                 params.put("taskId", taskId);
                 return params;
             }
