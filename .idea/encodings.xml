@@ -7,13 +7,9 @@
     <file url="file://$PROJECT_DIR$/libs/gson-2.0.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/httpcore-4.3.2.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/httpmime-4.3.5.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/mips" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/mips64" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/parse-android-1.13.0.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/pushservice-5.0.0.66.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/universal-image-loader-1.9.2.jar" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/libs/volley.jar" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/libs/x86_64" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/anim/custom_dialog_frame.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/anim/slide_in_from_bottom.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/anim/slide_in_from_left.xml" charset="UTF-8" />
@@ -148,9 +144,11 @@
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemSelectFileAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemSharePeopleAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemTaskCommentAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemTaskEmpsAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemTaskGroupsSelectAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemTaskPersonAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemTaskPersonSelectAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemTaskShareAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemWeeklyAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemYearAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/OnClickContentItemListener.java" charset="UTF-8" />

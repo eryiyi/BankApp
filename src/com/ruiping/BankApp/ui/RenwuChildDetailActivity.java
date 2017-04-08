@@ -360,7 +360,7 @@ public class RenwuChildDetailActivity extends BaseActivity implements View.OnCli
     }
 
     private void showTaskTypeSelect() {
-        final Dialog picAddDialog = new Dialog(RenwuChildDetailActivity.this, R.style.dialog);
+        final Dialog picAddDialog = new Dialog(RenwuChildDetailActivity.this, R.style.MyAlertDialog);
         View picAddInflate = View.inflate(this, R.layout.task_type_dialog, null);
         Button btn_one = (Button) picAddInflate.findViewById(R.id.btn_one);
         Button btn_two = (Button) picAddInflate.findViewById(R.id.btn_two);
@@ -471,7 +471,7 @@ public class RenwuChildDetailActivity extends BaseActivity implements View.OnCli
                                     }
                                     adapter.notifyDataSetChanged();
                                 } else {
-                                    Toast.makeText(RenwuChildDetailActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(RenwuChildDetailActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -592,53 +592,6 @@ public class RenwuChildDetailActivity extends BaseActivity implements View.OnCli
     }
 
 
-    //广播接收动作
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action.equals("add_task_comment_success")) {
-                BankJobTaskComment bankJobTaskComment = (BankJobTaskComment) intent.getExtras().get("bankJobTaskComment");
-                lists.add(0,bankJobTaskComment);
-                adapter.notifyDataSetChanged();
-            }
-            if(action.equals("update_task_file_success")){
-                String attach_file = intent.getExtras().getString("attach_file");
-                bankJobTask.setTaskFile(attach_file);
-                if(!StringUtil.isNullOrEmpty(attach.getText().toString())){
-                    attach.setText(String.valueOf((Integer.parseInt(attach.getText().toString())+1)));
-                }
-                else {
-                    attach.setText("1");
-                }
-            }
-            if(action.equals("update_task_person_count_success")){
-                if(!StringUtil.isNullOrEmpty(people.getText().toString())){
-                    people.setText(String.valueOf(Integer.parseInt(people.getText().toString()) + 1));
-                    taskBeanObj.setJoinEmpNum(String.valueOf(Integer.parseInt(people.getText().toString()) + 1));
-                }else {
-                    people.setText("1");
-                    taskBeanObj.setJoinEmpNum("1");
-                }
-            }
-        }
-    };
-
-    //注册广播
-    public void registerBoradcastReceiver() {
-        IntentFilter myIntentFilter = new IntentFilter();
-        myIntentFilter.addAction("add_task_comment_success");
-        myIntentFilter.addAction("update_task_file_success");//更新报表附件成功
-        myIntentFilter.addAction("update_task_person_count_success");//更新参与人数
-        //注册广播
-        registerReceiver(mBroadcastReceiver, myIntentFilter);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(mBroadcastReceiver);
-    }
 
 
     @Override
@@ -741,6 +694,8 @@ public class RenwuChildDetailActivity extends BaseActivity implements View.OnCli
                                 String code1 = jo.getString("code");
                                 if (Integer.parseInt(code1) == 200) {
                                     showMsg(RenwuChildDetailActivity.this, "操作成功！");
+                                    Intent intent1 = new Intent("update_renwu_number");
+                                    sendBroadcast(intent1);
                                     finish();
                                 } else {
                                     Toast.makeText(RenwuChildDetailActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
@@ -1074,6 +1029,55 @@ public class RenwuChildDetailActivity extends BaseActivity implements View.OnCli
         };
         getRequestQueue().add(request);
     }
+
+    //广播接收动作
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("add_task_comment_success")) {
+                BankJobTaskComment bankJobTaskComment = (BankJobTaskComment) intent.getExtras().get("bankJobTaskComment");
+                lists.add(0,bankJobTaskComment);
+                adapter.notifyDataSetChanged();
+            }
+            if(action.equals("update_task_file_success")){
+                String attach_file = intent.getExtras().getString("attach_file");
+                bankJobTask.setTaskFile(attach_file);
+                if(!StringUtil.isNullOrEmpty(attach.getText().toString())){
+                    attach.setText(String.valueOf((Integer.parseInt(attach.getText().toString())+1)));
+                }
+                else {
+                    attach.setText("1");
+                }
+            }
+            if(action.equals("update_task_person_count_success")){
+                if(!StringUtil.isNullOrEmpty(people.getText().toString())){
+                    people.setText(String.valueOf(Integer.parseInt(people.getText().toString()) + 1));
+                    taskBeanObj.setJoinEmpNum(String.valueOf(Integer.parseInt(people.getText().toString()) + 1));
+                }else {
+                    people.setText("1");
+                    taskBeanObj.setJoinEmpNum("1");
+                }
+            }
+        }
+    };
+
+    //注册广播
+    public void registerBoradcastReceiver() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction("add_task_comment_success");
+        myIntentFilter.addAction("update_task_file_success");//更新报表附件成功
+        myIntentFilter.addAction("update_task_person_count_success");//更新参与人数
+        //注册广播
+        registerReceiver(mBroadcastReceiver, myIntentFilter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mBroadcastReceiver);
+    }
+
 
 
 }

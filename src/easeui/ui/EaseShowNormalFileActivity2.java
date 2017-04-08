@@ -1,15 +1,12 @@
 package easeui.ui;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMFileMessageBody;
 import com.hyphenate.util.FileUtils;
 import com.ruiping.BankApp.R;
-import com.ruiping.BankApp.base.InternetURL;
 
 import java.io.File;
 import java.util.HashMap;

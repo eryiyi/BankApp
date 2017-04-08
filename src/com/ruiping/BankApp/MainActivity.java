@@ -722,7 +722,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     }
 
     private void showVersionDialog() {
-        final Dialog picAddDialog = new Dialog(MainActivity.this, R.style.dialog);
+        final Dialog picAddDialog = new Dialog(MainActivity.this, R.style.MyAlertDialog);
         View picAddInflate = View.inflate(this, R.layout.dialog_new_version, null);
         TextView btn_sure = (TextView) picAddInflate.findViewById(R.id.btn_sure);
         btn_sure.setOnClickListener(new View.OnClickListener() {

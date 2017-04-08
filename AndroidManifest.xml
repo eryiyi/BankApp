@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.ruiping.BankApp"
-          android:versionCode="7"
-          android:versionName="1.6">
+          android:versionCode="10"
+          android:versionName="1.9">
     <uses-sdk android:minSdkVersion="16"/>
 
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -26,6 +26,21 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    <!-- 富媒体需要声明的权限 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
+
+    <!-- 适配Android N系统必需的ContentProvider写权限声明，写权限包含应用包名-->
+    <uses-permission android:name="baidu.push.permission.WRITE_PUSHINFOPROVIDER.com.ruiping.BankApp" />
+    <permission
+            android:name="baidu.push.permission.WRITE_PUSHINFOPROVIDER.com.ruiping.BankApp"
+            android:protectionLevel="normal">
+    </permission>
+
     <permission
             android:name="com.ruiping.BankApp.permission.C2D_MESSAGE"
             android:protectionLevel="signature"
@@ -148,6 +163,11 @@
         <activity android:name=".ui.TaskShareGroupsSelectActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.BangonghuiActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.RelateListActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AddTaskEmpFActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AddTaskDatelineActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AddTaskEmpSActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AddTaskShareActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AddTaskXifenActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
 
         <!--百度推送-->
         <!-- push富媒体，不使用富媒体推送不需要 -->
@@ -176,47 +196,55 @@
         </receiver>
 
         <!-- push必须的receviver和service声明 -->
-        <receiver android:name="com.baidu.android.pushservice.PushServiceReceiver"
-                  android:process=":bdservice_v1">
+        <receiver
+                android:name="com.baidu.android.pushservice.PushServiceReceiver"
+                android:process=":bdservice_v1" >
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-                <action android:name="com.baidu.android.pushservice.action.notification.SHOW"/>
-                <action android:name="com.baidu.android.pushservice.action.media.CLICK"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="com.baidu.android.pushservice.action.notification.SHOW" />
+                <action android:name="com.baidu.android.pushservice.action.media.CLICK" />
                 <!-- 以下四项为可选的action声明，可大大提高service存活率和消息到达速度 -->
-                <action android:name="android.intent.action.MEDIA_MOUNTED"/>
-                <action android:name="android.intent.action.USER_PRESENT"/>
-                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
-                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+                <action android:name="android.intent.action.MEDIA_MOUNTED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.baidu.android.pushservice.RegistrationReceiver"
-                  android:process=":bdservice_v1">
+        <receiver
+                android:name="com.baidu.android.pushservice.RegistrationReceiver"
+                android:process=":bdservice_v1" >
             <intent-filter>
-                <action android:name="com.baidu.android.pushservice.action.METHOD"/>
-                <action android:name="com.baidu.android.pushservice.action.BIND_SYNC"/>
+                <action android:name="com.baidu.android.pushservice.action.METHOD" />
+                <action android:name="com.baidu.android.pushservice.action.BIND_SYNC" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
-                <data android:scheme="package"/>
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
             </intent-filter>
         </receiver>
+
         <service
                 android:name="com.baidu.android.pushservice.PushService"
                 android:exported="true"
-                android:process=":bdservice_v1">
+                android:process=":bdservice_v1" >
             <intent-filter>
-                <action android:name="com.baidu.android.pushservice.action.PUSH_SERVICE"/>
+                <action android:name="com.baidu.android.pushservice.action.PUSH_SERVICE" />
             </intent-filter>
         </service>
-        <service android:name="com.baidu.android.pushservice.CommandService"
-                 android:exported="true"/>
-        <!-- 4.6.2版本增加一个可选的Activity声明 -->
-        <activity
-                android:launchMode="singleInstance"
-                android:name="com.baidu.android.pushservice.PushKeepAlive"
-                android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-        <!-- push结束 -->
+        <service
+                android:name="com.baidu.android.pushservice.CommandService"
+                android:exported="true" />
+
+        <!-- 适配Android N系统必需的ContentProvider声明，写权限包含应用包名-->
+        <provider
+                android:name="com.baidu.android.pushservice.PushInfoProvider"
+                android:authorities="com.ruiping.BankApp.bdpush"
+                android:writePermission="baidu.push.permission.WRITE_PUSHINFOPROVIDER.com.ruiping.BankApp"
+                android:protectionLevel = "signature"
+                android:exported="true" />
+
 
         <!-- 在百度开发者中心查询应用的API Key -->
         <meta-data android:name="api_key" android:value="HUs4DmXHRXyzF1BackTcT1U4"/>
@@ -457,5 +485,14 @@
             </intent-filter>
         </receiver>
 
+        <!--58de0b08f5ade43ecf000ff1-->
+        <meta-data
+                android:name="UMENG_APPKEY"
+                android:value="58de0b08f5ade43ecf000ff1" >
+        </meta-data>
+        <meta-data
+                android:name="UMENG_CHANNEL"
+                android:value="YINGYONGBAO" >
+        </meta-data>
     </application>
 </manifest>

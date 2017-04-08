@@ -55,7 +55,7 @@ public class AddTaskTitleActivity extends BaseActivity implements View.OnClickLi
 
     public void saveTaskTitleAction(View view){
         if(StringUtil.isNullOrEmpty(content.getText().toString())){
-            showMsg(AddTaskTitleActivity.this, "请输入标题！");
+            showMsg(AddTaskTitleActivity.this, "请输入任务标题！");
             return;
         }
         progressDialog = new CustomProgressDialog(AddTaskTitleActivity.this, "正在加载中",R.anim.custom_dialog_frame);
@@ -79,8 +79,9 @@ public class AddTaskTitleActivity extends BaseActivity implements View.OnClickLi
                                 String code = jo.getString("code");
                                 if (Integer.parseInt(code) == 200) {
                                     taskId = jo.getString("data");
-                                    Intent detailIntent = new Intent(AddTaskTitleActivity.this, RenwuDetailActivity.class);
+                                    Intent detailIntent = new Intent(AddTaskTitleActivity.this, AddTaskEmpFActivity.class);
                                     detailIntent.putExtra("taskId", taskId);
+                                    detailIntent.putExtra("taskTitle", content.getText().toString());
                                     startActivity(detailIntent);
                                     finish();
                                 }else {

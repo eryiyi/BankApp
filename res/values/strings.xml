@@ -410,5 +410,9 @@
     <string name="check_new_version">检查中...</string>
     <string name="version_name">"检查版本"</string>
     <string name="can_not_find_version_name">"没有最新版本信息"</string>
+    <string name="task_emp_name_f">"%1$S"</string>
+    <string name="task_emp_name">"设置%1$S为任务负责人？"</string>
+    <string name="add_task_emp_s_txt">"已选择（%1$s）人"</string>
+    <string name="add_task_share_txt">"已选择（%1$s）"</string>
 
 </resources>

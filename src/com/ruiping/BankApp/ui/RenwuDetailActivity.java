@@ -24,7 +24,10 @@ import com.ruiping.BankApp.base.BaseActivity;
 import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.data.BankJobTaskCommentData;
 import com.ruiping.BankApp.data.TaskBeanObjData;
-import com.ruiping.BankApp.entiy.*;
+import com.ruiping.BankApp.entiy.BankEmpBean;
+import com.ruiping.BankApp.entiy.BankJobTask;
+import com.ruiping.BankApp.entiy.BankJobTaskComment;
+import com.ruiping.BankApp.entiy.TaskBeanObj;
 import com.ruiping.BankApp.popview.TaskPopMenu;
 import com.ruiping.BankApp.util.Contance;
 import com.ruiping.BankApp.util.DateUtil;
@@ -209,9 +212,14 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
             nickname.setText(bankJobTask.getBankEmpf().getEmpName());
             imageLoader.displayImage(InternetURL.INTERNAL + bankJobTask.getBankEmpf().getEmpCover(), head, BankAppApplication.txOptions, animateFirstListener);
         }
+
+        if(!StringUtil.isNullOrEmpty(bankJobTask.getDateLine())){
+            starttime.setText(bankJobTask.getDateLine());
+        }
         if(!StringUtil.isNullOrEmpty(bankJobTask.getDateLineEnd())){
             endtime.setText(bankJobTask.getDateLineEnd());
         }
+
         if(!StringUtil.isNullOrEmpty(bankJobTask.getTaskProgress())){
             progr.setText(bankJobTask.getTaskProgress());
         }
@@ -252,8 +260,8 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
             attach.setText("0");
         }
 
-        starttime.setText(bankJobTask.getDateLine());
-        endtime.setText(bankJobTask.getDateLineEnd());
+
+//        endtime.setText(bankJobTask.getDateLineEnd());
 
     }
 
@@ -270,6 +278,7 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                 intent.putExtra("taskId", taskId);
                 intent.putExtra("commentId", "");
                 intent.putExtra("reportCommentName", "");
+
                 startActivity(intent);
             }
                 break;
@@ -290,6 +299,17 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                 Intent intent = new Intent(RenwuDetailActivity.this, RenwuChildListActivity.class);
                 intent.putExtra("taskId", bankJobTask.getTaskId());//任务ID
                 intent.putExtra("empIdF", bankJobTask.getEmpIdF());//任务负责人ID
+                intent.putExtra("taskTitle", bankJobTask.getTaskTitle());
+                if(!StringUtil.isNullOrEmpty(bankJobTask.getDateLine())){
+                    intent.putExtra("dateLine", bankJobTask.getDateLine());
+                }else {
+                    intent.putExtra("dateLine", "");
+                }
+                if(!StringUtil.isNullOrEmpty(bankJobTask.getDateLineEnd())){
+                    intent.putExtra("dateLineEnd", bankJobTask.getDateLineEnd());
+                }else{
+                    intent.putExtra("dateLineEnd", "");
+                }
                 startActivity(intent);
             }
             break;
@@ -390,7 +410,7 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void showTaskTypeSelect() {
-        final Dialog picAddDialog = new Dialog(RenwuDetailActivity.this, R.style.dialog);
+        final Dialog picAddDialog = new Dialog(RenwuDetailActivity.this, R.style.MyAlertDialog);
         View picAddInflate = View.inflate(this, R.layout.task_type_dialog, null);
         Button btn_one = (Button) picAddInflate.findViewById(R.id.btn_one);
         Button btn_two = (Button) picAddInflate.findViewById(R.id.btn_two);
@@ -505,7 +525,7 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                                     }
                                     adapter.notifyDataSetChanged();
                                 } else {
-                                    Toast.makeText(RenwuDetailActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(RenwuDetailActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -789,6 +809,8 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                                 String code1 = jo.getString("code");
                                 if (Integer.parseInt(code1) == 200) {
                                     showMsg(RenwuDetailActivity.this, "操作成功！");
+                                    Intent intent1 = new Intent("update_renwu_number");
+                                    sendBroadcast(intent1);
                                     finish();
                                 } else {
                                     Toast.makeText(RenwuDetailActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();

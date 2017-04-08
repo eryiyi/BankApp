@@ -76,7 +76,7 @@ public class RenwuListActivity extends BaseActivity implements View.OnClickListe
         right_btn.setOnClickListener(this);
         switch (Integer.parseInt(type)){
             case 1:
-                title.setText("我的任务");
+                title.setText("我参与的任务");
                 urlInternet = InternetURL.GET_TASK_BY_EMP_ID_URL;
                 break;
             case 2:
@@ -205,6 +205,7 @@ public class RenwuListActivity extends BaseActivity implements View.OnClickListe
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("empId", getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class));
                 params.put("pagecurrent", String.valueOf(pageIndex));
+                params.put("pagesize", "30");
                 return params;
             }
 
@@ -224,26 +225,18 @@ public class RenwuListActivity extends BaseActivity implements View.OnClickListe
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-//            if (action.equals("update_task_fuzeren_success")) {
-//                //负责人更新
-//                BankJobTaskEmp bankJobTaskEmp = (BankJobTaskEmp) intent.getExtras().get("bankJobTaskEmp");
-//                for(int i=0;i<lists.size();i++){
-//                    BankJobTask bankJobTask  = lists.get(i);
-//                    if(bankJobTask.getTaskId().equals(bankJobTaskEmp.getBankJobTask().getTaskId())){
-//                        lists.get(i).setBankEmp(bankJobTaskEmp.getBankEmp());
-//                        lists.get(i).setEmpName(bankJobTaskEmp.getBankEmp().getEmpName());
-//                        break;
-//                    }
-//                }
-//                adapter.notifyDataSetChanged();
-//            }
+            if (action.equals("update_renwu_number")) {
+                IS_REFRESH = true;
+                pageIndex = 1;
+                getData();
+            }
         }
     };
 
     //注册广播
     public void registerBoradcastReceiver() {
         IntentFilter myIntentFilter = new IntentFilter();
-//        myIntentFilter.addAction("update_task_fuzeren_success");
+        myIntentFilter.addAction("update_renwu_number");
         //注册广播
         registerReceiver(mBroadcastReceiver, myIntentFilter);
     }

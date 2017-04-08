@@ -75,8 +75,16 @@ public class ItemRenwuAdapter extends BaseAdapter {
         }
         BankJobTask cell = lists.get(position);
         if (cell != null) {
+            //判断主次
+            if(!StringUtil.isNullOrEmpty(cell.getPid()) && !"0".equals(cell.getPid())){
+                //说明有pid  是子任务
+                holder.item_head.setImageDrawable(res.getDrawable(R.drawable.subtask));
+            }else{
+                //说明是主任务
+                holder.item_head.setImageDrawable(res.getDrawable(R.drawable.maintask));
+            }
             if(cell.getBankEmpf() != null){
-                imageLoader.displayImage(InternetURL.INTERNAL+cell.getBankEmpf().getEmpCover(), holder.item_head, BankAppApplication.txOptions, animateFirstListener);
+//                imageLoader.displayImage(InternetURL.INTERNAL+cell.getBankEmpf().getEmpCover(), holder.item_head, BankAppApplication.txOptions, animateFirstListener);
                 holder.item_nickname.setText(cell.getBankEmpf().getEmpName());
             }
 

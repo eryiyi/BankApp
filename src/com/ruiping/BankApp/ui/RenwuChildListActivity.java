@@ -54,6 +54,9 @@ public class RenwuChildListActivity extends BaseActivity implements View.OnClick
 
     private String taskId;//主任务ID
     private String empIdF;//主任务负责人id
+    private String taskTitle;
+    private String dateLine;
+    private String dateLineEnd;
 
     private String empId;//登录人ID
 
@@ -66,6 +69,9 @@ public class RenwuChildListActivity extends BaseActivity implements View.OnClick
         setContentView(R.layout.renwu_child_list_activity);
         taskId = getIntent().getExtras().getString("taskId");
         empIdF = getIntent().getExtras().getString("empIdF");
+        taskTitle = getIntent().getExtras().getString("taskTitle");
+        dateLine = getIntent().getExtras().getString("dateLine");
+        dateLineEnd = getIntent().getExtras().getString("dateLineEnd");
 
         empId = getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class);
 
@@ -95,7 +101,7 @@ public class RenwuChildListActivity extends BaseActivity implements View.OnClick
             right_btn.setVisibility(View.GONE);
         }
         back.setOnClickListener(this);
-        title.setText("子任务列表");
+        title.setText("参与人列表");
         urlInternet = InternetURL.GET_TASK_ALL_BY_EMP_ID_URL;
         adapter = new ItemRenwuAdapter(lists, RenwuChildListActivity.this);
         lstv.setAdapter(adapter);
@@ -147,11 +153,13 @@ public class RenwuChildListActivity extends BaseActivity implements View.OnClick
                 finish();
                 break;
             case R.id.right_btn:
-                //添加任务
             {
-                Intent renwuAdd = new Intent(RenwuChildListActivity.this, AddTaskTitleChildActivity.class);
-                renwuAdd.putExtra("pid", taskId);
-                startActivity(renwuAdd);
+                Intent intent  = new Intent(RenwuChildListActivity.this, AddTaskEmpSActivity.class);
+                intent.putExtra("taskId", taskId);
+                intent.putExtra("taskTitle", taskTitle);
+                intent.putExtra("dateLine", dateLine);
+                intent.putExtra("dateLineEnd", dateLineEnd);
+                startActivity(intent);
             }
                 break;
         }
@@ -178,7 +186,7 @@ public class RenwuChildListActivity extends BaseActivity implements View.OnClick
                                     lstv.onRefreshComplete();
                                     adapter.notifyDataSetChanged();
                                 } else {
-                                    Toast.makeText(RenwuChildListActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(RenwuChildListActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -205,6 +213,7 @@ public class RenwuChildListActivity extends BaseActivity implements View.OnClick
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("taskId", taskId);
+                params.put("pagesize", "30");
                 return params;
             }
 
@@ -224,26 +233,18 @@ public class RenwuChildListActivity extends BaseActivity implements View.OnClick
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-//            if (action.equals("update_task_fuzeren_success")) {
-//                //负责人更新
-//                BankJobTaskEmp bankJobTaskEmp = (BankJobTaskEmp) intent.getExtras().get("bankJobTaskEmp");
-//                for(int i=0;i<lists.size();i++){
-//                    BankJobTask bankJobTask  = lists.get(i);
-//                    if(bankJobTask.getTaskId().equals(bankJobTaskEmp.getBankJobTask().getTaskId())){
-//                        lists.get(i).setBankEmp(bankJobTaskEmp.getBankEmp());
-//                        lists.get(i).setEmpName(bankJobTaskEmp.getBankEmp().getEmpName());
-//                        break;
-//                    }
-//                }
-//                adapter.notifyDataSetChanged();
-//            }
+            if (action.equals("update_renwu_number")) {
+                IS_REFRESH = true;
+                pageIndex = 1;
+                getData();
+            }
         }
     };
 
     //注册广播
     public void registerBoradcastReceiver() {
         IntentFilter myIntentFilter = new IntentFilter();
-//        myIntentFilter.addAction("update_task_fuzeren_success");
+        myIntentFilter.addAction("update_renwu_number");
         //注册广播
         registerReceiver(mBroadcastReceiver, myIntentFilter);
     }

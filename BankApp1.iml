@@ -17,5 +17,6 @@
     <orderEntry type="library" name="android-support-v4" level="project" />
     <orderEntry type="library" name="httpcore-4.2.4" level="project" />
     <orderEntry type="library" name="httpmime-4.3.5" level="project" />
+    <orderEntry type="library" name="umeng-analytics-v6.1.0" level="project" />
   </component>
 </module>

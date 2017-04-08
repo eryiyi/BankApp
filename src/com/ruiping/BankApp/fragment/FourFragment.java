@@ -102,6 +102,7 @@ public class FourFragment extends BaseFragment {
             }
         });
     }
+
     void getData(){
         StringRequest request = new StringRequest(
                 Request.Method.POST,

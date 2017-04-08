@@ -175,6 +175,14 @@ public class MyPushMessageReceiver extends PushMessageReceiver {
                    context.startActivity(intent);
                }
                    break;
+               case 4:
+               {
+                   //新建的任务   msgId：新建的任务ID
+                   Intent intent = new Intent(context, RenwuListActivity.class);
+                   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                   context.startActivity(intent);
+               }
+                   break;
            }
        }
     }

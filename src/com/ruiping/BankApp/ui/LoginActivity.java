@@ -63,9 +63,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         });
         initView();
 
-        PushManager.startWork(getApplicationContext(),
-                PushConstants.LOGIN_TYPE_API_KEY,
-                Utils.getMetaValue(LoginActivity.this, "api_key"));
+
     }
 
     private void initView() {

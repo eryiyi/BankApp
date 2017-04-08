@@ -5,7 +5,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -318,7 +317,7 @@ public class DailyDetailActivtiy extends BaseActivity implements View.OnClickLis
     }
 
     private void showVersionDialog() {
-        final Dialog picAddDialog = new Dialog(DailyDetailActivtiy.this, R.style.dialog);
+        final Dialog picAddDialog = new Dialog(DailyDetailActivtiy.this, R.style.MyAlertDialog);
         View picAddInflate = View.inflate(this, R.layout.dialog_del_version, null);
         TextView btn_sure = (TextView) picAddInflate.findViewById(R.id.btn_sure);
         btn_sure.setOnClickListener(new View.OnClickListener() {

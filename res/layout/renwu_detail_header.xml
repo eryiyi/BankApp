@@ -173,7 +173,7 @@
                     android:id="@+id/liner_child"
                     android:layout_height="50dp">
         <TextView android:layout_width="wrap_content"
-                  android:text="子任务"
+                  android:text="参与人"
                   android:layout_centerVertical="true"
                   android:textSize="16sp"
                   android:textColor="@color/text_color"
@@ -195,11 +195,13 @@
 
     <View android:layout_width="match_parent"
           android:background="@color/gray"
+          android:visibility="gone"
           android:layout_marginTop="15dp"
           android:layout_height="0.1dp"></View>
     <RelativeLayout android:layout_width="match_parent"
                     android:background="@drawable/btn_white_shape"
                     android:padding="12dp"
+                    android:visibility="gone"
                     android:id="@+id/liner_people"
                     android:layout_height="50dp">
         <TextView android:layout_width="wrap_content"
@@ -226,15 +228,17 @@
 
     <View android:layout_width="match_parent"
           android:background="@color/gray"
+          android:visibility="gone"
           android:layout_marginTop="15dp"
           android:layout_height="0.1dp"></View>
     <RelativeLayout android:layout_width="match_parent"
                     android:background="@drawable/btn_white_shape"
                     android:padding="12dp"
+                    android:visibility="gone"
                     android:id="@+id/liner_share"
                     android:layout_height="50dp">
         <TextView android:layout_width="wrap_content"
-                  android:text="共享"
+                  android:text="通知"
                   android:layout_centerVertical="true"
                   android:textSize="16sp"
                   android:textColor="@color/text_color"

@@ -4,8 +4,8 @@ package com.ruiping.BankApp.base;
  * Created by zhanghl on 2015/1/12.
  */
 public class InternetURL {
-//    public static final String INTERNAL = "http://223.99.167.142:8088/Manage_ssm/";
-    public static final String INTERNAL = "http://192.168.0.188:8080/Manage_ssm/";
+    public static final String INTERNAL = "http://223.99.167.142:8088/Manage_ssm/";
+//    public static final String INTERNAL = "http://192.168.0.188:8080/Manage_ssm/";
 
     //多媒体文件上传接口
     public static final String UPLOAD_FILE = INTERNAL + "uploadFileController.do?uploadImage";
@@ -224,4 +224,20 @@ public class InternetURL {
     //2.根据用户id 年份 月份获取日报信息
     public static final String getReportonMoths = INTERNAL + "appReportController.do?getReportonMoths";//empId  year  month
 
+
+
+    //录入起始日期和截止日期
+    public static final String appBankJobTaskUpdateTaskDate = INTERNAL + "appBankJobTask.do?updateTaskDate";
+    //更新负责人
+    public static final String appBankJobTaskUpdateManagerEmpId = INTERNAL + "appBankJobTask.do?updateManagerEmpId";
+    //更新参与人
+    public static final String appBankJobTaskSaveSub = INTERNAL + "appBankJobTask.do?saveSub";
+    //根据taskId查询任务和子任务列表
+    public static final String appBankJobTaskFindTaskAndSubTask = INTERNAL + "appBankJobTask.do?findTaskAndSubTask";
+    //更新任务详细信息
+    public static final String appBankJobTaskUpdateDetailTask = INTERNAL + "appBankJobTask.do?updateDetailTask";
+    //查询所有角色
+    public static final String appBankJobTaskFindAllRole = INTERNAL + "appBankJobTask.do?findAllRole";
+    //分享角色操作
+    public static final String appBankJobTaskSaveRoleShare = INTERNAL + "appBankJobTask.do?saveRoleShare";
 }

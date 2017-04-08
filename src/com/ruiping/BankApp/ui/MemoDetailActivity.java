@@ -160,7 +160,7 @@ public class MemoDetailActivity extends BaseActivity implements View.OnClickList
 
     // 弹窗删除
     private void showWindows() {
-        final Dialog picAddDialog = new Dialog(MemoDetailActivity.this, R.style.dialog);
+        final Dialog picAddDialog = new Dialog(MemoDetailActivity.this, R.style.MyAlertDialog);
         View picAddInflate = View.inflate(this, R.layout.msg_dialog, null);
         Button btn_sure = (Button) picAddInflate.findViewById(R.id.btn_sure);
         final TextView msg_content = (TextView) picAddInflate.findViewById(R.id.content);

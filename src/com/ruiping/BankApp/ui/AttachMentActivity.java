@@ -24,7 +24,6 @@ import com.ruiping.BankApp.data.BankJobReportSingleData;
 import com.ruiping.BankApp.entiy.AttachMentObj;
 import com.ruiping.BankApp.upload.CommonUtil;
 import com.ruiping.BankApp.util.Contance;
-import com.ruiping.BankApp.util.HttpDownloader;
 import com.ruiping.BankApp.util.StringUtil;
 import com.ruiping.BankApp.widget.CustomProgressDialog;
 import easeui.ui.EaseShowNormalFileActivity2;

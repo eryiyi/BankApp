@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.ruiping.BankApp.BankAppApplication;
 import com.ruiping.BankApp.upload.MultiPartStringRequest;
 import com.ruiping.BankApp.widget.CustomProgressDialog;
+import com.umeng.analytics.game.UMGameAgent;
 import easeui.ui.EaseBaseActivity;
 
 import java.io.File;
@@ -81,10 +82,12 @@ public class BaseActivity extends EaseBaseActivity {
 
     public void onResume() {
         super.onResume();
+        UMGameAgent.onResume(this);
     }
 
     public void onPause() {
         super.onPause();
+        UMGameAgent.onPause(this);
     }
     /**
      * 返回

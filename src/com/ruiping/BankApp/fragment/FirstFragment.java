@@ -1,6 +1,9 @@
 package com.ruiping.BankApp.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -53,6 +56,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.one_fragment, null);
+        registerBoradcastReceiver();
         res = getActivity().getResources();
         initView();
         //获取任务统计
@@ -189,7 +193,33 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
             task_mine_number_do.setText(indexCountObj.getKey4()==null?"0":indexCountObj.getKey4());
             task_mine_number_finish.setText(indexCountObj.getKey2()==null?"0":indexCountObj.getKey2());
             task_mine_number_all.setText(indexCountObj.getKey5()==null?"0":indexCountObj.getKey5());
-            task_mine_number_share.setText(indexCountObj.getKey6()==null?"":indexCountObj.getKey6());
+            task_mine_number_share.setText(indexCountObj.getKey6()==null?"0":indexCountObj.getKey6());
         }
+    }
+
+
+    //广播接收动作
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("update_renwu_number")) {
+                getMineCount();
+            }
+        }
+    };
+
+    //注册广播
+    public void registerBoradcastReceiver() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction("update_renwu_number");
+        //注册广播
+        getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(mBroadcastReceiver);
     }
 }

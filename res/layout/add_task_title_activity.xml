@@ -22,11 +22,11 @@
             android:background="@drawable/et_bule_bg"
             android:textSize="16sp"
             android:gravity="top"
-            android:hint="请输入标题"
+            android:hint="请输入任务标题"
             android:padding="10dp"
             android:textColor="#ff000000"/>
     <Button android:layout_width="match_parent"
-            android:text="保存并完善信息"
+            android:text="保存下一步"
             android:padding="12dp"
             android:textStyle="bold"
             android:layout_marginTop="25dp"

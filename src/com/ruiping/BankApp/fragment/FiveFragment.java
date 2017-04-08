@@ -45,6 +45,7 @@ import com.ruiping.BankApp.util.Contance;
 import com.ruiping.BankApp.util.StringUtil;
 import com.ruiping.BankApp.widget.PictureGridview;
 import com.ruiping.BankApp.widget.SelectPhoPopWindow;
+import com.umeng.analytics.MobclickAgent;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -171,7 +172,7 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
                         //任务
                     {
                         Intent intent = new Intent(getActivity(), RenwuListActivity.class);
-                        intent.putExtra("type", "1");
+                        intent.putExtra("type", "4");
                         startActivity(intent);
                     }
                         break;
@@ -629,6 +630,7 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
     }
 
     void logout() {
+        MobclickAgent.onKillProcess(getContext());
         save(Contance.EMP_PWD, "");
         //调用广播，刷新主页
         DemoHelper.getInstance().logout(false,new EMCallBack() {

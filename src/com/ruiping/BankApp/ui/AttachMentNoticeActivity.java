@@ -1,6 +1,5 @@
 package com.ruiping.BankApp.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,9 +12,7 @@ import com.ruiping.BankApp.adapter.ItemAttachNoticeAdapter;
 import com.ruiping.BankApp.base.BaseActivity;
 import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.entiy.AttachMentObj;
-import com.ruiping.BankApp.util.HttpDownloader;
 import com.ruiping.BankApp.util.StringUtil;
-import easeui.ui.EaseShowNormalFileActivity;
 import easeui.ui.EaseShowNormalFileActivity2;
 
 import java.io.File;
