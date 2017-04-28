@@ -180,23 +180,25 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
                         if (StringUtil.isJson(s)) {
                             BankEmpData data = getGson().fromJson(s, BankEmpData.class);
                             if (data.getCode() == 200) {
-                                emps = data.getData();
+                                emps.clear();
+                                emps.addAll(data.getData());
+//                                emps = data.getData();
                                 if(conversationListView != null){
                                     conversationListView.refresh();
                                 }
                                 notifyMyAdapter();
                             } else {
-                                Toast.makeText(getActivity(), "获得数据失败，请稍后重试", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getActivity(), "获得数据失败，请稍后重试", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(getActivity(), "获得数据失败，请稍后重试", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity(), "获得数据失败，请稍后重试", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Toast.makeText(getActivity(), "获得数据失败，请稍后重试", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(), "获得数据失败，请稍后重试", Toast.LENGTH_SHORT).show();
                     }
                 }
         ) {
