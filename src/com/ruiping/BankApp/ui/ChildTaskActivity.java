@@ -121,9 +121,9 @@ public class ChildTaskActivity extends BaseActivity implements View.OnClickListe
                                 String code1 = jo.getString("code");
                                 if (Integer.parseInt(code1) == 200) {
                                     BankJobTaskData data = getGson().fromJson(s, BankJobTaskData.class);
-                                    if (IS_REFRESH) {
+//                                    if (IS_REFRESH) {
                                         lists.clear();
-                                    }
+//                                    }
                                     lists.addAll(data.getData());
                                     adapter.notifyDataSetChanged();
                                 } else {

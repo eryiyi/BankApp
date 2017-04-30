@@ -142,7 +142,11 @@ public class TaskSharePersonSelectActivity extends BaseActivity implements View.
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("empId", getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class));
-                params.put("groupId", getGson().fromJson(getSp().getString(Contance.GROUP_ID, ""), String.class));
+                if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString(Contance.GROUP_ID, ""), String.class))){
+                    params.put("groupId", getGson().fromJson(getSp().getString(Contance.GROUP_ID, ""), String.class));
+                }else{
+                    params.put("groupId", "");
+                }
                 return params;
             }
 

@@ -6,16 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
-import com.ruiping.BankApp.BankAppApplication;
 import com.ruiping.BankApp.R;
-import com.ruiping.BankApp.base.InternetURL;
-import com.ruiping.BankApp.entiy.BankJobReportDoneBean;
 import com.ruiping.BankApp.entiy.SourceObj;
-import com.ruiping.BankApp.util.DateUtil;
 import com.ruiping.BankApp.util.StringUtil;
 
 import java.util.List;

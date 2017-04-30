@@ -538,6 +538,9 @@ public class RenwuChildDetailActivity extends BaseActivity implements View.OnCli
                                             if(bankJobTasks != null){
                                                 bankJobTask = bankJobTasks.get(0);//获得任务详情了
                                                 if(bankJobTask != null){
+                                                    if(StringUtil.isNullOrEmpty(bankJobTask.getEmpIdZf())){
+                                                        bankJobTask.setEmpIdZf("");
+                                                    }
                                                     initData();//初始化数据
                                                 }
                                             }
@@ -577,7 +580,11 @@ public class RenwuChildDetailActivity extends BaseActivity implements View.OnCli
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("taskId", taskId);
                 params.put("empId", getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class));
-                params.put("groupId", getGson().fromJson(getSp().getString(Contance.GROUP_ID, ""), String.class));
+                if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString(Contance.GROUP_ID, ""), String.class))){
+                    params.put("groupId", getGson().fromJson(getSp().getString(Contance.GROUP_ID, ""), String.class));
+                }else{
+                    params.put("groupId", "");
+                }
                 return params;
             }
 

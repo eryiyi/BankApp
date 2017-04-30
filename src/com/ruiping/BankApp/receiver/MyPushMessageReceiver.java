@@ -143,7 +143,6 @@ public class MyPushMessageReceiver extends PushMessageReceiver {
                     msgId = customJson.getString("msgId");
                 }
             } catch (JSONException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }

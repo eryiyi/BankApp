@@ -89,8 +89,8 @@ public class ItemRenwuAdapter extends BaseAdapter {
 
             holder.item_title.setText(cell.getTaskTitle());
             holder.item_jindu.setText(cell.getTaskProgress());
-            if(!StringUtil.isNullOrEmpty(cell.getDateLine())){
-                holder.item_dateline.setText(DateUtil.getDate(cell.getDateLine(), "yyyy-MM-dd"));
+            if(!StringUtil.isNullOrEmpty(cell.getDateLineEnd())){
+                holder.item_dateline.setText(DateUtil.getDate(cell.getDateLineEnd(), "yyyy-MM-dd"));
             }
             if (!StringUtil.isNullOrEmpty(BankAppApplication.fontSize)) {
                 holder.item_title.setTextSize(Float.valueOf(BankAppApplication.fontSize));

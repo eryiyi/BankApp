@@ -1,13 +1,17 @@
 package com.ruiping.BankApp.ui;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.*;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -36,6 +40,7 @@ import com.ruiping.BankApp.util.StringUtil;
 import com.ruiping.BankApp.widget.ContentListView;
 import com.ruiping.BankApp.widget.CustomProgressDialog;
 import com.ruiping.BankApp.widget.DoubleDatePickerDialog;
+import com.ruiping.BankApp.widget.SelectDeleteWindow;
 import org.json.JSONObject;
 
 import java.util.*;
@@ -91,6 +96,8 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
     private TextView txt5;
     private TextView txt6;
     private TextView txt7;
+
+    private SelectDeleteWindow selectDeleteWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -234,7 +241,7 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
     //初始化数据
     void initData(){
         if(bankJobTask != null){
-            if(bankJobTask.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) || bankJobTask.getEmpIdF().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))){
+            if(bankJobTask.getEmpIdZf().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) ||bankJobTask.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) || bankJobTask.getEmpIdF().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))){
                 flag = true;
             }
         }
@@ -327,17 +334,36 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.liner_header:
             {
+                if("1".equals(bankJobTask.getIsType())){
+                    showMsg(RenwuDetailActivity.this, "任务已标记完成，不能继续操作！");
+                    return;
+                }
                 if(flag){
-                    //负责人
-                    Intent intent = new Intent(RenwuDetailActivity.this, TaskPersonFuzerenSelectActivity.class);
-                    intent.putExtra("taskId", bankJobTask.getTaskId());//任务ID
-                    startActivityForResult(intent, 1000);
+                    if(!StringUtil.isNullOrEmpty(bankJobTask.getPid()) && !"0".equals(bankJobTask.getPid())){
+                        //说明有pid  是子任务
+                        if(bankJobTask.getEmpIdZf().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) || bankJobTask.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))){
+                            Intent intent = new Intent(RenwuDetailActivity.this, TaskPersonFuzerenSelectActivity.class);
+                            intent.putExtra("taskId", bankJobTask.getTaskId());//任务ID
+                            startActivityForResult(intent, 1000);
+                        }
+                    }else{
+                        //说明是主任务
+                        if(bankJobTask.getEmpIdZf().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) ||bankJobTask.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) || bankJobTask.getEmpIdF().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))){
+                            Intent intent = new Intent(RenwuDetailActivity.this, TaskPersonFuzerenSelectActivity.class);
+                            intent.putExtra("taskId", bankJobTask.getTaskId());//任务ID
+                            startActivityForResult(intent, 1000);
+                        }
+                    }
                 }
 
             }
                 break;
             case R.id.liner_child:
             {
+                if("1".equals(bankJobTask.getIsType())){
+                    showMsg(RenwuDetailActivity.this, "任务已标记完成，不能继续操作！");
+                    return;
+                }
                 //子任务
                 Intent intent = new Intent(RenwuDetailActivity.this, RenwuChildListActivity.class);
                 intent.putExtra("taskId", bankJobTask.getTaskId());//任务ID
@@ -358,6 +384,10 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
             break;
             case R.id.liner_people:
             {
+                if("1".equals(bankJobTask.getIsType())){
+                    showMsg(RenwuDetailActivity.this, "任务已标记完成，不能继续操作！");
+                    return;
+                }
                 //参与人
                 Intent intent = new Intent(RenwuDetailActivity.this, TaskPersonActivity.class);
                 intent.putExtra("taskId", bankJobTask.getTaskId());//任务ID
@@ -367,6 +397,10 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
             break;
             case R.id.liner_attach:
             {
+                if("1".equals(bankJobTask.getIsType())){
+                    showMsg(RenwuDetailActivity.this, "任务已标记完成，不能继续操作！");
+                    return;
+                }
                 //附件
                 Intent intent = new Intent(RenwuDetailActivity.this, AttachMentTaskActivity.class);
                 intent.putExtra("attach_file",(bankJobTask.getTaskFile()==null?"":bankJobTask.getTaskFile()));
@@ -377,16 +411,36 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
             break;
             case R.id.liner_title:
             {
+                if("1".equals(bankJobTask.getIsType())){
+                    showMsg(RenwuDetailActivity.this, "任务已标记完成，不能继续操作！");
+                    return;
+                }
                 //标题
                 if(flag){
-                    Intent intent = new Intent(RenwuDetailActivity.this, TaskWriteContentActivity.class);
-                    intent.putExtra("content", task_title.getText().toString());
-                    startActivityForResult(intent, 1001);
+                    if(!StringUtil.isNullOrEmpty(bankJobTask.getPid()) && !"0".equals(bankJobTask.getPid())){
+                        //说明有pid  是子任务
+                        if(bankJobTask.getEmpIdZf().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) || bankJobTask.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))){
+                            Intent intent = new Intent(RenwuDetailActivity.this, TaskWriteContentActivity.class);
+                            intent.putExtra("content", task_title.getText().toString());
+                            startActivityForResult(intent, 1001);
+                        }
+                    }else{
+                        //说明是主任务
+                        if(bankJobTask.getEmpIdZf().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) ||bankJobTask.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) || bankJobTask.getEmpIdF().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))){
+                            Intent intent = new Intent(RenwuDetailActivity.this, TaskWriteContentActivity.class);
+                            intent.putExtra("content", task_title.getText().toString());
+                            startActivityForResult(intent, 1001);
+                        }
+                    }
                 }
             }
                 break;
             case R.id.liner_type:
             {
+                if("1".equals(bankJobTask.getIsType())){
+                    showMsg(RenwuDetailActivity.this, "任务已标记完成，不能继续操作！");
+                    return;
+                }
                 //紧急程度
                 if(flag) {
                     showTaskTypeSelect();
@@ -395,58 +449,124 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.liner_starttime:
             {
+                if("1".equals(bankJobTask.getIsType())){
+                    showMsg(RenwuDetailActivity.this, "任务已标记完成，不能继续操作！");
+                    return;
+                }
                 if(flag){
-                    //开始日期
-                    Calendar c = Calendar.getInstance();
-                    // 最后一个false表示不显示日期，如果要显示日期，最后参数可以是true或者不用输入
-                    new DoubleDatePickerDialog(RenwuDetailActivity.this, 0, new DoubleDatePickerDialog.OnDateSetListener() {
+                    if(!StringUtil.isNullOrEmpty(bankJobTask.getPid()) && !"0".equals(bankJobTask.getPid())){
+                        //说明有pid  是子任务
+                        if(bankJobTask.getEmpIdZf().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) || bankJobTask.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))){
+                            //开始日期
+                            Calendar c = Calendar.getInstance();
+                            // 最后一个false表示不显示日期，如果要显示日期，最后参数可以是true或者不用输入
+                            new DoubleDatePickerDialog(RenwuDetailActivity.this, 0, new DoubleDatePickerDialog.OnDateSetListener() {
 
-                        @Override
-                        public void onDateSet(DatePicker startDatePicker, int startYear, int startMonthOfYear,
-                                              int startDayOfMonth) {
-                            String textString = String.format("%d-%d-%d", startYear,
-                                    startMonthOfYear + 1, startDayOfMonth);
-                            //调用接口
-                            updateStart(textString);
+                                @Override
+                                public void onDateSet(DatePicker startDatePicker, int startYear, int startMonthOfYear,
+                                                      int startDayOfMonth) {
+                                    String textString = String.format("%d-%d-%d", startYear,
+                                            startMonthOfYear + 1, startDayOfMonth);
+                                    //调用接口
+                                    updateStart(textString);
+                                }
+                            }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DATE), false).show();
                         }
-                    }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DATE), false).show();
+                    }else{
+                        //说明是主任务
+                        if(bankJobTask.getEmpIdZf().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) ||bankJobTask.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) || bankJobTask.getEmpIdF().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))){
+                            //开始日期
+                            Calendar c = Calendar.getInstance();
+                            // 最后一个false表示不显示日期，如果要显示日期，最后参数可以是true或者不用输入
+                            new DoubleDatePickerDialog(RenwuDetailActivity.this, 0, new DoubleDatePickerDialog.OnDateSetListener() {
+
+                                @Override
+                                public void onDateSet(DatePicker startDatePicker, int startYear, int startMonthOfYear,
+                                                      int startDayOfMonth) {
+                                    String textString = String.format("%d-%d-%d", startYear,
+                                            startMonthOfYear + 1, startDayOfMonth);
+                                    //调用接口
+                                    updateStart(textString);
+                                }
+                            }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DATE), false).show();
+                        }
+                    }
                 }
             }
                 break;
             case R.id.liner_endtime:
             {
+                if("1".equals(bankJobTask.getIsType())){
+                    showMsg(RenwuDetailActivity.this, "任务已标记完成，不能继续操作！");
+                    return;
+                }
                 if(flag){
-                    //到期日期
-                    Calendar c = Calendar.getInstance();
-                    // 最后一个false表示不显示日期，如果要显示日期，最后参数可以是true或者不用输入
-                    new DoubleDatePickerDialog(RenwuDetailActivity.this, 0, new DoubleDatePickerDialog.OnDateSetListener() {
+                    if(!StringUtil.isNullOrEmpty(bankJobTask.getPid()) && !"0".equals(bankJobTask.getPid())){
+                        //说明有pid  是子任务
+                        if(bankJobTask.getEmpIdZf().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) || bankJobTask.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))){
+                            //到期日期
+                            Calendar c = Calendar.getInstance();
+                            // 最后一个false表示不显示日期，如果要显示日期，最后参数可以是true或者不用输入
+                            new DoubleDatePickerDialog(RenwuDetailActivity.this, 0, new DoubleDatePickerDialog.OnDateSetListener() {
 
-                        @Override
-                        public void onDateSet(DatePicker startDatePicker, int startYear, int startMonthOfYear,
-                                              int startDayOfMonth) {
-                            String textString = String.format("%d-%d-%d", startYear,
-                                    startMonthOfYear + 1, startDayOfMonth);
+                                @Override
+                                public void onDateSet(DatePicker startDatePicker, int startYear, int startMonthOfYear,
+                                                      int startDayOfMonth) {
+                                    String textString = String.format("%d-%d-%d", startYear,
+                                            startMonthOfYear + 1, startDayOfMonth);
 //                        endtime.setText(textString);
-                            //调用接口
-                            updateEnd(textString);
+                                    //调用接口
+                                    updateEnd(textString);
+                                }
+                            }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DATE), false).show();
                         }
-                    }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DATE), false).show();
+                    }else{
+                        //说明是主任务
+                        if(bankJobTask.getEmpIdZf().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) ||bankJobTask.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) || bankJobTask.getEmpIdF().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))){
+                            //到期日期
+                            Calendar c = Calendar.getInstance();
+                            // 最后一个false表示不显示日期，如果要显示日期，最后参数可以是true或者不用输入
+                            new DoubleDatePickerDialog(RenwuDetailActivity.this, 0, new DoubleDatePickerDialog.OnDateSetListener() {
+
+                                @Override
+                                public void onDateSet(DatePicker startDatePicker, int startYear, int startMonthOfYear,
+                                                      int startDayOfMonth) {
+                                    String textString = String.format("%d-%d-%d", startYear,
+                                            startMonthOfYear + 1, startDayOfMonth);
+//                        endtime.setText(textString);
+                                    //调用接口
+                                    updateEnd(textString);
+                                }
+                            }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DATE), false).show();
+                        }
+                    }
+
+
                 }
             }
             break;
             case R.id.liner_pro:
+            {
+                if("1".equals(bankJobTask.getIsType())){
+                    showMsg(RenwuDetailActivity.this, "任务已标记完成，不能继续操作！");
+                    return;
+                }
                 if(flag){
                     updatePro("");
                 }
+            }
                 break;
             case R.id.liner_share:
             {
+                if("1".equals(bankJobTask.getIsType())){
+                    showMsg(RenwuDetailActivity.this, "任务已标记完成，不能继续操作！");
+                    return;
+                }
                 //共享人
                 Intent intent = new Intent(RenwuDetailActivity.this, RenwuShareActivity.class);
                 intent.putExtra("taskId", taskId);
                 intent.putExtra("flag", String.valueOf(flag));
                 startActivity(intent);
-
             }
                 break;
         }
@@ -524,8 +644,6 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
 
     }
 
-
-
     @Override
     public void onLoad() {
             //评论
@@ -579,9 +697,7 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                         lstv.onRefreshComplete();
                         lstv.onLoadComplete();
                         lstv.setResultSize(lists.size());
-                        if(progressDialog != null){
-                            progressDialog.dismiss();
-                        }
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -589,9 +705,7 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                     public void onErrorResponse(VolleyError volleyError) {
                         lstv.onRefreshComplete();
                         lstv.onLoadComplete();
-                        if(progressDialog != null){
-                            progressDialog.dismiss();
-                        }
+
                         Toast.makeText(RenwuDetailActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -635,6 +749,9 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                                             if(bankJobTasks != null){
                                                 bankJobTask = bankJobTasks.get(0);//获得任务详情了
                                                 if(bankJobTask != null){
+                                                    if(StringUtil.isNullOrEmpty(bankJobTask.getEmpIdZf())){
+                                                        bankJobTask.setEmpIdZf("");
+                                                    }
                                                     initData();//初始化数据
                                                 }
                                             }
@@ -652,9 +769,7 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                         lstv.onRefreshComplete();
                         lstv.onLoadComplete();
                         lstv.setResultSize(lists.size());
-                        if(progressDialog != null){
-                            progressDialog.dismiss();
-                        }
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -662,9 +777,7 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                     public void onErrorResponse(VolleyError volleyError) {
                         lstv.onRefreshComplete();
                         lstv.onLoadComplete();
-                        if(progressDialog != null){
-                            progressDialog.dismiss();
-                        }
+
                         Toast.makeText(RenwuDetailActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -674,7 +787,11 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("taskId", taskId);
                 params.put("empId", getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class));
-                params.put("groupId", getGson().fromJson(getSp().getString(Contance.GROUP_ID, ""), String.class));
+                if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString(Contance.GROUP_ID, ""), String.class))){
+                    params.put("groupId", getGson().fromJson(getSp().getString(Contance.GROUP_ID, ""), String.class));
+                }else{
+                    params.put("groupId", "");
+                }
                 return params;
             }
 
@@ -757,20 +874,33 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
         if("000".equals(str)){
             switch (index) {
                 case 0:
-                   //标记完成
-                    progressDialog = new CustomProgressDialog(RenwuDetailActivity.this, "正在加载中",R.anim.custom_dialog_frame);
-                    progressDialog.setCancelable(true);
-                    progressDialog.setIndeterminate(true);
-                    progressDialog.show();
-                    doneFFinishTask();
+                {
+                    if("1".equals(bankJobTask.getIsType())){
+                        showMsg(RenwuDetailActivity.this, "任务已标记完成，不能继续操作！");
+                        return;
+                    }else{
+                        //标记完成
+                        progressDialog = new CustomProgressDialog(RenwuDetailActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                        progressDialog.setCancelable(true);
+                        progressDialog.setIndeterminate(true);
+                        progressDialog.show();
+                        doneFFinishTask();
+                    }
+                }
+
                     break;
                 case 1:
                     //删除
-                    progressDialog = new CustomProgressDialog(RenwuDetailActivity.this, "正在加载中",R.anim.custom_dialog_frame);
-                    progressDialog.setCancelable(true);
-                    progressDialog.setIndeterminate(true);
-                    progressDialog.show();
-                    deleteTask();
+                    if("1".equals(bankJobTask.getIsType())){
+                        showMsg(RenwuDetailActivity.this, "任务已标记完成，不能继续操作！");
+                        return;
+                    }else{
+                        if(bankJobTask.getEmpIdZf().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) || bankJobTask.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))){
+                            showDialog();
+                        }else{
+                            showMsg(RenwuDetailActivity.this, "你没有权限删除该任务！");
+                        }
+                    }
                     break;
                 case  2:
                     break;
@@ -795,6 +925,7 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                                     //完成进度100%
                                     progr.setText("100%");
                                     seekBar.setProgress(100);
+                                    bankJobTask.setIsType("1");
                                 } else {
                                     Toast.makeText(RenwuDetailActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
                                 }
@@ -1241,5 +1372,55 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
         super.onDestroy();
         unregisterReceiver(mBroadcastReceiver);
     }
+
+    private void showDialog() {
+        selectDeleteWindow = new SelectDeleteWindow(RenwuDetailActivity.this, itemsOnClick);
+        //显示窗口
+        setBackgroundAlpha(0.5f);//设置屏幕透明度
+
+        selectDeleteWindow.setBackgroundDrawable(new BitmapDrawable());
+        selectDeleteWindow.setFocusable(true);
+        selectDeleteWindow.showAtLocation(this.findViewById(R.id.main), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        selectDeleteWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                setBackgroundAlpha(1.0f);
+            }
+        });
+    }
+
+    //为弹出窗口实现监听类
+    private View.OnClickListener itemsOnClick = new View.OnClickListener() {
+
+        public void onClick(View v) {
+            selectDeleteWindow.dismiss();
+            switch (v.getId()) {
+                case R.id.btn_sure: {
+                    progressDialog = new CustomProgressDialog(RenwuDetailActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                    progressDialog.setCancelable(true);
+                    progressDialog.setIndeterminate(true);
+                    progressDialog.show();
+                    deleteTask();
+                }
+                break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    /**
+     * 设置添加屏幕的背景透明度
+     *
+     * @param bgAlpha
+     *            屏幕透明度0.0-1.0 1表示完全不透明
+     */
+    public void setBackgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = ((Activity) RenwuDetailActivity.this).getWindow()
+                .getAttributes();
+        lp.alpha = bgAlpha;
+        ((Activity) RenwuDetailActivity.this).getWindow().setAttributes(lp);
+    }
+
 
 }

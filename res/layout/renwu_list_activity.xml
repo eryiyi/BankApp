@@ -4,14 +4,61 @@
               android:background="@color/main_bg"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <include
-            android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_height="wrap_content"
-            layout="@layout/top_liner"/>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:background="@color/white"
+                    android:layout_height="@dimen/top_title_height">
+
+        <TextView android:layout_width="wrap_content"
+                  android:drawablePadding="5dp"
+                  android:textSize="16sp"
+                  android:gravity="center_vertical"
+                  android:padding="8dp"
+                  android:id="@+id/back"
+                  android:drawableLeft="@drawable/sm_back"
+                  android:text="@string/back"
+                  android:textColor="@color/blue_btn_normal"
+                  android:layout_centerVertical="true"
+                  android:layout_height="40dp"/>
+
+        <EditText android:layout_width="match_parent"
+                  android:layout_marginTop="3dp"
+                  android:layout_marginBottom="3dp"
+                  android:layout_marginRight="8dp"
+                  android:layout_marginLeft="8dp"
+                  android:layout_toRightOf="@+id/back"
+                  android:singleLine="true"
+                  android:drawableLeft="@drawable/ease_search_bar_icon_normal"
+                  android:layout_toLeftOf="@+id/right_btn"
+                  android:padding="8dp"
+                  android:id="@+id/keywords"
+                  android:hint="关键词"
+                  android:paddingLeft="8dp"
+                  android:background="@drawable/et_bule_radio_bg"
+                  android:textSize="15sp"
+                  android:layout_centerHorizontal="true"
+                  android:layout_centerVertical="true"
+                  android:paddingRight="12dp"
+                  android:textColor="@color/text_color_two"
+                  android:imeOptions="actionSearch"
+                  android:layout_height="wrap_content"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:text="编辑"
+                  android:id="@+id/right_btn"
+                  android:padding="12dp"
+                  android:layout_centerVertical="true"
+                  android:textSize="16sp"
+                  android:layout_alignParentRight="true"
+                  android:textColor="@color/blue_btn_normal"
+                  android:layout_height="wrap_content"/>
+    </RelativeLayout>
     <View android:layout_width="match_parent"
           android:background="@color/gray"
           android:layout_height="0.1dp"></View>
+
+
     <RelativeLayout android:layout_width="match_parent"
                     android:padding="15dp"
                     android:layout_height="match_parent">

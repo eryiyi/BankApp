@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class BankJobTask implements Serializable{
 	private String taskId;//工作表id 32 位 uuid
+	private String empIdZf;//主负责人ID
 	private String empId;//会员id 创建者 32 位uuid
 	private String empName;//创建人
 	private String empIdF;//会员id 负责人 32位uuid
@@ -371,6 +372,12 @@ public class BankJobTask implements Serializable{
 	public void setMytask(int mytask) {
 		this.mytask = mytask;
 	}
-	
 
+	public String getEmpIdZf() {
+		return empIdZf;
+	}
+
+	public void setEmpIdZf(String empIdZf) {
+		this.empIdZf = empIdZf;
+	}
 }

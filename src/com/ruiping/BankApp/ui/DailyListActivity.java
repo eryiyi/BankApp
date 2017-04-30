@@ -6,11 +6,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.view.KeyEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.*;
 import com.android.volley.*;
 import com.android.volley.toolbox.StringRequest;
 import com.ruiping.BankApp.R;
@@ -38,7 +37,6 @@ import java.util.Map;
  * Created by zhl on 2016/7/2.
  */
 public class DailyListActivity extends BaseActivity implements View.OnClickListener {
-    private TextView title;
     private TextView back;
     private TextView right_btn;
     private TextView no_data;
@@ -49,6 +47,8 @@ public class DailyListActivity extends BaseActivity implements View.OnClickListe
     private int pageIndex = 1;
     private static boolean IS_REFRESH = true;
     boolean isMobileNet, isWifiNet;
+    private EditText keywords;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +70,6 @@ public class DailyListActivity extends BaseActivity implements View.OnClickListe
     private void initView() {
         no_data = (TextView) this.findViewById(R.id.no_data);
         lstv = (PullToRefreshListView) this.findViewById(R.id.lstv);
-        title = (TextView) this.findViewById(R.id.title);
         back = (TextView) this.findViewById(R.id.back);
         right_btn = (TextView) this.findViewById(R.id.right_btn);
         right_btn.setText("添加");
@@ -78,14 +77,11 @@ public class DailyListActivity extends BaseActivity implements View.OnClickListe
         right_btn.setOnClickListener(this);
         switch (Integer.parseInt(type)){
             case 1:
-                title.setText("我的日报");
                 break;
             case 2:
-                title.setText("下属日报");
                 right_btn.setVisibility(View.GONE);
                 break;
             case 3:
-                title.setText("评论的日报");
                 right_btn.setVisibility(View.GONE);
                 break;
         }
@@ -130,6 +126,26 @@ public class DailyListActivity extends BaseActivity implements View.OnClickListe
                 }
             }
         });
+        keywords = (EditText) this.findViewById(R.id.keywords);
+        keywords.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    //修改回车键功能
+                    // 先隐藏键盘
+                    ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
+                            .hideSoftInputFromWindow(
+                                    DailyListActivity.this
+                                            .getCurrentFocus()
+                                            .getWindowToken(),
+                                    InputMethodManager.HIDE_NOT_ALWAYS);
+                    initData();
+
+                }
+                return false;
+            }
+        });
+
     }
 
     @Override
@@ -237,6 +253,9 @@ public class DailyListActivity extends BaseActivity implements View.OnClickListe
                             params.put("year", DateUtil.getYearAndMonth());
                             params.put("day", DateUtil.getDay());
                         }
+                        if(!StringUtil.isNullOrEmpty( keywords.getText().toString())){
+                            params.put("title", keywords.getText().toString());
+                        }
                         return params;
                     }
 
@@ -300,7 +319,7 @@ public class DailyListActivity extends BaseActivity implements View.OnClickListe
 
     BankJobReport bankJobReport;//今天的日报
 
-    //查询日报 今天的
+
     void getData(){
         StringRequest request = new StringRequest(
                 Request.Method.POST,
@@ -343,6 +362,7 @@ public class DailyListActivity extends BaseActivity implements View.OnClickListe
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("empId", getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class));
                 params.put("yearmonth", DateUtil.getYear() +"-"+ DateUtil.getMonth() +"-"+ DateUtil.getDay());
+
                 return params;
             }
 

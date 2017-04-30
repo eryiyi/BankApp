@@ -271,6 +271,7 @@
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/widget/NoScrollGridView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/widget/PictureGridview.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/widget/ReboundScrollView.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/widget/SelectDeleteWindow.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/widget/SelectPhoPopWindow.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/widget/SelectPhoTwoPopWindow.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/widget/SexRadioGroup.java" charset="UTF-8" />
