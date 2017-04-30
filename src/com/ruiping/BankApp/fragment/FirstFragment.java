@@ -48,6 +48,12 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
 
     private IndexCountObj indexCountObj ;//任务统计对象
 
+    private TextView txt1;
+    private TextView txt2;
+    private TextView txt3;
+    private TextView txt4;
+    private TextView txt5;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,14 +1,16 @@
 package com.ruiping.BankApp.ui;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.*;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.AuthFailureError;
@@ -23,12 +25,15 @@ import com.ruiping.BankApp.base.BaseActivity;
 import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.data.BankVersionData;
 import com.ruiping.BankApp.entiy.BankVersion;
+import com.ruiping.BankApp.entiy.SetFontSize;
 import com.ruiping.BankApp.huanxin.DemoHelper;
 import com.ruiping.BankApp.util.Contance;
 import com.ruiping.BankApp.util.StringUtil;
 import com.ruiping.BankApp.widget.CustomProgressDialog;
+import com.ruiping.BankApp.widget.CustomerSpinner;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,9 +43,18 @@ import java.util.Map;
 public class MineSetActivity extends BaseActivity implements View.OnClickListener {
     private TextView title;
     private TextView daily_count;
+
+    private CustomerSpinner textSize;
+    ArrayAdapter<String> adapterEmpType;
+    private ArrayList<SetFontSize> empTypeList = new ArrayList<SetFontSize>();
+    private ArrayList<String> empTypeListStr = new ArrayList<String>();
+    private TextView fontsize_text;
+    private SetFontSize tmpSize;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        registerBoradcastReceiver();
         setContentView(R.layout.mine_set_activity);
 
         this.findViewById(R.id.back).setOnClickListener(this);
@@ -54,6 +68,38 @@ public class MineSetActivity extends BaseActivity implements View.OnClickListene
         this.findViewById(R.id.liner_four).setOnClickListener(this);
         this.findViewById(R.id.liner_notice).setOnClickListener(this);
         daily_count.setText(getVersion());
+
+        fontsize_text = (TextView) this.findViewById(R.id.fontsize_text);
+        textSize = (CustomerSpinner) this.findViewById(R.id.textSize);
+
+        empTypeList.add(new SetFontSize(getResources().getString(R.string.font_zhengchang), "16"));
+        empTypeList.add(new SetFontSize(getResources().getString(R.string.font_small), "14"));
+        empTypeList.add(new SetFontSize(getResources().getString(R.string.font_zhong), "18"));
+        empTypeList.add(new SetFontSize(getResources().getString(R.string.font_big), "22"));
+        empTypeList.add(new SetFontSize(getResources().getString(R.string.font_big_big), "26"));
+        empTypeListStr.add(getResources().getString(R.string.font_zhengchang));
+        empTypeListStr.add(getResources().getString(R.string.font_small));
+        empTypeListStr.add(getResources().getString(R.string.font_zhong));
+        empTypeListStr.add(getResources().getString(R.string.font_big));
+        empTypeListStr.add(getResources().getString(R.string.font_big_big));
+        adapterEmpType = new ArrayAdapter<String>(MineSetActivity.this, android.R.layout.simple_spinner_item, empTypeListStr);
+        textSize.setList(empTypeListStr);
+        textSize.setAdapter(adapterEmpType);
+        textSize.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                tmpSize = empTypeList.get(position);
+                save("font_size", tmpSize.getSizeStr());
+                //调用广播，刷新主页
+                Intent intent1 = new Intent("change_color_size");
+                sendBroadcast(intent1);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     public String getVersion() {
@@ -123,6 +169,7 @@ public class MineSetActivity extends BaseActivity implements View.OnClickListene
                 startActivity(intent);
             }
                 break;
+
         }
     }
 
@@ -248,6 +295,53 @@ public class MineSetActivity extends BaseActivity implements View.OnClickListene
             }
         };
         getRequestQueue().add(request);
+    }
+
+
+    void changeColorOrSize() {
+        if (!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("font_size", ""), String.class))) {
+            fontsize_text.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            if ("16".equals(getGson().fromJson(getSp().getString("font_size", ""), String.class))) {
+                textSize.setSelection(0, true);
+            }
+            if ("14".equals(getGson().fromJson(getSp().getString("font_size", ""), String.class))) {
+                textSize.setSelection(1, true);
+            }
+            if ("18".equals(getGson().fromJson(getSp().getString("font_size", ""), String.class))) {
+                textSize.setSelection(2, true);
+            }
+            if ("22".equals(getGson().fromJson(getSp().getString("font_size", ""), String.class))) {
+                textSize.setSelection(3, true);
+            }
+            if ("26".equals(getGson().fromJson(getSp().getString("font_size", ""), String.class))) {
+                textSize.setSelection(4, true);
+            }
+        }
+    }
+
+    //广播接收动作
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("change_color_size")) {
+                changeColorOrSize();
+            }
+        }
+    };
+
+    //注册广播
+    public void registerBoradcastReceiver() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction("change_color_size");//
+        //注册广播
+        registerReceiver(mBroadcastReceiver, myIntentFilter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mBroadcastReceiver);
     }
 
 }

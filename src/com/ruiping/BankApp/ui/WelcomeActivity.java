@@ -168,7 +168,9 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
         save(Contance.EMP_EMAIL, bankEmpBean.getEmail());
         save(Contance.IS_MEETING, bankEmpBean.getIsMeeting());
         if(!StringUtil.isNullOrEmpty(bankEmpBean.getEmpIdUp())){
-            save(Contance.EMP_NAME_UP, bankEmpBean.getBankemp().getEmpName());
+            if(bankEmpBean.getBankemp() != null){
+                save(Contance.EMP_NAME_UP, bankEmpBean.getBankemp().getEmpName());
+            }
         }
         if(bankEmpBean.getBankGroup() != null){
             save(Contance.GROUP_ID, bankEmpBean.getBankGroup().getGroupId());

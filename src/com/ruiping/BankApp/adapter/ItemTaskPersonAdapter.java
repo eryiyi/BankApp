@@ -92,7 +92,7 @@ public class ItemTaskPersonAdapter extends BaseAdapter {
         return convertView;
     }
 
-    class ViewHolder {
+    public static   class ViewHolder {
         ImageView item_head;
         TextView item_title;
         TextView btn_delete;

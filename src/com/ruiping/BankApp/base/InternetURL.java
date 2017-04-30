@@ -240,4 +240,6 @@ public class InternetURL {
     public static final String appBankJobTaskFindAllRole = INTERNAL + "appBankJobTask.do?findAllRole";
     //分享角色操作
     public static final String appBankJobTaskSaveRoleShare = INTERNAL + "appBankJobTask.do?saveRoleShare";
+
+    //
 }

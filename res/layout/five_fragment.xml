@@ -112,7 +112,6 @@
                 <TextView android:layout_width="wrap_content"
                           android:text="暂无"
                           android:textSize="16sp"
-                          android:drawableRight="@drawable/sm_more"
                           android:id="@+id/email"
                           android:layout_alignParentRight="true"
                           android:textColor="@color/text_color_two"
@@ -134,7 +133,6 @@
                 <TextView android:layout_width="wrap_content"
                           android:id="@+id/mobile"
                           android:textSize="16sp"
-                          android:drawableRight="@drawable/sm_more"
                           android:layout_alignParentRight="true"
                           android:textColor="@color/text_color_two"
                           android:layout_height="wrap_content"/>

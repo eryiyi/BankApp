@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">农商银行办公系统</string>
+    <string name="app_name">农商银行OA</string>
     <string name="net_work_error">请检查网络连接</string>
     <string name="back">返回</string>
     <string name="pull_to_refresh_pull_label" translatable="false">向下拉动可以刷新</string>
@@ -414,5 +414,11 @@
     <string name="task_emp_name">"设置%1$S为任务负责人？"</string>
     <string name="add_task_emp_s_txt">"已选择（%1$s）人"</string>
     <string name="add_task_share_txt">"已选择（%1$s）"</string>
+
+    <string name="font_zhengchang">正常字体</string>
+    <string name="font_small">小号字体</string>
+    <string name="font_zhong">中号字体</string>
+    <string name="font_big">大号字体</string>
+    <string name="font_big_big">超大号字体</string>
 
 </resources>
