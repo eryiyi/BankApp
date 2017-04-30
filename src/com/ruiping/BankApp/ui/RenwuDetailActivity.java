@@ -84,6 +84,14 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
     private TaskPopMenu menu;
     List<String> arrayMenu = new ArrayList<>();
 
+    private TextView txt1;
+    private TextView txt2;
+    private TextView txt3;
+    private TextView txt4;
+    private TextView txt5;
+    private TextView txt6;
+    private TextView txt7;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,7 +114,35 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
 
         //查询共享人数量
         getShareCount();
+        changeColorOrSize();
     }
+
+    void changeColorOrSize() {
+        if (!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("font_size", ""), String.class))) {
+            txt1.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt2.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt3.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt4.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt5.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt6.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt6.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt7.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+
+            task_title.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            dateline.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            nickname.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            endtime.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            progr.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            child.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            people.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            attach.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            task_type.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            starttime.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            share_count.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+
+        }
+    }
+
 
     private void initView() {
         back = (TextView) this.findViewById(R.id.back);
@@ -186,6 +222,13 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
             }
         });
 
+        txt1 = (TextView) headLiner.findViewById(R.id.txt1);
+        txt2 = (TextView) headLiner.findViewById(R.id.txt2);
+        txt3 = (TextView) headLiner.findViewById(R.id.txt3);
+        txt4 = (TextView) headLiner.findViewById(R.id.txt4);
+        txt5 = (TextView) headLiner.findViewById(R.id.txt5);
+        txt6 = (TextView) headLiner.findViewById(R.id.txt6);
+        txt7 = (TextView) headLiner.findViewById(R.id.txt7);
     }
 
     //初始化数据

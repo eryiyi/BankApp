@@ -67,6 +67,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         initView();
         //获取任务统计
         getMineCount();
+        changeColorOrSize();
         return view;
     }
 
@@ -90,6 +91,29 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         task_mine_number_finish = (TextView) view.findViewById(R.id.task_mine_number_finish);
         task_mine_number_all = (TextView) view.findViewById(R.id.task_mine_number_all);
         task_mine_number_share = (TextView) view.findViewById(R.id.task_mine_number_share);
+
+        txt1 = (TextView) view.findViewById(R.id.txt1);
+        txt2 = (TextView) view.findViewById(R.id.txt2);
+        txt3 = (TextView) view.findViewById(R.id.txt3);
+        txt4 = (TextView) view.findViewById(R.id.txt4);
+        txt5 = (TextView) view.findViewById(R.id.txt5);
+
+    }
+
+    void changeColorOrSize() {
+        if (!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("font_size", ""), String.class))) {
+            txt1.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt2.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt3.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt4.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt5.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+
+            task_mine_number.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            task_mine_number_do.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            task_mine_number_finish.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            task_mine_number_all.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            task_mine_number_share.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+        }
     }
 
     @Override
@@ -212,6 +236,9 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
             if (action.equals("update_renwu_number")) {
                 getMineCount();
             }
+            if (action.equals("change_color_size")) {
+                changeColorOrSize();
+            }
         }
     };
 
@@ -219,6 +246,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
     public void registerBoradcastReceiver() {
         IntentFilter myIntentFilter = new IntentFilter();
         myIntentFilter.addAction("update_renwu_number");
+        myIntentFilter.addAction("change_color_size");
         //注册广播
         getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
     }

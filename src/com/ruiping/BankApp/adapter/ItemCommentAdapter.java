@@ -95,6 +95,13 @@ public class ItemCommentAdapter extends BaseAdapter {
                 }
             }
             holder.item_cont.setText(cell.getCommentCont()==null?"":cell.getCommentCont());
+
+            if (!StringUtil.isNullOrEmpty(BankAppApplication.fontSize)) {
+                holder.item_dateline.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+                holder.item_nickname.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+                holder.item_reply.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+                holder.item_cont.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+            }
         }
 
         return convertView;

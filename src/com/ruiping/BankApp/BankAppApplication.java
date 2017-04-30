@@ -55,6 +55,8 @@ public class BankAppApplication extends Application {
      * nickname for current user, the nickname instead of ID be shown when user receive notification from APNs
      */
     public static String currentUserNick = "";
+    public static String fontSize = "16";
+
 
     @Override
     public void onCreate() {

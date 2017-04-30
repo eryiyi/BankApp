@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.ruiping.BankApp.BankAppApplication;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.entiy.BankNoticesBean;
 import com.ruiping.BankApp.util.DateUtil;
@@ -74,6 +75,10 @@ public class ItemNoticeAdapter extends BaseAdapter {
                 holder.item_dateline.setText(DateUtil.getDate(cell.getReleaseTime(),"yyyy-MM-dd HH:mm"));
             }
 
+            if (!StringUtil.isNullOrEmpty(BankAppApplication.fontSize)) {
+                holder.item_dateline.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+                holder.item_cont.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+            }
         }
 
         return convertView;

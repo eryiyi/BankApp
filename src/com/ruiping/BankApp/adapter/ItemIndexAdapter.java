@@ -9,8 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.ruiping.BankApp.BankAppApplication;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.entiy.IndexObj;
+import com.ruiping.BankApp.util.StringUtil;
 
 import java.util.List;
 
@@ -99,6 +101,10 @@ public class ItemIndexAdapter extends BaseAdapter {
                 holder.item_number.setTextColor(res.getColor(R.color.index_seven));
             }
 
+            if (!StringUtil.isNullOrEmpty(BankAppApplication.fontSize)) {
+                holder.item_title.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+                holder.item_number.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+            }
         }
 
         return convertView;

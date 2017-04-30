@@ -105,7 +105,20 @@ public class DailyDetailActivtiy extends BaseActivity implements View.OnClickLis
         initData();//获得评论列表
         getDone();//获得日报查阅列表
 //        getDetail();//获得日报详情
+        changeColorOrSize();
     }
+
+    void changeColorOrSize() {
+        if (!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("font_size", ""), String.class))) {
+            nickname.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            dateline.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            content.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+        }
+    }
+
+
+
+
     private void getDetail() {
         //判断是否有网
         try {

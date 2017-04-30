@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.ruiping.BankApp.BankAppApplication;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.entiy.BankJobTaskComment;
@@ -91,6 +92,12 @@ public class ItemTaskCommentAdapter extends BaseAdapter {
                 }
             }
             holder.item_cont.setText(cell.getCommentCont());
+            if (!StringUtil.isNullOrEmpty(BankAppApplication.fontSize)) {
+                holder.item_dateline.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+                holder.item_cont.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+                holder.item_reply.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+                holder.item_nickname.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+            }
         }
 
         return convertView;

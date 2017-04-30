@@ -7,12 +7,14 @@
               android:layout_height="wrap_content">
     <TextView android:layout_width="wrap_content"
               android:id="@+id/item_title"
+              android:text="title"
               android:textColor="@color/text_color"
               android:textSize="16sp"
               android:layout_height="wrap_content"/>
     <TextView android:layout_width="wrap_content"
               android:textColor="@color/text_color_two"
               android:layout_marginTop="6dp"
+              android:text="content"
               android:lineSpacingMultiplier="1.2"
               android:layout_below="@+id/item_title"
               android:id="@+id/item_cont"
@@ -21,6 +23,7 @@
               android:id="@+id/item_dateline"
               android:textColor="@color/blue_btn_normal"
               android:textSize="14sp"
+              android:text="2017"
               android:layout_alignParentRight="true"
               android:layout_height="wrap_content"/>
 </RelativeLayout>

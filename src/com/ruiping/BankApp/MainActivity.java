@@ -104,6 +104,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         res = getResources();
         fm = getSupportFragmentManager();
         requestPermissions();
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("font_size", ""), String.class))){
+            BankAppApplication.fontSize =getGson().fromJson(getSp().getString("font_size", ""), String.class);
+        }
 
         initView();
 

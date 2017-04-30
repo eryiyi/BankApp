@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:padding="12dp"
+              android:padding="16dp"
               android:gravity="center_vertical"
               android:background="@drawable/btn_white_shape"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
     <TextView android:layout_width="wrap_content"
               android:textSize="14sp"
+              android:text="02-24 9:00"
               android:id="@+id/item_dateline"
               android:textColor="@color/blue_btn_normal"
               android:layout_height="wrap_content"/>
     <TextView android:layout_width="wrap_content"
               android:textColor="@color/text_color"
               android:textSize="14sp"
+              android:text="周春波"
               android:layout_toRightOf="@id/item_dateline"
               android:id="@+id/item_nickname"
               android:layout_marginLeft="15dp"
@@ -22,6 +24,7 @@
               android:layout_marginTop="6dp"
               android:layout_below="@+id/item_dateline"
               android:id="@+id/item_cont"
+              android:text="内容"
               android:textColor="@color/text_color"
               android:lineSpacingMultiplier="1.2"
               android:layout_height="wrap_content"/>

@@ -18,7 +18,7 @@
                       android:layout_height="match_parent">
             <RelativeLayout android:layout_width="match_parent"
                             android:background="@drawable/profile_bg"
-                            android:layout_height="130dp">
+                            android:layout_height="150dp">
                <com.ruiping.BankApp.widget.CircleImageView
                        android:layout_width="60dp"
                        android:id="@+id/head"
@@ -46,6 +46,7 @@
                             android:layout_height="wrap_content">
                 <TextView android:layout_width="wrap_content"
                           android:text="状态"
+                          android:id="@+id/txt1"
                           android:textSize="16sp"
                           android:textColor="@color/text_color"
                           android:layout_height="wrap_content"/>
@@ -65,6 +66,7 @@
                           android:layout_height="wrap_content">
                 <TextView android:layout_width="wrap_content"
                           android:text="部门"
+                          android:id="@+id/txt2"
                           android:textSize="16sp"
                           android:textColor="@color/text_color"
                           android:layout_height="wrap_content"/>
@@ -85,6 +87,7 @@
                             android:layout_height="wrap_content">
                 <TextView android:layout_width="wrap_content"
                           android:text="上级"
+                          android:id="@+id/txt3"
                           android:textSize="16sp"
                           android:textColor="@color/text_color"
                           android:layout_height="wrap_content"/>
@@ -106,6 +109,7 @@
                             android:layout_height="wrap_content">
                 <TextView android:layout_width="wrap_content"
                           android:text="邮箱"
+                          android:id="@+id/txt4"
                           android:textSize="16sp"
                           android:textColor="@color/text_color"
                           android:layout_height="wrap_content"/>
@@ -127,6 +131,7 @@
                             android:layout_height="wrap_content">
                 <TextView android:layout_width="wrap_content"
                           android:text="手机"
+                          android:id="@+id/txt5"
                           android:textSize="16sp"
                           android:textColor="@color/text_color"
                           android:layout_height="wrap_content"/>
@@ -148,6 +153,7 @@
                             android:layout_height="wrap_content">
                 <TextView android:layout_width="match_parent"
                           android:text="设置"
+                          android:id="@+id/txt6"
                           android:drawableRight="@drawable/sm_more"
                           android:textSize="16sp"
                           android:textColor="@color/text_color"

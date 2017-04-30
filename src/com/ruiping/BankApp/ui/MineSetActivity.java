@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.hyphenate.EMCallBack;
+import com.ruiping.BankApp.BankAppApplication;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.base.ActivityTack;
 import com.ruiping.BankApp.base.BaseActivity;
@@ -89,6 +90,7 @@ public class MineSetActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 tmpSize = empTypeList.get(position);
+                BankAppApplication.fontSize = tmpSize.getSizeStr();
                 save("font_size", tmpSize.getSizeStr());
                 //调用广播，刷新主页
                 Intent intent1 = new Intent("change_color_size");
@@ -100,6 +102,8 @@ public class MineSetActivity extends BaseActivity implements View.OnClickListene
 
             }
         });
+
+        changeColorOrSize();
     }
 
     public String getVersion() {

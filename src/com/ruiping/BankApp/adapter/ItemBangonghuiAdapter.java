@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.ruiping.BankApp.BankAppApplication;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.entiy.BankOfficeMeeting;
 import com.ruiping.BankApp.util.StringUtil;
@@ -84,6 +85,11 @@ public class ItemBangonghuiAdapter extends BaseAdapter {
             }
             String str = String.valueOf(strb).substring(0,strb.length()-1).replaceAll("\n","").replaceAll(" ", "").replaceAll("\t", "");
             holder.item_cont.setText(str);
+            if (!StringUtil.isNullOrEmpty(BankAppApplication.fontSize)) {
+                holder.item_daline_1.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+                holder.item_cont.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+                holder.item_daline_2.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+            }
         }
 
         return convertView;

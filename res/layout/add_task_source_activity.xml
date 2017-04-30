@@ -9,20 +9,18 @@
             android:layout_alignParentBottom="true"
             android:layout_height="wrap_content"
             layout="@layout/top_liner"/>
-    <View android:layout_width="match_parent"
-          android:background="@color/gray"
-          android:layout_height="0.1dp"></View>
+
 
     <RelativeLayout android:layout_width="match_parent"
-                    android:padding="12dp"
-                    android:layout_height="match_parent">
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
         <TextView android:layout_width="wrap_content"
                   android:id="@+id/no_data"
                   android:text="暂无数据"
                   android:textSize="16sp"
                   android:layout_centerInParent="true"
                   android:layout_height="wrap_content"/>
-        <com.ruiping.BankApp.library.PullToRefreshListView
+        <ListView
                 android:id="@+id/lstv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

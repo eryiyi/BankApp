@@ -47,6 +47,11 @@ public class SecondFragment extends BaseFragment implements View.OnClickListener
     private TextView xiashuCount;
     private TextView comment_count;
 
+    private TextView txt1;
+    private TextView txt2;
+    private TextView txt3;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +60,7 @@ public class SecondFragment extends BaseFragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.two_fragment, null);
+        registerBoradcastReceiver();
         res = getActivity().getResources();
         initView();
         progressDialog = new CustomProgressDialog(getActivity(), "正在加载中",R.anim.custom_dialog_frame);
@@ -65,6 +71,7 @@ public class SecondFragment extends BaseFragment implements View.OnClickListener
         getMineCount();
         //查询今天的日报
         getData();
+        changeColorOrSize();
         return view;
     }
 
@@ -83,6 +90,10 @@ public class SecondFragment extends BaseFragment implements View.OnClickListener
         view.findViewById(R.id.liner_one).setOnClickListener(this);
         view.findViewById(R.id.liner_two).setOnClickListener(this);
         view.findViewById(R.id.liner_three).setOnClickListener(this);
+
+        txt1 = (TextView) view.findViewById(R.id.txt1);
+        txt2 = (TextView) view.findViewById(R.id.txt2);
+        txt3 = (TextView) view.findViewById(R.id.txt3);
     }
 
     @Override
@@ -251,6 +262,19 @@ public class SecondFragment extends BaseFragment implements View.OnClickListener
     }
 
 
+    void changeColorOrSize() {
+        if (!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("font_size", ""), String.class))) {
+            txt1.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt2.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt3.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+
+            daily_count.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            xiashuCount.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            comment_count.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+        }
+    }
+
+
     //广播接收动作
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -262,6 +286,9 @@ public class SecondFragment extends BaseFragment implements View.OnClickListener
             if(action.equals("add_report_comment_success")){
                 getMineCount();
             }
+            if (action.equals("change_color_size")) {
+                changeColorOrSize();
+            }
         }
     };
 
@@ -270,6 +297,7 @@ public class SecondFragment extends BaseFragment implements View.OnClickListener
         IntentFilter myIntentFilter = new IntentFilter();
         myIntentFilter.addAction("add_report_daily_success");//添加日报成功
         myIntentFilter.addAction("add_report_comment_success");//添加日报评论
+        myIntentFilter.addAction("change_color_size");
         //注册广播
         getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
     }

@@ -5,10 +5,10 @@
               android:background="@drawable/btn_white_shape"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
-    <ImageView android:layout_width="35dp"
+    <ImageView android:layout_width="45dp"
                android:id="@+id/item_head"
                android:src="@drawable/ic_launcher"
-               android:layout_height="35dp"/>
+               android:layout_height="45dp"/>
     <TextView android:layout_width="wrap_content"
               android:textSize="14sp"
               android:layout_marginLeft="8dp"

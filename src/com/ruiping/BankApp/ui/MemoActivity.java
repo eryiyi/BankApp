@@ -37,6 +37,8 @@ public class MemoActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView daily_count;
     private TextView xiashuCount;
+    private TextView txt1;
+    private TextView txt2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class MemoActivity extends BaseActivity implements View.OnClickListener {
         //查询统计数据
         getMineCount();
         getMineCount2();
+        changeColorOrSize();
     }
     private void initView() {
         back = (TextView) this.findViewById(R.id.back);
@@ -65,8 +68,21 @@ public class MemoActivity extends BaseActivity implements View.OnClickListener {
 
         daily_count = (TextView) this.findViewById(R.id.daily_count);
         xiashuCount = (TextView) this.findViewById(R.id.xiashuCount);
+        txt1 = (TextView) this.findViewById(R.id.txt1);
+        txt2 = (TextView) this.findViewById(R.id.txt2);
 
     }
+
+    void changeColorOrSize() {
+        if (!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("font_size", ""), String.class))) {
+            txt1.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt2.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+
+            daily_count.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            xiashuCount.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+        }
+    }
+
 
     @Override
     public void onClick(View v) {

@@ -6,12 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.ruiping.BankApp.BankAppApplication;
 import com.ruiping.BankApp.R;
-import com.ruiping.BankApp.entiy.BankJobReport;
+import com.ruiping.BankApp.base.InternetURL;
+import com.ruiping.BankApp.entiy.BankJobReportDoneBean;
+import com.ruiping.BankApp.entiy.SourceObj;
+import com.ruiping.BankApp.util.DateUtil;
 import com.ruiping.BankApp.util.StringUtil;
 
 import java.util.List;
@@ -19,9 +23,9 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/5/27.
  */
-public class ItemWeeklyAdapter extends BaseAdapter {
+public class ItemTaskSourceAdapter extends BaseAdapter {
     private ViewHolder holder;
-    private List<BankJobReport> lists;
+    private List<SourceObj> lists;
     private Context mContect;
     Resources res;
 
@@ -35,7 +39,7 @@ public class ItemWeeklyAdapter extends BaseAdapter {
     }
 
 
-    public ItemWeeklyAdapter(List<BankJobReport> lists, Context mContect) {
+    public ItemTaskSourceAdapter(List<SourceObj> lists, Context mContect) {
         this.lists = lists;
         this.mContect = mContect;
     }
@@ -60,41 +64,28 @@ public class ItemWeeklyAdapter extends BaseAdapter {
         res = mContect.getResources();
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = LayoutInflater.from(mContect).inflate(R.layout.item_weekly, null);
-            holder.item_dateline = (TextView) convertView.findViewById(R.id.item_dateline);
-            holder.item_cont = (TextView) convertView.findViewById(R.id.item_cont);
-            holder.item_title = (TextView) convertView.findViewById(R.id.item_title);
-
+            convertView = LayoutInflater.from(mContect).inflate(R.layout.item_task_source, null);
+            holder.title = (TextView) convertView.findViewById(R.id.title);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        BankJobReport cell = lists.get(position);
+        SourceObj cell = lists.get(position);
         if (cell != null) {
-            if(cell.getBankEmp() != null){
-                holder.item_title.setText(cell.getReportNumber() +"--" +cell.getBankEmp().getEmpName());
-            }else {
-                holder.item_title.setText(cell.getReportNumber());
-            }
-            String strContent = cell.getReportTitle();
-            if(!StringUtil.isNullOrEmpty(strContent) && strContent.length() > 50){
-                strContent = strContent.substring(0,49);
-            }
-            holder.item_cont.setText(strContent==null?"":strContent);
-            holder.item_dateline.setText(cell.getDateStartEnd());
 
-            if (!StringUtil.isNullOrEmpty(BankAppApplication.fontSize)) {
-                holder.item_dateline.setTextSize(Float.valueOf(BankAppApplication.fontSize));
-                holder.item_cont.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+            if(!StringUtil.isNullOrEmpty(cell.getSource_title())){
+                holder.title.setText(cell.getSource_title());
             }
+
+//            if (!StringUtil.isNullOrEmpty(BankAppApplication.fontSize)) {
+//                holder.title.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+//            }
         }
 
         return convertView;
     }
 
     class ViewHolder {
-        TextView item_title;
-        TextView item_cont;
-        TextView item_dateline;
+        TextView title;
     }
 }

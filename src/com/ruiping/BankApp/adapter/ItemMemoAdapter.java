@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.ruiping.BankApp.BankAppApplication;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.entiy.BankNoteBean;
 import com.ruiping.BankApp.util.DateUtil;
@@ -72,6 +73,11 @@ public class ItemMemoAdapter extends BaseAdapter {
             holder.item_cont.setText(cell.getNoteContent());
             if(!StringUtil.isNullOrEmpty(cell.getDateLine())){
                 holder.item_dateline.setText(DateUtil.getDate(cell.getDateLine(),"yyyy-MM-dd HH:mm"));
+            }
+
+            if (!StringUtil.isNullOrEmpty(BankAppApplication.fontSize)) {
+                holder.item_dateline.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+                holder.item_cont.setTextSize(Float.valueOf(BankAppApplication.fontSize));
             }
         }
 

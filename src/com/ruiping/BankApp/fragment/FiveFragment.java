@@ -85,6 +85,13 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
     private String pics = "";
     private static final File PHOTO_CACHE_DIR = new File(Environment.getExternalStorageDirectory() + "/liangxun/PhotoCache");
 
+    private TextView txt1;
+    private TextView txt2;
+    private TextView txt3;
+    private TextView txt4;
+    private TextView txt5;
+    private TextView txt6;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +106,7 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
         initData();//初始化用户个人信息
         //查询主页面统计数据
         getCountTj();
+        changeColorOrSize();
         return view;
     }
 
@@ -179,8 +187,7 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
                     case 1:
                         //日报
                     {
-                        Intent intent = new Intent(getActivity(), DailyListActivity.class);
-                        intent.putExtra("type", "1");
+                        Intent intent = new Intent(getActivity(), DailyWeekActivity.class);
                         startActivity(intent);
                     }
                         break;
@@ -238,6 +245,14 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
         });
 
         view.findViewById(R.id.quite_btn).setOnClickListener(this);
+
+        txt1 = (TextView) view.findViewById(R.id.txt1);
+        txt2 = (TextView) view.findViewById(R.id.txt2);
+        txt3 = (TextView) view.findViewById(R.id.txt3);
+        txt4 = (TextView) view.findViewById(R.id.txt4);
+        txt5 = (TextView) view.findViewById(R.id.txt5);
+        txt6 = (TextView) view.findViewById(R.id.txt6);
+
     }
 
     @Override
@@ -606,6 +621,9 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
                 //查询主页面统计信息
                 getCountTj();
             }
+            if(action.equals("change_color_size")){
+                changeColorOrSize();
+            }
         }
     };
 
@@ -619,6 +637,7 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
         myIntentFilter.addAction("add_month_success");
         myIntentFilter.addAction("update_weekly_success");
         myIntentFilter.addAction("add_quarter_success");
+        myIntentFilter.addAction("change_color_size");
         //注册广播
         getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
     }
@@ -676,5 +695,24 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener{
             }
         });
     }
+
+    void changeColorOrSize() {
+        if (!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("font_size", ""), String.class))) {
+            txt1.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt2.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt3.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt4.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt5.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt6.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+
+            status.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            groupName.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            upEmpName.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            email.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            mobile.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            nickname.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+        }
+    }
+
 
 }

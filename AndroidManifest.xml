@@ -168,6 +168,7 @@
         <activity android:name=".ui.AddTaskEmpSActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.AddTaskShareActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.AddTaskXifenActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.AddTaskSourceActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
 
         <!--百度推送-->
         <!-- push富媒体，不使用富媒体推送不需要 -->

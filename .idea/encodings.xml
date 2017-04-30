@@ -149,6 +149,7 @@
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemTaskPersonAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemTaskPersonSelectAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemTaskShareAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemTaskSourceAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemWeeklyAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/ItemYearAdapter.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/com/ruiping/BankApp/adapter/OnClickContentItemListener.java" charset="UTF-8" />

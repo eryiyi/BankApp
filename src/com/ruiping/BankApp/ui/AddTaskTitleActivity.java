@@ -79,7 +79,7 @@ public class AddTaskTitleActivity extends BaseActivity implements View.OnClickLi
                                 String code = jo.getString("code");
                                 if (Integer.parseInt(code) == 200) {
                                     taskId = jo.getString("data");
-                                    Intent detailIntent = new Intent(AddTaskTitleActivity.this, AddTaskEmpFActivity.class);
+                                    Intent detailIntent = new Intent(AddTaskTitleActivity.this, AddTaskSourceActivity.class);
                                     detailIntent.putExtra("taskId", taskId);
                                     detailIntent.putExtra("taskTitle", content.getText().toString());
                                     startActivity(detailIntent);

@@ -21,6 +21,7 @@
                     android:layout_height="wrap_content">
         <TextView android:layout_width="wrap_content"
                   android:text="我的月报"
+                  android:id="@+id/txt1"
                   android:layout_centerVertical="true"
                   android:textSize="16sp"
                   android:textColor="@color/text_color"
@@ -46,6 +47,7 @@
                     android:layout_height="wrap_content">
         <TextView android:layout_width="wrap_content"
                   android:text="下属月报"
+                  android:id="@+id/txt2"
                   android:layout_centerVertical="true"
                   android:textSize="16sp"
                   android:textColor="@color/text_color"
@@ -72,6 +74,7 @@
         <TextView android:layout_width="wrap_content"
                   android:text="评论我的"
                   android:textSize="16sp"
+                  android:id="@+id/txt3"
                   android:layout_centerVertical="true"
                   android:textColor="@color/text_color"
                   android:layout_height="wrap_content"/>

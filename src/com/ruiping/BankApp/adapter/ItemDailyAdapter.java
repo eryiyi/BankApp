@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.ruiping.BankApp.BankAppApplication;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.entiy.BankJobReport;
 import com.ruiping.BankApp.util.DateUtil;
@@ -91,6 +92,12 @@ public class ItemDailyAdapter extends BaseAdapter {
                 holder.item_fujian.setVisibility(View.VISIBLE);
             }else {
                 holder.item_fujian.setVisibility(View.GONE);
+            }
+
+            if (!StringUtil.isNullOrEmpty(BankAppApplication.fontSize)) {
+                holder.item_dateline.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+                holder.item_nickname.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+                holder.item_cont.setTextSize(Float.valueOf(BankAppApplication.fontSize));
             }
         }
 

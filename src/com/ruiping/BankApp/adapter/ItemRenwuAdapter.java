@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.ruiping.BankApp.BankAppApplication;
 import com.ruiping.BankApp.R;
 import com.ruiping.BankApp.entiy.BankJobTask;
 import com.ruiping.BankApp.util.DateUtil;
@@ -89,7 +90,13 @@ public class ItemRenwuAdapter extends BaseAdapter {
             holder.item_title.setText(cell.getTaskTitle());
             holder.item_jindu.setText(cell.getTaskProgress());
             if(!StringUtil.isNullOrEmpty(cell.getDateLine())){
-                holder.item_dateline.setText(DateUtil.getDate(cell.getDateLine(), "yy-MM-dd HH:mm"));
+                holder.item_dateline.setText(DateUtil.getDate(cell.getDateLine(), "yyyy-MM-dd"));
+            }
+            if (!StringUtil.isNullOrEmpty(BankAppApplication.fontSize)) {
+                holder.item_title.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+                holder.item_nickname.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+                holder.item_jindu.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+                holder.item_dateline.setTextSize(Float.valueOf(BankAppApplication.fontSize));
             }
         }
         return convertView;

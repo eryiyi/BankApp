@@ -64,6 +64,9 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
     private TextView unread_renwu_number;
     private TextView unread_beiwang_number;
     private TextView unread_notice_number;
+    private TextView txt1;
+    private TextView txt2;
+    private TextView txt3;
     private InputMethodManager inputMethodManager;
 
     private RelativeLayout relate_xsdt;
@@ -81,6 +84,7 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
         view = inflater.inflate(R.layout.ease_fragment_conversation_list, null);
         res = getActivity().getResources();
         registerBoradcastReceiver();
+
         return view;
     }
 
@@ -95,6 +99,9 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
         unread_renwu_number = (TextView) listViewHead.findViewById(R.id.unread_renwu_number);
         unread_beiwang_number = (TextView) listViewHead.findViewById(R.id.unread_beiwang_number);
         unread_notice_number = (TextView) listViewHead.findViewById(R.id.unread_notice_number);
+        txt1 = (TextView) listViewHead.findViewById(R.id.txt1);
+        txt2 = (TextView) listViewHead.findViewById(R.id.txt2);
+        txt3 = (TextView) listViewHead.findViewById(R.id.txt3);
         xsdt_title = (TextView) listViewHead.findViewById(R.id.xsdt_title);
         relate_xsdt = (RelativeLayout) listViewHead.findViewById(R.id.relate_xsdt);
         relate_xsdt.setOnClickListener(this);
@@ -103,6 +110,7 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
         listViewHead.findViewById(R.id.relate_notice).setOnClickListener(this);
         getData();
         getDataT();
+        changeColorOrSize();
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -573,6 +581,20 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
     }
 
 
+    void changeColorOrSize() {
+        if (!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("font_size", ""), String.class))) {
+            unread_renwu_number.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            unread_beiwang_number.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            unread_notice_number.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            xsdt_title.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+
+            txt1.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt2.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt3.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+        }
+    }
+
+
     //广播接收动作
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -584,15 +606,19 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
                 //退群
                 refresh();
             }
+            if (action.equals("change_color_size")) {
+                changeColorOrSize();
+            }
+
         }
     }  ;
-
 
     //注册广播
     public void registerBoradcastReceiver() {
         IntentFilter myIntentFilter = new IntentFilter();
         myIntentFilter.addAction("arrived_msg_andMe");//有与我相关
         myIntentFilter.addAction("quite_group_success");//退群
+        myIntentFilter.addAction("change_color_size");
         getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
     }
 

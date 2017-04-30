@@ -38,6 +38,10 @@ public class QuarterActivity extends BaseActivity implements View.OnClickListene
     private TextView xiashuCount;
     private TextView comment_count;
 
+    private TextView txt1;
+    private TextView txt2;
+    private TextView txt3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +54,7 @@ public class QuarterActivity extends BaseActivity implements View.OnClickListene
         progressDialog.show();
         //查询统计数据
         getMineCount();
+        changeColorOrSize();
     }
 
     private void initView() {
@@ -68,7 +73,23 @@ public class QuarterActivity extends BaseActivity implements View.OnClickListene
         xiashuCount = (TextView) this.findViewById(R.id.xiashuCount);
         comment_count = (TextView) this.findViewById(R.id.comment_count);
 
+        txt1 = (TextView) this.findViewById(R.id.txt1);
+        txt2 = (TextView) this.findViewById(R.id.txt2);
+        txt3 = (TextView) this.findViewById(R.id.txt3);
     }
+
+    void changeColorOrSize() {
+        if (!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("font_size", ""), String.class))) {
+            txt1.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt2.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            txt3.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+
+            daily_count.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            xiashuCount.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+            comment_count.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
+        }
+    }
+
 
     @Override
     public void onClick(View v) {
