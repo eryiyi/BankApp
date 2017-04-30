@@ -70,14 +70,8 @@ public class BankAppApplication extends Application {
         initImageLoader(this);
         DemoHelper.getInstance().init(applicationContext);
 
-//        UMGameAgent.setDebugMode(true);
         UMGameAgent.init(this);
-        // Deprecated UMGameAgent.setPlayerLevel("LV.01");
         UMGameAgent.setPlayerLevel(1);
-        // UMGameAgent.setSessionContinueMillis(1000);
-        // UMGameAgent.startWithConfigure(
-        // new UMAnalyticsConfig(mContext, "4f83c5d852701564c0000011", "Umeng",
-        // EScenarioType.E_UM_GAME));
         MobclickAgent.setScenarioType(applicationContext, MobclickAgent.EScenarioType.E_UM_GAME);
     }
 
