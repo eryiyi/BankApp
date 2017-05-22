@@ -67,9 +67,9 @@ public class DailyWeekActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onClickOnDate() {
                 String dateAndDay = (monthDateView.getmSelYear()+"")  + (monthDateView.getmSelMonth()+"") +((monthDateView.getmSelDay()) +"");
-                if(Integer.parseInt(dateAndDay) > Integer.parseInt(currentDateAndDay)){
-                    showMsg(DailyWeekActivity.this, "该日报暂时不能添加");
-                }else {
+//                if(Integer.parseInt(dateAndDay) > Integer.parseInt(currentDateAndDay)){
+//                    showMsg(DailyWeekActivity.this, "该日报暂时不能添加");
+//                }else {
                     int year = monthDateView.getmSelYear();
                     int month = monthDateView.getmSelMonth()+1;
                     int day = monthDateView.getmSelDay();
@@ -92,7 +92,7 @@ public class DailyWeekActivity extends BaseActivity implements View.OnClickListe
                     progressDialog.setIndeterminate(true);
                     progressDialog.show();
                     getDailyByDay(yearmonth);
-                }
+//                }
             }
         });
         setOnlistener();

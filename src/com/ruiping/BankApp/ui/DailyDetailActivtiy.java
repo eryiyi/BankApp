@@ -223,7 +223,7 @@ public class DailyDetailActivtiy extends BaseActivity implements View.OnClickLis
         imageLoader.displayImage(InternetURL.INTERNAL + bankJobReport.getBankEmp().getEmpCover(), head, animateFirstListener);
         nickname.setText(bankJobReport.getBankEmp().getEmpName());
         dateline.setText(DateUtil.getDate(bankJobReport.getDateLine(),"MM-dd HH:mm"));
-        content.setText(bankJobReport.getReportCont());
+        content.setText(bankJobReport.getReportTitle());
         content.setOnClickListener(this);
         btn_attachment = (TextView) headLiner.findViewById(R.id.btn_attachment);
         btn_attachment.setOnClickListener(this);

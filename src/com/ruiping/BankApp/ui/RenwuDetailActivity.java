@@ -82,6 +82,7 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
     private TextView task_type;//紧急程度
     private TextView starttime;//开始日期
     private TextView share_count;//共享人数
+    private TextView content;
 
     private String taskId;//任务id
 
@@ -173,6 +174,7 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
         task_type = (TextView) headLiner.findViewById(R.id.task_type);
         starttime = (TextView) headLiner.findViewById(R.id.starttime);
         share_count = (TextView) headLiner.findViewById(R.id.share_count);
+        content = (TextView) headLiner.findViewById(R.id.content);
 
 
         headLiner.findViewById(R.id.liner_header).setOnClickListener(this);
@@ -184,6 +186,7 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
         headLiner.findViewById(R.id.add_comment).setOnClickListener(this);
         headLiner.findViewById(R.id.liner_type).setOnClickListener(this);
         headLiner.findViewById(R.id.liner_starttime).setOnClickListener(this);
+        headLiner.findViewById(R.id.liner_content).setOnClickListener(this);
         headLiner.findViewById(R.id.liner_share).setOnClickListener(this);
 
         adapter = new ItemTaskCommentAdapter(lists, RenwuDetailActivity.this);
@@ -310,6 +313,9 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
             attach.setText("0");
         }
 
+        if(!StringUtil.isNullOrEmpty(bankJobTask.getTaskCont())){
+            content.setText(bankJobTask.getTaskCont());
+        }
 
 //        endtime.setText(bankJobTask.getDateLineEnd());
 
@@ -569,6 +575,31 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                 startActivity(intent);
             }
                 break;
+            case R.id.liner_content:
+            {
+                if("1".equals(bankJobTask.getIsType())){
+                    showMsg(RenwuDetailActivity.this, "任务已标记完成，不能继续操作！");
+                    return;
+                }
+                if(flag){
+                    if(!StringUtil.isNullOrEmpty(bankJobTask.getPid()) && !"0".equals(bankJobTask.getPid())){
+                        //说明有pid  是子任务
+                        if(bankJobTask.getEmpIdZf().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) || bankJobTask.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))){
+                            Intent intent = new Intent(RenwuDetailActivity.this, TaskWriteBeizhuActivity.class);
+                            intent.putExtra("content", content.getText().toString());
+                            startActivityForResult(intent, 1002);
+                        }
+                    }else{
+                        //说明是主任务
+                        if(bankJobTask.getEmpIdZf().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) ||bankJobTask.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) || bankJobTask.getEmpIdF().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))){
+                            Intent intent = new Intent(RenwuDetailActivity.this, TaskWriteBeizhuActivity.class);
+                            intent.putExtra("content", content.getText().toString());
+                            startActivityForResult(intent, 1002);
+                        }
+                    }
+                }
+            }
+                break;
         }
     }
 
@@ -641,7 +672,13 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
             }
 
         }
+        if(requestCode == 1002 && resultCode == 10001){
+            String xontent = data.getExtras().getString("xontent");
+            if(!StringUtil.isNullOrEmpty(xontent)){
+                updateContent(xontent);
+            }
 
+        }
     }
 
     @Override
@@ -1196,6 +1233,64 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
         };
         getRequestQueue().add(request);
     }
+
+
+    private void updateContent(final String title){
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.updateMemo,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                String code1 = jo.getString("code");
+                                if (Integer.parseInt(code1) == 200) {
+                                    content.setText(title);
+                                    bankJobTask.setTaskCont(title);
+                                } else {
+                                    Toast.makeText(RenwuDetailActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            Toast.makeText(RenwuDetailActivity.this, R.string.add_failed, Toast.LENGTH_SHORT).show();
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(RenwuDetailActivity.this, R.string.add_failed, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("taskId", taskId);
+                params.put("taskCont", title);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
 
     //更新任务类型
     private void updateType(final String taskType){

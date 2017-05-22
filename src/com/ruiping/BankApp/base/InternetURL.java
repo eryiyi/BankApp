@@ -5,7 +5,7 @@ package com.ruiping.BankApp.base;
  */
 public class InternetURL {
     public static final String INTERNAL = "http://223.99.167.142:8088/Manage_ssm/";
-//    public static final String INTERNAL = "http://192.168.0.19:8080/Manage_ssm/";
+//    public static final String INTERNAL = "http://192.168.0.188:8080/Manage_ssm/";
 
     //多媒体文件上传接口
     public static final String UPLOAD_FILE = INTERNAL + "uploadFileController.do?uploadImage";
@@ -245,4 +245,7 @@ public class InternetURL {
     public static final String appBankJobTaskupdateTaskSource = INTERNAL + "appBankJobTask.do?updateTaskSource";
     //获取全部任务来源
     public static final String appBankTaskSourcefindall = INTERNAL + "appBankTaskSource.do?findall";
+
+    //1.更新备注信息
+    public static final String updateMemo = INTERNAL + "appBankJobTask.do?updateMemo";
 }

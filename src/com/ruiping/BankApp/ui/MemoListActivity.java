@@ -134,7 +134,6 @@ public class MemoListActivity extends BaseActivity implements View.OnClickListen
                     @Override
                     public void onResponse(String s) {
                         if (StringUtil.isJson(s)) {
-
                             try {
                                 JSONObject jo = new JSONObject(s);
                                 String code1 = jo.getString("code");

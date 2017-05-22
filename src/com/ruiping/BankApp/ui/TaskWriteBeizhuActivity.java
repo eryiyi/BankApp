@@ -13,7 +13,7 @@ import com.ruiping.BankApp.util.StringUtil;
  * Created by zhl on 2016/8/30.
  * 任务更新标题
  */
-public class TaskWriteContentActivity extends BaseActivity implements View.OnClickListener {
+public class TaskWriteBeizhuActivity extends BaseActivity implements View.OnClickListener {
     private TextView title;
 
     private TextView right_btn;
@@ -25,7 +25,7 @@ public class TaskWriteContentActivity extends BaseActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.write_title_activity);
+        setContentView(R.layout.write_content_activity);
         contentStr = getIntent().getExtras().getString("content");
         this.findViewById(R.id.back).setOnClickListener(this);
         right_btn = (TextView) this.findViewById(R.id.right_btn);
@@ -37,7 +37,7 @@ public class TaskWriteContentActivity extends BaseActivity implements View.OnCli
         if(!StringUtil.isNullOrEmpty(contentStr)){
             content.setText(contentStr);
         }
-        title.setText("任务标题");
+        title.setText("任务备注");
     }
 
     @Override
@@ -50,7 +50,7 @@ public class TaskWriteContentActivity extends BaseActivity implements View.OnCli
             {
                 //点击保存
                 if(StringUtil.isNullOrEmpty(content.getText().toString())){
-                    showMsg(TaskWriteContentActivity.this, "请输入内容！");
+                    showMsg(TaskWriteBeizhuActivity.this, "请输入内容！");
                     return;
                 }
                 Intent intent = new Intent();

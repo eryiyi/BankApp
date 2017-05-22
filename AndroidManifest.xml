@@ -1,39 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.ruiping.BankApp"
-          android:versionCode="11"
-          android:versionName="20">
+          android:versionCode="13"
+          android:versionName="22">
     <uses-sdk android:minSdkVersion="16"/>
 
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
-    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <!--<uses-permission android:name="android.permission.VIBRATE" />-->
+    <!--<uses-permission android:name="android.permission.INTERNET" />-->
+    <!--<uses-permission android:name="android.permission.RECORD_AUDIO" />-->
+    <!--<uses-permission android:name="android.permission.CAMERA" />-->
+    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
+    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
+    <!--<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />-->
+    <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
+    <!--<uses-permission android:name="android.permission.GET_TASKS" />-->
+    <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />-->
+    <!--<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />-->
+    <!--<uses-permission android:name="android.permission.WAKE_LOCK" />-->
+    <!--<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />-->
+    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
+    <!--<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />-->
+    <!--<uses-permission android:name="android.permission.USE_CREDENTIALS" />-->
+    <!--<uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />-->
+    <!--<uses-permission android:name="android.permission.BROADCAST_STICKY" />-->
+    <!--<uses-permission android:name="android.permission.WRITE_SETTINGS" />-->
+    <!--<uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />-->
+    <!--<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />-->
 
-    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
-    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
-    <!-- 富媒体需要声明的权限 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--<uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />-->
+    <!--<uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />-->
+    <!--&lt;!&ndash; 富媒体需要声明的权限 &ndash;&gt;-->
+    <!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
+    <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />-->
+    <!--<uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />-->
+
+    <!--&lt;!&ndash; 适配Android N系统必需的ContentProvider写权限声明，写权限包含应用包名&ndash;&gt;-->
+    <!--<uses-permission android:name="baidu.push.permission.WRITE_PUSHINFOPROVIDER.com.ruiping.BankApp" />-->
+    <!--<permission-->
+            <!--android:name="baidu.push.permission.WRITE_PUSHINFOPROVIDER.com.ruiping.BankApp"-->
+            <!--android:protectionLevel="normal">-->
+    <!--</permission>-->
+
+    <!--<permission-->
+            <!--android:name="com.ruiping.BankApp.permission.C2D_MESSAGE"-->
+            <!--android:protectionLevel="signature"-->
+            <!--/>-->
+    <!--<uses-permission android:name="com.ruiping.BankApp.permission.C2D_MESSAGE" />-->
+    <!--<permission-->
+            <!--android:name="com.ruiping.BankApp.permission.MIPUSH_RECEIVE"-->
+            <!--android:protectionLevel="signature" />-->
+    <!--<uses-permission android:name="com.ruiping.BankApp.permission.MIPUSH_RECEIVE" />-->
+    <!--<uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>-->
+    <!--<uses-feature android:name="android.hardware.camera"/>-->
+    <!--<uses-feature android:name="android.hardware.camera.autofocus"/>-->
+    <!--<uses-permission android:name="android.permission.FLASHLIGHT"/>-->
+    <!--<uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>-->
+    <!--<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>-->
+    <!--<uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION"/>-->
+    <!--<uses-permission android:name="android.permission.READ_LOGS"/>-->
+    <!--<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>-->
+    <!--<uses-permission android:name="android.permission.CALL_PHONE"/>-->
+    <!--<uses-permission android:name="android.permission.GET_ACCOUNTS"/>-->
+    <!--<uses-permission android:name="android.permission.USE_CREDENTIALS"/>-->
+    <!--<uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>-->
+    <!--<uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>-->
+    <!--<uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>-->
+    <!--<uses-permission android:name="android.permission.RECEIVE_SMS"/>-->
+    <!--<uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>-->
+    <!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>-->
+    <!--<uses-permission android:name="android.permission.SET_DEBUG_APP"/>-->
+    <!--<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>-->
+    <!--<uses-permission android:name="android.permission.READ_SMS"/>-->
+    <!-- 允许程序打开网络sockets(必选配置) -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 允许程序访问有关的网络信息(必选配置) -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 允许程序访问Wi-Fi网络状态信息(必选配置) -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 允许应用写（非读）用户的外部存储器(必选配置) -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 允许程序录制音频(必选配置) -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- 允许应用程序修改全局声音设置的权限 (必选配置)-->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <!-- 允许使用PowerManager的WakeLocks保持进程在休眠时从屏幕消失(必选配置) -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <!-- 允许请求访问使用照相设备(如果使用视频通话则必选配置) -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!--  允许程序连接到已配对的蓝牙设备(非必选,由应用选择是否需要) -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <!-- 允许程序发现和配对蓝牙设备(非必选,由应用选择是否需要)-->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!--  GPS定位权限(非必选，由应用选择是否需要)-->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <!--  允许一个程序访问CellID或WiFi热点来获取粗略的位置-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--  允许一个程序访问精良位置(如GPS)-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 允许访问振动设备(非必选,由应用选择是否需要)-->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!--  允许程序禁用键盘锁(非必选,由应用选择是否需要)-->
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!-- 允许一个程序接收到 ACTION_BOOT_COMPLETED广播在系统完成启动-->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!--以下2项是sharedsdk的配置-->
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+
+    <!--读取短信-->
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <!--mob-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <!--高德地图sdk-->
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.SET_DEBUG_APP" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <permission
+            android:name="com.ruiping.BankApp.permission.C2D_MESSAGE"
+            android:protectionLevel="signature"
+            />
+    <uses-permission android:name="com.ruiping.BankApp.permission.C2D_MESSAGE" />
+
+    <!-- renren sso Permission for Unit Test -->
+    <!-- QQ、QQ空间所需权限 -->
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+
+    <!-- Push service 运行需要的权限 -->
+    <!-- 富媒体需要声明的权限 -->
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
 
+    <permission
+            android:name="com.ruiping.BankApp.permission.MIPUSH_RECEIVE"
+            android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.ruiping.BankApp.permission.MIPUSH_RECEIVE" />
     <!-- 适配Android N系统必需的ContentProvider写权限声明，写权限包含应用包名-->
     <uses-permission android:name="baidu.push.permission.WRITE_PUSHINFOPROVIDER.com.ruiping.BankApp" />
     <permission
@@ -41,36 +156,16 @@
             android:protectionLevel="normal">
     </permission>
 
-    <permission
-            android:name="com.ruiping.BankApp.permission.C2D_MESSAGE"
-            android:protectionLevel="signature"
-            />
-    <uses-permission android:name="com.ruiping.BankApp.permission.C2D_MESSAGE" />
-    <permission
-            android:name="com.ruiping.BankApp.permission.MIPUSH_RECEIVE"
-            android:protectionLevel="signature" />
-    <uses-permission android:name="com.ruiping.BankApp.permission.MIPUSH_RECEIVE" />
-    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
-    <uses-permission android:name="android.permission.FLASHLIGHT"/>
-    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION"/>
-    <uses-permission android:name="android.permission.READ_LOGS"/>
-    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
-    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
-    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.SET_DEBUG_APP"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.READ_SMS"/>
+
+    <uses-feature
+            android:name="android.hardware.location"
+            android:required="false" />
+    <uses-feature
+            android:name="android.hardware.location.gps"
+            android:required="false" />
+    <uses-feature
+            android:name="android.hardware.location.network"
+            android:required="false" />
 
     <application android:label="@string/app_name"
                  android:theme="@android:style/Theme.NoTitleBar"
@@ -170,37 +265,93 @@
         <activity android:name=".ui.AddTaskXifenActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.AddTaskSourceActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.RenwuListChildActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.TaskWriteBeizhuActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
 
         <!--百度推送-->
         <!-- push富媒体，不使用富媒体推送不需要 -->
-        <activity
-                android:name="com.baidu.android.pushservice.richmedia.MediaViewActivity"
-                android:configChanges="orientation|keyboardHidden"
-                android:label="MediaViewActivity">
-        </activity>
-        <activity
-                android:name="com.baidu.android.pushservice.richmedia.MediaListActivity"
-                android:configChanges="orientation|keyboardHidden"
-                android:label="MediaListActivity"
-                android:launchMode="singleTask">
-        </activity>
-        <!-- push富媒体结束 -->
+        <!--<activity-->
+                <!--android:name="com.baidu.android.pushservice.richmedia.MediaViewActivity"-->
+                <!--android:configChanges="orientation|keyboardHidden"-->
+                <!--android:label="MediaViewActivity">-->
+        <!--</activity>-->
+        <!--<activity-->
+                <!--android:name="com.baidu.android.pushservice.richmedia.MediaListActivity"-->
+                <!--android:configChanges="orientation|keyboardHidden"-->
+                <!--android:label="MediaListActivity"-->
+                <!--android:launchMode="singleTask">-->
+        <!--</activity>-->
+        <!--&lt;!&ndash; push富媒体结束 &ndash;&gt;-->
 
-        <!-- push应用定义消息receiver声明 -->
-        <receiver android:name="com.ruiping.BankApp.receiver.MyPushMessageReceiver">
-            <intent-filter>
-                <!-- 接收push消息 -->
-                <action android:name="com.baidu.android.pushservice.action.MESSAGE"/>
-                <!-- 接收bind,unbind,fetch,delete等反馈消息 -->
-                <action android:name="com.baidu.android.pushservice.action.RECEIVE"/>
-                <action android:name="com.baidu.android.pushservice.action.notification.CLICK"/>
-            </intent-filter>
-        </receiver>
+        <!--&lt;!&ndash; push应用定义消息receiver声明 &ndash;&gt;-->
+        <!--<receiver android:name="com.ruiping.BankApp.receiver.MyPushMessageReceiver">-->
+            <!--<intent-filter>-->
+                <!--&lt;!&ndash; 接收push消息 &ndash;&gt;-->
+                <!--<action android:name="com.baidu.android.pushservice.action.MESSAGE"/>-->
+                <!--&lt;!&ndash; 接收bind,unbind,fetch,delete等反馈消息 &ndash;&gt;-->
+                <!--<action android:name="com.baidu.android.pushservice.action.RECEIVE"/>-->
+                <!--<action android:name="com.baidu.android.pushservice.action.notification.CLICK"/>-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
 
-        <!-- push必须的receviver和service声明 -->
-        <receiver
-                android:name="com.baidu.android.pushservice.PushServiceReceiver"
-                android:process=":bdservice_v1" >
+        <!--&lt;!&ndash; push必须的receviver和service声明 &ndash;&gt;-->
+        <!--<receiver-->
+                <!--android:name="com.baidu.android.pushservice.PushServiceReceiver"-->
+                <!--android:process=":bdservice_v1" >-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.BOOT_COMPLETED" />-->
+                <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE" />-->
+                <!--<action android:name="com.baidu.android.pushservice.action.notification.SHOW" />-->
+                <!--<action android:name="com.baidu.android.pushservice.action.media.CLICK" />-->
+                <!--&lt;!&ndash; 以下四项为可选的action声明，可大大提高service存活率和消息到达速度 &ndash;&gt;-->
+                <!--<action android:name="android.intent.action.MEDIA_MOUNTED" />-->
+                <!--<action android:name="android.intent.action.USER_PRESENT" />-->
+                <!--<action android:name="android.intent.action.ACTION_POWER_CONNECTED" />-->
+                <!--<action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
+        <!--<receiver-->
+                <!--android:name="com.baidu.android.pushservice.RegistrationReceiver"-->
+                <!--android:process=":bdservice_v1" >-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.baidu.android.pushservice.action.METHOD" />-->
+                <!--<action android:name="com.baidu.android.pushservice.action.BIND_SYNC" />-->
+            <!--</intent-filter>-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.PACKAGE_REMOVED" />-->
+
+                <!--<data android:scheme="package" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
+
+        <!--<service-->
+                <!--android:name="com.baidu.android.pushservice.PushService"-->
+                <!--android:exported="true"-->
+                <!--android:process=":bdservice_v1" >-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.baidu.android.pushservice.action.PUSH_SERVICE" />-->
+            <!--</intent-filter>-->
+        <!--</service>-->
+        <!--<service-->
+                <!--android:name="com.baidu.android.pushservice.CommandService"-->
+                <!--android:exported="true" />-->
+
+        <!--&lt;!&ndash; 适配Android N系统必需的ContentProvider声明，写权限包含应用包名&ndash;&gt;-->
+        <!--<provider-->
+                <!--android:name="com.baidu.android.pushservice.PushInfoProvider"-->
+                <!--android:authorities="com.ruiping.BankApp.bdpush"-->
+                <!--android:writePermission="baidu.push.permission.WRITE_PUSHINFOPROVIDER.com.ruiping.BankApp"-->
+                <!--android:protectionLevel = "signature"-->
+                <!--android:exported="true" />-->
+
+
+        <!--&lt;!&ndash; 在百度开发者中心查询应用的API Key &ndash;&gt;-->
+        <!--<meta-data android:name="api_key" android:value="HUs4DmXHRXyzF1BackTcT1U4"/>-->
+
+
+        <!-- push service start -->
+        <!-- 用于接收系统消息以保证PushService正常运行 -->
+        <receiver android:name="com.baidu.android.pushservice.PushServiceReceiver"
+                  android:process=":bdservice_v1" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
@@ -213,31 +364,28 @@
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
             </intent-filter>
         </receiver>
-        <receiver
-                android:name="com.baidu.android.pushservice.RegistrationReceiver"
-                android:process=":bdservice_v1" >
+        <!-- Push服务接收客户端发送的各种请求-->
+        <receiver android:name="com.baidu.android.pushservice.RegistrationReceiver"
+                  android:process=":bdservice_v1" >
             <intent-filter>
                 <action android:name="com.baidu.android.pushservice.action.METHOD" />
                 <action android:name="com.baidu.android.pushservice.action.BIND_SYNC" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
-
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
-
-        <service
-                android:name="com.baidu.android.pushservice.PushService"
-                android:exported="true"
-                android:process=":bdservice_v1" >
-            <intent-filter>
+        <service android:name="com.baidu.android.pushservice.PushService" android:exported="true"
+                 android:process=":bdservice_v1" >
+            <intent-filter >
                 <action android:name="com.baidu.android.pushservice.action.PUSH_SERVICE" />
             </intent-filter>
         </service>
-        <service
-                android:name="com.baidu.android.pushservice.CommandService"
-                android:exported="true" />
+
+        <!-- 4.4版本新增的CommandService声明，提升小米和魅族手机上的实际推送到达率 -->
+        <service android:name="com.baidu.android.pushservice.CommandService"
+                 android:exported="true" />
 
         <!-- 适配Android N系统必需的ContentProvider声明，写权限包含应用包名-->
         <provider
@@ -246,10 +394,23 @@
                 android:writePermission="baidu.push.permission.WRITE_PUSHINFOPROVIDER.com.ruiping.BankApp"
                 android:protectionLevel = "signature"
                 android:exported="true" />
-
-
         <!-- 在百度开发者中心查询应用的API Key -->
-        <meta-data android:name="api_key" android:value="HUs4DmXHRXyzF1BackTcT1U4"/>
+        <meta-data
+                android:name="api_key"
+                android:value="HUs4DmXHRXyzF1BackTcT1U4" />
+
+        <!-- push应用定义消息receiver声明 -->
+        <receiver android:name=".receiver.MyPushMessageReceiver" >
+            <intent-filter>
+                <!-- 接收push消息 -->
+                <action android:name="com.baidu.android.pushservice.action.MESSAGE" />
+                <!-- 接收bind,unbind,fetch,delete等反馈消息 -->
+                <action android:name="com.baidu.android.pushservice.action.RECEIVE" />
+                <action android:name="com.baidu.android.pushservice.action.notification.CLICK" />
+            </intent-filter>
+        </receiver>
+        <!-- push结束 -->
+
 
         <!-- 注册 -->
         <activity

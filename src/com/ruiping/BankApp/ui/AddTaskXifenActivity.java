@@ -97,10 +97,10 @@ public class AddTaskXifenActivity extends BaseActivity implements View.OnClickLi
         }
 
        final EditText title = (EditText) picAddInflate.findViewById(R.id.title);
-//       final EditText content = (EditText) picAddInflate.findViewById(R.id.content);
+       final EditText content = (EditText) picAddInflate.findViewById(R.id.content);
 
         title.setText(bankJobTask.getTaskTitle()==null?"":bankJobTask.getTaskTitle());
-//        content.setText(bankJobTask.getTaskCont()==null?"":bankJobTask.getTaskCont());
+        content.setText(bankJobTask.getTaskCont()==null?"":bankJobTask.getTaskCont());
 
         btn_sure.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,8 +109,11 @@ public class AddTaskXifenActivity extends BaseActivity implements View.OnClickLi
                 if(StringUtil.isNullOrEmpty(title.getText().toString())){
                     showMsg(AddTaskXifenActivity.this, "请输入标题！");
                     return;
-                }else {
+                }else{
                     updateEmpTask( bankJobTask.getTaskId(), title.getText().toString());
+                    if(!StringUtil.isNullOrEmpty(content.getText().toString())){
+                        updateContTask(bankJobTask.getTaskId(), content.getText().toString());
+                    }
                     picAddDialog.dismiss();
                 }
             }
@@ -187,6 +190,64 @@ public class AddTaskXifenActivity extends BaseActivity implements View.OnClickLi
         };
         getRequestQueue().add(request);
     }
+
+    private void updateContTask(final String taskId, final String content) {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.updateMemo,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                String code = jo.getString("code");
+                                if (Integer.parseInt(code) == 200) {
+                                    getData();
+                                    adapter.notifyDataSetChanged();
+                                }else {
+                                    showMsg(AddTaskXifenActivity.this, jo.getString("message"));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                            Toast.makeText(AddTaskXifenActivity.this, R.string.add_failed, Toast.LENGTH_SHORT).show();
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(AddTaskXifenActivity.this, R.string.add_failed, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("taskId", taskId);
+                params.put("taskCont", content);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
 
     private void getData() {
         progressDialog = new CustomProgressDialog(AddTaskXifenActivity.this, "正在加载中",R.anim.custom_dialog_frame);

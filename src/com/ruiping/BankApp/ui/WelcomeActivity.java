@@ -143,9 +143,12 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
     //保存登录用户的信息
     void saveEmp(){
         //进行绑定
+
         PushManager.startWork(getApplicationContext(),
                 PushConstants.LOGIN_TYPE_API_KEY,
                 Utils.getMetaValue(WelcomeActivity.this, "api_key"));
+
+
         save(Contance.EMP_ID, bankEmpBean.getEmpId());
         save(Contance.EMP_MOBILE, bankEmpBean.getEmpMobile());
         save(Contance.EMP_NAME, bankEmpBean.getEmpName());
