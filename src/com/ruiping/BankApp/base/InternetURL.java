@@ -4,8 +4,9 @@ package com.ruiping.BankApp.base;
  * Created by zhanghl on 2015/1/12.
  */
 public class InternetURL {
-    public static final String INTERNAL = "http://223.99.167.142:8088/Manage_ssm/";
-//    public static final String INTERNAL = "http://192.168.0.188:8080/Manage_ssm/";
+//    public static final String INTERNAL = "http://223.99.167.142:8088/Manage_ssm/";
+    public static final String INTERNAL = "http://192.168.0.188:8080/Manage_ssm/";
+//    public static final String INTERNAL = "http://157j1274e3.iask.in/Manage_ssm/";
 
     //多媒体文件上传接口
     public static final String UPLOAD_FILE = INTERNAL + "uploadFileController.do?uploadImage";
@@ -16,6 +17,9 @@ public class InternetURL {
 
     //登陆
     public static final String LOGIN_URL = INTERNAL + "appBankEmp.do?empLogin";
+
+    //百度推送SDK
+    public static final String BAIDU_PUSH_API_KEY = "HUs4DmXHRXyzF1BackTcT1U4";
 
     //    日报
     //    1.保存会员日报（周报）信息
@@ -174,6 +178,8 @@ public class InternetURL {
 
     //推送绑定
     public static final String UPDATE_PUSH_ID_URL = INTERNAL + "appBankEmp.do?updatePushId";
+    //华为绑定token
+    public static final String UPDATE_PUSH_ID_URL_HW = INTERNAL + "appBankEmp.do?updateHuaWeiTk";
     //根据会员ID查询会员详细信息
     public static final String GET_EMP_DETAIL_BY_ID_URL = INTERNAL + "appBankEmp.do?findEmpById";
 
@@ -224,8 +230,6 @@ public class InternetURL {
     //2.根据用户id 年份 月份获取日报信息
     public static final String getReportonMoths = INTERNAL + "appReportController.do?getReportonMoths";//empId  year  month
 
-
-
     //录入起始日期和截止日期
     public static final String appBankJobTaskUpdateTaskDate = INTERNAL + "appBankJobTask.do?updateTaskDate";
     //更新负责人
@@ -248,4 +252,9 @@ public class InternetURL {
 
     //1.更新备注信息
     public static final String updateMemo = INTERNAL + "appBankJobTask.do?updateMemo";
+
+    //更新任务为未完成
+    public static final String noDoneJobTask = INTERNAL + "appBankJobTask.do?noDoneJobTask";
+
+
 }

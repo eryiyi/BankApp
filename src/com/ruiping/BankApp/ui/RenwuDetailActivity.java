@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -61,6 +62,7 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
     private static boolean IS_REFRESH = true;
 
     private BankJobTask bankJobTask;//任务详情
+    private BankJobTask bankJobTaskIndex;//主任务详情
     private TaskBeanObj taskBeanObj;//任务主 全部信息
 
     ImageLoader imageLoader = ImageLoader.getInstance();//图片加载类
@@ -83,6 +85,14 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
     private TextView starttime;//开始日期
     private TextView share_count;//共享人数
     private TextView content;
+
+    private RelativeLayout liner_child;//任务参与人 --- 分任务没有该选项
+    private View liner_line_child;
+
+    private RelativeLayout liner_index_task;//所属主任务区域
+    private TextView index_title;//所属主任务标题
+
+    private LinearLayout liner_done_reply;//标记改为未完成状态，只有主任务负责人和创建人有该权限
 
     private String taskId;//任务id
 
@@ -175,7 +185,8 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
         starttime = (TextView) headLiner.findViewById(R.id.starttime);
         share_count = (TextView) headLiner.findViewById(R.id.share_count);
         content = (TextView) headLiner.findViewById(R.id.content);
-
+        liner_done_reply = (LinearLayout) headLiner.findViewById(R.id.liner_done_reply);
+        liner_done_reply.setOnClickListener(this);
 
         headLiner.findViewById(R.id.liner_header).setOnClickListener(this);
         headLiner.findViewById(R.id.liner_endtime).setOnClickListener(this);
@@ -188,6 +199,13 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
         headLiner.findViewById(R.id.liner_starttime).setOnClickListener(this);
         headLiner.findViewById(R.id.liner_content).setOnClickListener(this);
         headLiner.findViewById(R.id.liner_share).setOnClickListener(this);
+
+        liner_child = (RelativeLayout) headLiner.findViewById(R.id.liner_child);
+        liner_index_task = (RelativeLayout) headLiner.findViewById(R.id.liner_index_task);
+        liner_line_child = (View) headLiner.findViewById(R.id.liner_line_child);
+        index_title = (TextView) headLiner.findViewById(R.id.index_title);
+
+        liner_index_task.setOnClickListener(this);
 
         adapter = new ItemTaskCommentAdapter(lists, RenwuDetailActivity.this);
         lstv.setOnRefreshListener(this);
@@ -318,6 +336,39 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
         }
 
 //        endtime.setText(bankJobTask.getDateLineEnd());
+
+        if(!StringUtil.isNullOrEmpty(bankJobTask.getPid()) && !"0".equals(bankJobTask.getPid())){
+            //说明有pid  是子任务
+            liner_line_child.setVisibility(View.GONE);
+            liner_child.setVisibility(View.GONE);
+            liner_index_task.setVisibility(View.VISIBLE);
+            //查询他的上级主任务
+            getDetailTaskIndex(bankJobTask.getPid());
+        }else{
+            //说明是主任务
+            liner_line_child.setVisibility(View.VISIBLE);
+            liner_child.setVisibility(View.VISIBLE);
+            liner_index_task.setVisibility(View.GONE);
+        }
+
+        if("1".equals(bankJobTask.getIsType())){
+            if(flag){
+                if(!StringUtil.isNullOrEmpty(bankJobTask.getPid()) && !"0".equals(bankJobTask.getPid())){
+                    //说明有pid  是子任务
+                    if(bankJobTask.getEmpIdZf().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) || bankJobTask.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))){
+                        liner_done_reply.setVisibility(View.VISIBLE);
+                    }
+                }else{
+                    //说明是主任务
+                    if(bankJobTask.getEmpIdZf().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) ||bankJobTask.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) || bankJobTask.getEmpIdF().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))){
+                        liner_done_reply.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        }else{
+            liner_done_reply.setVisibility(View.GONE);
+        }
+
 
     }
 
@@ -582,25 +633,73 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                     return;
                 }
                 if(flag){
-                    if(!StringUtil.isNullOrEmpty(bankJobTask.getPid()) && !"0".equals(bankJobTask.getPid())){
-                        //说明有pid  是子任务
-                        if(bankJobTask.getEmpIdZf().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) || bankJobTask.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))){
+//                    if(!StringUtil.isNullOrEmpty(bankJobTask.getPid()) && !"0".equals(bankJobTask.getPid())){
+//                        //说明有pid  是子任务
+                        if(bankJobTask.getEmpIdZf().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) || bankJobTask.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))|| bankJobTask.getEmpIdF().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) ){
                             Intent intent = new Intent(RenwuDetailActivity.this, TaskWriteBeizhuActivity.class);
                             intent.putExtra("content", content.getText().toString());
                             startActivityForResult(intent, 1002);
                         }
-                    }else{
-                        //说明是主任务
-                        if(bankJobTask.getEmpIdZf().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) ||bankJobTask.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) || bankJobTask.getEmpIdF().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))){
-                            Intent intent = new Intent(RenwuDetailActivity.this, TaskWriteBeizhuActivity.class);
-                            intent.putExtra("content", content.getText().toString());
-                            startActivityForResult(intent, 1002);
-                        }
-                    }
+//                    }else{
+//                        //说明是主任务
+//                        if(bankJobTask.getEmpIdZf().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) ||bankJobTask.getEmpId().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class)) || bankJobTask.getEmpIdF().equals(getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class))){
+//                            Intent intent = new Intent(RenwuDetailActivity.this, TaskWriteBeizhuActivity.class);
+//                            intent.putExtra("content", content.getText().toString());
+//                            startActivityForResult(intent, 1002);
+//                        }
+//                    }
                 }
             }
                 break;
+            case R.id.liner_index_task:
+            {
+                //所属主任务
+                if(bankJobTaskIndex != null){
+                    Intent intent  = new Intent(RenwuDetailActivity.this, RenwuDetailActivity.class);
+                    intent.putExtra("taskId", bankJobTaskIndex.getTaskId());
+                    startActivity(intent);
+                }else {
+                    showMsg(RenwuDetailActivity.this, "所属主任务查询失败！请稍后重试");
+                }
+
+            }
+                break;
+            case R.id.liner_done_reply:
+            {
+                //标记为未完成状态，只有负责人和创建人有此权限
+                //todo
+                showUnDoneDialog();
+            }
+                break;
         }
+    }
+
+    private void showUnDoneDialog() {
+        final Dialog picAddDialog = new Dialog(RenwuDetailActivity.this, R.style.MyAlertDialog);
+        View picAddInflate = View.inflate(this, R.layout.dialog_task_undone, null);
+        TextView btn_sure = (TextView) picAddInflate.findViewById(R.id.btn_sure);
+        btn_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressDialog = new CustomProgressDialog(RenwuDetailActivity.this, "请稍后...",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                upDoneFFinishTask();
+                picAddDialog.dismiss();
+            }
+        });
+
+        //取消
+        TextView btn_cancel = (TextView) picAddInflate.findViewById(R.id.btn_cancel);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                picAddDialog.dismiss();
+            }
+        });
+        picAddDialog.setContentView(picAddInflate);
+        picAddDialog.show();
     }
 
     private void showTaskTypeSelect() {
@@ -916,12 +1015,18 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                         showMsg(RenwuDetailActivity.this, "任务已标记完成，不能继续操作！");
                         return;
                     }else{
-                        //标记完成
-                        progressDialog = new CustomProgressDialog(RenwuDetailActivity.this, "正在加载中",R.anim.custom_dialog_frame);
-                        progressDialog.setCancelable(true);
-                        progressDialog.setIndeterminate(true);
-                        progressDialog.show();
-                        doneFFinishTask();
+                        if(StringUtil.isNullOrEmpty(content.getText().toString())){
+                            showMsg(RenwuDetailActivity.this, "不能标记完成！任务描述不能为空！");
+                            return;
+                        }else{
+                            //标记完成
+                            progressDialog = new CustomProgressDialog(RenwuDetailActivity.this, "请稍后...",R.anim.custom_dialog_frame);
+                            progressDialog.setCancelable(true);
+                            progressDialog.setIndeterminate(true);
+                            progressDialog.show();
+                            doneFFinishTask();
+                        }
+
                     }
                 }
 
@@ -963,6 +1068,7 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                                     progr.setText("100%");
                                     seekBar.setProgress(100);
                                     bankJobTask.setIsType("1");
+                                    getDetailTask();
                                 } else {
                                     Toast.makeText(RenwuDetailActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
                                 }
@@ -1518,4 +1624,139 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
     }
 
 
+
+    //查询主任务详情
+    private void getDetailTaskIndex(final String taskIdZ){
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.GET_DETAIL_TASK_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                String code1 = jo.getString("code");
+                                if (Integer.parseInt(code1) == 200) {
+                                    TaskBeanObjData data = getGson().fromJson(s, TaskBeanObjData.class);
+                                    if(data != null){
+                                        TaskBeanObj taskBeanObj = data.getData();
+                                        if(taskBeanObj != null){
+                                            List<BankJobTask> bankJobTasks = taskBeanObj.getBankJobTask();
+                                            if(bankJobTasks != null){
+                                                bankJobTaskIndex = bankJobTasks.get(0);//获得任务详情了
+                                                if(bankJobTaskIndex != null){
+                                                    if(StringUtil.isNullOrEmpty(bankJobTaskIndex.getEmpIdZf())){
+                                                        bankJobTaskIndex.setEmpIdZf("");
+                                                    }
+                                                    index_title.setText(bankJobTaskIndex.getTaskTitle());
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    Toast.makeText(RenwuDetailActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            Toast.makeText(RenwuDetailActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                        }
+                        lstv.onRefreshComplete();
+                        lstv.onLoadComplete();
+                        lstv.setResultSize(lists.size());
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        lstv.onRefreshComplete();
+                        lstv.onLoadComplete();
+
+                        Toast.makeText(RenwuDetailActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("taskId", taskIdZ);
+                params.put("empId", getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class));
+//                if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString(Contance.GROUP_ID, ""), String.class))){
+//                    params.put("groupId", getGson().fromJson(getSp().getString(Contance.GROUP_ID, ""), String.class));
+//                }else{
+//                    params.put("groupId", "");
+//                }
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
+
+    //标记未完成任务
+    private void upDoneFFinishTask(){
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.noDoneJobTask,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                String code1 = jo.getString("code");
+                                if (Integer.parseInt(code1) == 200) {
+                                    showMsg(RenwuDetailActivity.this, "操作成功！");
+                                    getDetailTask();
+                                } else {
+                                    Toast.makeText(RenwuDetailActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            Toast.makeText(RenwuDetailActivity.this, R.string.add_failed, Toast.LENGTH_SHORT).show();
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(RenwuDetailActivity.this, R.string.add_failed, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("empId",getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class));
+                params.put("taskId", taskId);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
 }

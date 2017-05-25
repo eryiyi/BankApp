@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/pop_layout"
+              android:background="@color/bg_gray"
+              android:orientation="vertical">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="15dp"
+                android:background="@drawable/btn_dark_shape"
+                android:gravity="center"
+                android:text="从手机相册选择"
+                android:id="@+id/btn_photo"
+                android:textColor="@color/text_color"
+                android:textSize="16sp"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="1dp"
+                android:gravity="center"
+                android:padding="15dp"
+                android:background="@drawable/btn_dark_shape"
+                android:text="拍照"
+                android:id="@+id/btn_camera"
+                android:textColor="@color/text_color"
+                android:textSize="16sp"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"
+                android:padding="15dp"
+                android:background="@drawable/btn_dark_shape"
+                android:text="取消"
+                android:id="@+id/btn_cancel"
+                android:textColor="@color/text_color">
+        </TextView>
+
+</LinearLayout>

@@ -67,7 +67,7 @@ public class BankAppApplication extends Application {
         requestQueue = Volley.newRequestQueue(this);
         gson = new Gson();
         lxThread = Executors.newFixedThreadPool(20);
-        sp = getSharedPreferences("university_manage", Context.MODE_PRIVATE);
+        sp = getSharedPreferences("bank_oa_manage", Context.MODE_PRIVATE);
         imageLoader = new com.android.volley.toolbox.ImageLoader(requestQueue, new BitmapCache());
         initImageLoader(this);
         DemoHelper.getInstance().init(applicationContext);
@@ -125,7 +125,7 @@ public class BankAppApplication extends Application {
      */
     public SharedPreferences getSp() {
         if (sp == null) {
-            sp = getSharedPreferences("university_manage", Context.MODE_PRIVATE);
+            sp = getSharedPreferences("bank_oa_manage", Context.MODE_PRIVATE);
         }
         return sp;
     }

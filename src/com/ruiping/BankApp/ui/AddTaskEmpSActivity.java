@@ -234,7 +234,11 @@ public class AddTaskEmpSActivity extends BaseActivity implements View.OnClickLis
                                 JSONObject jo = new JSONObject(s);
                                 String code = jo.getString("code");
                                 if (Integer.parseInt(code) == 200) {
-                                    showDialog();
+//                                    showDialog();
+                                    //需要细分任务
+                                    Intent intent = new Intent(AddTaskEmpSActivity.this, AddTaskXifenActivity.class);
+                                    intent.putExtra("taskId", taskId);
+                                    startActivity(intent);
                                 }else {
                                     showMsg(AddTaskEmpSActivity.this, jo.getString("message"));
                                 }

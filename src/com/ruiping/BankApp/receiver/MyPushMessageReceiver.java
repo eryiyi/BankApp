@@ -170,6 +170,7 @@ public class MyPushMessageReceiver extends PushMessageReceiver {
                {
                    //任务
                    Intent intent = new Intent(context, RenwuListActivity.class);
+                   intent.putExtra("type", "1");
                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                    context.startActivity(intent);
                }
@@ -178,6 +179,7 @@ public class MyPushMessageReceiver extends PushMessageReceiver {
                {
                    //新建的任务   msgId：新建的任务ID
                    Intent intent = new Intent(context, RenwuListActivity.class);
+                   intent.putExtra("type", "1");
                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                    context.startActivity(intent);
                }
@@ -215,7 +217,6 @@ public class MyPushMessageReceiver extends PushMessageReceiver {
                     getNotice(context, myvalue);
                 }
             } catch (JSONException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -304,7 +305,7 @@ public class MyPushMessageReceiver extends PushMessageReceiver {
     }
 
     private void updateContent(Context context, final String userId, String channelId) {
-        final SharedPreferences sp = context.getSharedPreferences("university_manage", Context.MODE_PRIVATE);
+        final SharedPreferences sp = context.getSharedPreferences("bank_oa_manage", Context.MODE_PRIVATE);
         String empId = new Gson().fromJson(sp.getString(Contance.EMP_ID, ""), String.class);
         if(!StringUtil.isNullOrEmpty(empId)){
             RequestQueue queue = Volley.newRequestQueue(context);

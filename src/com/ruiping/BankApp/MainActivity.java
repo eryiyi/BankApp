@@ -22,6 +22,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
+import com.baidu.android.pushservice.PushSettings;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMContactListener;
 import com.hyphenate.EMMessageListener;
@@ -99,6 +102,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 startActivity(intent);
             }
         }
+
+        //百度云推送
+        PushSettings.enableDebugMode(getApplicationContext(), true);
+        PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY, InternetURL.BAIDU_PUSH_API_KEY);
 
         setContentView(R.layout.main);
         res = getResources();

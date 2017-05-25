@@ -1,9 +1,12 @@
 package com.ruiping.BankApp.ui;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -22,9 +25,7 @@ import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.data.BankJobReportSingleData;
 import com.ruiping.BankApp.entiy.BankJobReport;
 import com.ruiping.BankApp.upload.CommonUtil;
-import com.ruiping.BankApp.util.Contance;
-import com.ruiping.BankApp.util.DateUtil;
-import com.ruiping.BankApp.util.StringUtil;
+import com.ruiping.BankApp.util.*;
 import com.ruiping.BankApp.widget.CustomProgressDialog;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -131,6 +132,48 @@ public class AddDailyActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
+    private void openCamera() {
+        Intent cameraIntent = new Intent();
+        cameraIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraIntent.addCategory(Intent.CATEGORY_DEFAULT);
+        // 根据文件地址创建文件
+        File file = new File(CommonDefine.FILE_PATH);
+        if (file.exists()) {
+            file.delete();
+        }
+        uri = Uri.fromFile(file);
+        // 设置系统相机拍摄照片完成后图片文件的存放地址
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+
+        // 开启系统拍照的Activity
+        startActivityForResult(cameraIntent, CommonDefine.TAKE_PICTURE_FROM_CAMERA);
+    }
+
+
+    private ArrayList<String> dataList = new ArrayList<String>();
+    private ArrayList<String> tDataList = new ArrayList<String>();
+    private List<String> uploadPaths = new ArrayList<String>();
+
+
+    private void openPhoto() {
+        Intent intent = new Intent(AddDailyActivity.this, AlbumActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putStringArrayList("dataList", getIntentArrayList(dataList));
+        intent.putExtras(bundle);
+        startActivityForResult(intent, CommonDefine.TAKE_PICTURE_FROM_GALLERY);
+    }
+    private ArrayList<String> getIntentArrayList(ArrayList<String> dataList) {
+
+        ArrayList<String> tDataList = new ArrayList<String>();
+
+        for (String s : dataList) {
+            if (!s.contains("camera_default")) {
+                tDataList.add(s);
+            }
+        }
+        return tDataList;
+    }
+
     public void onActivityResult(int requestCode , int resultCode , Intent data){
 
         if(resultCode == RESULT_CANCELED){
@@ -147,6 +190,52 @@ public class AddDailyActivity extends BaseActivity implements View.OnClickListen
                 adapter.notifyDataSetChanged();
             }else {
                 showMsg(AddDailyActivity.this, getResources().getString(R.string.open_file_failed));
+            }
+        }
+
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case SELECT_LOCAL_PHOTO:
+                    tDataList = data.getStringArrayListExtra("datalist");
+                    if (tDataList != null) {
+                        for (int i = 0; i < tDataList.size(); i++) {
+                            String string = tDataList.get(i);
+                            dataList.add(string);
+                        }
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        finish();
+                    }
+                    break;
+                case CommonDefine.TAKE_PICTURE_FROM_CAMERA:
+                    String sdStatus = Environment.getExternalStorageState();
+                    if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) {
+                        return;
+                    }
+                    Bitmap bitmap = ImageUtils.getUriBitmap(this, uri, 400, 400);
+                    String cameraImagePath = FileUtils.saveBitToSD(bitmap, System.currentTimeMillis() + ".jpg");
+
+                    dataList.add(cameraImagePath);
+                    adapter.notifyDataSetChanged();
+                    break;
+                case CommonDefine.TAKE_PICTURE_FROM_GALLERY:
+                    tDataList = data.getStringArrayListExtra("datalist");
+                    if (tDataList != null) {
+                        dataList.clear();
+                        for (int i = 0; i < tDataList.size(); i++) {
+                            String string = tDataList.get(i);
+                            if (!string.contains("camera_default")) {
+                                dataList.add(string);
+                            }
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                    break;
+                case CommonDefine.DELETE_IMAGE:
+                    int position = data.getIntExtra("position", -1);
+                    dataList.remove(position);
+                    adapter.notifyDataSetChanged();
+                    break;
             }
         }
     }

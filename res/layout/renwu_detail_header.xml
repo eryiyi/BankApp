@@ -4,7 +4,9 @@
               android:background="@color/main_bg"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-
+    <View android:layout_width="match_parent"
+          android:background="@color/gray"
+          android:layout_height="0.1dp"></View>
     <RelativeLayout android:layout_width="match_parent"
                     android:padding="12dp"
                     android:id="@+id/liner_title"
@@ -25,6 +27,53 @@
                   android:layout_below="@+id/task_title"
                   android:layout_height="wrap_content"/>
     </RelativeLayout>
+    <View android:layout_width="match_parent"
+          android:background="@color/gray"
+          android:layout_height="0.1dp"></View>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:background="@drawable/btn_white_shape"
+                    android:padding="12dp"
+                    android:id="@+id/liner_index_task"
+                    android:layout_height="wrap_content">
+        <TextView android:layout_width="wrap_content"
+                  android:text="所属主任务:"
+                  android:layout_centerVertical="true"
+                  android:textSize="16sp"
+                  android:id="@+id/text_index_title"
+                  android:textColor="@color/text_color"
+                  android:layout_height="wrap_content"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_toRightOf="@+id/text_index_title"
+                  android:layout_marginLeft="15dp"
+                  android:drawablePadding="5dp"
+                  android:gravity="right"
+                  android:singleLine="true"
+                  android:id="@+id/index_title"
+                  android:drawableRight="@drawable/sm_more"
+                  android:layout_centerVertical="true"
+                  android:textSize="16sp"
+                  android:layout_alignParentRight="true"
+                  android:textColor="@color/blue_btn_normal"
+                  android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                    android:background="@color/blue_btn_normal"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:id="@+id/liner_done_reply"
+                    android:layout_height="wrap_content">
+
+        <TextView android:layout_width="wrap_content"
+                  android:text="标记改为未完成状态，继续操作该任务"
+                  android:layout_centerVertical="true"
+                  android:textSize="16sp"
+                  android:padding="12dp"
+                  android:gravity="center"
+                  android:layout_gravity="center"
+                  android:textColor="@color/white"
+                  android:layout_height="wrap_content"/>
+    </LinearLayout>
 
     <LinearLayout android:layout_width="match_parent"
                     android:background="@color/white"
@@ -171,6 +220,7 @@
     <View android:layout_width="match_parent"
           android:background="@color/gray"
           android:layout_marginTop="15dp"
+          android:id="@+id/liner_line_child"
           android:layout_height="0.1dp"></View>
     <RelativeLayout android:layout_width="match_parent"
                     android:background="@drawable/btn_white_shape"
@@ -205,7 +255,7 @@
                     android:id="@+id/liner_content"
                     android:layout_height="wrap_content">
         <TextView android:layout_width="wrap_content"
-                  android:text="备注:"
+                  android:text="描述:"
                   android:id="@+id/content1"
                   android:textSize="16sp"
                   android:textColor="@color/text_color"

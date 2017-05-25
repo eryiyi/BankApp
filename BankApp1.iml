@@ -11,12 +11,14 @@
       <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android API 24 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="bolts-tasks-1.4.0" level="project" />
     <orderEntry type="library" name="android-support-v4" level="project" />
     <orderEntry type="library" name="httpcore-4.2.4" level="project" />
     <orderEntry type="library" name="httpmime-4.3.5" level="project" />
     <orderEntry type="library" name="umeng-analytics-v6.1.0" level="project" />
+    <orderEntry type="library" name="pushservice-5.7.0.95" level="project" />
+    <orderEntry type="library" name="HwPush_SDK_V2705" level="project" />
   </component>
 </module>

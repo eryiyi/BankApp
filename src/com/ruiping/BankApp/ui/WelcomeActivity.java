@@ -13,6 +13,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.baidu.android.pushservice.PushConstants;
 import com.baidu.android.pushservice.PushManager;
+import com.baidu.android.pushservice.PushSettings;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.ruiping.BankApp.BankAppApplication;
@@ -143,10 +144,10 @@ public class WelcomeActivity extends BaseActivity implements View.OnClickListene
     //保存登录用户的信息
     void saveEmp(){
         //进行绑定
-
-        PushManager.startWork(getApplicationContext(),
-                PushConstants.LOGIN_TYPE_API_KEY,
-                Utils.getMetaValue(WelcomeActivity.this, "api_key"));
+//        PushSettings.enableDebugMode(getApplicationContext(),true);
+//        PushManager.startWork(getApplicationContext(),
+//                PushConstants.LOGIN_TYPE_API_KEY,
+//                InternetURL.BAIDU_PUSH_API_KEY);
 
 
         save(Contance.EMP_ID, bankEmpBean.getEmpId());

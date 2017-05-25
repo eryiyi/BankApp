@@ -176,9 +176,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     //保存登录用户的信息
     void saveEmp(){
         //进行绑定
-        PushManager.startWork(getApplicationContext(),
-                PushConstants.LOGIN_TYPE_API_KEY,
-                Utils.getMetaValue(LoginActivity.this, "api_key"));
+//        PushManager.startWork(getApplicationContext(),
+//                PushConstants.LOGIN_TYPE_API_KEY,
+//                InternetURL.BAIDU_PUSH_API_KEY);
 
         save(Contance.EMP_ID, bankEmpBean.getEmpId());
         save(Contance.EMP_MOBILE, bankEmpBean.getEmpMobile());
