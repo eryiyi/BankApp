@@ -64,6 +64,8 @@ public class ItemRenwuAdapter extends BaseAdapter {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mContect).inflate(R.layout.item_renwu, null);
             holder.item_head = (ImageView) convertView.findViewById(R.id.item_head);
+            holder.icon_1 = (ImageView) convertView.findViewById(R.id.icon_1);
+            holder.icon_2 = (ImageView) convertView.findViewById(R.id.icon_2);
             holder.item_title = (TextView) convertView.findViewById(R.id.item_title);
             holder.item_jindu = (TextView) convertView.findViewById(R.id.item_jindu);
             holder.item_nickname = (TextView) convertView.findViewById(R.id.item_nickname);
@@ -134,12 +136,18 @@ public class ItemRenwuAdapter extends BaseAdapter {
             }
             if("0".equals(cell.getIsExceed())){
                 //未超时
-//                holder.item_title.setTextColor(res.getColor(R.color.text_color));
+                holder.icon_1.setVisibility(View.GONE);
             }else if("1".equals(cell.getIsExceed())){
                 //超时
-//                holder.item_title.setTextColor(res.getColor(R.color.red_p));
+                holder.icon_1.setVisibility(View.VISIBLE);
             }
-
+            if("0".equals(cell.getTaskType())){
+                //不加急
+                holder.icon_2.setVisibility(View.GONE);
+            }else {
+                //加急
+                holder.icon_2.setVisibility(View.VISIBLE);
+            }
         }
         return convertView;
     }
@@ -153,5 +161,8 @@ public class ItemRenwuAdapter extends BaseAdapter {
         TextView item_nickname2;
         TextView item_dateline;
         TextView item_dateline1;
+
+        ImageView icon_1;
+        ImageView icon_2;
     }
 }

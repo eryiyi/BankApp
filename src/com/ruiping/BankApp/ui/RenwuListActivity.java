@@ -46,9 +46,7 @@ public class RenwuListActivity extends BaseActivity implements View.OnClickListe
     private String type;
     private int pageIndex = 1;
     private static boolean IS_REFRESH = true;
-
     private String urlInternet = "";//接口路径
-
     private EditText keywords;
 
     @Override
@@ -127,6 +125,7 @@ public class RenwuListActivity extends BaseActivity implements View.OnClickListe
                     if(bankJobTask != null){
                         Intent intent = new Intent(RenwuListActivity.this, RenwuListChildActivity.class);
                         intent.putExtra("taskId", bankJobTask.getTaskId());
+                        intent.putExtra("taskTitle", bankJobTask.getTaskTitle());
                         startActivity(intent);
                     }
                 }

@@ -18,10 +18,10 @@
                   android:id="@+id/item_title"
                   android:layout_gravity="center_vertical"
                   android:singleLine="true"
-                  android:text="标题标题标题标题标题标题标题标题标题标题"
                   android:layout_marginLeft="8dp"
                   android:textColor="@color/text_color"
                   android:layout_height="wrap_content"/>
+
     </LinearLayout>
     <LinearLayout android:layout_width="match_parent"
                   android:orientation="horizontal"
@@ -35,15 +35,14 @@
         <TextView android:layout_width="wrap_content"
                   android:textSize="14sp"
                   android:layout_weight="1"
-                  android:text="开始日：2017-05-24"
                   android:textColor="@color/text_color_two"
                   android:layout_below="@+id/item_nickname"
                   android:id="@+id/item_dateline1"
                   android:layout_height="wrap_content"/>
+
         <TextView android:layout_width="wrap_content"
                   android:textSize="14sp"
                   android:layout_weight="1"
-                  android:text="到期日：2017-05-24"
                   android:gravity="right"
                   android:textColor="@color/text_color_two"
                   android:layout_below="@+id/item_nickname"
@@ -62,7 +61,6 @@
                   android:textSize="14sp"
                   android:layout_centerVertical="true"
                   android:id="@+id/item_nickname"
-                  android:text="负责人：张三"
                   android:textColor="@color/text_color_two"
                   android:layout_height="wrap_content"/>
 
@@ -71,13 +69,13 @@
                   android:id="@+id/item_jindu"
                   android:textSize="14sp"
                   android:layout_alignParentRight="true"
-                  android:text="进度：10%"
                   android:textColor="@color/text_color_two"
                   android:layout_height="wrap_content"/>
 
     </RelativeLayout>
     <RelativeLayout android:layout_width="match_parent"
                     android:layout_below="@+id/liner_top_2"
+                    android:id="@+id/liner_top_3"
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
@@ -85,7 +83,6 @@
         <TextView android:layout_width="wrap_content"
                   android:textSize="14sp"
                   android:id="@+id/item_nickname1"
-                  android:text="创建人：张三"
                   android:layout_centerVertical="true"
                   android:textColor="@color/text_color_two"
                   android:layout_height="wrap_content"/>
@@ -93,9 +90,27 @@
                   android:textSize="14sp"
                   android:layout_alignParentRight="true"
                   android:id="@+id/item_nickname2"
-                  android:text="主负责人：张三"
                   android:layout_centerVertical="true"
                   android:textColor="@color/text_color_two"
                   android:layout_height="wrap_content"/>
     </RelativeLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="6dp"
+                  android:gravity="center_vertical|right"
+                  android:layout_below="@+id/liner_top_3"
+                  android:layout_height="wrap_content">
+        <ImageView android:layout_width="wrap_content"
+                   android:layout_toRightOf="@+id/item_nickname"
+                   android:src="@drawable/attatch_due"
+                   android:layout_marginLeft="8dp"
+                   android:id="@+id/icon_1"
+                   android:layout_height="wrap_content"/>
+        <ImageView android:layout_width="wrap_content"
+                   android:id="@+id/icon_2"
+                   android:layout_toRightOf="@+id/item_nickname"
+                   android:src="@drawable/attatch_rush"
+                   android:layout_marginLeft="8dp"
+                   android:layout_height="wrap_content"/>
+    </LinearLayout>
 </RelativeLayout>

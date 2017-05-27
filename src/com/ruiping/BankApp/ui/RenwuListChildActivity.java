@@ -1,13 +1,17 @@
 package com.ruiping.BankApp.ui;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.android.volley.AuthFailureError;
@@ -25,6 +29,7 @@ import com.ruiping.BankApp.library.PullToRefreshBase;
 import com.ruiping.BankApp.library.PullToRefreshListView;
 import com.ruiping.BankApp.util.StringUtil;
 import com.ruiping.BankApp.widget.CustomProgressDialog;
+import com.ruiping.BankApp.widget.SelectDeleteWindow;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -43,10 +48,12 @@ public class RenwuListChildActivity extends BaseActivity implements View.OnClick
     private ItemRenwuAdapter adapter;
     private List<BankJobTask> lists = new ArrayList<BankJobTask>();
     private String taskId;
+    private String taskTitle;
     private int pageIndex = 1;
     private static boolean IS_REFRESH = true;
 
     private EditText keywords;
+    private TextView task_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +61,7 @@ public class RenwuListChildActivity extends BaseActivity implements View.OnClick
         registerBoradcastReceiver();
         setContentView(R.layout.renwu_list_activity);
         taskId = getIntent().getExtras().getString("taskId");
+        taskTitle = getIntent().getExtras().getString("taskTitle");
         initView();
         progressDialog = new CustomProgressDialog(RenwuListChildActivity.this, "正在加载中",R.anim.custom_dialog_frame);
         progressDialog.setCancelable(true);
@@ -63,11 +71,19 @@ public class RenwuListChildActivity extends BaseActivity implements View.OnClick
     }
 
     private void initView() {
+        task_title = (TextView) this.findViewById(R.id.task_title);
+        task_title.setVisibility(View.VISIBLE);
+        if(!StringUtil.isNullOrEmpty(taskTitle)){
+            task_title.setText(taskTitle);
+        }
+
         no_data = (TextView) this.findViewById(R.id.no_data);
         lstv = (PullToRefreshListView) this.findViewById(R.id.lstv);
         back = (TextView) this.findViewById(R.id.back);
         right_btn = (TextView) this.findViewById(R.id.right_btn);
-        right_btn.setVisibility(View.GONE);
+        right_btn.setVisibility(View.VISIBLE);
+        right_btn.setText("删除");
+        right_btn.setOnClickListener(this);
         back.setOnClickListener(this);
 
         adapter = new ItemRenwuAdapter(lists, RenwuListChildActivity.this);
@@ -138,9 +154,125 @@ public class RenwuListChildActivity extends BaseActivity implements View.OnClick
             case R.id.back:
                 finish();
                 break;
+            case R.id.right_btn:
+            {
+                //删除主任务
+                showDialog();
+            }
+                break;
 
         }
     }
+    SelectDeleteWindow selectDeleteWindow;
+
+    private void showDialog() {
+        selectDeleteWindow = new SelectDeleteWindow(RenwuListChildActivity.this, itemsOnClick);
+        //显示窗口
+        setBackgroundAlpha(0.5f);//设置屏幕透明度
+
+        selectDeleteWindow.setBackgroundDrawable(new BitmapDrawable());
+        selectDeleteWindow.setFocusable(true);
+        selectDeleteWindow.showAtLocation(this.findViewById(R.id.main), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        selectDeleteWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                setBackgroundAlpha(1.0f);
+            }
+        });
+    }
+
+    //为弹出窗口实现监听类
+    private View.OnClickListener itemsOnClick = new View.OnClickListener() {
+
+        public void onClick(View v) {
+            selectDeleteWindow.dismiss();
+            switch (v.getId()) {
+                case R.id.btn_sure: {
+                    progressDialog = new CustomProgressDialog(RenwuListChildActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                    progressDialog.setCancelable(true);
+                    progressDialog.setIndeterminate(true);
+                    progressDialog.show();
+                    deleteTask();
+                }
+                break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    private void deleteTask(){
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.deletebyMainTaskid,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                String code1 = jo.getString("code");
+                                if (Integer.parseInt(code1) == 200) {
+                                    showMsg(RenwuListChildActivity.this, "操作成功！");
+                                    Intent intent1 = new Intent("update_renwu_number");
+                                    sendBroadcast(intent1);
+                                    finish();
+                                } else {
+                                    Toast.makeText(RenwuListChildActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            Toast.makeText(RenwuListChildActivity.this, R.string.add_failed, Toast.LENGTH_SHORT).show();
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(RenwuListChildActivity.this, R.string.add_failed, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("taskId", taskId);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
+
+    /**
+     * 设置添加屏幕的背景透明度
+     *
+     * @param bgAlpha
+     *            屏幕透明度0.0-1.0 1表示完全不透明
+     */
+    public void setBackgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = ((Activity) RenwuListChildActivity.this).getWindow()
+                .getAttributes();
+        lp.alpha = bgAlpha;
+        ((Activity) RenwuListChildActivity.this).getWindow().setAttributes(lp);
+    }
+
+
 
     //查询任务列表
     private void getData() {

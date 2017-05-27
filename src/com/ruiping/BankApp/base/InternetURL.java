@@ -153,7 +153,9 @@ public class InternetURL {
     //标记完成任务
     public static final String TASK_FINISHED_URL = INTERNAL + "appBankJobTask.do?doneJobTask";
     // 删除任务
-    public static final String TASK_DELETE_URL = INTERNAL + "appBankJobTask.do?putInTheRecycleBin";
+    public static final String TASK_DELETE_URL = INTERNAL + "appBankJobTask.do?deleteByTaskId";
+    //删除主任务
+    public static final String deletebyMainTaskid = INTERNAL + "appBankJobTask.do?deletebyMainTaskid";
     //更新任务附件 主任务
     public static final String TASK_UPDATE_FILE_URL = INTERNAL + "appBankJobTask.do?updateFile";
     //更新任务负责人 根据taskid 更新empidf
