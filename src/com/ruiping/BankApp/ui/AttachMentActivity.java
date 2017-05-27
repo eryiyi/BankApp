@@ -1,14 +1,18 @@
 package com.ruiping.BankApp.ui;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.provider.MediaStore;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.WindowManager;
+import android.widget.*;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -23,9 +27,13 @@ import com.ruiping.BankApp.base.InternetURL;
 import com.ruiping.BankApp.data.BankJobReportSingleData;
 import com.ruiping.BankApp.entiy.AttachMentObj;
 import com.ruiping.BankApp.upload.CommonUtil;
+import com.ruiping.BankApp.util.CommonDefine;
 import com.ruiping.BankApp.util.Contance;
+import com.ruiping.BankApp.util.ImageUtils;
 import com.ruiping.BankApp.util.StringUtil;
 import com.ruiping.BankApp.widget.CustomProgressDialog;
+import com.ruiping.BankApp.widget.SelectPhotoPopFileWindow;
+import com.ruiping.BankApp.widget.SelectPhotoPopWindow;
 import easeui.ui.EaseShowNormalFileActivity2;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,9 +65,11 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
     private Intent fileChooserIntent ;
     private static final int REQUEST_CODE = 1;   //请求码
 
-    private String dataList = "";//选择文件  手机的路径
-    private String dataListName = "";//选择文件的文件名  手机的路径
-
+//    private String dataList = "";//选择文件  手机的路径
+//    private String dataListName = "";//选择文件的文件名  手机的路径
+    private ArrayList<String> dataList = new ArrayList<String>();//选择文件  手机的路径
+    private ArrayList<String> dataListName = new ArrayList<String>();//选择文件的文件名  手机的路径
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,12 +163,19 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
             case R.id.right_btn:
                 //添加附件
             {
+//                if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
+//                {
+//                    fileChooserIntent =  new Intent(this, FileChooserActivity.class);
+//                    startActivityForResult(fileChooserIntent , REQUEST_CODE);
+//                } else{
+//                    showMsg(AttachMentActivity.this, getResources().getString(R.string.sdcard_unmonted_hint));
+//                }
+                //添加附件
                 if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
                 {
-                    fileChooserIntent =  new Intent(this, FileChooserActivity.class);
-                    startActivityForResult(fileChooserIntent , REQUEST_CODE);
+                    showSelectImageDialogFile();
                 } else{
-                    showMsg(AttachMentActivity.this, getResources().getString(R.string.sdcard_unmonted_hint));
+                    showSelectImageDialog();
                 }
             }
                 break;
@@ -166,6 +183,125 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
     }
 
 
+
+    // 选择相册，相机
+    SelectPhotoPopWindow selectPhotoPopWindow;
+    SelectPhotoPopFileWindow selectPhotoPopFileWindow;
+
+    public void showSelectImageDialog(){
+        selectPhotoPopWindow = new SelectPhotoPopWindow(AttachMentActivity.this, itemsOnClick);
+        //显示窗口
+        setBackgroundAlpha(0.5f);//设置屏幕透明度
+
+        selectPhotoPopWindow.setBackgroundDrawable(new BitmapDrawable());
+        selectPhotoPopWindow.setFocusable(true);
+        selectPhotoPopWindow.showAtLocation(this.findViewById(R.id.main), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        selectPhotoPopWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                setBackgroundAlpha(1.0f);
+            }
+        });
+    }
+
+    public void showSelectImageDialogFile(){
+        selectPhotoPopFileWindow = new SelectPhotoPopFileWindow(AttachMentActivity.this, itemsOnClick);
+        //显示窗口
+        setBackgroundAlpha(0.5f);//设置屏幕透明度
+
+        selectPhotoPopFileWindow.setBackgroundDrawable(new BitmapDrawable());
+        selectPhotoPopFileWindow.setFocusable(true);
+        selectPhotoPopFileWindow.showAtLocation(this.findViewById(R.id.main), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        selectPhotoPopFileWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                setBackgroundAlpha(1.0f);
+            }
+        });
+    }
+
+
+
+    /**
+     * 设置添加屏幕的背景透明度
+     *
+     * @param bgAlpha
+     *            屏幕透明度0.0-1.0 1表示完全不透明
+     */
+    public void setBackgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = ((Activity) AttachMentActivity.this).getWindow()
+                .getAttributes();
+        lp.alpha = bgAlpha;
+        ((Activity) AttachMentActivity.this).getWindow().setAttributes(lp);
+    }
+
+    //为弹出窗口实现监听类
+    private View.OnClickListener itemsOnClick = new View.OnClickListener() {
+        public void onClick(View v) {
+            if(selectPhotoPopWindow != null){
+                selectPhotoPopWindow.dismiss();
+            }
+            if(selectPhotoPopFileWindow != null){
+                selectPhotoPopFileWindow.dismiss();
+            }
+            switch (v.getId()) {
+                case R.id.btn_file:
+                {
+                    fileChooserIntent =  new Intent(AttachMentActivity.this, FileChooserActivity.class);
+                    startActivityForResult(fileChooserIntent , REQUEST_CODE);
+                }
+                break;
+                case R.id.btn_camera: {
+                    Intent cameraIntent = new Intent();
+                    cameraIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                    cameraIntent.addCategory(Intent.CATEGORY_DEFAULT);
+                    // 根据文件地址创建文件
+                    File file = new File(CommonDefine.FILE_PATH);
+                    if (file.exists()) {
+                        file.delete();
+                    }
+                    uri = Uri.fromFile(file);
+                    // 设置系统相机拍摄照片完成后图片文件的存放地址
+                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+
+                    // 开启系统拍照的Activity
+                    startActivityForResult(cameraIntent, CommonDefine.TAKE_PICTURE_FROM_CAMERA);
+                }
+                break;
+                case R.id.btn_photo: {
+                    dataList.clear();
+                    Intent intent = new Intent(AttachMentActivity.this, AlbumActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putStringArrayList("dataList", getIntentArrayList(dataList));
+                    intent.putExtras(bundle);
+                    startActivityForResult(intent, CommonDefine.TAKE_PICTURE_FROM_GALLERY);
+                }
+                break;
+                default:
+                    break;
+            }
+        }
+
+    };
+
+
+    private ArrayList<String> tDataList = new ArrayList<String>();
+
+    private ArrayList<String> getIntentArrayList(ArrayList<String> dataList) {
+
+        ArrayList<String> tDataList = new ArrayList<String>();
+
+        for (String s : dataList) {
+            if (!s.contains("camera_default")) {
+                tDataList.add(s);
+            }
+        }
+        return tDataList;
+    }
+
+    private final static int SELECT_LOCAL_PHOTO = 110;
+    private Uri uri;
+    
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -177,32 +313,90 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
 
         if(resultCode == RESULT_OK && requestCode == REQUEST_CODE){
             //获取路径名
+            dataList.clear();
+            dataListName.clear();
+            
             String pptPath = data.getStringExtra(Contance.EXTRA_FILE_CHOOSER);
             String pptName = data.getStringExtra(Contance.EXTRA_FILE_CHOOSER_NAME);
             if(pptPath != null){
-                dataList = pptPath;
-                dataListName = pptName;
+                dataList.add(pptPath);
+                dataListName.add(pptName);
                 //上传
-                File file = new File(dataList);
+                File file = new File(dataList.get(0));
                 if (file.length() > 20 * 1024 * 1024) {
                     Toast.makeText(AttachMentActivity.this, R.string.The_file_is_not_greater_than_20_m, Toast.LENGTH_SHORT).show();
                 }else {
-                    sendFile();
+                    sendFile(dataList.get(0));
                 }
             }else {
                 showMsg(AttachMentActivity.this, getResources().getString(R.string.open_file_failed));
             }
         }
+
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case SELECT_LOCAL_PHOTO:
+                    tDataList = data.getStringArrayListExtra("datalist");
+                    if (tDataList != null) {
+                        for (int i = 0; i < tDataList.size(); i++) {
+                            String string = tDataList.get(i);
+                            dataList.add(string);
+                            dataListName.add(string);
+                        }
+                        for(String str:dataList){
+                            File file = new File(str);
+                            if (file.length() <= 20 * 1024 * 1024) {
+                                sendFile(str);
+                            }
+                        }
+                    } else {
+                        finish();
+                    }
+                    break;
+                case CommonDefine.TAKE_PICTURE_FROM_CAMERA:
+                    String sdStatus = Environment.getExternalStorageState();
+                    if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) {
+                        return;
+                    }
+                    Bitmap bitmap = ImageUtils.getUriBitmap(this, uri, 400, 400);
+                    String fileName = System.currentTimeMillis()+"";
+                    String cameraImagePath = com.ruiping.BankApp.util.FileUtils.saveBitToSD(bitmap, fileName + ".jpg");
+
+                    dataList.add(cameraImagePath);
+                    dataListName.add(fileName);
+                    for(String str:dataList){
+                        File file = new File(str);
+                        if (file.length() <= 20 * 1024 * 1024) {
+                            sendFile(str);
+                        }
+                    }
+                    break;
+                case CommonDefine.TAKE_PICTURE_FROM_GALLERY:
+                    tDataList = data.getStringArrayListExtra("datalist");
+                    if (tDataList != null) {
+                        dataList.clear();
+                        dataListName.clear();
+                        for (int i = 0; i < tDataList.size(); i++) {
+                            String string = tDataList.get(i);
+                            dataList.add(string);
+                            dataListName.add(string);
+                        }
+                        for(String str:dataList){
+                            File file = new File(str);
+                            if (file.length() <= 20 * 1024 * 1024) {
+                                sendFile(str);
+                            }
+                        }
+                    }
+                    break;
+            }
+        }
     }
 
-    public void sendFile() {
-        progressDialog = new CustomProgressDialog(AttachMentActivity.this, "文件上传中，请稍后",R.anim.custom_dialog_frame);
-        progressDialog.setCancelable(true);
-        progressDialog.setIndeterminate(true);
-        progressDialog.show();
+    public void sendFile(String filePath) {
         fileUrls = "";
         fileNames = "";
-            File f = new File(dataList);
+            File f = new File(filePath);
             final Map<String, File> files = new HashMap<String, File>();
             files.put("file", f);
             Map<String, String> params = new HashMap<String, String>();
@@ -222,7 +416,10 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
                                         fileUrls = jo.getString("data");
                                         fileNames = jo.getString("fileName");
                                         attach_file += fileNames + "|" + fileUrls + ",";
-                                        updateWeekly();
+                                        if(progressDialog != null){
+                                            progressDialog.dismiss();
+                                        }
+                                        updateWeekly( fileNames,  fileUrls);
                                     }
                                 } catch (JSONException e) {
                                     if(progressDialog != null){
@@ -248,7 +445,7 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
                     null);
     }
 
-    private void updateWeekly() {
+    private void updateWeekly(final String fileNames, final String fileUrls) {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 InternetURL.WEEK_UPDATE_FILE_URL,
@@ -260,19 +457,24 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
                                 JSONObject jo = new JSONObject(s);
                                 String code = jo.getString("code");
                                 if (Integer.parseInt(code) == 200) {
-                                    lists.add(new AttachMentObj(dataListName, dataList));
+                                    lists.add(new AttachMentObj(fileNames, fileUrls));
                                     adapter.notifyDataSetChanged();
-
                                     BankJobReportSingleData data = getGson().fromJson(s, BankJobReportSingleData.class);
                                     //调用广播，刷新
                                     Intent intent1 = new Intent("update_report_file_success");
                                     intent1.putExtra("bankJobReport", data.getData());
                                     sendBroadcast(intent1);
+                                    if(progressDialog != null){
+                                        progressDialog.dismiss();
+                                    }
                                 }else {
                                     showMsg(AttachMentActivity.this, jo.getString("message"));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
+                            }
+                            if(progressDialog != null){
+                                progressDialog.dismiss();
                             }
 
                         } else {
@@ -340,15 +542,76 @@ public class AttachMentActivity extends BaseActivity implements View.OnClickList
                     }
                     attach_file = strTmp;
                 }
-                updateWeekly();
+                updateWeeklyDel();
                 lists.remove(position);
                 adapter.notifyDataSetChanged();
                 break;
         }
     }
 
-//    @Override
-//    public void run() {
-//        sendFile();
-//    }
+
+    private void updateWeeklyDel() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.WEEK_UPDATE_FILE_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                String code = jo.getString("code");
+                                if (Integer.parseInt(code) == 200) {
+                                    BankJobReportSingleData data = getGson().fromJson(s, BankJobReportSingleData.class);
+                                    //调用广播，刷新
+                                    Intent intent1 = new Intent("update_report_file_success");
+                                    intent1.putExtra("bankJobReport", data.getData());
+                                    sendBroadcast(intent1);
+                                }else {
+                                    showMsg(AttachMentActivity.this, jo.getString("message"));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            if(progressDialog != null){
+                                progressDialog.dismiss();
+                            }
+                        } else {
+                            Toast.makeText(AttachMentActivity.this, R.string.add_failed, Toast.LENGTH_SHORT).show();
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(AttachMentActivity.this, R.string.add_failed, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("reportId", reportId);
+                if(!StringUtil.isNullOrEmpty(attach_file)){
+                    params.put("reportFile", attach_file);
+                }
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
 }

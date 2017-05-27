@@ -454,13 +454,13 @@ public class AddMineWeeklyActivtiy extends BaseActivity implements View.OnClickL
             case R.id.btn_attachment:
             {
                 //附件点击
-                if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
-                {
-                    fileChooserIntent =  new Intent(this, FileChooserActivity.class);
-                    startActivityForResult(fileChooserIntent , REQUEST_CODE);
-                } else{
-                    showMsg(AddMineWeeklyActivtiy.this, getResources().getString(R.string.sdcard_unmonted_hint));
-                }
+//                if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
+//                {
+//                    fileChooserIntent =  new Intent(this, FileChooserActivity.class);
+//                    startActivityForResult(fileChooserIntent , REQUEST_CODE);
+//                } else{
+//                    showMsg(AddMineWeeklyActivtiy.this, getResources().getString(R.string.sdcard_unmonted_hint));
+//                }
             }
             break;
             case R.id.content_one:

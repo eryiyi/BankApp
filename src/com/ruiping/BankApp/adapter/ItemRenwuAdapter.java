@@ -67,7 +67,10 @@ public class ItemRenwuAdapter extends BaseAdapter {
             holder.item_title = (TextView) convertView.findViewById(R.id.item_title);
             holder.item_jindu = (TextView) convertView.findViewById(R.id.item_jindu);
             holder.item_nickname = (TextView) convertView.findViewById(R.id.item_nickname);
+            holder.item_nickname1 = (TextView) convertView.findViewById(R.id.item_nickname1);
+            holder.item_nickname2 = (TextView) convertView.findViewById(R.id.item_nickname2);
             holder.item_dateline = (TextView) convertView.findViewById(R.id.item_dateline);
+            holder.item_dateline1 = (TextView) convertView.findViewById(R.id.item_dateline1);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -83,21 +86,60 @@ public class ItemRenwuAdapter extends BaseAdapter {
                 holder.item_head.setImageDrawable(res.getDrawable(R.drawable.maintask));
             }
             if(cell.getBankEmpf() != null){
-//                imageLoader.displayImage(InternetURL.INTERNAL+cell.getBankEmpf().getEmpCover(), holder.item_head, BankAppApplication.txOptions, animateFirstListener);
-                holder.item_nickname.setText(cell.getBankEmpf().getEmpName());
+                holder.item_nickname.setText("负责人："+cell.getBankEmpf().getEmpName());
+                if(BankAppApplication.EMPID.equals(cell.getBankEmpf().getEmpId())){
+                    //说明是当前登陆者自己负责这个项目
+                    holder.item_nickname.setTextColor(res.getColor(R.color.btn_blue_normal));
+                }else {
+                    //说明不是当前人负责的项目
+                    holder.item_nickname.setTextColor(res.getColor(R.color.text_color_two));
+                }
+            }
+            if("1".equals(cell.getIsType())){
+                //任务已完成
+                convertView.setBackgroundColor(res.getColor(R.color.main_bg));
+            }else {
+                //未完成
+                convertView.setBackground(res.getDrawable(R.drawable.btn_white_shape));
+            }
+
+            if(cell.getBankEmp() != null){
+               holder.item_nickname1.setText("创建人："+cell.getBankEmp().getEmpName());
+            } else{
+                holder.item_nickname1.setText("");
+            }
+            if(cell.getBankEmpZf() != null){
+               holder.item_nickname2.setText("主负责人："+cell.getBankEmpZf().getEmpName());
+            }else{
+                holder.item_nickname2.setText("");
             }
 
             holder.item_title.setText(cell.getTaskTitle());
-            holder.item_jindu.setText(cell.getTaskProgress());
+            holder.item_jindu.setText("进度："+cell.getTaskProgress());
             if(!StringUtil.isNullOrEmpty(cell.getDateLineEnd())){
-                holder.item_dateline.setText(DateUtil.getDate(cell.getDateLineEnd(), "yyyy-MM-dd"));
+                holder.item_dateline.setText("到期日："+DateUtil.getDate(cell.getDateLineEnd(), "yyyy-MM-dd"));
             }
+            if(!StringUtil.isNullOrEmpty(cell.getDateLineEnd())){
+                holder.item_dateline1.setText("开始日："+DateUtil.getDate(cell.getDateLine(), "yyyy-MM-dd"));
+            }
+
             if (!StringUtil.isNullOrEmpty(BankAppApplication.fontSize)) {
                 holder.item_title.setTextSize(Float.valueOf(BankAppApplication.fontSize));
                 holder.item_nickname.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+                holder.item_nickname1.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+                holder.item_nickname2.setTextSize(Float.valueOf(BankAppApplication.fontSize));
                 holder.item_jindu.setTextSize(Float.valueOf(BankAppApplication.fontSize));
                 holder.item_dateline.setTextSize(Float.valueOf(BankAppApplication.fontSize));
+                holder.item_dateline1.setTextSize(Float.valueOf(BankAppApplication.fontSize));
             }
+            if("0".equals(cell.getIsExceed())){
+                //未超时
+//                holder.item_title.setTextColor(res.getColor(R.color.text_color));
+            }else if("1".equals(cell.getIsExceed())){
+                //超时
+//                holder.item_title.setTextColor(res.getColor(R.color.red_p));
+            }
+
         }
         return convertView;
     }
@@ -107,6 +149,9 @@ public class ItemRenwuAdapter extends BaseAdapter {
         TextView item_title;
         TextView item_jindu;
         TextView item_nickname;
+        TextView item_nickname1;
+        TextView item_nickname2;
         TextView item_dateline;
+        TextView item_dateline1;
     }
 }

@@ -56,6 +56,7 @@ public class BankAppApplication extends Application {
      */
     public static String currentUserNick = "";
     public static String fontSize = "16";
+    public static String EMPID = "";
 
 
     @Override

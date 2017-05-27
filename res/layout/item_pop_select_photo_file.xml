@@ -30,6 +30,18 @@
                 android:id="@+id/btn_camera"
                 android:textColor="@color/text_color"
                 android:textSize="16sp"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="1dp"
+                android:gravity="center"
+                android:padding="15dp"
+                android:background="@drawable/btn_dark_shape"
+                android:text="选择文件"
+                android:id="@+id/btn_file"
+                android:textColor="@color/text_color"
+                android:textSize="16sp"/>
 
         <TextView
                 android:layout_width="match_parent"

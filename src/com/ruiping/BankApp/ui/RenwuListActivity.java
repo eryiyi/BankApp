@@ -132,6 +132,7 @@ public class RenwuListActivity extends BaseActivity implements View.OnClickListe
                 }
             }
         });
+        lstv.setLongClickable(true);
         keywords = (EditText) this.findViewById(R.id.keywords);
         keywords.setOnKeyListener(new View.OnKeyListener() {
             @Override

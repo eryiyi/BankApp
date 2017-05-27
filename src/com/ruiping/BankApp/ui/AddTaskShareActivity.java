@@ -234,11 +234,12 @@ public class AddTaskShareActivity extends BaseActivity implements View.OnClickLi
                                 String code = jo.getString("code");
                                 if (Integer.parseInt(code) == 200) {
                                     showMsg(AddTaskShareActivity.this, "新建任务成功！");
+                                    Intent intent1 = new Intent("update_renwu_number");
+                                    sendBroadcast(intent1);
+
                                     Intent intent = new Intent(AddTaskShareActivity.this, RenwuDetailActivity.class);
                                     intent.putExtra("taskId", taskId);
                                     startActivity(intent);
-                                    Intent intent1 = new Intent("update_renwu_number");
-                                    sendBroadcast(intent1);
                                     finish();
                                 }else {
                                     showMsg(AddTaskShareActivity.this, jo.getString("message"));

@@ -3,15 +3,15 @@ package com.ruiping.BankApp.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.WindowManager;
+import android.widget.*;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -27,6 +27,8 @@ import com.ruiping.BankApp.entiy.BankJobReport;
 import com.ruiping.BankApp.upload.CommonUtil;
 import com.ruiping.BankApp.util.*;
 import com.ruiping.BankApp.widget.CustomProgressDialog;
+import com.ruiping.BankApp.widget.SelectPhotoPopFileWindow;
+import com.ruiping.BankApp.widget.SelectPhotoPopWindow;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -119,49 +121,121 @@ public class AddDailyActivity extends BaseActivity implements View.OnClickListen
                 break;
             case R.id.addFile:
             {
+
                 //添加附件
                 if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
                 {
-                    fileChooserIntent =  new Intent(this, FileChooserActivity.class);
-                    startActivityForResult(fileChooserIntent , REQUEST_CODE);
+                    showSelectImageDialogFile();
                 } else{
-                    showMsg(AddDailyActivity.this, getResources().getString(R.string.sdcard_unmonted_hint));
+                    showSelectImageDialog();
                 }
             }
                 break;
         }
     }
 
-    private void openCamera() {
-        Intent cameraIntent = new Intent();
-        cameraIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-        cameraIntent.addCategory(Intent.CATEGORY_DEFAULT);
-        // 根据文件地址创建文件
-        File file = new File(CommonDefine.FILE_PATH);
-        if (file.exists()) {
-            file.delete();
+
+    // 选择相册，相机
+    SelectPhotoPopWindow selectPhotoPopWindow;
+    SelectPhotoPopFileWindow selectPhotoPopFileWindow;
+
+    public void showSelectImageDialog(){
+        selectPhotoPopWindow = new SelectPhotoPopWindow(AddDailyActivity.this, itemsOnClick);
+        //显示窗口
+        setBackgroundAlpha(0.5f);//设置屏幕透明度
+
+        selectPhotoPopWindow.setBackgroundDrawable(new BitmapDrawable());
+        selectPhotoPopWindow.setFocusable(true);
+        selectPhotoPopWindow.showAtLocation(this.findViewById(R.id.main), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        selectPhotoPopWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                setBackgroundAlpha(1.0f);
+            }
+        });
+    }
+
+    public void showSelectImageDialogFile(){
+        selectPhotoPopFileWindow = new SelectPhotoPopFileWindow(AddDailyActivity.this, itemsOnClick);
+        //显示窗口
+        setBackgroundAlpha(0.5f);//设置屏幕透明度
+
+        selectPhotoPopFileWindow.setBackgroundDrawable(new BitmapDrawable());
+        selectPhotoPopFileWindow.setFocusable(true);
+        selectPhotoPopFileWindow.showAtLocation(this.findViewById(R.id.main), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        selectPhotoPopFileWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                setBackgroundAlpha(1.0f);
+            }
+        });
+    }
+
+
+    /**
+     * 设置添加屏幕的背景透明度
+     *
+     * @param bgAlpha
+     *            屏幕透明度0.0-1.0 1表示完全不透明
+     */
+    public void setBackgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = ((Activity) AddDailyActivity.this).getWindow()
+                .getAttributes();
+        lp.alpha = bgAlpha;
+        ((Activity) AddDailyActivity.this).getWindow().setAttributes(lp);
+    }
+
+    //为弹出窗口实现监听类
+    private View.OnClickListener itemsOnClick = new View.OnClickListener() {
+        public void onClick(View v) {
+            if(selectPhotoPopWindow != null){
+                selectPhotoPopWindow.dismiss();
+            }
+            if(selectPhotoPopFileWindow != null){
+                selectPhotoPopFileWindow.dismiss();
+            }
+            switch (v.getId()) {
+                case R.id.btn_file:
+                {
+                    fileChooserIntent =  new Intent(AddDailyActivity.this, FileChooserActivity.class);
+                    startActivityForResult(fileChooserIntent , REQUEST_CODE);
+                }
+                    break;
+                case R.id.btn_camera: {
+                    Intent cameraIntent = new Intent();
+                    cameraIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                    cameraIntent.addCategory(Intent.CATEGORY_DEFAULT);
+                    // 根据文件地址创建文件
+                    File file = new File(CommonDefine.FILE_PATH);
+                    if (file.exists()) {
+                        file.delete();
+                    }
+                    uri = Uri.fromFile(file);
+                    // 设置系统相机拍摄照片完成后图片文件的存放地址
+                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+
+                    // 开启系统拍照的Activity
+                    startActivityForResult(cameraIntent, CommonDefine.TAKE_PICTURE_FROM_CAMERA);
+                }
+                break;
+                case R.id.btn_photo: {
+                    Intent intent = new Intent(AddDailyActivity.this, AlbumActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putStringArrayList("dataList", getIntentArrayList(dataList));
+                    intent.putExtras(bundle);
+                    startActivityForResult(intent, CommonDefine.TAKE_PICTURE_FROM_GALLERY);
+                }
+                break;
+                default:
+                    break;
+            }
         }
-        uri = Uri.fromFile(file);
-        // 设置系统相机拍摄照片完成后图片文件的存放地址
-        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 
-        // 开启系统拍照的Activity
-        startActivityForResult(cameraIntent, CommonDefine.TAKE_PICTURE_FROM_CAMERA);
-    }
+    };
 
 
-    private ArrayList<String> dataList = new ArrayList<String>();
     private ArrayList<String> tDataList = new ArrayList<String>();
-    private List<String> uploadPaths = new ArrayList<String>();
 
-
-    private void openPhoto() {
-        Intent intent = new Intent(AddDailyActivity.this, AlbumActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putStringArrayList("dataList", getIntentArrayList(dataList));
-        intent.putExtras(bundle);
-        startActivityForResult(intent, CommonDefine.TAKE_PICTURE_FROM_GALLERY);
-    }
     private ArrayList<String> getIntentArrayList(ArrayList<String> dataList) {
 
         ArrayList<String> tDataList = new ArrayList<String>();
@@ -186,7 +260,8 @@ public class AddDailyActivity extends BaseActivity implements View.OnClickListen
             String pptName = data.getStringExtra(Contance.EXTRA_FILE_CHOOSER_NAME);
             if(pptPath != null){
                 dataList.add(pptPath);
-                dataListName.add(pptName);
+//                dataListName.add(pptName);
+                dataListName.add(pptPath);
                 adapter.notifyDataSetChanged();
             }else {
                 showMsg(AddDailyActivity.this, getResources().getString(R.string.open_file_failed));
@@ -201,6 +276,7 @@ public class AddDailyActivity extends BaseActivity implements View.OnClickListen
                         for (int i = 0; i < tDataList.size(); i++) {
                             String string = tDataList.get(i);
                             dataList.add(string);
+                            dataListName.add(string);
                         }
                         adapter.notifyDataSetChanged();
                     } else {
@@ -213,20 +289,22 @@ public class AddDailyActivity extends BaseActivity implements View.OnClickListen
                         return;
                     }
                     Bitmap bitmap = ImageUtils.getUriBitmap(this, uri, 400, 400);
-                    String cameraImagePath = FileUtils.saveBitToSD(bitmap, System.currentTimeMillis() + ".jpg");
+                    String fileName = System.currentTimeMillis()+"";
+                    String cameraImagePath = FileUtils.saveBitToSD(bitmap,fileName + ".jpg");
 
                     dataList.add(cameraImagePath);
+                    dataListName.add(fileName);
                     adapter.notifyDataSetChanged();
                     break;
                 case CommonDefine.TAKE_PICTURE_FROM_GALLERY:
                     tDataList = data.getStringArrayListExtra("datalist");
                     if (tDataList != null) {
                         dataList.clear();
+                        dataListName.clear();
                         for (int i = 0; i < tDataList.size(); i++) {
                             String string = tDataList.get(i);
-                            if (!string.contains("camera_default")) {
-                                dataList.add(string);
-                            }
+                            dataList.add(string);
+                            dataListName.add(string);
                         }
                         adapter.notifyDataSetChanged();
                     }
@@ -234,6 +312,7 @@ public class AddDailyActivity extends BaseActivity implements View.OnClickListen
                 case CommonDefine.DELETE_IMAGE:
                     int position = data.getIntExtra("position", -1);
                     dataList.remove(position);
+                    dataListName.remove(position);
                     adapter.notifyDataSetChanged();
                     break;
             }

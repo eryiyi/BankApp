@@ -109,7 +109,7 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
         listViewHead.findViewById(R.id.relate_beiwanglu).setOnClickListener(this);
         listViewHead.findViewById(R.id.relate_notice).setOnClickListener(this);
         getData();
-        getDataT();
+//        getDataT();
         changeColorOrSize();
         super.onActivityCreated(savedInstanceState);
     }
@@ -429,9 +429,12 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
 
             unread_renwu_number.setVisibility(View.GONE);
             unread_renwu_number.setText("0");
-            Intent intent = new Intent(getActivity(), RenwuListActivity.class);
-            intent.putExtra("type", "3");
-            startActivity(intent);
+            Intent intent1 = new Intent("click_to_renwu");
+            getActivity().sendBroadcast(intent1);
+
+//            Intent intent = new Intent(getActivity(), RenwuListActivity.class);
+//            intent.putExtra("type", "3");
+//            startActivity(intent);
         }
         if (i == R.id.relate_beiwanglu) {
             unread_beiwang_number.setVisibility(View.GONE);

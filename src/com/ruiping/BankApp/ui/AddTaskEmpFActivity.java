@@ -80,7 +80,9 @@ public class AddTaskEmpFActivity extends BaseActivity implements View.OnClickLis
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
                         | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                 PixelFormat.TRANSLUCENT);
-        mWindowManager.addView(mDialogText, lp);
+        if(mDialogText != null && mWindowManager != null && lp!= null){
+            mWindowManager.addView(mDialogText, lp);
+        }
         indexBar.setTextView(mDialogText);
         lvContact.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

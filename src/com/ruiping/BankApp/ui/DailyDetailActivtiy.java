@@ -104,7 +104,6 @@ public class DailyDetailActivtiy extends BaseActivity implements View.OnClickLis
         progressDialog.show();
         initData();//获得评论列表
         getDone();//获得日报查阅列表
-//        getDetail();//获得日报详情
         changeColorOrSize();
     }
 
@@ -115,8 +114,6 @@ public class DailyDetailActivtiy extends BaseActivity implements View.OnClickLis
             content.setTextSize(Float.valueOf(getGson().fromJson(getSp().getString("font_size", ""), String.class)));
         }
     }
-
-
 
 
     private void getDetail() {

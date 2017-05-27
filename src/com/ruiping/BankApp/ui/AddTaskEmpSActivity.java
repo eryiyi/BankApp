@@ -103,9 +103,11 @@ public class AddTaskEmpSActivity extends BaseActivity implements View.OnClickLis
             Integer key = entry.getKey();
             Boolean value = entry.getValue();
             System.out.println("key=" + key + " value=" + value);
-            if(value){
+            if(value && lists.size()>0 ){
                 //如果选中了
-                listEmpSelect.add(lists.get(key).getEmpId());
+                if(lists.size()>key){
+                    listEmpSelect.add(lists.get(key).getEmpId());
+                }
             }
         }
 
@@ -239,6 +241,7 @@ public class AddTaskEmpSActivity extends BaseActivity implements View.OnClickLis
                                     Intent intent = new Intent(AddTaskEmpSActivity.this, AddTaskXifenActivity.class);
                                     intent.putExtra("taskId", taskId);
                                     startActivity(intent);
+                                    finish();
                                 }else {
                                     showMsg(AddTaskEmpSActivity.this, jo.getString("message"));
                                 }

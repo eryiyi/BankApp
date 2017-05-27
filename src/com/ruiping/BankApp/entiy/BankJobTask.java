@@ -21,7 +21,9 @@ public class BankJobTask implements Serializable{
 	private String shareEmpId;
 	private String shareEmpName;
 	private String shareFlags;
-	private String taskTitle;//任务标题 
+	private String reason;
+	private String isExceed;//0未超期 1超期
+	private String taskTitle;//任务标题
 	private String taskCont;//任务内容
 	private String taskFile;//任务附件 10个内
 	private String taskType;//任务分类
@@ -47,6 +49,8 @@ public class BankJobTask implements Serializable{
 	private String delName;//删除人
 	private BankEmpBean bankEmp;//创建人
 	private BankEmpBean bankEmpf;//负责人
+	private BankEmpBean bankEmpZf;//主任务负责人
+
 	private ArrayList<BankJobTaskComment> bankJobTaskCommentList;
 	private ArrayList<BankJobTaskDoneBean> bankJobTaskDoneList;
 	private ArrayList<BankJobTaskRemind> bankJobTaskRemindList;
@@ -63,6 +67,16 @@ public class BankJobTask implements Serializable{
 	private int newtask;
 	private int mytask;
 	private int isshare;//是否共享
+
+
+	public BankEmpBean getBankEmpZf() {
+		return bankEmpZf;
+	}
+
+	public void setBankEmpZf(BankEmpBean bankEmpZf) {
+		this.bankEmpZf = bankEmpZf;
+	}
+
 	public int getStatus() {
 		return status;
 	}
@@ -379,5 +393,21 @@ public class BankJobTask implements Serializable{
 
 	public void setEmpIdZf(String empIdZf) {
 		this.empIdZf = empIdZf;
+	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
+	public String getIsExceed() {
+		return isExceed;
+	}
+
+	public void setIsExceed(String isExceed) {
+		this.isExceed = isExceed;
 	}
 }

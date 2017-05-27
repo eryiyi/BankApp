@@ -102,7 +102,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 startActivity(intent);
             }
         }
-
+        registerBoradcastReceiver();
         //百度云推送
         PushSettings.enableDebugMode(getApplicationContext(), true);
         PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY, InternetURL.BAIDU_PUSH_API_KEY);
@@ -138,6 +138,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
 
         checkVersion();
+        BankAppApplication.EMPID = getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class);
     }
 
     @TargetApi(23)
@@ -431,6 +432,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         } catch (Exception e) {
         }
 
+        if(mBroadcastReceiver != null){
+            unregisterReceiver(mBroadcastReceiver);
+        }
     }
 
     /**
@@ -790,6 +794,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             finish();
             System.exit(0);
         }
+    }
+
+
+
+    //广播接收动作
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("click_to_renwu")) {
+                switchFragment(R.id.foot_two);
+            }
+        }
+    };
+
+    //注册广播
+    public void registerBoradcastReceiver() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction("click_to_renwu");
+        registerReceiver(mBroadcastReceiver, myIntentFilter);
     }
 
 }

@@ -86,6 +86,10 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
     private TextView share_count;//共享人数
     private TextView content;
 
+    private TextView nickname1;
+    private TextView nickname2;
+    private TextView content12;
+
     private RelativeLayout liner_child;//任务参与人 --- 分任务没有该选项
     private View liner_line_child;
 
@@ -187,6 +191,10 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
         content = (TextView) headLiner.findViewById(R.id.content);
         liner_done_reply = (LinearLayout) headLiner.findViewById(R.id.liner_done_reply);
         liner_done_reply.setOnClickListener(this);
+        nickname1 = (TextView) headLiner.findViewById(R.id.nickname1);
+        nickname2 = (TextView) headLiner.findViewById(R.id.nickname2);
+        content12 = (TextView) headLiner.findViewById(R.id.content12);
+
 
         headLiner.findViewById(R.id.liner_header).setOnClickListener(this);
         headLiner.findViewById(R.id.liner_endtime).setOnClickListener(this);
@@ -369,7 +377,20 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
             liner_done_reply.setVisibility(View.GONE);
         }
 
-
+        //创建人
+        if(bankJobTask.getBankEmp() != null){
+            nickname1.setText(bankJobTask.getBankEmp().getEmpName());
+        }
+        //主负责人
+        if(bankJobTask.getBankEmpZf() != null){
+            nickname2.setText(bankJobTask.getBankEmpZf().getEmpName());
+        }
+        //延时shuoming
+        if(!StringUtil.isNullOrEmpty(bankJobTask.getReason())){
+            content12.setText(bankJobTask.getReason());
+        }else{
+            content12.setText("暂无说明");
+        }
     }
 
     @Override
@@ -667,26 +688,38 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
             case R.id.liner_done_reply:
             {
                 //标记为未完成状态，只有负责人和创建人有此权限
-                //todo
                 showUnDoneDialog();
             }
                 break;
         }
     }
 
+    boolean flagCheck = true;
     private void showUnDoneDialog() {
         final Dialog picAddDialog = new Dialog(RenwuDetailActivity.this, R.style.MyAlertDialog);
         View picAddInflate = View.inflate(this, R.layout.dialog_task_undone, null);
         TextView btn_sure = (TextView) picAddInflate.findViewById(R.id.btn_sure);
+        final EditText content = (EditText) picAddInflate.findViewById(R.id.content);
+        final CheckBox checkbox = (CheckBox) picAddInflate.findViewById(R.id.checkbox);
         btn_sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog = new CustomProgressDialog(RenwuDetailActivity.this, "请稍后...",R.anim.custom_dialog_frame);
-                progressDialog.setCancelable(true);
-                progressDialog.setIndeterminate(true);
-                progressDialog.show();
-                upDoneFFinishTask();
-                picAddDialog.dismiss();
+                if(StringUtil.isNullOrEmpty(content.getText().toString())){
+                    showMsg(RenwuDetailActivity.this, "请输入延时说明！");
+                }else {
+                    if(checkbox.isChecked()){
+                        flagCheck = true;
+                    }else{
+                        flagCheck = false;
+                    }
+                    progressDialog = new CustomProgressDialog(RenwuDetailActivity.this, "请稍后...",R.anim.custom_dialog_frame);
+                    progressDialog.setCancelable(true);
+                    progressDialog.setIndeterminate(true);
+                    progressDialog.show();
+                    upDoneFFinishTask(content.getText().toString());
+                    picAddDialog.dismiss();
+                }
+
             }
         });
 
@@ -1506,7 +1539,7 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("taskId", taskId);
-                params.put("taskProgress", taskProgress+"%");
+                params.put("taskProgress", taskProgress);
                 return params;
             }
 
@@ -1554,6 +1587,9 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
             if(action.equals("add_person_task_share_success")){
                 getShareCount();
             }
+            if(action.equals("update_task_end_dateline_success")){
+                getDetailTask();
+            }
         }
     };
 
@@ -1564,6 +1600,7 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
         myIntentFilter.addAction("update_task_file_success");//更新报表附件成功
         myIntentFilter.addAction("update_task_person_count_success");//更新参与人数
         myIntentFilter.addAction("add_person_task_share_success");//更新共享人数
+        myIntentFilter.addAction("update_task_end_dateline_success");//更新任务到日期
         //注册广播
         registerReceiver(mBroadcastReceiver, myIntentFilter);
     }
@@ -1704,7 +1741,7 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
 
 
     //标记未完成任务
-    private void upDoneFFinishTask(){
+    private void upDoneFFinishTask(final String reason){
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 InternetURL.noDoneJobTask,
@@ -1717,7 +1754,14 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                                 String code1 = jo.getString("code");
                                 if (Integer.parseInt(code1) == 200) {
                                     showMsg(RenwuDetailActivity.this, "操作成功！");
-                                    getDetailTask();
+                                    if(flagCheck){
+                                        //修改日期
+                                        Intent intent = new Intent(RenwuDetailActivity.this, UpdateTaskDatelineActivity.class);
+                                        intent.putExtra("taskId", taskId);
+                                        startActivity(intent);
+                                    }else {
+                                        getDetailTask();
+                                    }
                                 } else {
                                     Toast.makeText(RenwuDetailActivity.this, jo.getString("message"), Toast.LENGTH_SHORT).show();
                                 }
@@ -1747,6 +1791,7 @@ public class RenwuDetailActivity extends BaseActivity implements View.OnClickLis
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("empId",getGson().fromJson(getSp().getString(Contance.EMP_ID, ""), String.class));
                 params.put("taskId", taskId);
+                params.put("reason", reason);
                 return params;
             }
 
